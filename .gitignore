@@ -1,0 +1,12 @@
+*.pdf
+*.tex
+.DS_Store
+*/.DS_Store
+*.sh
+private/
+local/
+scripts/
+_build/
+_static/
+doc_venv/
+cover.docx
