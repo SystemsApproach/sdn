@@ -237,7 +237,10 @@ it. A simple flow rule, for example, might specify that any packet
 with destination address *D* be forwarded on output port *i*. The
 original OpenFlow spec allowed the header fields shown in
 :numref:`Figure %s <fig-headers>` to be included in the Match half of
-the rule.
+the rule. So for example, a Match might specify a packet's MAC header
+``Type`` field equals ``0x800`` (indicating the frame carries and IP
+packet) and its IP header ``DstAddr`` field be contained in some
+subnet (e.g., ``192.12.69/24``).
 
 .. _fig-headers:
 .. figure:: figures/Slide3.png
@@ -421,10 +424,20 @@ the NOS takes on the burden of collecting network state (the hard part
 of distributed algorithms like Link-State and Distance-Vector routing
 protocols) and the app is free to simply run the shortest path
 algorithm on this graph and load the resulting flow rules into the
-underlying switches. By centralizing this logic, the goal is to come
-up with a globally optimized solution. As we discuss in later
-chapters, the published evidence from cloud providers that have
-embraced this approach confirms this advantage.
+underlying switches.  For an introduction to Link-State and
+Distance-Vector routing algorithms, see
+
+.. _reading_routing:
+.. admonition:: Further Reading
+
+   `Routing
+   <https://book.systemsapproach.org/internetworking/routing.html>`__. *Computer
+   Networks: A Systems Approach*, 2020.
+
+By centralizing this logic, the goal is to come up with a globally
+optimized solution. As we discuss in later chapters, the published
+evidence from cloud providers that have embraced this approach
+confirms this advantage.
 
 The idea of “collecting network state” is central to SDN and the role
 played by a NOS. We are not talking about collecting the full range of
@@ -545,8 +558,9 @@ program into a switch, switches didn’t necessarily have the capacity
 to implement that functionality in an efficient way. To ensure high
 forwarding performance, flow tables were implemented using highly
 optimized data structures that required specialized memories, like
-TCAMs. As a consequence, they supported only a limited number of
-entries.
+*Ternary Content Addressable Memory (TCAM)*. As a consequence, they
+supported only a limited number of entries, which meant the controller
+had to be careful about how they were used.
 
 In short, it proved necessary for the controller to know details about
 the pipeline in order to install a set of flow rules that the switch could
@@ -633,8 +647,8 @@ Which is to say, SDN is not just about shifting control from vendors
 to operators, but ultimately, it is about shifting control from
 vendors to operators to users. That's the long-term goal, inspired by
 what commodity servers and open source software did for the computing
-industry. We return to more modest predictions about the next phase of
-the SDN journey in Chapter 8.
+industry. But we still have a ways to go, so we return to more modest
+predictions about the next phase of the SDN journey in Chapter 8.
 
 .. _reading_future:
 .. admonition:: Further Reading
