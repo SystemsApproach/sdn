@@ -36,14 +36,16 @@ in this space—from incumbent vendors to network operators, startups,
 standards bodies, and other open source projects—each offering varied
 interpretations of what SDN *is* and *is not*. We discuss these other
 perspectives and explain how they fit into the larger scheme of
-things, but we do not let them deter us from describing the full
-potential of SDN. Only time will tell where the SDN journey takes us,
+things, but we do not let them deter us from describing an end-to-end
+approach to SDN. Only time will tell where the SDN journey takes us,
 but we believe it is important to understand the scope of the
 opportunity.
 
-This book is still a work-in-progress, with some of the later chapters
-still being fleshed out. We are eager to hear your feedback and
-suggestions.
+This book assumes a general understanding of the Internet, although an
+appreciation for the role switches and routers play forwarding
+ethernet frames and IP packets is helpful. Links to related background
+information are included to help bridge any gaps. This book is also a
+work-in-progress. We are eager to hear your feedback and suggestions.
 
 | Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska
 | Open Networking Foundation
