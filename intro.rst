@@ -268,7 +268,7 @@ controller off-switch. This enabled the configuration shown in
 
 .. _fig-flowtab:
 .. figure:: figures/Slide4.png
-    :width: 400px
+    :width: 500px
     :align: center
 
     Controller securely passes flow rules to an OpenFlow-enabled
