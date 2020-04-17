@@ -66,6 +66,27 @@ generation and formal verification tools. This closed loop complements
 the intrinsic value of disaggregation, which makes it possible to
 reason about correctness-by-construction.
 
+.. sidebar:: Top-Down Verification
+	     
+   The approach to verifying networks described in this section is
+   similar the one used in chip design. At the top is a behavorial
+   model; then at the register-transfer level is a Verilog or VHDL
+   model; and eventually at the bottom are transistors, polygons and
+   metal. Tools are used to formally verify correctness across each
+   boundary and abstraction level.
+
+   This is a model for what we are talking about here: Verifying
+   across boundaries in a top-down design approach. This is made
+   possible by the new SDN interfaces and abstractions defined by the
+   software stack, which extends all the way to the programmable
+   forwarding pipelines provided by the switching chip.
+
+   As experience with hardware verification demonstrates, this
+   approach works best in composed systems, where each minimal
+   component can be verified or reliably tested on its own. Formal
+   tools are then applied as components are composed at layer
+   boundaries.
+
 The goal is to enable network operators to specify a network’s
 behavior top-down, and then verifying the correctness across each
 interface. At the lowest level, P4 programs specify how packets are
