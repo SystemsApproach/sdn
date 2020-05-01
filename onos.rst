@@ -448,6 +448,63 @@ Flow Objectives. The first is borrowed from OpenFlow, and hence, is
 pipeline-aware. The second is pipeline-agnostic, and the focus of the
 rest of this section.
 
+There are three types of flow objectives: *Filtering*, *Next*, and
+*Forwarding*. Filtering objectives determine whether or not traffic
+should be permitted to enter the pipeline, based on a traffic
+*Selector*. This selector abstracts the "match" part of a match-action
+rule. Next objectives indicate what kind of *Treatment* the traffic
+should receive. This treatment abstracts the "action" part of a
+match-action rule.  Forwarding objectives determine which traffic is
+to be allowed to egress the pipeline, effectively adding a second
+opportunity apply a match rule to the traffic.
+
+The challenge is to map these pipeline-agnostic objectives onto
+pipeline-dependent rules. In ONOS, this mapping is managed by the Flow
+Objective Service, as depicted in :numref:`Figure %s
+<fig-flowobj>`. For simplicity, the example focuses on the selector
+(match) specified by a Filtering objective, where the key is to
+express the fact that you want to match on a particular switch port,
+MAC address, VLAN tag, and IP address without regard for which
+sequence of pipeline tables implements such a combination.
+
+.. _fig-flowobj:
+.. figure:: figures/Slide39.png 
+    :width: 500px 
+    :align: center 
+
+    Flow Objective Service manages the mapping of pipeline-agnostic
+    rules onto pipeline-specific Flow Rules.
+
+Internally, ONOS manages the binding between the pipeline-agnostic
+objectives and the device-specific handlers. These handlers are
+implemented using the ONOS device driver mechanism. The device driver
+behavior that abstracts the implementation of how flow objective
+directives should map to flow rule operations is called *Pipeliner*.
+:numref:`Figure %s <fig-flowobj>` shows Pipeliners for two example
+switch pipelines.
+
+Each Pipeliner is able to map Flow objectives onto both Flow Rules (in
+the case of fixed-function pipelines) and P4-programmed pipelines. The
+example given in :numref:`Figure %s <fig-flowobj>` assumes the former
+case, which implies a mapping to OpenFlow 1.3. In the latter case,
+Pipeliner leverages *Pipeconf*, a structure that maintains
+associations among the following elements:
+
+1. A model of the pipeline for each target switch.
+2. A target-specific driver needed to to deploy flow instructions to the switch.
+3. A pipeline-specific translator to map Flow Objectives into the target pipeline.
+
+Pipeconf maintains these bindings using information extracted from the
+``.p4info`` file output by the P4 compiler, as described in Section
+5.2.
+
+Today, the “model” identified in (1) is ONOS-defined, meaning the
+end-to-end workflow for a developer involves being aware of both a P4
+architecture model (e.g., ``v1model.p4``) when programming the data
+plane and this ONOS model when programming the control plane using
+Flow Objectives. Eventually, these various layers of pipeline models
+will be unified, and in all likelihood, specified in P4.
+
 Programmatically, Flow Objectives are a data structure, packaged with
 associated constructor routines. The control application builds a list
 of objectives and passes them to ONOS to be executed. The following
@@ -496,56 +553,10 @@ example.
         devices.add(ingress.deviceId());
     }
 
-There are three types of flow objectives: *Filtering*, *Next*, and
-*Forwarding*. Filtering objectives determine whether or not traffic
-should be permitted to enter the pipeline, based on a traffic selector
-(match). Next objectives indicate what kind of actions should be
-performed on the traffic. Forwarding objectives determine which
-traffic is to be allowed to egress the pipeline. The above example
-creates a Next objective and a Forwarding objective, with the Next
-objective applying a Treatment to the flow. Minimally, that Treatment
-sets the output port, but optionally, it also applies the
-``originalTreatment`` passed in as an argument to ``createFlow``.
-
-Each flow objective carries information that can be used by the
-low-level drivers to map the objective into one or more flow rules for
-specific tables in that device’s physical pipeline. This allows
-applications to be portable from one pipeline to another as they can
-specify criteria and treatment actions independent of the pipeline. If
-the above example were to be written in terms of flow rules rather
-than flow objectives, the application would have to first determine
-the device pipeline structure and then properly formulate the actions
-and egress rules and target them to the proper tables in accordance
-with the pipeline capabilities.
-
-Internally, ONOS manages the binding between the pipeline-agnostic
-objectives and the device-specific handlers. These handlers are
-implemented using the ONOS device driver mechanism. The device driver
-behavior that abstracts the implementation of how flow objective
-directives should map to flow rule operations is called
-*Pipeliner*. It is technically part of the ONOS core, but like many of
-the core services, it plays a role exporting an interface to control
-apps.
-
-Pipeliner is able to map Flow objectives onto both Flow Rules (in the
-case of fixed-function pipelines) and P4-programmed pipelines. In the
-latter case, Pipeliner leverages *Pipeconf*, a structure that
-maintains associations among the following elements:
-
-1. A model of the pipeline for each target switch.
-2. A target-specific driver needed to to deploy flow instructions to the switch.
-3. A pipeline-specific translator to map Flow Objectives into the target pipeline.
-
-Pipeconf maintains these bindings using information extracted from the
-``.p4info`` file output by the P4 compiler, as described in Section
-5.2.
-
-Today, the “model” identified in (1) is ONOS-defined, meaning the
-end-to-end workflow for a developer involves being aware of both a P4
-architecture model (e.g., ``v1model.p4``) when programming the data
-plane and this ONOS model when programming the control plane using
-Flow Objectives. Eventually, these various layers of pipeline models
-will be unified, and in all likelihood, specified in P4.
+The above example creates a Next objective and a Forwarding objective,
+with the Next objective applying a Treatment to the flow. Minimally,
+that Treatment sets the output port, but optionally, it also applies
+the ``originalTreatment`` passed in as an argument to ``createFlow``.
 
 6.4 Southbound Interface
 ------------------------
