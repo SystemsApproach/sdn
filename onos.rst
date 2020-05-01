@@ -473,7 +473,7 @@ sequence of pipeline tables implements such a combination.
     :align: center 
 
     Flow Objective Service manages the mapping of pipeline-agnostic
-    rules onto pipeline-specific Flow Rules.
+    objectives onto pipeline-specific rules.
 
 Internally, ONOS manages the binding between the pipeline-agnostic
 objectives and the device-specific handlers. These handlers are
