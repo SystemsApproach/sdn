@@ -160,13 +160,16 @@ algorithm to provide a rich set of programming primitives that ONOS
 uses to manage the distributed state and make it easy for control apps
 to access.
 
-This is a common design paradigm. What’s unique about ONOS—or any
-Network OS, for that matter—is the set of maps it defines: the
-semantics of the keys it stores and the types of the values associated
-with those keys. It is this data model that makes a Network OS a
-Network OS (and not a ride-share application or a social network).
-This section mostly focuses on this set of data models and the
-corresponding services built around them, although we start with a
+This is a common design paradigm, which results in a system that is
+both scalable (runs on enough virtualized instances to handle the
+request workload) and highly available (run on enough instances to
+continue offering service in the face of failure). What’s unique about
+ONOS—or any Network OS, for that matter—is the set of maps it defines:
+the semantics of the keys it stores and the types of the values
+associated with those keys. It is this data model that makes a Network
+OS a Network OS (and not a ride-share application or a social
+network).  This section mostly focuses on this set of data models and
+the corresponding services built around them, although we start with a
 brief introduction to the primitives that Atomix supports.
 
 6.2.1 Atomix Primitives
@@ -196,8 +199,13 @@ map.
 
 Maps are the workhorse primitive used by ONOS, as we will see in the
 next subsection. We conclude this section by looking at another role
-that Atomix plays in ONOS: coordinating all the ONOS instances. There
-are two aspects to this coordination.
+that Atomix plays in ONOS: coordinating all the ONOS instances.\ [#]_
+There are two aspects to this coordination.
+
+.. [#] For the purpose of this discussion, assume ONOS is packaged as
+       a whole, and then scaled across multiple virtualized instances.
+       An alternative partitioning of ONOS functionality into
+       independently scaled microservices is discussed in Section 6.5.
 
 First, as a horizontally scalable service, the number of ONOS
 instances running at any given time depends on the workload and the
@@ -656,11 +664,15 @@ rest of ONOS.
 A refactoring of ONOS to more closely adhere to a microservice
 architecture is also underway. The new version, called µONOS,
 leverages ONOS’s existing modularity, but packages and scales
-different subsystems independently. This includes encapsulating Atomix
-in its own microservice, as well as running each control application
-and southbound adaptor as a separate microservice. It also means
-partitioning the core into distinct microservices corresponding to
-Topology Management (exporting a Network Graph API), Control
-Management (exporting a P4Runtime API), Configuration Management
-(exporting a gNMI API), and Operations Management (exporting a gNOI
-API).
+different subsystems independently. Although in principle each ONOS
+service introduced in this chapter could be packaged as an independent
+microservice, doing so is much too fine-grain to be
+practical. Instead, µONOS adopts the following approach. First, it
+encapsulates Atomix in its own microservice. Second, it runs each each
+control application and southbound adaptor as a separate
+microservice. Third, it partitions the core into four distinct
+microservices: (1) a *Topology Management* microservice that exports a
+Network Graph API; (2) a *Control Management* microservice that
+exports a P4Runtime API; (3) a *Configuration Management* microservice
+that exports a gNMI API; and (4) an *Operations Management*
+microservice that exports a gNOI API.
