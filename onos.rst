@@ -664,9 +664,9 @@ rest of ONOS.
 A refactoring of ONOS to more closely adhere to a microservice
 architecture is also underway. The new version, called µONOS,
 leverages ONOS’s existing modularity, but packages and scales
-different subsystems independently. Although in principle each ONOS
-service introduced in this chapter could be packaged as an independent
-microservice, doing so is much too fine-grain to be
+different subsystems independently. Although in principle each of of
+the core services introduced in this chapter could be packaged as an
+independent microservice, doing so is much too fine-grain to be
 practical. Instead, µONOS adopts the following approach. First, it
 encapsulates Atomix in its own microservice. Second, it runs each each
 control application and southbound adaptor as a separate
