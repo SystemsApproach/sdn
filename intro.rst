@@ -512,7 +512,7 @@ a general-purpose processor), but high-performance switches employ a
 hardware-based *forwarding pipeline*.
 
 We postpone an in-depth description of these pipelines until Chapter
-3, but the important characteristic for now is whether that pipeline
+4, but the important characteristic for now is whether that pipeline
 is limited to matching a fixed set of fields in the packet headers
 (e.g., the fields shown in :numref:`Figure %s <fig-headers>`) and
 perform a fixed set of actions, or if the bit-patterns to be matched
@@ -610,7 +610,7 @@ that can be used to program the pipeline, is one viable response to
 these two issues. Both have emerged in the last few years, in the form
 of a *Protocol Independent Switching Architecture (PISA)* and the *P4*
 programming language. We will discuss both in more detail in Chapter
-3, but the big takeaway for now is that SDN has evolved beyond its
+4, but the big takeaway for now is that SDN has evolved beyond its
 original goal as a means to program the control plane. Today, SDN also
 includes the possibility of a programmable data plane.
 
