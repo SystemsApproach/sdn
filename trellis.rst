@@ -16,10 +16,10 @@ details.
   running in production with the former.
 
 * Trellis supports a wide-range of L2/L3 features, all re-implemented
-  as SDN control apps (with the exception of Quagga, which is used to
-  exchange BGP routes with external peers). Trellis implements L2
-  connectivity within each server rack, and L3 connectivity between
-  racks.
+  as SDN control apps (with the exception of a DHCP server used to
+  relay DHCP requests and a Quagga BGP server used to exchange BGP
+  routes with external peers). Trellis implements L2 connectivity
+  within each server rack, and L3 connectivity between racks.
 
 * Trellis supports access/edge networking technologies, such as PON
   and RAN, including support for (a) routing IP traffic to/from devices
@@ -50,12 +50,12 @@ the resilience and scalability of legacy solutions. Trellis has
 satisfied this requirement, which we summarize here.
 
 First, with respect to L2 connectivity, Trellis supports VLANs,
-including native support for forwarding traffic based on just an outer
-VLAN id, as well as QinQ support based on an outer/inner VLAN id
-pair. Support for QinQ is particularly relevant to access networks,
-where double tagging is used to isolate traffic belonging to different
-service classes. In addition, Trellis supports L2 tunnels across the
-L3 fabric (both single and double tagged).
+including native support for forwarding traffic based on VLAN id,
+along with QinQ support based on an outer/inner VLAN id pair. Support
+for QinQ is particularly relevant to access networks, where double
+tagging is used to isolate traffic belonging to different service
+classes. In addition, Trellis supports L2 tunnels across the L3 fabric
+(both single and double tagged).
 
 Second, with respect to L3 connectivity, Trellis supports IPv4 and
 IPv6 routing for both unicast and multicast addresses. For the latter,
@@ -145,16 +145,14 @@ subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
     pair of hosts.
 
 When Host 1 sends a packet with destination address 10.0.2.1 it is by
-default forwarded to the server’s ToR/leaf switch. (Because of link
-bonding the packet could show up at either ToR, but the behavior is
-exactly the same for both.) Leaf 1 matches the destination IP address,
-learns this packet needs to cross the fabric and emerge at Leaf 2 to
-reach subnet 10.0.2/24, and so pushes the MPLS label 102 onto the
-packet. Because of ECMP, Leaf 1 can forward the resulting packet to
-either spine, at which point that switch matches the MPLS label 102,
-pops the label off the header, and forwards it to Leaf 2.  Finally,
-Leaf 2 matches the destination IP address and forwards the packet
-along to Host 2.
+default forwarded to the server’s ToR/leaf switch. Leaf 1 matches the
+destination IP address, learns this packet needs to cross the fabric
+and emerge at Leaf 2 to reach subnet 10.0.2/24, and so pushes the MPLS
+label 102 onto the packet. Because of ECMP, Leaf 1 can forward the
+resulting packet to either spine, at which point that switch matches
+the MPLS label 102, pops the label off the header, and forwards it to
+Leaf 2.  Finally, Leaf 2 matches the destination IP address and
+forwards the packet along to Host 2.
 
 What you should take away from this example is that SR is highly
 stylized. For a given combination of leaf and spine switches, Trellis
