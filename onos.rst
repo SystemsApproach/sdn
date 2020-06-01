@@ -444,28 +444,38 @@ a given configuration of ONOS, there is a corresponding API. For
 example, the “Topology” interface shown in :numref:`Figure %s
 <fig-onos>` is exactly the API offered by the Topology Service shown
 in :numref:`Figure %s <fig-services1>`. Second, because ONOS permits
-applications to define and use their own Atomix primitives, it is fair
-to consider the Atomix programmatic interface as another part of the
-ONOS NBI. Third, the ONOS NBI includes gNMI and gNOI. These are
+applications to define and use their own Atomix tables, it is fair to
+consider the Atomix programmatic interface as another part of the ONOS
+NBI. Third, the ONOS NBI includes gNMI and gNOI. These are
 standardized interfaces, defined independent of ONOS, but supported as
 part of the ONOS NBI. Note that the implementation sitting behind gNMI
-and gNOI are also Atomix-based maps. Finally, and most interestingly,
-ONOS offers a set of interfaces for controlling the underlying
-switches. :numref:`Figure %s <fig-onos>` depicts two: Flow Rules and
-Flow Objectives. The first is borrowed from OpenFlow, and hence, is
-pipeline-aware. The second is pipeline-agnostic, and the focus of the
-rest of this section.
+and gNOI are also ONOS services wrapped around Atomix maps. Finally,
+and most interestingly, ONOS offers a set of interfaces for
+controlling the underlying switches. :numref:`Figure %s <fig-onos>`
+depicts two: Flow Rules and Flow Objectives. The first is borrowed
+from OpenFlow, and hence, is pipeline-aware. The second is
+pipeline-agnostic, and the focus of the rest of this section.
 
-There are three types of flow objectives: *Filtering*, *Next*, and
-*Forwarding*. Filtering objectives determine whether or not traffic
+There are three types of flow objectives: *Filtering*, *Forwarding*,
+and *Next*. Filtering objectives determine whether or not traffic
 should be permitted to enter the pipeline, based on a traffic
-*Selector*. You can think of selectors as abstracting the "match" part
-of a match-action rule. Next objectives indicate what kind of
-*Treatment* the traffic should receive. You can think of treatments as
-abstracting the "action" part of a match-action rule.  Forwarding
-objectives determine what traffic is to be allowed to egress the
-pipeline, effectively adding a second opportunity apply a match rule
-to the traffic.
+*Selector*. Forwarding objectives determine what traffic is to be
+allowed to egress the pipeline, generally by matching select fields in
+the packet with a forwarding table. Next objectives indicate what kind
+of *Treatment* the traffic should receive, such as how the header is
+to be rewritten. If this sounds like an abstract three-stage pipeline:
+
+.. centered:: Filtering → Forwarding → Next
+
+then you understand the idea behind Flow Objectives. For example, the
+Filter objective (stage) might specify that packets matching a
+particular MAC address, VLAN tag, and IP address be allowed to enter
+the pipeline; the corresponding Forwarding objective (stage) then
+looks up the IP address in a routing table; and finally the Next
+objective (stage) rewrites the headers as necessary and assigns the
+packet to an output port. All three stages, of course, are agnostic as
+to exactly what combination of tables in the underlying switch are
+used to implement the corresponding sequence of match/action pairs.
 
 The challenge is to map these pipeline-agnostic objectives onto the
 corresponding pipeline-dependent rules. In ONOS, this mapping is
