@@ -2,7 +2,7 @@ Chapter 6:  Network OS
 ======================
 
 We are now ready to move from a single switch with purely local state,
-to the global, network-wise view maintained by a Network Operating
+to the global, network-wide view maintained by a Network Operating
 System. The best way to think about a NOS is that it is like any other
 horizontally scalable cloud application. It consists of a collection
 of loosely coupled subsystems—as is often associated with a
