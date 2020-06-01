@@ -41,13 +41,13 @@ approach to SDN. Only time will tell where the SDN journey takes us,
 but we believe it is important to understand the scope of the
 opportunity.
 
-This book assumes a general understanding of the Internet, although an
-appreciation for the role switches and routers play forwarding
+This book assumes a general understanding of the Internet, although a
+deeper appreciation for the role switches and routers play forwarding
 ethernet frames and IP packets is helpful. Links to related background
 information are included to help bridge any gaps. This book is also a
 work-in-progress. We are eager to hear your feedback and suggestions.
 
 | Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska
 | Open Networking Foundation
-| March 2020
+| June 2020
 
