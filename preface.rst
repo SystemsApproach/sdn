@@ -21,8 +21,8 @@ are organized accordingly. SDN suggests a completely different
 world-view, one that comes with a new software stack. This book is
 organized around that new stack, with the goal of presenting a
 top-to-bottom tour of SDN without leaving any significant gaps that
-the reader might suspect can only be filled with magic or some
-expert's secret sauce.
+the reader might suspect can only be filled with magic or proprietary
+code.
 
 An important aspect of meeting this goal is to use open source. We do
 this in large part by taking advantage of two community-based
@@ -36,8 +36,8 @@ in this space—from incumbent vendors to network operators, startups,
 standards bodies, and other open source projects—each offering varied
 interpretations of what SDN *is* and *is not*. We discuss these other
 perspectives and explain how they fit into the larger scheme of
-things, but we do not let them deter us from describing an end-to-end
-approach to SDN. Only time will tell where the SDN journey takes us,
+things, but we do not let them deter us from describing the full
+breadth of SDN. Only time will tell where the SDN journey takes us,
 but we believe it is important to understand the scope of the
 opportunity.
 
