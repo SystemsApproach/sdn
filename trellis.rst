@@ -287,7 +287,7 @@ Before doing that, it is important to acknowledge that knowing exactly
 what you want from a network from the outset is an impossibly high
 bar. Networks evolve based on experience using and operating them. No
 one knew how to write ``fabric.p4`` on day one, but after iterating
-through a series of of implementations of every layer up-and-down the
+through a series of implementations of every layer up-and-down the
 stack (including the introduction of Tofino as a programmable
 forwarding pipeline), ``fabric.p4`` emerged. *The point is that
 treating the network as a programmable platform frees you to
@@ -296,9 +296,11 @@ continually and rapidly evolve it.*
 Said another way, we introduced ``forward.p4`` as our canonical
 example of "a forwarding plane customized to do exactly what we want"
 in Chapter 4, but then spent the rest of the chapter describing all
-the machinery that makes something like ``forward.p4`` possible.  In
-short, ``fabric.p4`` is an example ``forward.p4``, which we only now
-able to describe because of how it relates to the control plane.
+the machinery that makes something like ``forward.p4`` possible,
+without ever revisiting what network-specific functionality it might
+actually implement.  In short, ``fabric.p4`` is a specific example of
+``forward.p4``, which we only now able to describe because of how it
+relates to the control plane.
 
 There are three things of note about ``fabric.p4``. First, it is
 loosely based on the Broadcom OF-DPA pipeline, which makes sense
