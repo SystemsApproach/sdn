@@ -265,3 +265,99 @@ DHCP packets). So the next time you use your TV remote to change
 channels, it is possible you are triggering procedure invocations up
 and down the SDN software stack described throughout this book!
     
+7.4  Customized Forwarding
+--------------------------
+
+Trellis is an example use case for SDN. It is a set of control
+applications running top of a Network OS, which in turn runs on top of
+a collection white-box switches arranged in a leaf-spine topology,
+where each switch runs a local Switch OS. In this way, Trellis serves
+as a capstone for our bottom-up tour of the SDN software stack.
+
+But if we knew from the outset that a leaf-spine fabric supporting the
+Trellis feature-set was exactly what we wanted, we might go back to
+lower layers and tailor them for that purpose. This is what has
+happened over time with Trellis, resulting in a customized forwarding
+plane implemented by a P4 program called ``fabric.p4``. We conclude
+this chapter by giving a high-level summary of ``fabric.p4``,
+highlighting how its design meshes with the rest of the software
+stack.
+
+Before doing that, it is important to acknowledge that knowing exactly
+what you want from a network from the outset is an impossibly high
+bar. Networks evolve based on experience using and operating them. No
+one knew how to write ``fabric.p4`` on day one, but after iterating
+through a series of of implementations of every layer up-and-down the
+stack (including the introduction of Tofino as a programmable
+forwarding pipeline), ``fabric.p4`` emerged. *The point is that
+treating the network as a programmable platform frees you to
+continually and rapidly evolve it.*
+
+Said another way, we introduced ``forward.p4`` as our canonical
+example of "a forwarding plane customized to do exactly what we want"
+in Chapter 4, but then spent the rest of the chapter describing all
+the machinery that makes something like ``forward.p4`` possible.  In
+short, ``fabric.p4`` is an example ``forward.p4``, which we only now
+able to describe because of how it relates to the control plane.
+
+There are three things of note about ``fabric.p4``. First, it is
+loosely based on the Broadcom OF-DPA pipeline, which makes sense
+because Trellis was originally implemented on top of a set of
+Tomahawk-based switches. The ``fabric.p4`` pipeline is simpler than
+OF-DPA, as it eliminates tables that Trellis does not need. This makes
+``fabric.p4`` easier to control.
+
+Second, ``fabric.p4`` is designed to mimic ONOS's FlowObjective API,
+thereby simplifying the process of mapping FlowObjectives onto
+P4Runtime operations. This is best illustrated by :numref:`Figure %s
+<fig-fabric>` which shows ``fabric.p4``\'s ingress pipeline. The
+egress pipeline is not shown, but it is a straightforward rewriting of
+the header fields in the common case.
+
+.. _fig-fabric:
+.. figure:: figures/Slide40.png
+    :width: 500px
+    :align: center
+
+    Logical pipeline supported by ``fabric.p4``, designed to parallel
+    the Filtering, Forwarding, and Next stages of the FlowObjective API.
+
+Third, ``fabric.p4`` is designed to be configurable, making it
+possible to selectively include additional functionality. This is not
+easy when writing code that is optimized for an ASIC-based forwarding
+pipeline, and in practice it makes heavy use of pre-processor
+conditionals (i.e., ``#ifdefs``). :numref:`Figure %s <fig-fabric-p4>`
+shows ``fabric.p4``\'s main control block, annotated to highlight
+optional functionality. The details of the options are beyond to scope
+of this book, but at a high level:
+
+* **SPGW (Serving and Packet Gateway)** Augments IP functionality in
+  support of 4G Mobile Networks.
+
+* **BNG (Broadband Network Gateway)** Augments IP functionality in
+  support of Fiber-to-the-Home.
+
+* **INT (Inband Network Telemetry)** Adds metric collection and
+  telemetry output directives.
+
+For example, a companion file, ``spgw.p4`` (not shown), implements the
+forwarding plane for the SPGW extension, which includes the GTP tunnel
+encapsulation/decapsulation required by the cellular network standard.
+Similarly, ``bng.p4`` (not shown) implements PPPoE termination, which 
+is used by some Passive Optical Networks deployments.
+
+.. _fig-fabric-p4:
+.. figure:: figures/Slide41.png
+    :width: 800px
+    :align: center
+
+    Main ``fabric.p4`` ingress processing block, including optional
+    extensions in support of SPGW, BNG, and INT.
+
+In addition to selecting which extensions to include, the pre-processor
+also defines several constants, including the size of each logical
+table.  Clearly, this implementation is a low-level approach to
+building configurable forwarding pipelines. Designing higher level
+language constructs for composition, including the ability to
+dynamically add functions to the pipeline at runtime, is a subject of
+on-going research.
