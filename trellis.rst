@@ -337,16 +337,15 @@ the header fields in the common case.
     to a server.
 
     Calling out functions like SPGW and BNG as being an "off-loaded"
-    optimization is arguably about claiming an improvement when what
-    you've done is fix a sub-par solution. It's just as accurate to
-    say that we've off-loaded IP to the switch since IP forwarding
-    also runs in software on a general-purpose processor. To a first
-    approximation, SPGW and BNG are specialized IP routers, augmented
-    with additional features unique to cellular and wireline access
-    networks, respectively. In the grand scheme of things, networks
-    are built from a combination of forwarding functions, and we now
-    have more options as to what hardware chip is the best target for
-    implementing each function.
+    optimization is arguably an example of selective memory. It's
+    just as accurate to say that we've off-loaded IP to the switch
+    since IP forwarding also runs in software on general-purpose
+    processors. To a first approximation, SPGW and BNG are just
+    specialized IP routers, augmented with additional features unique
+    to cellular and wireline access networks, respectively. In the
+    grand scheme of things, networks are built from a combination of
+    forwarding functions, and we now have more options as to what
+    hardware chip is the best target for implementing each function.
 
 Third, ``fabric.p4`` is designed to be configurable, making it
 possible to selectively include additional functionality. This is not
