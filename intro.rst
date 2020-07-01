@@ -26,8 +26,16 @@ This focus on the software stack is a central theme of the
 book. Because SDN is an approach to building networks, a set of
 software and hardware artifacts is required to put that approach into
 practice.  The open source examples we draw upon are available on
-GitHub, with links to both code and tutorials available throughout the
-book.
+GitHub, with links to both code and on-hand programming exercises
+available throughout the book.
+
+.. _code_overview:
+.. admonition:: Programming Exercises
+
+   A collection of programming exercises, tied to the material in this
+   book. To get started, set up the execution environment as outlined
+   `here
+   <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/README.md>`__.
 
 Before getting into the details, it is helpful to understand the
 origin story for SDN, which started as an effort by the Computer
@@ -656,3 +664,4 @@ predictions about the next phase of the SDN journey in Chapter 8.
    `Future:Net 2019
    <https://www.vmware.com/futurenet/2019-event/>`__.
    October 2019.
+  

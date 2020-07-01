@@ -324,6 +324,30 @@ the header fields in the common case.
     Logical pipeline supported by ``fabric.p4``, designed to parallel
     the Filtering, Forwarding, and Next stages of the FlowObjective API.
 
+.. sidebar:: VNF Off-loading
+
+    The SPGW and BNG extensions are examples of an optimization
+    technique sometimes called *VNF off-loading*. VNF is an acronym
+    for *Vitrual Network Function*, which refers to functionality that
+    sometimes runs as software in virtual machines. Off-loading refers
+    to the idea of re-implementing this functionality to run in switch
+    forwarding pipeline, rather than on a general-purpose server. This
+    generally leads to better performance because packets can be
+    forwarded from source to destination without having to be diverted
+    to a server.
+
+    Calling out functions like SPGW and BNG as being an "off-loaded"
+    optimization is arguably about claiming an improvement when what
+    you've done is fix a sub-par solution. It's just as accurate to
+    say that we've off-loaded IP to the switch since IP forwarding
+    also runs in software on a general-purpose processor. To a first
+    approximation, SPGW and BNG are specialized IP routers, augmented
+    with additional features unique to cellular and wireline access
+    networks, respectively. In the grand scheme of things, networks
+    are built from a combination of forwarding functions, and we now
+    have more options as to what hardware chip is the best target for
+    implementing each function.
+
 Third, ``fabric.p4`` is designed to be configurable, making it
 possible to selectively include additional functionality. This is not
 easy when writing code that is optimized for an ASIC-based forwarding
@@ -333,13 +357,13 @@ shows ``fabric.p4``\'s main control block, annotated to highlight
 optional functionality. The details of the options are beyond to scope
 of this book, but at a high level:
 
-* **SPGW (Serving and Packet Gateway)** Augments IP functionality in
+* **SPGW (Serving and Packet Gateway):** Augments IP functionality in
   support of 4G Mobile Networks.
 
-* **BNG (Broadband Network Gateway)** Augments IP functionality in
+* **BNG (Broadband Network Gateway):** Augments IP functionality in
   support of Fiber-to-the-Home.
 
-* **INT (Inband Network Telemetry)** Adds metric collection and
+* **INT (Inband Network Telemetry):** Adds metric collection and
   telemetry output directives.
 
 For example, a companion file, ``spgw.p4`` (not shown), implements the
@@ -347,6 +371,14 @@ forwarding plane for the SPGW extension, which includes the GTP tunnel
 encapsulation/decapsulation required by the cellular network standard.
 Similarly, ``bng.p4`` (not shown) implements PPPoE termination, which 
 is used by some Passive Optical Networks deployments.
+
+In addition to selecting which extensions to include, the pre-processor
+also defines several constants, including the size of each logical
+table.  Clearly, this implementation is a low-level approach to
+building configurable forwarding pipelines. Designing higher level
+language constructs for composition, including the ability to
+dynamically add functions to the pipeline at runtime, is a subject of
+on-going research.
 
 .. _fig-fabric-p4:
 .. figure:: figures/Slide41.png
@@ -356,10 +388,3 @@ is used by some Passive Optical Networks deployments.
     Main ``fabric.p4`` ingress processing block, including optional
     extensions in support of SPGW, BNG, and INT.
 
-In addition to selecting which extensions to include, the pre-processor
-also defines several constants, including the size of each logical
-table.  Clearly, this implementation is a low-level approach to
-building configurable forwarding pipelines. Designing higher level
-language constructs for composition, including the ability to
-dynamically add functions to the pipeline at runtime, is a subject of
-on-going research.

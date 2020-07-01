@@ -18,4 +18,5 @@ Software-Defined Networks: A Systems Approach
    onos.rst
    trellis.rst
    future.rst
+   exercises.rst
    README.rst
