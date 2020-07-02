@@ -367,6 +367,7 @@ beyond to scope of this book, but at a high level:
   telemetry output directives.
 
 .. code-block:: C
+   :linenos:
    :emphasize-lines: 2-5,8-11,18-20,22-24
 		
    apply {
@@ -398,8 +399,12 @@ beyond to scope of this book, but at a high level:
 For example, a companion file, ``spgw.p4`` (not shown), implements the
 forwarding plane for the SPGW extension, which includes the GTP tunnel
 encapsulation/decapsulation required by the cellular network standard.
-Similarly, ``bng.p4`` (not shown) implements PPPoE termination, which 
-is used by some Passive Optical Networks deployments.
+Similarly, ``bng.p4`` (not shown) implements PPPoE termination, which
+is used by some Passive Optical Networks deployments. (As an aside,
+the code fragment also illustrates the basic structure of
+``fabric.p4``\'s core functionality: lines 6-7 invoke the *filtering
+objective*, lines 12-14 invoke the *forwarding objective*, and lines
+16-17 invoke the *next objective*.)
 
 In addition to selecting which extensions to include, the pre-processor 
 also defines several constants, including the size of each logical 
