@@ -5,7 +5,7 @@ A collection of programming exercises provides hand-on experience with
 the software described in this book. They include:
 
 * Using Stratum's P4Runtime, gNMI, OpenConfig, and gNOI interfaces
-* Using ONOS to control P4-programmed devices
+* Using ONOS to control P4-programmed switches
 * Writing ONOS applications to implement control plane logic
   (e.g., bridging, routing, ECMP)
 * Testing a software stack using bmv2 in Mininet
@@ -25,7 +25,7 @@ tutorial slides that introduce the topics covered in the exercises:
 
 * http://bit.ly/adv-ngsdn-tutorial-slides
 
-This material has significant overlap with the material covered in
+These slides have significant overlap with the material covered in
 this book, so it is not essential that you start with the slides, but
 they can be a good supplemental resource.
 
@@ -39,11 +39,11 @@ prepare that environment.
 System Requirements
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The current configuration of the VM is 4 GB of RAM and 4-core CPU.
+The current configuration of the VM is 4 GB of RAM and a 4-core CPU.
 These are the recommended minimum system requirements to complete the
-exercises. When imported, the VM takes approximately 8 GB of HDD
-space. For a smooth experience, we recommend running the VM on a host
-system that has at least double these resources.
+exercises. The VM also takes approximately 8 GB of HDD space. For a
+smooth experience, we recommend running the VM on a host system that
+has at least double these resources.
 
 Download VM
 ~~~~~~~~~~~~~~~~~

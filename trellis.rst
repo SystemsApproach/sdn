@@ -324,6 +324,15 @@ the header fields in the common case.
     Logical pipeline supported by ``fabric.p4``, designed to parallel
     the Filtering, Forwarding, and Next stages of the FlowObjective API.
 
+Third, ``fabric.p4`` is designed to be configurable, making it 
+possible to selectively include additional functionality. This is not 
+easy when writing code that is optimized for an ASIC-based forwarding 
+pipeline, and in practice it makes heavy use of pre-processor 
+conditionals (i.e., ``#ifdefs``). The code fragment shown below is the 
+main control block of ``fabric.p4``\'s ingress function, annotated to 
+highlight optional functionality. The details of the options are 
+beyond to scope of this book, but at a high level:
+
 .. sidebar:: VNF Off-loading
 
     The SPGW and BNG extensions are examples of an optimization
@@ -336,25 +345,17 @@ the header fields in the common case.
     forwarded from source to destination without having to be diverted
     to a server.
 
-    Calling out functions like SPGW and BNG as being an "off-loaded"
-    optimization is arguably an example of selective memory. It's
+    Calling out functions like SPGW and BNG as being an off-load
+    "optimization" is arguably an example of selective memory. It's
     just as accurate to say that we've off-loaded IP to the switch
-    since IP forwarding also runs in software on general-purpose
-    processors. To a first approximation, SPGW and BNG are just
-    specialized IP routers, augmented with additional features unique
-    to cellular and wireline access networks, respectively. In the
-    grand scheme of things, networks are built from a combination of
-    forwarding functions, and we now have more options as to what
-    hardware chip is the best target for implementing each function.
-
-Third, ``fabric.p4`` is designed to be configurable, making it
-possible to selectively include additional functionality. This is not
-easy when writing code that is optimized for an ASIC-based forwarding
-pipeline, and in practice it makes heavy use of pre-processor
-conditionals (i.e., ``#ifdefs``). :numref:`Figure %s <fig-fabric-p4>`
-shows ``fabric.p4``\'s main control block, annotated to highlight
-optional functionality. The details of the options are beyond to scope
-of this book, but at a high level:
+    since IP forwarding also sometimes runs in software on
+    general-purpose processors. To a first approximation, SPGW and BNG
+    are just specialized IP routers, augmented with additional
+    features unique to cellular and wireline access networks,
+    respectively. In the grand scheme of things, networks are built
+    from a combination of forwarding functions, and we now have more
+    options as to what hardware chip is the most appropriate target
+    for implementing each such function.
 
 * **SPGW (Serving and Packet Gateway):** Augments IP functionality in
   support of 4G Mobile Networks.
@@ -365,25 +366,47 @@ of this book, but at a high level:
 * **INT (Inband Network Telemetry):** Adds metric collection and
   telemetry output directives.
 
+.. code-block:: C
+   :emphasize-lines: 2-5,8-11,18-20,22-24
+		
+   apply {
+   #ifdef WITH_SPGW
+        spgw_normalizer.apply(hdr.gtpu.isValid(), hdr.gtpu_ipv4, hdr.gtpu_udp,
+                              hdr.ipv4, hdr.udp, hdr.inner_ipv4, hdr.inner_udp);
+   #endif // WITH_SPGW
+        pkt_io_ingress.apply(hdr, fabric_metadata, standard_metadata);
+        filtering.apply(hdr, fabric_metadata, standard_metadata);
+   #ifdef WITH_SPGW
+        spgw_ingress.apply(hdr.gtpu_ipv4, hdr.gtpu_udp, hdr.gtpu,
+                           hdr.ipv4, hdr.udp, fabric_metadata, standard_metadata);
+   #endif // WITH_SPGW
+        if (fabric_metadata.skip_forwarding == _FALSE) {
+            forwarding.apply(hdr, fabric_metadata, standard_metadata);
+        }
+        acl.apply(hdr, fabric_metadata, standard_metadata);
+        if (fabric_metadata.skip_next == _FALSE) {
+            next.apply(hdr, fabric_metadata, standard_metadata);
+   #if defined WITH_INT
+            process_set_source_sink.apply(hdr, fabric_metadata, standard_metadata);
+   #endif // WITH_INT
+        }	
+   #ifdef WITH_BNG
+        bng_ingress.apply(hdr, fabric_metadata, standard_metadata);
+   #endif // WITH_BNG
+   }
+
 For example, a companion file, ``spgw.p4`` (not shown), implements the
 forwarding plane for the SPGW extension, which includes the GTP tunnel
 encapsulation/decapsulation required by the cellular network standard.
 Similarly, ``bng.p4`` (not shown) implements PPPoE termination, which 
 is used by some Passive Optical Networks deployments.
 
-In addition to selecting which extensions to include, the pre-processor
-also defines several constants, including the size of each logical
-table.  Clearly, this implementation is a low-level approach to
-building configurable forwarding pipelines. Designing higher level
-language constructs for composition, including the ability to
-dynamically add functions to the pipeline at runtime, is a subject of
-on-going research.
+In addition to selecting which extensions to include, the pre-processor 
+also defines several constants, including the size of each logical 
+table.  Clearly, this implementation is a low-level approach to 
+building configurable forwarding pipelines. Designing higher level 
+language constructs for composition, including the ability to 
+dynamically add functions to the pipeline at runtime, is a subject of 
+on-going research. 
 
-.. _fig-fabric-p4:
-.. figure:: figures/Slide41.png
-    :width: 800px
-    :align: center
-
-    Main ``fabric.p4`` ingress processing block, including optional
-    extensions in support of SPGW, BNG, and INT.
-
+    
