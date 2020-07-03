@@ -399,10 +399,12 @@ beyond to scope of this book, but at a high level:
 
 For example, a companion file, ``spgw.p4`` (not shown), implements the
 forwarding plane for the SPGW extension, which includes the GTP tunnel
-encapsulation/decapsulation required by the cellular network standard.
-Similarly, ``bng.p4`` (not shown) implements PPPoE termination, which
-is used by some Passive Optical Networks deployments. (As an aside,
-the code fragment also illustrates the basic structure of
+encapsulation/decapsulation required by the 3GPP cellular standard to
+connect the Trellis fabric to the base stations of the Radio Access
+Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
+termination, which is used by some Passive Optical Networks
+deployments to connect the Trellis fabric to home routers. (As an
+aside, the code fragment also illustrates the basic structure of
 ``fabric.p4``\'s core functionality: lines 6-7 invoke the *filtering
 objective*, lines 12-14 invoke the *forwarding objective*, and lines
 16-17 invoke the *next objective*.)
