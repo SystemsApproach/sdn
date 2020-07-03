@@ -26,7 +26,7 @@ This focus on the software stack is a central theme of the
 book. Because SDN is an approach to building networks, a set of
 software and hardware artifacts is required to put that approach into
 practice.  The open source examples we draw upon are available on
-GitHub, with links to both code and on-hand programming exercises
+GitHub, with links to both code and hands-on programming exercises
 available throughout the book.
 
 Before getting into the details, it is helpful to understand the
