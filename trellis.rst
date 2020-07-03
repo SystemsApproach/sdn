@@ -22,9 +22,10 @@ details.
   within each server rack, and L3 connectivity between racks.
 
 * Trellis supports access/edge networking technologies, such as PON
-  and RAN, including support for (a) routing IP traffic to/from devices
-  connected to those access networks, and (b) off-loading access
-  network functionality into the fabric switches.
+  (see :numref:`Figure %s <fig-seba>`) and RAN (see :numref:`Figure %s
+  <fig-trellis>`), including support for (a) routing IP traffic
+  to/from devices connected to those access networks, and (b)
+  off-loading access network functionality into the fabric switches.
 
 This chapter does not give a comprehensive description of all of these
 features, especially those related to Trellis being deployed in
