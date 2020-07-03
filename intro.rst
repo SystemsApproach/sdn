@@ -29,14 +29,6 @@ practice.  The open source examples we draw upon are available on
 GitHub, with links to both code and on-hand programming exercises
 available throughout the book.
 
-.. _code_overview:
-.. admonition:: Programming Exercises
-
-   A collection of programming exercises, tied to the material in this
-   book. To get started, set up the execution environment as outlined
-   `here
-   <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/README.md>`__.
-
 Before getting into the details, it is helpful to understand the
 origin story for SDN, which started as an effort by the Computer
 Science research community to address the ossification of the
