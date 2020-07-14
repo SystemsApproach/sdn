@@ -7,7 +7,6 @@ the software described in this book. They include:
 * Using Stratum's P4Runtime, gNMI, OpenConfig, and gNOI interfaces
 * Using ONOS to control P4-programmed switches
 * Writing ONOS applications to implement control plane logic
-  (e.g., bridging, routing, ECMP)
 * Testing a software stack using bmv2 in Mininet
 * Using PTF to test P4-based forwarding planes
 
@@ -73,8 +72,8 @@ to build a VM on your machine using Vagrant.
 
 At this point you can start the virtual machine (an Ubuntu system),
 and log in using the credentials ``sdn`` / ``rocks``. The instructions
-given throughout the remainder of this section are to be executed in
-the context the VM.
+given throughout the remainder of this section (as well as the
+exercises themselves) are to be executed within the running VM.
 
 
 Clone Repository
@@ -141,10 +140,10 @@ The repo you cloned is structured as follows:
 Commands
 ~~~~~~~~~~~~~~~~
 
-To facilitate working on the exercises, we provide a set of ``make``
-targets to control the different aspects of the process. The specific
-commands are introduced in the individual exercises, but the following
-is a quick reference:
+To facilitate working on the exercises, the repo provides a set of
+``make`` targets to control the different aspects of the process. The
+specific commands are introduced in the individual exercises, but the
+following is a quick reference:
 
 * ``make deps`` → Pull and build all required dependencies
 * ``make p4-build`` → Build P4 program
@@ -158,7 +157,16 @@ is a quick reference:
 * ``make mn-log`` →  Show the Mininet log (i.e., the CLI output)
 * ``make app-build`` → Build custom ONOS app
 * ``make app-reload`` →  Install and activate the ONOS app
-* ``make netcfg`` →  Push ``netcfg.json`` file (network config) to ONOS
+* ``make netcfg`` →  Push ``netcfg.json`` file (network config) to
+  ONOS
+
+.. _warning-cmds:
+.. admonition:: Executing Commands
+
+   As a reminder, these commands will be executed in a terminal window
+   you open within the VM you just created. Be sure you are in the
+   root directory of the repo you cloned (where the main ``Makefile``
+   lives).
 
 Exercises
 ------------------
@@ -166,9 +174,11 @@ Exercises
 The following lists (and links) the individual exercises. That there
 are 8 exercises and 8 chapters is a coincidence. Exercises 1 and 2
 focus on Stratum, and are best attempted after reading through Chapter
-5; Exercises 3 through 6 focus on ONOS and are best attempted after
-reading through Chapter 6; and Exercises 7 and 8 focus on Trellis and
-are best attempted after reading through Chapter 7.
+5. Exercises 3 through 6 focus on ONOS and are best attempted after
+reading through Chapter 6. Exercises 7 and 8 focus on Trellis and are
+best attempted after reading through Chapter 7. Note that the
+exercises build on each other, so it is best to work through them in
+order.
 
 1. `P4Runtime Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-1.md>`__ 
 2. `YANG, OpenConfig, gNMI Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-2.md>`__   
