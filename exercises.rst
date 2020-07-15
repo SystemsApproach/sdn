@@ -1,7 +1,7 @@
 Hands-on Programming
 ======================
 
-A collection of programming exercises provides hand-on experience with
+A collection of programming exercises provides hands-on experience with
 the software described in this book. They include:
 
 * Using Stratum's P4Runtime, gNMI, OpenConfig, and gNOI interfaces
@@ -59,7 +59,7 @@ instructions on how to get VirtualBox and import the VM:
 * https://www.virtualbox.org/wiki/Downloads
 * https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html
 
-Alternatively, you can also use these
+Alternatively, you can use these
 `scripts <https://github.com/opennetworkinglab/ngsdn-tutorial/tree/advanced/util/vm>`__
 to build a VM on your machine using Vagrant.
 
@@ -136,6 +136,9 @@ The repo you cloned is structured as follows:
 * ``mininet\`` → 2x2 leaf-spine (Mininet)
 * ``util\`` → Utility Scripts (Bash)
 * ``ptf\`` → Data plane unit tests (PTF)
+
+Note that the exercises include links to various files on GitHub, but
+don't forget you have those same files cloned on your laptop.
 
 Commands
 ~~~~~~~~~~~~~~~~
