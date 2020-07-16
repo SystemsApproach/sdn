@@ -47,7 +47,7 @@ has at least double these resources.
 Download VM
 ~~~~~~~~~~~~~~~~~
 
-Use the following link to download the VM (4 GB):
+Click the following link to download the VM (4 GB):
 
 * http://bit.ly/ngsdn-tutorial-ova
 
@@ -204,3 +204,7 @@ solution to the reference solution should you get stuck.
    cloud-hosted VMs used during ONF-run tutorials, and so does apply
    here. In its place, the exercises also describe how to access the
    GUI running locally on your laptop.
+
+If you have suggestions for how we can improve these exercises, please
+send email to ng-sdn-exercises@opennetworking.org or post an issue to
+`GitHub <https://github.com/opennetworkinglab/ngsdn-tutorial/issues/new>`__.

@@ -679,7 +679,7 @@ rest of ONOS.
     Multiple ONOS instances, all sharing network state via Atomix,
     provides scalable performance and high availability. 
     
-:numref:`Figure %s <fig-ha>` illustrates ONOS scaled across multiple
+:numref:`Figure %s <fig-ha>` illustrates ONOS scaling across multiple
 instances, where the set of instances share network state via Atomix
 Maps. The figure also shows each instance being responsible for a
 subset of the underlying hardware switches. Should a given instance
