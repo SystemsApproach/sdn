@@ -147,7 +147,7 @@ are in turn implemented using a distributed key/value store. The store
 itself will be familiar to anyone that has looked at how modern cloud
 services are designed—it scales across a distributed set of servers,
 and implements the Raft consensus algorithm to achieve fault-tolerance
-in the face of failures. If you are unfamiliar with Raft, a good
+in the event of failures. If you are unfamiliar with Raft, a good
 introduction is available at:
 
 .. _reading_p4:
@@ -670,6 +670,22 @@ providers, where ONOS uses Karaf as its internal modularity framework.
 The bundle also includes Atomix, although ONOS supports an optional
 configuration that scales the key/value store independently from the
 rest of ONOS.
+
+.. _fig-ha:
+.. figure:: figures/Slide42.png 
+    :width: 600px 
+    :align: center 
+
+    Multiple ONOS instances, all sharing network state via Atomix,
+    provides scalable performance and high availability. 
+    
+:numref:`Figure %s <fig-ha>` illustrates ONOS scaled across multiple
+instances, where the set of instances share network state via Atomix
+Maps. The figure also shows each instance being responsible for a
+subset of the underlying hardware switches. Should a given instance
+fail, the remaining instances use the Atomix leader-election primitive
+to select a new instance to take its place, thereby assuring high
+availability.
 
 A refactoring of ONOS to more closely adhere to a microservice
 architecture is also underway. The new version, called µONOS,

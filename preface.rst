@@ -21,10 +21,10 @@ organized accordingly. SDN suggests a completely different world-view,
 one that comes with a new software stack. This book is organized
 around that new stack, with the goal of presenting a top-to-bottom
 tour of SDN without leaving any significant gaps that the reader might
-suspect can only be filled with magic or proprietary code. *In fact, we
-invite you do the hands-on programming exercises included at the end
-of the book to prove to yourself that the software stack is both real
-and complete.*
+suspect can only be filled with magic or proprietary code. *We invite
+you do the hands-on programming exercises included at the end of the
+book to prove to yourself that the software stack is both real and
+complete.*
 
 An important aspect of meeting this goal is to use open source. We do
 this in large part by taking advantage of two community-based
