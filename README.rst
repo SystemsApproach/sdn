@@ -2,7 +2,7 @@ About This Book
 ===============
 
 This `repository <https://github.com/SystemsApproach/SDN>`__ contains
-source for *Softwarwe-Defined Networks: A Systems Approach*, available under
+source for *Software-Defined Networks: A Systems Approach*, available under
 terms of the `Creative Commons (CC BY-NC-ND 4.0)
 <https://creativecommons.org/licenses/by-nc-nd/4.0>`__ license. The
 community is invited to contribute corrections, improvements, updates,
@@ -37,9 +37,9 @@ To build a web-viewable version, you first need to download the source:
 
 .. code:: shell 
 
-   mkdir ~/SDN 
-   cd ~/SDN 
-   git clone https://github.com/SystemsApproach/SDN.git 
+   $ mkdir ~/SDN 
+   $ cd ~/SDN 
+   $ git clone https://github.com/SystemsApproach/SDN.git 
 
 The build process is stored in the Makefile and requires Python be 
 installed. The Makefile will create a virtualenv (``doc_venv``) which 

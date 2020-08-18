@@ -653,7 +653,7 @@ predictions about the next phase of the SDN journey in Chapter 8.
 .. _reading_future:
 .. admonition:: Further Reading
 
-   `Future:Net 2019
+   `FutureNet 2019
    <https://www.vmware.com/futurenet/2019-event/>`__.
    October 2019.
   
