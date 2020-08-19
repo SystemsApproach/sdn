@@ -311,7 +311,7 @@ language is fuzzy, a gentle introduction is available here:
 .. _reading_xml:
 .. admonition:: Further Reading
 
-   `Marckup Languages (XML)
+   `Markup Languages (XML)
    <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
    Computer Networks: A Systems Approach, November 2019.
 
