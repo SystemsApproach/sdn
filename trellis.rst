@@ -1,11 +1,11 @@
 Chapter 7:  Leaf-Spine Fabric
 =======================================
 
-This chapter describes Trellis, a leaf-spine switching fabric
-implemented by a collection of control applications running on top of
-ONOS. We have introduced various aspects of Trellis in earlier
-chapters, so we summarize those highlights before getting into the
-details.
+This chapter describes a leaf-spine switching fabric implemented by a
+collection of control applications. We use Trellis, running on ONOS,
+as our exemplar implementation. Various aspects of Trellis were
+introduced in earlier chapters, so we summarize those highlights
+before getting into the details.
 
 * Trellis supports the leaf-spine fabric topology that is commonly
   used to interconnect multiple racks of servers in a datacenter (see
@@ -28,12 +28,11 @@ details.
   off-loading access network functionality into the fabric switches.
 
 This chapter does not give a comprehensive description of all of these
-features, especially those related to Trellis being deployed in
-support of access networks. It focuses on the more narrow datacenter
-fabric use case, which is sufficient to illustrate the approach to
-building a production-grade network using SDN principles. More
-information about the full range of Trellis design decisions is
-available on the Trellis website:
+features, but it does focus on the datacenter fabric use case, which
+is sufficient to illustrate the approach to building a
+production-grade network using SDN principles. More information about
+the full range of Trellis design decisions is available on the Trellis
+website:
 
 .. _reading_trellis:
 .. admonition:: Further Reading
@@ -288,8 +287,8 @@ Before doing that, it is important to acknowledge that knowing exactly
 what you want from a network at the outset is an impossibly high
 bar. Networks evolve based on experience using and operating them. No
 one knew how to write ``fabric.p4`` on day one, but after iterating
-through a series of implementations of every layer up-and-down the
-stack (including the introduction of Tofino as a programmable
+through a series of implementations of the other layers up-and-down
+the stack (including the introduction of Tofino as a programmable
 forwarding pipeline), ``fabric.p4`` emerged. *The point is that
 treating the network as a programmable platform frees you to
 continually and rapidly evolve it.*
