@@ -287,7 +287,7 @@ principles, we recommend:
 .. admonition:: Further Reading
 
    `5G Mobile Networks: A Systems Approach
-   <https://5g.systemsapproach.org/>`__. August 2019.
+   <https://5g.systemsapproach.org/>`__. June 2020.
 
 The bottom line is that the effort to apply SDN principles to both
 fiber and mobile access networks starts with the same building block

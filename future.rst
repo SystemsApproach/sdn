@@ -243,15 +243,19 @@ by the RAN elements. Various of the control applications then analyze
 this data to make informed decisions about how the RAN can best meet
 its data delivery objectives.
 
-For more information about what’s involved in disaggregating 5G mobile
-networks so they can be implemented in software, we recommend a
-companion book:
+For a broad introduction into what’s involved in disaggregating 5G
+mobile networks so they can be implemented in software, as well as
+more details about the ONOS-based RIC, we recommend the following:
 
 .. _reading_5g:
 .. admonition:: Further Reading
 
    `5G Mobile Networks: A Systems Approach
-   <https://5g.systemsapproach.org/>`__. March 2020.
+   <https://5g.systemsapproach.org/>`__. June 2020.
+
+   
+   `SD-RAN Project
+   <https://opennetworking.org/sd-ran/>`__. August 2020.
 
 Finally, circling back to the previous section, applying closed-loop
 verification to a disaggregated and software-defined cellular network

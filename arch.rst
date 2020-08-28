@@ -29,8 +29,11 @@ An overview of the software stack is given in :numref:`Figure %s
 *Control Applications*. :numref:`Figure %s <fig-stack>` also calls out
 a corresponding set of exemplar open source components (*Trellis*,
 *ONOS*, and *Stratum*) on the right, as well as a related *P4
-Toolchain* on the left. This chapter introduces these components, with
+Toolchain* on the left.\ [#]_ This chapter introduces these components, with
 later chapters giving more detail.
+
+.. [#] We sometimes call this the **TOST** stack: **T**\rellis running
+	on **O**\NOS running on **S**\tratum running on **T**\ofino.
 
 Note the similarity between this diagram and :numref:`Figure %s
 <fig-market2>` in Chapter 1, both of which include two open

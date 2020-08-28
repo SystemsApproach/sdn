@@ -8,6 +8,9 @@ design to appreciate the software stack that runs on top of it. Also,
 because we ultimately want to be vendor agnostic, this chapter
 discusses both P4 as a language-based approach to programming the
 switch’s data plane, and OpenFlow as the first-generation alternative.
+(It is helpful to keep in mind that we introduce these two approaches
+in reverse chronological order, starting with the more general
+programmable case.)
 
 4.1 Switch-Level Schematic
 ----------------------------------
@@ -155,7 +158,7 @@ The ALU shown in the figure then implements the action paired with the
 corresponding pattern. Possible actions include modifying specific
 header fields (e.g., decrementing a TTL), pushing or popping tags
 (e.g., VLAN, MPLS), incrementing or clearing various counters internal
-to the switch (e.g., packets processed), and setting user/ internal
+to the switch (e.g., packets processed), and setting user/internal
 metadata (e.g. the VRF ID to be used in the routing table).
 
 Directly programming the parser, match-action units, and deparser
@@ -1036,6 +1039,12 @@ controlled using a control interface like OpenFlow or P4Runtime (not
 shown). The five examples differ based on whether the pipeline is
 defined by a P4 program or through some other means (e.g., the OF-DPA
 specification).
+
+Note that only those configurations with a P4-defined logical pipeline
+at the top of the stack (i.e., first, third, fifth examples) can be
+controlled using P4Runtime. This is for the pragmatic reason that the
+P4Runtime interface is auto-generated from this P4 program using the
+tooling described in the next Chapter.
 
 The two leftmost examples exist today, and represent the canonical
 layers for programmable and fixed-function ASICs, respectively. The
