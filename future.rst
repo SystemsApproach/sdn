@@ -174,6 +174,12 @@ principles are applied to the Radio Access Network (RAN), resulting in
 increased feature velocity. Because of this, mobile network operators
 are working to make Software-Defined RAN (SD-RAN) happen.
 
+.. _reading_5g:
+.. admonition:: Further Reading  
+   
+   `SD-RAN Project  
+   <https://opennetworking.org/sd-ran/>`__. August 2020. 
+   
 To understand SD-RAN at a technical level, it is important to
 recognize that the base stations that make up the RAN are, for all
 practical purposes, packet forwarders. The set of base stations in a
@@ -244,19 +250,15 @@ this data to make informed decisions about how the RAN can best meet
 its data delivery objectives.
 
 For a broad introduction into what’s involved in disaggregating 5G
-mobile networks so they can be implemented in software, as well as
-more details about the ONOS-based RIC, we recommend the following:
+mobile networks so they can be implemented in software, we recommend
+the following companion book:
 
 .. _reading_5g:
-.. admonition:: Further Reading
+.. admonition:: Further Reading  
 
-   `5G Mobile Networks: A Systems Approach
-   <https://5g.systemsapproach.org/>`__. June 2020.
-
-   
-   `SD-RAN Project
-   <https://opennetworking.org/sd-ran/>`__. August 2020.
-
+   `5G Mobile Networks: A Systems Approach  
+   <https://5g.systemsapproach.org/>`__. June 2020.  
+ 
 Finally, circling back to the previous section, applying closed-loop
 verification to a disaggregated and software-defined cellular network
 is the next obvious thing to do.
