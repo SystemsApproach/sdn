@@ -258,7 +258,7 @@ Moreover, when the fabric is constructed using switches with
 programmable pipelines, certain functionality originally provided by
 the legacy hardware can be programmed into the switches that comprise
 the fabric. For example, BNG-equivalent functionality, which could be
-packeted as a *Virtual Network Function (VNF)* running on a
+packaged as a *Virtual Network Function (VNF)* running on a
 general-purpose processor, is instead programmed directly into a
 white-box switches. This practice is sometimes called *VNF
 off-loading* because the packet processing is moved from the compute

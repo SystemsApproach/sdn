@@ -13,12 +13,12 @@ This chapter defines the general architecture of such a software
 stack, and while there are multiple options for the specific
 components and tools that can be plugged into this architecture, it
 also introduces an example set. We do this to make the discussion more
-concrete, but the particular components we describe two important
-attributes. One, they are open source and freely available on
-GitHub. Two, they are designed to work together, providing a
-comprehensive solution; there are no gaps in our story. Both
-attributes make it possible for *anyone* to build the same end-to-end
-system that is running today in production networks.
+concrete, but the particular components we describe have two important
+attributes. One, they are open source and freely available on GitHub.
+Two, they are designed to work together, providing a comprehensive
+solution; there are no gaps in our story. Both attributes make it
+possible for *anyone* to build the same end-to-end system that is
+running today in production networks.
 
 3.1 Software Stack
 -------------------
@@ -81,8 +81,8 @@ The top-to-bottom view of the software stack shown in :numref:`Figure
 %s <fig-stack>` is from the perspective of a single switch, but it is
 important to also keep the network perspective in
 mind. :numref:`Figure %s <fig-e2e>` gives such a perspective by
-focusing on an end-to-end path through the network, connecting a pair
-of VMs.
+focusing on an end-to-end path through the network, connecting
+Virtual Machines (VMs).
 
 .. _fig-e2e:
 .. figure:: figures/Slide19.png
@@ -171,11 +171,12 @@ P4 programs are written to an abstract model of the forwarding
 pipeline, and whether the chip’s actual hardware pipeline is fixed or
 programmable, we still need to know how to map the abstract pipeline
 onto the physical pipeline. This is where ``arch.p4`` plays a role. As
-for the role of ``forward.p4``, this program actually prescribes the
+for the role of ``forward.p4``, this program actually *prescribes* the
 pipeline in the case of a programmable chip, whereas for the
-fixed-function chip, ``forward.p4`` merely describes the pipeline. But
-we still need ``forward.p4`` in both cases because the toolchain uses
-it to generate the API that sits between the control and data planes.
+fixed-function chip, ``forward.p4`` merely *describes* the
+pipeline. But we still need ``forward.p4`` in both cases because the
+toolchain uses it to generate the API that sits between the control
+and data planes.
 
 3.3 Switch OS
 -------------------

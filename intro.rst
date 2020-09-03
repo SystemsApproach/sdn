@@ -2,8 +2,8 @@ Chapter 1:  Introduction
 ===========================
 
 Software-Defined Networking (SDN) is an approach to how we *implement*
-networks, which matters because it impacts the pace of
-*innovation*. SDN does not directly address any of the technical
+networks, which matters because it impacts the *pace of
+innovation*. SDN does not directly address any of the technical
 challenges of routing, congestion control, traffic engineering,
 security, mobility, reliability, or real-time communication, but it
 does open new opportunities to create and deploy innovative solutions
