@@ -19,8 +19,9 @@ following information:
 Read the Book
 -------------
 
-An online version of the book is published at
-`https://sdn.systemsapproach.org
+This book is part of the `Systems Approach Series
+<https://www.systemsapproach.org>`__, with an online version published
+at `https://sdn.systemsapproach.org
 <https://sdn.systemsapproach.org>`__.
 
 To track progress and receive notices about new versions, you can follow
