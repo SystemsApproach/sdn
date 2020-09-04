@@ -90,15 +90,23 @@ replicated on three to five servers.
     High availability through a combination of dual-homing, link
     bonding, and ECMP groups.
 
-Details about link aggregation and ECMP are beyond the scope of this
-book, but the idea is straightforward: the packet forwarding mechanism
-is augmented to load balance outgoing packets among a group (e.g., a
-pair) of links (egress ports) rather than having just a single “best”
-output link (egress port). This both improves bandwidth and results in
-an automatic recover mechanism should any single link fail. It is also
-the case that switch forwarding pipelines have explicit support for
-port groups, so once equivalences are established, they can be pushed
-all the way into the data plane.
+The use of link aggregation and ECMP is straightforward: the packet
+forwarding mechanism is augmented to load balance outgoing packets
+among a group (e.g., a pair) of links (egress ports) rather than
+having just a single “best” output link (egress port). This both
+improves bandwidth and results in an automatic recovery mechanism
+should any single link fail. It is also the case that switch
+forwarding pipelines have explicit support for port groups, so once
+equivalences are established, they can be pushed all the way into the
+data plane.
+
+To be clear, ECMP is a forwarding strategy that Trellis applies
+uniformly across all the switches in the fabric. The Trellis control
+application knows the topology, and pushes the port groups into each
+of the fabric switches accordingly. Each switch then applies these
+port groups to its forwarding pipeline, which then forwards packets
+across the set of ports in each group without additional control plane
+involvement.
 
 Fourth, with respect to scalability, Trellis has demonstrated the
 ability to support up to 120k routes and 250k flows. This is in a
