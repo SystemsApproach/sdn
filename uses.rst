@@ -103,20 +103,19 @@ we explore in-depth throughout this book, so for now we give only a
 brief introduction.
 
 A datacenter switching fabric is a network often designed according to
-a leaf-spine topology, based on the well-studied *Clos Architecture*.
-The basic idea is illustrated by the small 4-rack/3-tier example shown
-in Figure 8. Each rack has a *Top-of-Rack (ToR)* switch that
-interconnects the servers in that rack; these are referred to as the
-*leaf* switches of the fabric. (There are typically two such ToR
-switches per rack for resilience, but the figure shows only one for
-simplicity.) Each leaf switch then connects to a subset of available
-*spine* switches, with two requirements: (1) that there be multiple
-paths between any pair of racks, and (2) that each rack-to-rack path
-is two-hops (i.e., via a single intermediate spine switch). Note that
-this means in 3-tier design like the one shown in :numref:`Figure %s
-<fig-leaf-spine>`, every server-to-server path is either two hops
-(server-leaf-server in the intra-rack case) or four hops
-(server-leaf-spine-leaf-server in the inter-rack case).
+a *leaf-spine* topology. The basic idea is illustrated by the small
+4-rack/3-tier example shown in Figure 8. Each rack has a *Top-of-Rack
+(ToR)* switch that interconnects the servers in that rack; these are
+referred to as the *leaf* switches of the fabric. (There are typically
+two such ToR switches per rack for resilience, but the figure shows
+only one for simplicity.) Each leaf switch then connects to a subset
+of available *spine* switches, with two requirements: (1) that there
+be multiple paths between any pair of racks, and (2) that each
+rack-to-rack path is two-hops (i.e., via a single intermediate spine
+switch). Note that this means in 3-tier design like the one shown in
+:numref:`Figure %s <fig-leaf-spine>`, every server-to-server path is
+either two hops (server-leaf-server in the intra-rack case) or four
+hops (server-leaf-spine-leaf-server in the inter-rack case).
 
 .. _fig-leaf-spine:
 .. figure:: figures/Slide20.png
