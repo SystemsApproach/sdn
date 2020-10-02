@@ -153,7 +153,7 @@ introduction is available at:
 .. _reading_p4:
 .. admonition:: Further Reading 
 
-   `The Raft Consensus Algorithm <https://raft.github.io/>`__. 
+   D. Ongaro and J. Ousterhout. `The Raft Consensus Algorithm <https://raft.github.io/>`__. 
 
 ONOS uses Atomix as its store, where Atomix goes beyond the core Raft
 algorithm to provide a rich set of programming primitives that ONOS

@@ -128,7 +128,7 @@ opportunity, we recommend the following paper:
 .. _reading_p4:
 .. admonition:: Further Reading
 
-   `p4v: Practical Verification for Programmable Data Planes
+   J. Liu, et. al. `p4v: Practical Verification for Programmable Data Planes
    <http://yuba.stanford.edu/~nickm/papers/p4v.pdf>`__. ACM
    SIGCOMM 2018.
 
@@ -178,7 +178,8 @@ are working to make Software-Defined RAN (SD-RAN) happen.
 .. admonition:: Further Reading  
    
    `SD-RAN Project  
-   <https://opennetworking.org/sd-ran/>`__. August 2020. 
+   <https://opennetworking.org/sd-ran/>`__.
+   Open Networking Foundation. August 2020. 
    
 To understand SD-RAN at a technical level, it is important to
 recognize that the base stations that make up the RAN are, for all
@@ -256,8 +257,9 @@ the following companion book:
 .. _reading_5g:
 .. admonition:: Further Reading  
 
-   `5G Mobile Networks: A Systems Approach  
-   <https://5g.systemsapproach.org/>`__. June 2020.  
+   L. Peterson and O. Sunay.
+   `5G Mobile Networks: A Systems Approach <https://5g.systemsapproach.org/>`__.
+   June 2020.  
  
 Finally, circling back to the previous section, applying closed-loop
 verification to a disaggregated and software-defined cellular network

@@ -38,7 +38,7 @@ well-documented in an article by Feamster, Rexford, and Zegura:
 .. _reading_history:
 .. admonition:: Further Reading
 
-   `The Road to SDN: An Intellectual History of Programmable Networks
+   N. Feamster, J. Rexford, and E. Zegura. `The Road to SDN: An Intellectual History of Programmable Networks
    <https://www.sigcomm.org/sites/default/files/ccr/papers/2014/April/0000000-0000012.pdf>`__.
    SIGCOMM CCR, April 2014.
 
@@ -65,7 +65,7 @@ intellectual case for SDN:
 .. _reading_shenker:
 .. admonition:: Further Reading
 
-   `The Future of Networking and the Past of Protocols
+   S. Shenker. `The Future of Networking and the Past of Protocols
    <https://www.youtube.com/watch?v=YHeyuD89n1Y>`__.
    Open Networking Summit, October 2011.
 
@@ -286,7 +286,7 @@ research community:
 .. _reading_openflow:
 .. admonition:: Further Reading
 
-   `OpenFlow: Enabling Innovation in Campus Networks
+   N. McKeown, et. al. `OpenFlow: Enabling Innovation in Campus Networks
    <https://www.net.t-labs.tu-berlin.de/teaching/ss09/IR_seminar/papers/openflow-wp-latest.pdf>`__.
    SIGCOMM CCR, March 2008.
 
@@ -430,9 +430,9 @@ Distance-Vector routing algorithms, see
 .. _reading_routing:
 .. admonition:: Further Reading
 
-   `Routing
-   <https://book.systemsapproach.org/internetworking/routing.html>`__. *Computer
-   Networks: A Systems Approach*, 2020.
+      `Routing
+      <https://book.systemsapproach.org/internetworking/routing.html>`__.
+      *Computer Networks: A Systems Approach*, 2020.
 
 By centralizing this logic, the goal is to come up with a globally
 optimized solution. As we discuss in later chapters, the published
@@ -653,7 +653,7 @@ predictions about the next phase of the SDN journey in Chapter 8.
 .. _reading_future:
 .. admonition:: Further Reading
 
-   `FutureNet 2019
+   N. McKeown. `FutureNet 2019
    <https://www.vmware.com/futurenet/2019-event/>`__.
    October 2019.
   

@@ -181,9 +181,10 @@ insightful about the thought process in adopting SDN:
 .. _reading_b4:
 .. admonition:: Further Reading
 
-   `A Purpose-built Global Network: Google's Move to SDN
-   <https://queue.acm.org/detail.cfm?id=2856460>`__. ACM Queue,
-   December 2015.
+   A. Vahdat, D. Clark, and J. Rexford. `A Purpose-built Global Network: 
+   Google's Move to SDN
+   <https://queue.acm.org/detail.cfm?id=2856460>`__.
+   ACM Queue, December 2015.
 
 2.4 Access Networks
 -------------------------
@@ -212,8 +213,8 @@ following brief introduction:
 .. admonition:: Further Reading
 
    `Access Networks
-   <https://book.systemsapproach.org/direct/access.html>`__. *Computer
-   Networks: A Systems Approach*, 2020.
+   <https://book.systemsapproach.org/direct/access.html>`__.
+   *Computer Networks: A Systems Approach*, 2020.
 
 Because these devices are purpose-built, not to mention closed and
 proprietary, they would seem to be worst-case examples for applying
@@ -285,7 +286,7 @@ principles, we recommend:
 .. _reading_5g:
 .. admonition:: Further Reading
 
-   `5G Mobile Networks: A Systems Approach
+   L. Peterson and O. Sunay. `5G Mobile Networks: A Systems Approach
    <https://5g.systemsapproach.org/>`__. June 2020.
 
 The bottom line is that the effort to apply SDN principles to both

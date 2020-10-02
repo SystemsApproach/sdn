@@ -63,11 +63,11 @@ elsewhere:
 
    `gRPC
    <https://book.systemsapproach.org/ee/rpc.html#grpc>`__.
-   Computer Networks: A Systems Approach, November 2019.
+   *Computer Networks: A Systems Approach*, 2020.
 
    `Protocol Buffers
    <https://book.systemsapproach.org/e2e/presentation.html#protobufs>`__.
-   Computer Networks: A Systems Approach, November 2019.
+   *Computer Networks: A Systems Approach*, 2020.
 
 The important take-away is that by using protobufs and gRPC, Stratum
 need not be concerned with the long list of formatting, reliability,
@@ -313,7 +313,7 @@ language is fuzzy, a gentle introduction is available here:
 
    `Markup Languages (XML)
    <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
-   Computer Networks: A Systems Approach, November 2019.
+   *Computer Networks: A Systems Approach*, 2020.
 
 What’s important about going in this direction is that the data model
 that defines the semantics of the variables available to be read and
@@ -528,7 +528,7 @@ As a reminder, if you are unfamiliar with protobufs, a brief overview is availab
 
    `Protocol Buffers
    <https://book.systemsapproach.org/e2e/presentation.html#protobufs>`__.
-   Computer Networks: A Systems Approach, November 2019.
+   *Computer Networks: A Systems Approach*, 2020.
 
 5.4 SONiC
 ----------------
