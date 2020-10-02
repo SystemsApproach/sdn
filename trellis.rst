@@ -32,7 +32,7 @@ features, but it does focus on the datacenter fabric use case, which
 is sufficient to illustrate the approach to building a
 production-grade network using SDN principles. More information about
 the full range of Trellis design decisions is available on the Trellis
-website:
+website.
 
 .. _reading_trellis:
 .. admonition:: Further Reading
@@ -125,7 +125,7 @@ end-to-end path between any pair of hosts can be defined by a sequence
 of segments, where label-switching is used to traverse a sequence of
 segments along an end-to-end path. The idea is an application of
 *Multi-Protocol Label Switching (MPLS)*, which you can read more about
-here:
+online.
 
 .. _reading_mpls:
 .. admonition:: Further Reading

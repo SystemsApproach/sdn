@@ -147,8 +147,8 @@ are in turn implemented using a distributed key/value store. The store
 itself will be familiar to anyone that has looked at how modern cloud
 services are designed—it scales across a distributed set of servers,
 and implements the Raft consensus algorithm to achieve fault-tolerance
-in the event of failures. If you are unfamiliar with Raft, a good
-introduction is available at:
+in the event of failures. If you are unfamiliar with Raft, Diego
+Ongaro and John Ousterhoust have written an excellent introduction.
 
 .. _reading_p4:
 .. admonition:: Further Reading 

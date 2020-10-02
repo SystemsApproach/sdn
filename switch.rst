@@ -539,7 +539,7 @@ to give a sense of what a P4 program looks like, thereby connecting
 all the dots introduced up to this point. We do this by example, that
 is, by walking through a P4 program that implements basic IP
 forwarding. This example is taken from a P4 Tutorial that you can find
-online and try for yourself:
+online and try for yourself.
 
 .. _reading_p4:
 .. admonition:: Further Reading
@@ -980,7 +980,7 @@ SAI includes both a configuration interface and a control interface,
 where its the control interface that’s most relevant to this section
 because it abstracts the forwarding pipeline. On the other hand, there
 is little value in looking at yet another forwarding pipeline, so we
-refer the interested reader to the SAI specification for more details:
+refer the interested reader to the SAI specification for more details.
 
 .. _reading_sai:
 .. admonition:: Further Reading

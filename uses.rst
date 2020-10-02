@@ -174,9 +174,9 @@ times better than the 30-40% average utilization that WAN links are
 typically provisioned for, which is necessary to allow those networks
 to deal with both traffic bursts and link/switch failures. The Google
 experience with SDN is an interesting one, and shows the value of
-being able to customize the network. The following discussion with
+being able to customize the network. A convesation with
 Amin Vahdat, Jennifer Rexford, and David Clark is especially
-insightful about the thought process in adopting SDN:
+insightful about the thought process in adopting SDN.
 
 .. _reading_b4:
 .. admonition:: Further Reading
@@ -205,9 +205,9 @@ can be controlled by software. In the case of wired networks like PON,
 there are two such devices: *Optical Line Terminals (OLT)* and
 *Broadband Network Gateways (BNG)*. In the case of the cellular
 network, there are also two relevant legacy components: *eNodeB* (the
-RAN base station) and the *Enhanced Packet Core (EPC)*. If you are not
-familiar with these acronyms, you are not alone. We recommend the
-following brief introduction:
+RAN base station) and the *Enhanced Packet Core (EPC)*. A brief
+introduction is available online if you are not familiar with these
+acronyms.
 
 .. _reading_access:
 .. admonition:: Further Reading
@@ -223,7 +223,7 @@ the biggest payoff, and it is for precisely this reason that large
 network operators are actively pursuing software-defined PON and RAN
 networks. This initiative is often referred to as *CORD (Central
 Office Re-architected as a Datacenter)* and has been the subject of
-much business analysis, including:
+much business analysis, including a comprehensive report by A.D. Little.
 
 .. _reading_cord:
 .. admonition:: Further Reading
@@ -281,7 +281,7 @@ proof-of-concept stage. Disaggregating the RAN is a bigger challenge,
 but the payoff will likely be even larger, as it leads to a
 5G-empowered edge cloud. We revisit SD-RAN in Chapter 8, but for a
 broad introduction to how 5G is being implemented according to SDN
-principles, we recommend:
+principles, we recommend a companion book.
 
 .. _reading_5g:
 .. admonition:: Further Reading

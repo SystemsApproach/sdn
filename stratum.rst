@@ -56,7 +56,7 @@ shown), which implies there is a corresponding set of *Protocol
 Buffers (protobufs)* that specify the API methods and supported
 parameters of each. A tutorial on gRPC and protobufs is beyond the
 scope of this book, but a brief introduction to both can be found
-elsewhere:
+online.
 
 .. _reading_grpc:
 .. admonition:: Further Reading
@@ -306,7 +306,7 @@ unlike XSD, it is not XML-specific. Instead, YANG can be used in
 conjunction with different over-the-wire message formats, including
 XML, but also protobufs and JSON. If these acronyms are unfamiliar, or
 the distinction between a markup language and a schema for a markup
-language is fuzzy, a gentle introduction is available here:
+language is fuzzy, a gentle introduction is available online.
 
 .. _reading_xml:
 .. admonition:: Further Reading
@@ -521,7 +521,7 @@ where, for example, the following protobuf message defines the
 	  	bool force = 5; // Force reboot if sanity checks fail. (ex. uncommited configuration)
 	}
 
-As a reminder, if you are unfamiliar with protobufs, a brief overview is available here:
+As a reminder, if you are unfamiliar with protobufs, a brief overview is available online.
 
 .. _reading_protobuf:
 .. admonition:: Further Reading

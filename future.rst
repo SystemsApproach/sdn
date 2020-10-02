@@ -123,7 +123,7 @@ forwarding behavior (and evolve it over time) using P4. The use of P4
 to program the data plane is key: the language carefully excludes
 features such as loops and pointer-based data structures, which
 typically make analysis impractical. To read more about the
-opportunity, we recommend the following paper:
+opportunity, we recommend a paper by Jed Liu and colleagues.
 
 .. _reading_p4:
 .. admonition:: Further Reading
@@ -252,7 +252,7 @@ its data delivery objectives.
 
 For a broad introduction into what’s involved in disaggregating 5G
 mobile networks so they can be implemented in software, we recommend
-the following companion book:
+the following companion book.
 
 .. _reading_5g:
 .. admonition:: Further Reading  

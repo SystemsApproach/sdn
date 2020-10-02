@@ -33,7 +33,7 @@ Before getting into the details, it is helpful to understand the
 origin story for SDN, which started as an effort by the Computer
 Science research community to address the ossification of the
 Internet, opening it up to more rapid innovation. That history is
-well-documented in an article by Feamster, Rexford, and Zegura:
+well-documented in an article by Feamster, Rexford, and Zegura.
 
 .. _reading_history:
 .. admonition:: Further Reading
@@ -43,7 +43,11 @@ well-documented in an article by Feamster, Rexford, and Zegura:
    SIGCOMM CCR, April 2014.
 
 We add two footnotes to that history. The first is a 2001 National
-Academy report:
+Academy report, which brought the ossification of the Internet into
+focus as a major challenge. In doing so, the report catalyzed what
+turned out to be a 20-year R&D effort. The fruits of that research are
+now directly impacting networks being deployed by both Cloud Providers
+and Internet Service Providers.
 
 .. _reading_ossified:
 .. admonition:: Further Reading
@@ -53,14 +57,12 @@ Academy report:
    <https://www.nap.edu/read/10183/chapter/1>`__. The National
    Academies Press, 2001.
 
-This report brought the ossification of the Internet into focus as a
-major challenge, and in doing so, catalyzed what turned out to be a
-20-year R&D effort. The fruits of that research are now directly
-impacting networks being deployed by both Cloud Providers and Internet
-Service Providers.
-
 The second is Scott Shenker’s iconic presentation making the
-intellectual case for SDN:
+intellectual case for SDN. Understanding the central thesis of
+Shenker’s talk—that the practice of building and operating networks is
+in dire need of abstractions to help manage complexity—is the lynchpin
+to also understanding the systems, platforms, tools, and interfaces
+described in this book.
 
 .. _reading_shenker:
 .. admonition:: Further Reading
@@ -69,10 +71,6 @@ intellectual case for SDN:
    <https://www.youtube.com/watch?v=YHeyuD89n1Y>`__.
    Open Networking Summit, October 2011.
 
-Understanding the central thesis of Shenker’s talk—that the practice
-of building and operating networks is in dire need of abstractions to
-help manage complexity—is the lynchpin to also understanding the
-systems, platforms, tools, and interfaces described in this book.
 
 1.1 Market Landscape
 --------------------
@@ -281,7 +279,7 @@ paragraphs), but the original idea was purposely simple. At the time
 in addition to its conventional forwarding path was a radical idea,
 proposed under the pretense of enabling research. In fact, the
 original OpenFlow publication was written as a call-to-action to the
-research community:
+research community.
 
 .. _reading_openflow:
 .. admonition:: Further Reading
@@ -424,8 +422,8 @@ the NOS takes on the burden of collecting network state (the hard part
 of distributed algorithms like Link-State and Distance-Vector routing
 protocols) and the app is free to simply run the shortest path
 algorithm on this graph and load the resulting flow rules into the
-underlying switches.  For an introduction to Link-State and
-Distance-Vector routing algorithms, see
+underlying switches.  An introduction to Link-State and
+Distance-Vector routing algorithms is available online.
 
 .. _reading_routing:
 .. admonition:: Further Reading
