@@ -208,9 +208,10 @@ texinfo_documents = [
 
 
 # -- Options for Epub output -------------------------------------------------
-
-# Bibliographic Dublin Core info.
 epub_title = project
+epub_description = 'The New Network Software Stack'
+epub_cover = ('_static/cover.jpg', '')
+epub_show_urls = 'False'
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
