@@ -64,7 +64,7 @@ Alternatively, you can use these
 to build a VM on your machine using Vagrant.
 
 .. _warning-windows:
-.. admonition:: Note for Windows Users
+.. admonition:: Windows Users
 
    All scripts have been tested on MacOS and Ubuntu.  Although they
    should work on Windows, they have not been tested. We therefore

@@ -90,13 +90,13 @@ the underlying hardware (including processor chips), to the operating
 system running on that hardware, to the application itself.
 
 .. _fig-market1:
-.. figure:: figures/Slide1.png
-    :width: 600px
-    :align: center
+.. figure:: figures/Slide1.png 
+    :width: 600px 
+    :align: center 
 
-    Transformation of the vertical mainframe market to a horizontal
-    marketplace with open interfaces and multiple options available at
-    every level.
+    Transformation of the vertical mainframe market to a horizontal 
+    marketplace with open interfaces and multiple options available at 
+    every level. 
 
 As shown in :numref:`Figure %s <fig-market1>`, the introduction of
 microprocessors (e.g., Intel x86 and Motorola 68000) and open source

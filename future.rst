@@ -46,13 +46,13 @@ behavior at fine granularity and in real-time. This is exactly the
 value SDN brings to the table, which leads to optimism that
 *verifiable closed-loop control* is now within reach.
 
-.. _fig-closed-loop:
-.. figure:: figures/Slide30.png
-    :width: 600px
-    :align: center
-
-    INT generates fine-grain measurements, which in turn feed a closed
-    control loop that verifies the network’s behavior.
+.. _reading_pronto:
+.. admonition:: Further Reading  
+   
+   N. Foster, et. al. `Using Deep Programmability to Put Network
+   Owners in Control
+   <http://www.systemsapproach.org/uploads/4/7/7/4/47748257/pronto_ccr_2020.pdf>`__.
+   ACM SIGCOMM Computer Communication Review, October 2020. 
 
 :numref:`Figure %s <fig-closed-loop>` illustrates the basic idea.  The
 software stack described in this book is augmented with the
@@ -65,6 +65,14 @@ These measurements can then be analyzed and fed back into code
 generation and formal verification tools. This closed loop complements
 the intrinsic value of disaggregation, which makes it possible to
 reason about correctness-by-construction.
+
+.. _fig-closed-loop:
+.. figure:: figures/Slide30.png
+    :width: 600px
+    :align: center
+
+    INT generates fine-grain measurements, which in turn feed a closed
+    control loop that verifies the network’s behavior.
 
 .. sidebar:: Top-Down Verification
 	     
@@ -94,7 +102,7 @@ processed; these programs are compiled to run on the forwarding plane
 elements. Such an approach represents a fundamental new capability
 that has not been possible in conventional designs, based on two key
 insights.
-
+   
 First, while network control planes are inherently complicated, a P4
 data plane captures *ground truth* for the network—i.e., how it
 forwards packets—and is therefore an attractive platform for deploying
@@ -174,7 +182,7 @@ principles are applied to the Radio Access Network (RAN), resulting in
 increased feature velocity. Because of this, mobile network operators
 are working to make Software-Defined RAN (SD-RAN) happen.
 
-.. _reading_5g:
+.. _reading_sdran:
 .. admonition:: Further Reading  
    
    `SD-RAN Project  

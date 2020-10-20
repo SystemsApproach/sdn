@@ -51,5 +51,5 @@ work-in-progress. We are eager to hear your feedback and suggestions.
 
 | Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska
 | Open Networking Foundation
-| June 2020
+| October 2020
 
