@@ -511,24 +511,24 @@ crank on the toolchain to load them into the SDN software stack!
 	put pressure on the marketplace to open up that space so
 	others can innovate.
 
-	But before anyone can innovate, the next step is to reproduce
+	But before anyone can innovate, the first step is to reproduce
 	what we had running before, except now using open interfaces
 	and programmable hardware. Even though this chapter uses
 	``forward.p4`` as a hypothetical new data plane function
 	someone might write, it's really programs like ``switch.p4``
 	(plus the Switch OS described in the next chapter) that
-	establish parity with legacy networking gear. Now we are ready
-	to do something new. But what?
+	establish parity with legacy networking gear. Once we have
+	that in place, we are ready to do something new. But what?
 
 	It is not our goal to answer that question with any certainty.
 	The VNF off-loading and INT examples introduced in Chapter 2
 	are a start. Chapter 8 goes on to introduce closed-loop
 	verification and software-defined 5G networks as potential
 	killer-apps. But history teaches us that killer-apps are
-	impossible to predict with any accuracy. On the other hand, it
-	also includes *many* examples of how opening
-	closed/fixed-function systems usually leads to qualitatively
-	new capabilities.
+	impossible to predict with any accuracy. On the other hand,
+	history also includes *many* examples of how opening
+	closed/fixed-function systems leads to qualitatively new
+	capabilities.
 
 4.4 P4 Programs
 ---------------------

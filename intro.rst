@@ -533,7 +533,7 @@ accumulated as the packet flows through the pipeline, and executed as
 a set in the last stage.
 
 .. _fig-pipeline:
-.. figure:: figures/Slide6.png
+.. figure:: figures/Slide7.png
     :width: 500px
     :align: center
 
@@ -589,7 +589,7 @@ with all the packet headers a switch might have to process to make a
 forwarding decision.
 
 .. _fig-vxlan:
-.. figure:: figures/Slide7.png
+.. figure:: figures/Slide6.png
     :width: 500px
     :align: center
 

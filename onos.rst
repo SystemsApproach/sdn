@@ -212,7 +212,7 @@ instances running at any given time depends on the workload and the
 level of replication needed to guarantee availability in the face of
 failures. The Atomix *group membership* primitive is used to determine
 the set of available instances, making it possible to detect new
-instances that have been spun and existing instances that have
+instances that have been spun up and existing instances that have
 failed. (Note that the set of ONOS instances are distinct from the set
 of Atomix instances, with both able to scale independently. This and
 the next paragraph are focused on the ONOS instances.)
