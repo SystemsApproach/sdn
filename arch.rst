@@ -134,6 +134,31 @@ ASIC, as well as whether the NIC is fixed-function or programmable
 (using P4). For our purposes, we will treat such Smart NICs as yet
 another switching element along the end-to-end path.
 
+.. sidebar:: Host-Centric Perspective
+
+	This book adopts a network-oriented narrative for SDN, one
+	that treats the end-host (both the virtual switch running in
+	the host OS and the NIC connecting the host to the network) as
+	an extension of the network.  While perfectly reasonable, the
+	host-centric perspective is equally valid, and perhaps more
+	importanly, comes with a robust ecosystem of open source
+	software that runs as part of the host OS.
+
+	DPDK is an example. It's a copy-free optimization for moving
+	packets between the NIC and the application running in user
+	space.  Another example that's gaining traction is the
+	combination of eBPF (extended Berkeley Packet Filter) and XDP
+	(eXpress Data Path). When used together, they provide a way to
+	program generlized Match-Action rules in the OS kernel, or
+	potentially even on the NIC.  This is similar in spirit to
+	OpenFlow and P4, except they allow for the Action part to be
+	an arbitrary program. In contrast, OpenFlow defines a fixed
+	set of Actions, while P4 is a restricted language for
+	experssing Actions, which is necessary when the Action must
+	execute within a fixed cycle budget, as is the case for a
+	forwarding pipeline.
+	
+
 3.2 White-Box Switch
 -------------------------
 
