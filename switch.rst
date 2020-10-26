@@ -933,7 +933,7 @@ OF-DPA pipeline looks like.
 
 .. _fig-ofdpa1:
 .. figure:: figures/Slide15.png 
-    :width: 300px 
+    :width: 200px 
     :align: center
 
     Software stack for Tomahawk fixed-function forwarding pipeline. 

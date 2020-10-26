@@ -154,7 +154,7 @@ another switching element along the end-to-end path.
 	OpenFlow and P4, except they allow for the Action part to be
 	an arbitrary program. In contrast, OpenFlow defines a fixed
 	set of Actions, while P4 is a restricted language for
-	experssing Actions, which is necessary when the Action must
+	expressing Actions, which is necessary when the Action must
 	execute within a fixed cycle budget, as is the case for a
 	forwarding pipeline.
 	
