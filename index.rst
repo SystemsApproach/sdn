@@ -1,11 +1,15 @@
-.. image:: bridge.png
-   :width: 250px
+.. image:: bridge.jpg
+   :width: 300px
    :align: center
-   :target: https://systemsapproach.org		    
-
+   :target: https://systemsapproach.org		 
 
 Software-Defined Networks: A Systems Approach
 =============================================
+
+Peterson, Cascone, O’Connor, and Vachuska
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+|
 
 .. toctree::
    :maxdepth: 2 
@@ -22,3 +26,4 @@ Software-Defined Networks: A Systems Approach
    future.rst
    exercises.rst
    README.rst
+   authors.rst
