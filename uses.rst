@@ -174,7 +174,7 @@ times better than the 30-40% average utilization that WAN links are
 typically provisioned for, which is necessary to allow those networks
 to deal with both traffic bursts and link/switch failures. The Google
 experience with SDN is an interesting one, and shows the value of
-being able to customize the network. A convesation with
+being able to customize the network. A conversation with
 Amin Vahdat, Jennifer Rexford, and David Clark is especially
 insightful about the thought process in adopting SDN.
 
@@ -229,7 +229,7 @@ much business analysis, including a comprehensive report by A.D. Little.
 .. admonition:: Further Reading
 
    `Who Dares Wins! How Access Transformation Can Fast-Track Evolution
-   of Operator Prodution Platforms
+   of Operator Production Platforms
    <https://www.adlittle.com/en/who-dares-wins>`__. *A.D. Little
    Report*, September 2019.
 
@@ -320,9 +320,9 @@ traffic sinks to monitor the exact data plane state that the packets
 observed (experienced) while being forwarded.
 
 The idea is illustrated in :numref:`Figure %s <fig-int>`, which shows
-an example packet travsering a path from source switch *S1* to sink
+an example packet traversing a path from source switch *S1* to sink
 switch *S5* via transit switch *S2*. The INT metadata added by each
-swith along the path both indicates what data is to be collect for the
+switch along the path both indicates what data is to be collect for the
 packet, and records the corresponding data for each switch.
 
 .. _fig-int:

@@ -77,7 +77,7 @@ reason about correctness-by-construction.
 .. sidebar:: Top-Down Verification
 	     
    The approach to verifying networks described in this section is
-   similar the one used in chip design. At the top is a behavorial
+   similar to the one used in chip design. At the top is a behavioral
    model; then at the register-transfer level is a Verilog or VHDL
    model; and eventually at the bottom are transistors, polygons and
    metal. Tools are used to formally verify correctness across each

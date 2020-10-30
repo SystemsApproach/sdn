@@ -489,7 +489,7 @@ one. These management networks can be used by off-switch controllers
 just as readily as by other management software. Plus, having access 
 to global state (as opposed to local, per-switch state) makes it 
 possible to implement a globally optimal solution. Suffice it to say,
-opinons differ. 
+opinions differ. 
 
 1.2.3 Data Plane: Programmable vs Fixed-Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

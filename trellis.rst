@@ -178,7 +178,7 @@ manage the set of ECMP groups connecting leaf and spine switches.
 7.3 Routes and Multicast
 ------------------------
 
-In addition to Segment Routing, which establies data paths between
+In addition to Segment Routing, which establishes data paths between
 leaf switches, Trellis also takes advantage of the Route and Mcast
 services introduced in Chapter 6. They determine which of the
 leaf-spine switches serve each IP prefix, and where to find all the
@@ -246,7 +246,7 @@ switches that connect the fabric to upstream networks (e.g., Switches 3
 and 4 in :numref:`Figure %s <fig-netconfig>`).
 
 The story with multicast is similar. Again using the ONOS CLI, it is
-possible to create a new muticast route and add a sink to it. For example:
+possible to create a new multicast route and add a sink to it. For example:
 
 .. code-block:: console
 
@@ -261,11 +261,11 @@ addresses (``sinks``). A sink can then be removed as follows:
     onos> mcast-sink-delete -sAddr * -gAddr 224.0.0.1 -h  00:AA:00:00:00:03/None
 
 Again, there is no PIM running, but instead, Trellis offers a
-programmatic inteface for network operators to define a multicast tree
+programmatic interface for network operators to define a multicast tree
 through a sequence of such calls. For example, when Trellis runs as
 part of an access network that delivers IPTV to subscribers, one
 option is for software running on the operator's set-top boxes to
-issue calls similar to the one's shown above (except, of course, using
+issue calls similar to the ones shown above (except, of course, using
 the RESTful API rather than the CLI). Another option is to have
 set-top boxes send IGMP messages, which Trellis intercepts using the
 Packet Service (similar to how the Host service intercepts ARP and
@@ -345,7 +345,7 @@ beyond to scope of this book, but at a high level:
 
     The SPGW and BNG extensions are examples of an optimization
     technique sometimes called *VNF off-loading*. VNF is an acronym
-    for *Vitrual Network Function*, which refers to functionality that
+    for *Virtual Network Function*, which refers to functionality that
     sometimes runs as software in virtual machines. Off-loading refers
     to the idea of re-implementing this functionality to run in switch
     forwarding pipeline, rather than on a general-purpose server. This

@@ -83,7 +83,7 @@ white-box switch includes a BIOS, which much like its microprocessor
 counterpart, is firmware that provisions and boots a bare-metal
 switch. A standard BIOS called the *Open Network Install Environment
 (ONIE)* has emerged under the OCP’s stewardship, and so we assume ONIE
-throughout the rest of chapter.
+throughout the rest of the chapter.
 
 4.2 Forwarding Pipeline 
 ----------------------------------
@@ -262,7 +262,7 @@ but in practice the architecture model would PSA specific, such as
 
     P4 architecture known as the Portable Switch Architecture
     (PSA). Includes the generic ``arch.p4`` as the the architecture
-    model spec, but for PSA this would be a replaced by ``psa.p4``.
+    model spec, but for PSA this would be replaced by ``psa.p4``.
 
 When compared to the simpler PISA model used in :numref:`Figure %s
 <fig-pisa1>` and :numref:`%s <fig-pisa2>`, we see two major
@@ -375,7 +375,7 @@ every programmable element in the abstract depiction shown in
 		...
 	}
 
-	/* Ingress Proceessing */
+	/* Ingress Processing */
 	control MyIngress(
 			inout headers hdr,
 			inout metadata meta,
@@ -383,7 +383,7 @@ every programmable element in the abstract depiction shown in
 		...
 	}
 
-	/* Egress Proceessing */
+	/* Egress Processing */
 	control MyEgress(
 			inout headers hdr,
 			inout metadata meta,

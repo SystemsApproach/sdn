@@ -431,7 +431,7 @@ include:
 Each of the above services comprises its own distributed store and
 notification capabilities. Individual applications are free to extend
 this set with their own services and to back their implementations
-with their own distributes stores. This is why ONOS provides
+with their own distributed stores. This is why ONOS provides
 applications with direct access to Atomix primitives, such as
 ``AtomicMaps`` and ``DistributedMaps``. We will see examples of such
 extensions in the next Chapter when we take a closer look at Trellis.
@@ -483,7 +483,7 @@ managed by the Flow Objective Service, as depicted in :numref:`Figure
 %s <fig-flowobj>`. For simplicity, the example focuses on the selector
 (match) specified by a Filtering objective, where the key is to
 express the fact that you want to select a particular input port, MAC
-address, VLAN tag, and IP address combintation, without regard for
+address, VLAN tag, and IP address combination, without regard for
 the exact sequence of pipeline tables that implement that combination.
 
 .. _fig-flowobj:
@@ -684,7 +684,7 @@ instances, where the set of instances share network state via Atomix
 Maps. The figure also shows each instance being responsible for a
 subset of the underlying hardware switches. Should a given instance
 fail, the remaining instances use the Atomix leader-election primitive
-to select a new instance to take its place, thereby assuring high
+to select a new instance to take its place, thereby ensuring high
 availability.
 
 A refactoring of ONOS to more closely adhere to a microservice
