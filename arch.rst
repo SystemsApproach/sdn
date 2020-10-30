@@ -98,13 +98,13 @@ first re-enforces the point we’ve been making: that the Network OS
 per-switch.
 
 The second is that part of the SDN software stack runs on the end
-hosts. In particular, there is a *Virtual Switch (vSwitch)*\
-—typically implemented in software as part of the Virtual Machine
-Hypervisor running on the server—that is responsible for forwarding
-packets to and from the VMs running on that server. Just like a
-physical switch, the vSwitch forwards packets from input port to
-output port, but these are virtual ports connected to VMs rather than
-physical ports connected to physical machines.
+hosts. In particular, there is a *Virtual Switch (vSwitch)*—typically
+implemented in software as part of the Virtual Machine Hypervisor
+running on the server—that is responsible for forwarding packets to
+and from the VMs running on that server. Just like a physical switch,
+the vSwitch forwards packets from input port to output port, but these
+are virtual ports connected to VMs rather than physical ports
+connected to physical machines.
 
 Fortunately, we can view a vSwitch as behaving just like a physical
 switch, including the APIs it supports. That a vSwitch is implemented
@@ -141,21 +141,19 @@ another switching element along the end-to-end path.
 	the host OS and the NIC connecting the host to the network) as
 	an extension of the network, running under the control of a
 	Network OS. A more host-centric perspective is equally valid,
-	and perhaps more importanly, comes with a robust ecosystem of
-	open source software that runs as part of the host OS. DPDK is
-	an example. It's a copy-free optimization for moving packets
-	between the NIC and the application process running in user
-	space.
+	and perhaps more importantly, comes with a robust ecosystem of
+	open source software that runs as part of the host OS.
 
-	Another example that's gaining traction is the combination of
-	eBPF (extended Berkeley Packet Filter) and XDP (eXpress Data
-	Path). When used together, they provide a way to program
-	generlized Match-Action rules in the OS kernel, or potentially
-	even on the NIC.  This is similar in spirit to OpenFlow and
-	P4, except they allow for the Action part to be an arbitrary
-	program. In contrast, OpenFlow defines a fixed set of Actions,
-	while P4 is a restricted language for expressing Actions. This
-	is necessary when the Action must execute within a fixed cycle
+	DPDK is one example. Another example that's gaining traction
+	is the combination of eBPF (extended Berkeley Packet Filter)
+	and XDP (eXpress Data Path). When used together, they provide
+	a way to program generalized Match-Action rules in the OS
+	kernel, or potentially even on a SmartNIC.  This is similar in
+	spirit to OpenFlow and P4, except they allow for the Action
+	part to be an arbitrary program. In contrast, OpenFlow defines
+	a fixed set of Actions, and P4 is a restricted language for
+	expressing Actions (e.g., it does not include loops). This is
+	necessary when the Action must execute within a fixed cycle
 	budget, as is the case for a switch-based forwarding pipeline.
 	
 
