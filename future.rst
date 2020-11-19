@@ -51,7 +51,7 @@ value SDN brings to the table, which leads to optimism that
    
    N. Foster, et. al. `Using Deep Programmability to Put Network
    Owners in Control
-   <http://www.systemsapproach.org/uploads/4/7/7/4/47748257/pronto_ccr_2020.pdf>`__.
+   <https://ccronline.sigcomm.org/2020/ccr-october-2020/using-deep-programmability-to-put-network-owners-in-control/>`__.
    ACM SIGCOMM Computer Communication Review, October 2020. 
 
 :numref:`Figure %s <fig-closed-loop>` illustrates the basic idea.  The
