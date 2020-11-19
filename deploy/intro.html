@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Chapter 1: Introduction &mdash; Software-Defined Networks: A Systems Approach Version 0.3-dev documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="static/bridge.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script type="text/javascript" src="static/jquery.js"></script>
+        <script type="text/javascript" src="static/underscore.js"></script>
+        <script type="text/javascript" src="static/doctools.js"></script>
+        <script type="text/javascript" src="static/language_data.js"></script>
+    
+    <script type="text/javascript" src="static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/rtd_theme_mods.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 2: Use Cases" href="uses.html" />
+    <link rel="prev" title="Preface" href="preface.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Software-Defined Networks: A Systems Approach
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Version 0.3-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chapter 1:  Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#market-landscape">1.1 Market Landscape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-landscape">1.2 Technical Landscape</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disaggregating-the-control-and-data-planes">1.2.1 Disaggregating the Control and Data Planes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-plane-centralized-vs-distributed">1.2.2 Control Plane: Centralized vs Distributed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-plane-programmable-vs-fixed-function">1.2.3 Data Plane: Programmable vs Fixed-Function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sdn-a-definition">1.3 SDN: A Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uses.html">Chapter 2:  Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch.html">Chapter 3:  Basic Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="switch.html">Chapter 4:  White-Box Switches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stratum.html">Chapter 5:  Switch OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="onos.html">Chapter 6:  Network OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trellis.html">Chapter 7:  Leaf-Spine Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="future.html">Chapter 8:  Future of SDN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Hands-on Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">About The Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">About The Authors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Software-Defined Networks: A Systems Approach</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Chapter 1:  Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="uses.html" class="btn btn-neutral float-right" title="Chapter 2: Use Cases" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="preface.html" class="btn btn-neutral float-left" title="Preface" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="chapter-1-introduction">
+<h1>Chapter 1:  Introduction<a class="headerlink" href="#chapter-1-introduction" title="Permalink to this headline">¶</a></h1>
+<p>Software-Defined Networking (SDN) is an approach to how we <em>implement</em>
+networks, which matters because it impacts the <em>pace of
+innovation</em>. SDN does not directly address any of the technical
+challenges of routing, congestion control, traffic engineering,
+security, mobility, reliability, or real-time communication, but it
+does open new opportunities to create and deploy innovative solutions
+to these and similar problems. Exactly how SDN accomplishes this has
+both business and technical implications, which we discuss throughout
+this book.</p>
+<p>Our approach is to view SDN through a <em>systems lens</em>, which is to say,
+we explore the collection of design principles that guide the journey
+to realizing software-defined networks (a journey that is still in
+progress), rather than to talk about SDN as though it were a point
+solution. Our approach emphasizes concepts (bringing abstractions to
+networking is a key part of the original case for SDN), but to keep
+the discussion concrete, we also draw on our experience implementing a
+collection of open source platforms over the last six years. These
+platforms are being used to deliver SDN-based solutions into
+production networks, including Tier-1 network operators.</p>
+<p>This focus on the software stack is a central theme of the
+book. Because SDN is an approach to building networks, a set of
+software and hardware artifacts is required to put that approach into
+practice.  The open source examples we draw upon are available on
+GitHub, with links to both code and hands-on programming exercises
+available throughout the book.</p>
+<p>Before getting into the details, it is helpful to understand the
+origin story for SDN, which started as an effort by the Computer
+Science research community to address the ossification of the
+Internet, opening it up to more rapid innovation. That history is
+well-documented in an article by Feamster, Rexford, and Zegura.</p>
+<div class="admonition-further-reading admonition" id="reading-history">
+<p class="first admonition-title">Further Reading</p>
+<p class="last">N. Feamster, J. Rexford, and E. Zegura. <a class="reference external" href="https://www.sigcomm.org/sites/default/files/ccr/papers/2014/April/0000000-0000012.pdf">The Road to SDN: An Intellectual History of Programmable Networks</a>.
+SIGCOMM CCR, April 2014.</p>
+</div>
+<p>We add two footnotes to that history. The first is a 2001 National
+Academy report, which brought the ossification of the Internet into
+focus as a major challenge. In doing so, the report catalyzed what
+turned out to be a 20-year R&amp;D effort. The fruits of that research are
+now directly impacting networks being deployed by both Cloud Providers
+and Internet Service Providers.</p>
+<div class="admonition-further-reading admonition" id="reading-ossified">
+<p class="first admonition-title">Further Reading</p>
+<p class="last"><a class="reference external" href="https://www.nap.edu/read/10183/chapter/1">Looking Over the Fence at Networks: A Neighbor’s View of
+Networking Research</a>. The National
+Academies Press, 2001.</p>
+</div>
+<p>The second is Scott Shenker’s iconic presentation making the
+intellectual case for SDN. Understanding the central thesis of
+Shenker’s talk—that the practice of building and operating networks is
+in dire need of abstractions to help manage complexity—is the lynchpin
+to also understanding the systems, platforms, tools, and interfaces
+described in this book.</p>
+<div class="admonition-further-reading admonition" id="reading-shenker">
+<p class="first admonition-title">Further Reading</p>
+<p class="last">S. Shenker. <a class="reference external" href="https://www.youtube.com/watch?v=YHeyuD89n1Y">The Future of Networking and the Past of Protocols</a>.
+Open Networking Summit, October 2011.</p>
+</div>
+<div class="section" id="market-landscape">
+<h2>1.1 Market Landscape<a class="headerlink" href="#market-landscape" title="Permalink to this headline">¶</a></h2>
+<p>To fully appreciate the role and ultimate impact of SDN, it is
+important to start by looking at the market landscape. SDN was in part
+conceived as a way to transform the marketplace, inspired by the
+transformation that the computing industry went through in previous
+decades.</p>
+<p>The computing industry was historically structured as a <em>vertical
+market</em>. This meant that a customer wanting a solution to some problem
+(e.g., finance, design, analysis) bought a vertically integrated
+solution from a single vendor, typically a large mainframe company
+like IBM. The vertically integrated solution included everything from
+the underlying hardware (including processor chips), to the operating
+system running on that hardware, to the application itself.</p>
+<div class="figure align-center" id="id9">
+<span id="fig-market1"></span><a class="reference internal image-reference" href="_images/Slide1.png"><img alt="_images/Slide1.png" src="_images/Slide1.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Figure 1. </span><span class="caption-text">Transformation of the vertical mainframe market to a horizontal
+marketplace with open interfaces and multiple options available at
+every level.</span></p>
+</div>
+<p>As shown in <a class="reference internal" href="#fig-market1"><span class="std std-numref">Figure 1</span></a>, the introduction of
+microprocessors (e.g., Intel x86 and Motorola 68000) and open source
+OS’s (e.g., BSD Unix and Linux), helped transform that vertical market
+into a horizontal marketplace, with open interfaces spurring
+innovation at every level.</p>
+<p>SDN, when viewed as a transformative initiative, is an attempt to spur
+the same sort of changes in the networking industry, which as the 2001
+National Academy report observed, had ossified. As shown in
+<a class="reference internal" href="#fig-market2"><span class="std std-numref">Figure 2</span></a>, the end goal is a horizontal
+ecosystem with multiple network operating systems enabled on top of
+white-box switches built from merchant silicon switching chips, which
+in turn enable a rich marketplace of networking applications.</p>
+<div class="figure align-center" id="id10">
+<span id="fig-market2"></span><a class="reference internal image-reference" href="_images/Slide2.png"><img alt="_images/Slide2.png" src="_images/Slide2.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Figure 2. </span><span class="caption-text">Transformation of the vertical router market to a horizontal
+marketplace with open interfaces and multiple options available at
+every level.</span></p>
+</div>
+<p>The value of such a transformation is clear. Opening a vertically
+integrated, closed, and proprietary market is a proven way to increase
+the pace of innovation. Or to restate in market-centric terms: the
+goal is to shift control from the vendors that sell networking
+equipment to the network operators that build networks to meet their
+users’ needs.</p>
+<p>To understand this opportunity in more depth, we need to get into the
+technical details (which we introduce in the next section), but
+appreciating the backstory of SDN as a means to transform the
+networking industry is an important place to start.</p>
+</div>
+<div class="section" id="technical-landscape">
+<h2>1.2 Technical Landscape<a class="headerlink" href="#technical-landscape" title="Permalink to this headline">¶</a></h2>
+<p>With the understanding that SDN is an approach rather than a
+point-solution, it is helpful to define the design principles at the
+core of that approach. Framing the design space is the goal of this
+section, but one important takeaway is that there is more than one
+possible end-state. Each network operator is free to pick different
+design points, and build out their network accordingly.</p>
+<p>That said, this book makes a point of describing the most complete
+application of SDN principles, which is sometimes called <em>pure play
+SDN</em>. Given that the whole point of SDN is to disrupt the existing
+vertical market, it should come as no surprise that incumbent vendors
+would offer <em>hybrid</em> solutions that align with their established
+business models and ease adoption. We sometimes call these hybrid
+solutions <em>SDN-lite</em> because they take advantage of some aspects of
+SDN, but not the full spectrum. Apart from pointing out the existence
+of these partial solutions, we do not attempt to be encyclopedic in
+our coverage of them. Our goal is to chart the full potential of SDN,
+and do so with as much technical depth as today’s state-of-the-art
+allows.</p>
+<div class="section" id="disaggregating-the-control-and-data-planes">
+<h3>1.2.1 Disaggregating the Control and Data Planes<a class="headerlink" href="#disaggregating-the-control-and-data-planes" title="Permalink to this headline">¶</a></h3>
+<p>The seminal idea behind SDN is that networks have distinct <em>control</em>
+and <em>data</em> planes, and the separation of these two planes should be
+codified in an open interface. In the most basic terms, the control
+plane determines the route packets should follow through the network
+(for example, by running a routing protocol like BGP, OSPF, or RIP),
+where the interconnected set of switches in the network implements a
+data plane, making forwarding decisions at each switch on a
+packet-by-packet basis.</p>
+<p>In practice, decoupling the control and data planes manifests in
+parallel but distinct data structures: the control plane maintains a
+<em>routing table</em> that includes any auxiliary information needed to
+select the best route at a given point in time (e.g., including
+alternative paths, their respective costs, and any policy
+constraints), while the data plane maintains a <em>forwarding table</em> that
+is optimized for fast packet processing (e.g., determining that any
+packet arriving on Port <em>i</em> with destination address <em>D</em> should be
+transmitted out Port <em>j</em>, optionally with a new destination address
+<em>D’</em>). The routing table is often called the <em>Routing Information Base
+(RIB)</em> and the forwarding table is often called the <em>Forwarding
+Information Base (FIB)</em>, as depicted in <a class="reference internal" href="#fig-fib"><span class="std std-numref">Figure 3</span></a>.</p>
+<div class="figure align-center" id="id11">
+<span id="fig-fib"></span><a class="reference internal image-reference" href="_images/Slide24.png"><img alt="_images/Slide24.png" src="_images/Slide24.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-number">Figure 3. </span><span class="caption-text">Control plane (and corresponding RIB) decoupled from the data
+plane (and the corresponding FIB).</span></p>
+</div>
+<p>There is no controversy about the value of decoupling the network
+control and data planes. It is a well-established practice in
+networking, where closed/proprietary routers that pre-date SDN adopted
+this level of modularity. But the first principle of SDN is that the
+interface between the control and data planes should be both
+well-defined and open. This strong level of modularity is often
+referred to as <em>disaggregation</em>, and it makes it possible for
+different parties to be responsible for each plane.</p>
+<p>In principle then, disaggregation means that a network operator should
+be able to purchase their control plane from vendor X and their data
+plane from vendor Y. Although it did not happen immediately, one
+natural consequence of disaggregation is that the data plane
+components (i.e., the switches) become commodity packet forwarding
+devices—commonly referred to as <em>white-box switches</em>—with all the
+intelligence implemented in software and running in the control
+plane.<a class="footnote-reference" href="#id2" id="id1">[1]</a> This is exactly what happened in the computer industry, where
+microprocessors became commodity. Chapter 4 describes these white-box
+switches in more detail.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>By our count, over 15 open-source and proprietary disaggregated
+control planes are available today.</td></tr>
+</tbody>
+</table>
+<p>Disaggregating the control and data planes implies the need for a
+well-defined <em>forwarding abstraction</em>, that is, a general-purpose way
+for the control plane to instruct the data plane to forward packets in
+a particular way. Keeping in mind disaggregation should <strong>not</strong>
+restrict how a given switch vendor implements the data plane (e.g.,
+the exact form of its forwarding table or the process by which it
+forwards packets), this forwarding abstraction should not assume (or
+favor) one data plane implementation over another.</p>
+<p>The original interface supporting disaggregation, called <em>OpenFlow</em>,
+was introduced in 2008, and although it was hugely instrumental in
+launching the SDN journey, it proved to be only a small part of what
+defines SDN today. Equating SDN with OpenFlow significantly
+under-values SDN, but it is an important milestone because it
+introduced <em>Flow Rules</em> as a simple-but-powerful way to specify the
+forwarding behavior.</p>
+<p>A flow rule is a Match-Action pair: Any packet that <em>Matches</em> the
+first part of the rule should have the associated <em>Action</em> applied to
+it. A simple flow rule, for example, might specify that any packet
+with destination address <em>D</em> be forwarded on output port <em>i</em>. The
+original OpenFlow spec allowed the header fields shown in
+<a class="reference internal" href="#fig-headers"><span class="std std-numref">Figure 4</span></a> to be included in the Match half of
+the rule. So for example, a Match might specify a packet’s MAC header
+<code class="docutils literal notranslate"><span class="pre">Type</span></code> field equals <code class="docutils literal notranslate"><span class="pre">0x800</span></code> (indicating the frame carries and IP
+packet) and its IP header <code class="docutils literal notranslate"><span class="pre">DstAddr</span></code> field be contained in some
+subnet (e.g., <code class="docutils literal notranslate"><span class="pre">192.12.69/24</span></code>).</p>
+<div class="figure align-center" id="id12">
+<span id="fig-headers"></span><a class="reference internal image-reference" href="_images/Slide3.png"><img alt="_images/Slide3.png" src="_images/Slide3.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Figure 4. </span><span class="caption-text">Header Fields Matched in Original OpenFlow Specification.</span></p>
+</div>
+<p>The Actions originally included <em>“forward packet to one or more
+ports”</em> and <em>“drop packet,”</em> plus a <em>“send packet up to the control
+plane”</em> escape hatch for any packet that requires further processing
+by a <em>controller</em> (a term introduced to signify the process running in
+the control plane responsible for controlling the switch). The set of
+allowed Actions became more complex over time, which we will return to
+later.</p>
+<p>Building on the flow rule abstraction, each switch then maintains a
+<em>Flow Table</em> to store the set of flow rules the controller has passed
+to it. In effect, the flow table is the OpenFlow abstraction for the
+forwarding table introduced at the beginning of this section. OpenFlow
+also defined a secure protocol with which flow rules could be passed
+between the controller and the switch, making it possible to run the
+controller off-switch. This enabled the configuration shown in
+<a class="reference internal" href="#fig-flowtab"><span class="std std-numref">Figure 5</span></a>.</p>
+<div class="figure align-center" id="id13">
+<span id="fig-flowtab"></span><a class="reference internal image-reference" href="_images/Slide4.png"><img alt="_images/Slide4.png" src="_images/Slide4.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Figure 5. </span><span class="caption-text">Controller securely passes flow rules to an OpenFlow-enabled
+switch, which maintains a Flow Table.</span></p>
+</div>
+<p>The OpenFlow specification grew more complicated over time (and was
+certainly defined with much more precision than the previous
+paragraphs), but the original idea was purposely simple. At the time
+(2008), the idea of building a switch that included an “OpenFlow option”
+in addition to its conventional forwarding path was a radical idea,
+proposed under the pretense of enabling research. In fact, the
+original OpenFlow publication was written as a call-to-action to the
+research community.</p>
+<div class="admonition-further-reading admonition" id="reading-openflow">
+<p class="first admonition-title">Further Reading</p>
+<p class="last">N. McKeown, et. al. <a class="reference external" href="https://www.net.t-labs.tu-berlin.de/teaching/ss09/IR_seminar/papers/openflow-wp-latest.pdf">OpenFlow: Enabling Innovation in Campus Networks</a>.
+SIGCOMM CCR, March 2008.</p>
+</div>
+<p>Today, the OpenFlow specification has been through multiple revisions,
+and work is underway to replace it with a more flexible (i.e.,
+programmable) alternative. We return to OpenFlow—and P4, the
+alternative programming language—in Chapter 4.</p>
+<p>We conclude this section by calling attention to two related but
+distinct concepts: <em>Control</em> and <em>Configuration</em>. The idea of OpenFlow
+(and SDN in general) is to define an interface for controlling the
+data plane, which implies making real-time decisions about how to
+respond to link and switch failures, as well as other data plane
+events. If the data plane reports a failure, the control plane needs
+to learn about this failure and provide a remedy (e.g., a new
+Match/Action flow rule) generally within milliseconds. <a class="footnote-reference" href="#id4" id="id3">[2]</a>  Otherwise, the
+disaggregation implied by SDN would not be viable.</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>There are also events that require attention in sub-millisecond
+response times. In such cases it is necessary to implement the
+remedy in the data plane, and then inform the control plane,
+giving it the opportunity to re-program the data plane. Fast
+failover groups are an example of this in OpenFlow.</td></tr>
+</tbody>
+</table>
+<p>At the same time, operators are accustomed to configuring their
+switches and routers. This has historically been done using a <em>Command
+Line Interface (CLI)</em> or a management protocol like SNMP, which
+looking back at <a class="reference internal" href="#fig-fib"><span class="std std-numref">Figure 3</span></a>, corresponds to the
+northbound interface to the RIB (as opposed to the interface between
+the RIB and the FIB). This includes installing new routes, which on
+the surface seems to be equivalent to installing a new flow
+rule. Would a switch be considered “SDN capable” if it merely exposed
+a programmatic configuration interface in lieu of the conventional
+CLI?</p>
+<p>The answer is likely no, and it comes down to hitting the mark on both
+generality and performance. While a well-defined programmatic
+configuration interface is certainly an improvement over legacy CLIs,
+they are intended for modifying the control plane’s RIB and setting
+other device parameters (e.g., port speeds/modes) rather than
+modifying the data plane’s FIB. As a consequence, such configuration
+interfaces are (a) unlikely to support the full range of
+programmability implied by a control/data plane interface, and (b)
+unlikely to support the real-time control loop required by
+control/data plane disaggregation. In short, the momentum of SDN has
+had the side-effect of improving the configuration interfaces exposed
+by switch and router vendors (and we describe the state-of-the-art in
+such interfaces in Chapter 5), but doing so is not a substitute for
+the granularity of control SDN requires.</p>
+<p>To be clear, all elements in a switch require configuration. The data
+plane requires configuration of things like port speeds. The platform
+requires configuration of fans, LEDs, and other peripherals.  The
+on-switch software needs to be informed what certificate it should use
+when a client connects and what log level should be set. The control
+plane components also require configuration. For example, the routing
+agent needs to know its IP address, who its neighbors are, and if it
+has any static routes. The key distinction is the purpose, but more
+quantitatively, the rate of updates: configuration implies potentially
+thousands of updates/day while control implies potentially thousands
+of updates/sec.</p>
+</div>
+<div class="section" id="control-plane-centralized-vs-distributed">
+<h3>1.2.2 Control Plane: Centralized vs Distributed<a class="headerlink" href="#control-plane-centralized-vs-distributed" title="Permalink to this headline">¶</a></h3>
+<p>Having disaggregated the control and data planes, the next
+consideration is how to implement the control plane. One option is to
+run the software that implements the control plane <em>on-switch</em>. Doing
+so implies each switch operates as an autonomous device, communicating
+with its peer switches throughout the network to construct a local
+routing table. Conveniently, there already exists a set of protocols
+that can be used for this purpose: BGP, OSPF, RIP, and so on. This is
+exactly the <em>distributed control plane</em> the Internet has employed for
+the last 30+ years.</p>
+<p>There is value in this scenario. Because disaggregation led to the
+availability of low-cost white-box switches built using merchant
+silicon switching chips, network operators can buy hardware from
+white-box switching vendors, and then load the appropriate control
+plane software from some other vendor, or possibly even use an open
+source version of those protocols. Doing so lowers costs and
+potentially reduces complexity (because only the required control
+modules need to be loaded onto the device), but it does not
+necessarily realize the pace of innovation SDN promises. This is
+because the operator remains stuck in the slow-paced standardization
+processes implied by today’s standardized protocols.</p>
+<p>The alternative, which is the second design principle of SDN, is that
+the control plane should be fully independent of the data plane and
+logically centralized. This implies the control plane is implemented
+<em>off-switch</em>, for example, by running the controller in the cloud. <a class="footnote-reference" href="#id6" id="id5">[3]</a></p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>For completeness, we note that it is also possible to adopt a
+mixed approach, with some control functionality running
+on-switch and some running off-switch, in a cloud-hosted
+controller.</td></tr>
+</tbody>
+</table>
+<p>We say logically centralized because while the state collected by the
+controller is maintained in a global data structure (think of this as
+the centralized counterpart to the per-switch routing table), the
+implementation of this data structure could still be distributed over
+multiple servers, as is now the best practice for cloud-hosted,
+horizontally scalable services. This is important for both scalability
+and availability, where the key is that the two planes are configured
+and scaled independent of each other. If you need more capacity in the
+data plane you add a white-box switch. If you need more capacity in
+the control plane you add a compute server (or more likely, a virtual
+machine).</p>
+<div class="figure align-center" id="id14">
+<span id="fig-nos"></span><a class="reference internal image-reference" href="_images/Slide5.png"><img alt="_images/Slide5.png" src="_images/Slide5.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Figure 6. </span><span class="caption-text">Network Operating System (NOS) hosting a set of control
+applications and providing a logically centralized point of
+control for an underlying network data plane.</span></p>
+</div>
+<p><a class="reference internal" href="#fig-nos"><span class="std std-numref">Figure 6</span></a> depicts the centralized control plane
+associated with a distributed data plane, but goes a step further by
+also introducing one of the key components implied by this approach: a
+<em>Network Operating System (NOS)</em>. Like a server operating system (e.g.,
+Linux, iOS, Android, Windows) that provides a set of high-level
+abstractions that make it easier to implement applications (e.g.,
+users can read and write files instead of directly accessing disk
+drives), a NOS makes it easier to implement network control
+functionality, otherwise known as <em>Control Apps</em>.</p>
+<p>The idea behind the NOS is to abstract the details of the switches and
+provide a <em>Network Map</em> abstraction to the application developer. The
+NOS detects changes in the underlying network (e.g., switches, ports,
+and links going up-and-down) and the control application simply
+implements the behavior it wants on this abstract graph. This means
+the NOS takes on the burden of collecting network state (the hard part
+of distributed algorithms like Link-State and Distance-Vector routing
+protocols) and the app is free to simply run the shortest path
+algorithm on this graph and load the resulting flow rules into the
+underlying switches.  An introduction to Link-State and
+Distance-Vector routing algorithms is available online.</p>
+<div class="admonition-further-reading admonition" id="reading-routing">
+<p class="first admonition-title">Further Reading</p>
+<p class="last"><a class="reference external" href="https://book.systemsapproach.org/internetworking/routing.html">Routing</a>.
+<em>Computer Networks: A Systems Approach</em>, 2020.</p>
+</div>
+<p>By centralizing this logic, the goal is to come up with a globally
+optimized solution. As we discuss in later chapters, the published
+evidence from cloud providers that have embraced this approach
+confirms this advantage.</p>
+<p>The idea of “collecting network state” is central to SDN and the role
+played by a NOS. We are not talking about collecting the full range of
+network telemetry data that is used, for example, to troubleshoot
+misconfigurations or do long-term planning, but we are talking about
+fine-grain meters that may require an immediate control plane
+response, an obvious example being the number of bytes/packets sent
+and received on each port. Protocols like OpenFlow define the means to
+report such meters to the NOS, in addition to providing the means for
+the NOS to install new flow rules based on the information it
+collects.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Domain of Control</p>
+<p>The “Centralized vs Decentralized” framing of this section is
+intended to characterize one dimension of the SDN design
+space, not to indicate that network operators face an
+either-or situation. There are many factors that impact where
+a given operator comes down on this spectrum, but one place to
+start is to scope the domain to which SDN is being applied. We
+discuss example use cases in Chapter 2, but there is a natural
+evolution of networking that highlights the thought process.</p>
+<p class="last">Historically, there has been one control plane instance per
+switch and they both run together on the same box. As simple
+routers grew into chassis routers, there were typically N
+control plane instances for M line cards. They ran on discrete
+hardware and talked to each other through a management
+network. As chassis routers grew into a multi-rack fabric
+built from commodity switches, SDN suggested a design that
+aggregates forwarding elements under a control plane running
+anywhere and structured as a distributed system. The advantage
+is that such a system can use modern techniques for state
+distribution and management, rather than being tied to
+standards. The key is to find domains for which it is possible
+to optimize performance with a logically centralized control
+plane.</p>
+</div>
+<p>Returning to the original question of centralized versus distributed
+control plane, proponents of the latter often base their rationale on
+the historical reason the Internet adopted distributed routing
+protocols in the first place: survival in the face of failures. The
+concern is that any centralized solution results in a single
+point-of-failure. Distributing the centralized control plane over a
+cluster of servers mitigates this concern, but it is still the case
+that the control plane is remote (i.e., off-switch), where the link
+between the two planes adds a vulnerable attack surface. The
+counter-argument is that non-SDN networks already have (and depend on)
+out-of-band management networks, so this attack surface is not a new
+one. These management networks can be used by off-switch controllers
+just as readily as by other management software. Plus, having access
+to global state (as opposed to local, per-switch state) makes it
+possible to implement a globally optimal solution. Suffice it to say,
+opinions differ.</p>
+</div>
+<div class="section" id="data-plane-programmable-vs-fixed-function">
+<h3>1.2.3 Data Plane: Programmable vs Fixed-Function<a class="headerlink" href="#data-plane-programmable-vs-fixed-function" title="Permalink to this headline">¶</a></h3>
+<p>The final dimension of the design space is whether the switches that
+implement the data plane are programmable or fixed-function. To
+appreciate what this means, we need to say a little more about how
+switches are implemented.</p>
+<p>The preceding discussion has implied a simple model of a switch, in
+which the switch’s main processing loop receives a packet from an
+input port, does a lookup of the destination address in the FIB (or
+using OpenFlow terminology, in the flow table), and puts the packet on
+the output port or port group indicated by the matched table
+entry. This is a reasonable implementation strategy for low-end
+switches (i.e., the main processing loop is implemented in software on
+a general-purpose processor), but high-performance switches employ a
+hardware-based <em>forwarding pipeline</em>.</p>
+<p>We postpone an in-depth description of these pipelines until Chapter
+4, but the important characteristic for now is whether that pipeline
+is limited to matching a fixed set of fields in the packet headers
+(e.g., the fields shown in <a class="reference internal" href="#fig-headers"><span class="std std-numref">Figure 4</span></a>) and
+perform a fixed set of actions, or if the bit-patterns to be matched
+and the actions to be executed are dynamically programmed into the
+switch. The former are referred to as <em>fixed-function pipelines</em> and
+the latter as <em>programmable pipelines</em>. But first we have to answer
+the question: “What exactly is a forwarding pipeline?”</p>
+<p>One way to think about a forwarding pipeline is that instead of a
+single flow table, as suggested in the previous section, switches
+actually implement a series of flow tables, each focused on a subset
+of the header fields that might be involved in a given flow rule
+(e.g., one table matches the MAC header, one matches the IP header,
+and so on). A given packet is processed by multiple flow tables in
+sequence—i.e., a pipeline—to determine how it is ultimately
+forwarded. <a class="reference internal" href="#fig-pipeline"><span class="std std-numref">Figure 7</span></a> gives a generic
+schematic for such a pipeline of flow tables, based on a diagram in
+the OpenFlow specification. The idea is that a set of actions are
+accumulated as the packet flows through the pipeline, and executed as
+a set in the last stage.</p>
+<div class="figure align-center" id="id15">
+<span id="fig-pipeline"></span><a class="reference internal image-reference" href="_images/Slide7.png"><img alt="_images/Slide7.png" src="_images/Slide7.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Figure 7. </span><span class="caption-text">Simple Schematic of an OpenFlow Forwarding Pipeline.</span></p>
+</div>
+<p>At first glance this might not seem to be important since header
+fields like those shown in <a class="reference internal" href="#fig-headers"><span class="std std-numref">Figure 4</span></a> are both
+well-known and at easy-to-compute offsets in every packet a switch has
+to forward (e.g., Table 0 tries to match the MAC header fields, Table
+1 tries to match the IP fields, and so on). And to this point, the
+initial idea of SDN was purposely data plane agnostic—SDN was entirely
+focused on opening the control plane to programmability. But early
+experience implementing SDN controllers exposed two problems.</p>
+<p>The first problem was that as SDN matured from a research experiment
+to a viable alternative to legacy black-box switches, performance
+became increasingly important. And while flow rules were general
+enough to say what forwarding behavior the controller wanted to
+program into a switch, switches didn’t necessarily have the capacity
+to implement that functionality in an efficient way. To ensure high
+forwarding performance, flow tables were implemented using highly
+optimized data structures that required specialized memories, like
+<em>Ternary Content Addressable Memory (TCAM)</em>. As a consequence, they
+supported only a limited number of entries, which meant the controller
+had to be careful about how they were used.</p>
+<p>In short, it proved necessary for the controller to know details about
+the pipeline in order to install a set of flow rules that the switch could
+map to hardware. As a consequence, many control applications were
+implicitly tied to a particular forwarding pipeline.  This would be
+analogous to writing a Java or Python program that can only run on an
+x86 processor and is not easily ported to an ARM processor. It proved
+necessary to have more control over the forwarding pipeline, and
+because we don’t want to limit ourselves to a single vendor’s
+pipeline, we also need an abstract way to specify a pipeline’s
+behavior, that can in turn be mapped onto the physical pipeline of any
+given switch.</p>
+<p>The second problem was that the protocol stack changed in unexpected
+ways, meaning that the assumption that all header fields you might
+need to match against are well-known is flawed. For example, while
+OpenFlow (and early forwarding pipelines) correctly include support
+for VLAN tags, a cornerstone for creating virtual networks in
+enterprise networks, the 4096 possible VLANs was not sufficient to
+account for all the tenants that a cloud might host.</p>
+<p>To address this problem, the IETF introduced a new standard, called
+<em>Virtual Extensible LAN (VXLAN)</em>. Unlike the original approach, which
+encapsulated a virtualized ethernet frame inside another ethernet
+frame, VXLAN encapsulates a virtual ethernet frame inside a UDP
+packet. <a class="reference internal" href="#fig-vxlan"><span class="std std-numref">Figure 8</span></a> shows the VXLAN header, along
+with all the packet headers a switch might have to process to make a
+forwarding decision.</p>
+<div class="figure align-center" id="id16">
+<span id="fig-vxlan"></span><a class="reference internal image-reference" href="_images/Slide6.png"><img alt="_images/Slide6.png" src="_images/Slide6.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Figure 8. </span><span class="caption-text">VXLAN Header encapsulated in a UDP/IP packet.</span></p>
+</div>
+<p>Adding support for VXLAN to OpenFlow is hard enough since agreeing to
+standards takes time, but adding support for VXLAN to fixed-function
+forwarding pipelines is an even more time-consuming endeavor:
+<em>Hardware needs to change!</em> One could argue that with VXLAN we are now
+done changing the protocol stack, but that’s unlikely. For example,
+QUIC is gaining momentum as an alternative to TCP when used with HTTP.
+Another example on the horizon is MPLS vs SRv6.</p>
+<p>Programmable forwarding pipelines, coupled with a high-level language
+that can be used to program the pipeline, is one viable response to
+these two issues. Both have emerged in the last few years, in the form
+of a <em>Protocol Independent Switching Architecture (PISA)</em> and the <em>P4</em>
+programming language. We will discuss both in more detail in Chapter
+4, but the big takeaway for now is that SDN has evolved beyond its
+original goal as a means to program the control plane. Today, SDN also
+includes the possibility of a programmable data plane.</p>
+</div>
+</div>
+<div class="section" id="sdn-a-definition">
+<h2>1.3 SDN: A Definition<a class="headerlink" href="#sdn-a-definition" title="Permalink to this headline">¶</a></h2>
+<p>To summarize, the original definition of SDN is simple to state:</p>
+<blockquote>
+<div><em>A network in which the control plane is physically separate
+from the forwarding plane, and a single control plane
+controls several forwarding devices</em>. <a class="footnote-reference" href="#id8" id="id7">[4]</a></div></blockquote>
+<p>This is a succinct way of saying what Sections 1.2.1 and 1.2.2 explain
+in long-form. Since that original definition, SDN has been interpreted
+by different stakeholders to mean both <em>less</em> (e.g., a programmatic
+configuration interface to network devices qualifies as SDN) and
+<em>more</em> (e.g., SDN also includes switches with programmable forwarding
+pipelines). This book covers the full spectrum by taking the more
+expansive view.</p>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[4]</a></td><td>From Nick McKeown’s 2013 presentation entitled <em>Software
+Defined Networking</em>.</td></tr>
+</tbody>
+</table>
+<p>Another way to frame SDN is to think of it as having two phases. In
+Phase 1, network operators took ownership of the control plane, and
+now in Phase 2, they are taking control of how packets are processed
+in the data plane. Phase 2 is still a work-in-progress, but as Nick
+McKeown posits, the aspirational end state is one in which:</p>
+<blockquote>
+<div><em>“Networks will [hopefully] be programmed by many, and operated by
+few.”</em></div></blockquote>
+<p>Which is to say, SDN is not just about shifting control from vendors
+to operators, but ultimately, it is about shifting control from
+vendors to operators to users. That’s the long-term goal, inspired by
+what commodity servers and open source software did for the computing
+industry. But we still have a ways to go, so we return to more modest
+predictions about the next phase of the SDN journey in Chapter 8.</p>
+<div class="admonition-further-reading admonition" id="reading-future">
+<p class="first admonition-title">Further Reading</p>
+<p class="last">N. McKeown. <a class="reference external" href="https://www.vmware.com/futurenet/2019-event/">FutureNet 2019</a>.
+October 2019.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="uses.html" class="btn btn-neutral float-right" title="Chapter 2: Use Cases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="preface.html" class="btn btn-neutral float-left" title="Preface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

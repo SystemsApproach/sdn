@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Chapter 7: Leaf-Spine Fabric &mdash; Software-Defined Networks: A Systems Approach Version 0.3-dev documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="static/bridge.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script type="text/javascript" src="static/jquery.js"></script>
+        <script type="text/javascript" src="static/underscore.js"></script>
+        <script type="text/javascript" src="static/doctools.js"></script>
+        <script type="text/javascript" src="static/language_data.js"></script>
+    
+    <script type="text/javascript" src="static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/rtd_theme_mods.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 8: Future of SDN" href="future.html" />
+    <link rel="prev" title="Chapter 6: Network OS" href="onos.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Software-Defined Networks: A Systems Approach
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Version 0.3-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Chapter 1:  Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uses.html">Chapter 2:  Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch.html">Chapter 3:  Basic Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="switch.html">Chapter 4:  White-Box Switches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stratum.html">Chapter 5:  Switch OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="onos.html">Chapter 6:  Network OS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chapter 7:  Leaf-Spine Fabric</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#feature-set">7.1 Feature Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#segment-routing">7.2 Segment Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#routes-and-multicast">7.3 Routes and Multicast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customized-forwarding">7.4  Customized Forwarding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="future.html">Chapter 8:  Future of SDN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Hands-on Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">About The Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">About The Authors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Software-Defined Networks: A Systems Approach</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Chapter 7:  Leaf-Spine Fabric</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/trellis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="future.html" class="btn btn-neutral float-right" title="Chapter 8: Future of SDN" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="onos.html" class="btn btn-neutral float-left" title="Chapter 6: Network OS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="chapter-7-leaf-spine-fabric">
+<h1>Chapter 7:  Leaf-Spine Fabric<a class="headerlink" href="#chapter-7-leaf-spine-fabric" title="Permalink to this headline">¶</a></h1>
+<p>This chapter describes a leaf-spine switching fabric implemented by a
+collection of control applications. We use Trellis, running on ONOS,
+as our exemplar implementation. Various aspects of Trellis were
+introduced in earlier chapters, so we summarize those highlights
+before getting into the details.</p>
+<ul class="simple">
+<li>Trellis supports the leaf-spine fabric topology that is commonly
+used to interconnect multiple racks of servers in a datacenter (see
+<a class="reference internal" href="uses.html#fig-leaf-spine"><span class="std std-numref">Figure 9</span></a>), but it also supports
+multi-site deployments (see <a class="reference internal" href="arch.html#fig-trellis"><span class="std std-numref">Figure 14</span></a>).
+Trellis uses only white-box switches to build out the fabric. It can
+run on a mix of fixed-function and programmable pipelines, but is
+running in production with the former.</li>
+<li>Trellis supports a wide-range of L2/L3 features, all re-implemented
+as SDN control apps (with the exception of a DHCP server used to
+relay DHCP requests and a Quagga BGP server used to exchange BGP
+routes with external peers). Trellis implements L2 connectivity
+within each server rack, and L3 connectivity between racks.</li>
+<li>Trellis supports access/edge networking technologies, such as PON
+(see <a class="reference internal" href="uses.html#fig-seba"><span class="std std-numref">Figure 10</span></a>) and RAN (see <a class="reference internal" href="arch.html#fig-trellis"><span class="std std-numref">Figure 14</span></a>), including support for (a) routing IP traffic
+to/from devices connected to those access networks, and (b)
+off-loading access network functionality into the fabric switches.</li>
+</ul>
+<p>This chapter does not give a comprehensive description of all of these
+features, but it does focus on the datacenter fabric use case, which
+is sufficient to illustrate the approach to building a
+production-grade network using SDN principles. More information about
+the full range of Trellis design decisions is available on the Trellis
+website.</p>
+<div class="admonition-further-reading admonition" id="reading-trellis">
+<p class="first admonition-title">Further Reading</p>
+<p class="last"><a class="reference external" href="https://docs.trellisfabric.org/">Trellis</a>. Open Networking
+Foundation, 2020.</p>
+</div>
+<div class="section" id="feature-set">
+<h2>7.1 Feature Set<a class="headerlink" href="#feature-set" title="Permalink to this headline">¶</a></h2>
+<p>SDN provides an opportunity to customize the network, but for
+pragmatic reasons, the first requirement for adoption is to reproduce
+functionality that already exists, and do so in a way that reproduces
+the resilience and scalability of legacy solutions. Trellis has
+satisfied this requirement, which we summarize here.</p>
+<p>First, with respect to L2 connectivity, Trellis supports VLANs,
+including native support for forwarding traffic based on VLAN id,
+along with QinQ support based on an outer/inner VLAN id pair. Support
+for QinQ is particularly relevant to access networks, where double
+tagging is used to isolate traffic belonging to different service
+classes. In addition, Trellis supports L2 tunnels across the L3 fabric
+(both single and double tagged).</p>
+<p>Second, with respect to L3 connectivity, Trellis supports IPv4 and
+IPv6 routing for both unicast and multicast addresses. For the latter,
+Trellis implements centralized multicast tree construction (as opposed
+to running a protocol like PIM), but does include IGMP support for end
+hosts wishing to join/leave multicast groups. Trellis also supports
+both ARP (for IPv4 address translation) and NDP (for IPv6 neighbor
+discovery), along with support for both DHCPv4 and DHCPv6.</p>
+<p>Third, Trellis provides high availability in the face of link or
+switch failures. It does this through a combination of well-known
+techniques: dual-homing, link binding, and ECMP link groups. As
+illustrated in <a class="reference internal" href="#fig-netconfig"><span class="std std-numref">Figure 36</span></a>, each server in a
+Trellis cluster is connected to a pair of ToR (leaf) switches, where
+the OS running on each compute server implements active-active link
+bonding. Each leaf switch is then connected by a pair of links to a
+pair of spine switches, with an ECMP group defined for the pair of
+links connecting each leaf to a given spine and for the set of links
+connecting each leaf to a pair of spines. The cluster as a whole then
+has multiple connections to external routes, shown via leaf switches 3
+and 4 in the Figure. Not shown in <a class="reference internal" href="#fig-netconfig"><span class="std std-numref">Figure 36</span></a>
+is the fact that Trellis runs on top of ONOS, which is itself
+replicated for the sake of availability. In a configuration like the
+one shown here, ONOS (and hence the Trellis control applications) are
+replicated on three to five servers.</p>
+<div class="figure align-center" id="id1">
+<span id="fig-netconfig"></span><a class="reference internal image-reference" href="_images/Slide31.png"><img alt="_images/Slide31.png" src="_images/Slide31.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Figure 36. </span><span class="caption-text">High availability through a combination of dual-homing, link
+bonding, and ECMP groups.</span></p>
+</div>
+<p>The use of link aggregation and ECMP is straightforward: the packet
+forwarding mechanism is augmented to load balance outgoing packets
+among a group (e.g., a pair) of links (egress ports) rather than
+having just a single “best” output link (egress port). This both
+improves bandwidth and results in an automatic recovery mechanism
+should any single link fail. It is also the case that switch
+forwarding pipelines have explicit support for port groups, so once
+equivalences are established, they can be pushed all the way into the
+data plane.</p>
+<p>To be clear, ECMP is a forwarding strategy that Trellis applies
+uniformly across all the switches in the fabric. The Trellis control
+application knows the topology, and pushes the port groups into each
+of the fabric switches accordingly. Each switch then applies these
+port groups to its forwarding pipeline, which then forwards packets
+across the set of ports in each group without additional control plane
+involvement.</p>
+<p>Fourth, with respect to scalability, Trellis has demonstrated the
+ability to support up to 120k routes and 250k flows. This is in a
+configuration that includes two spine switches and eight leaf
+switches, the latter implying up to four racks of servers. As with
+availability, Trellis’s ability to scale performance is directly due
+to ONOS’s ability to scale.</p>
+</div>
+<div class="section" id="segment-routing">
+<h2>7.2 Segment Routing<a class="headerlink" href="#segment-routing" title="Permalink to this headline">¶</a></h2>
+<p>The previous section focused on <em>what</em> Trellis does. This section
+focuses on <em>how</em>, where the core strategy is based on <em>Segment Routing
+(SR)</em>. The term “segment routing” comes from the idea that the
+end-to-end path between any pair of hosts can be defined by a sequence
+of segments, where label-switching is used to traverse a sequence of
+segments along an end-to-end path. The idea is an application of
+<em>Multi-Protocol Label Switching (MPLS)</em>, which you can read more about
+online.</p>
+<div class="admonition-further-reading admonition" id="reading-mpls">
+<p class="first admonition-title">Further Reading</p>
+<p class="last"><a class="reference external" href="https://book.systemsapproach.org/scaling/mpls.html">Multi-Protocol Label Switching</a>. <em>Computer
+Networks: A Systems Approach</em>, 2020.</p>
+</div>
+<p>When applied to a leaf-spine fabric, there are always two segments
+involved—leaf-to-spine and spine-to-leaf—where Tellis programs the
+switches to match and then push/pop MPLS labels.  <a class="reference internal" href="#fig-sr"><span class="std std-numref">Figure 37</span></a> illustrates how SR works in Trellis using a simple
+configuration that forwards traffic between a pair of hosts: 10.0.1.1
+and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
+subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
+10.0.2/24, and each of the switches have an assigned MPLS id: 101,
+103, 102, and 104.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-sr"></span><a class="reference internal image-reference" href="_images/Slide32.png"><img alt="_images/Slide32.png" src="_images/Slide32.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Figure 37. </span><span class="caption-text">Example of Segment Routing being used to forward traffic between a
+pair of hosts.</span></p>
+</div>
+<p>When Host 1 sends a packet with destination address 10.0.2.1 it is by
+default forwarded to the server’s ToR/leaf switch. Leaf 1 matches the
+destination IP address, learns this packet needs to cross the fabric
+and emerge at Leaf 2 to reach subnet 10.0.2/24, and so pushes the MPLS
+label 102 onto the packet. Because of ECMP, Leaf 1 can forward the
+resulting packet to either spine, at which point that switch matches
+the MPLS label 102, pops the label off the header, and forwards it to
+Leaf 2.  Finally, Leaf 2 matches the destination IP address and
+forwards the packet along to Host 2.</p>
+<p>What you should take away from this example is that SR is highly
+stylized. For a given combination of leaf and spine switches, Trellis
+first assigns all identifiers, with each rack configured to share an
+IP prefix and be on the same VLAN. Trellis then pre-computes the
+possible paths and installs the corresponding match/action rules in
+the underlying switches. The complexity having to do with balancing
+load across multiple paths is delegated to ECMP, which is similarly
+unaware of any end-to-end paths. From an implementation perspective,
+the Trellis control application that implements SR passes these
+match/action rules to ONOS, which in turn installs them on the
+underlying switches. Trellis also maintains its own Atomix map to
+manage the set of ECMP groups connecting leaf and spine switches.</p>
+</div>
+<div class="section" id="routes-and-multicast">
+<h2>7.3 Routes and Multicast<a class="headerlink" href="#routes-and-multicast" title="Permalink to this headline">¶</a></h2>
+<p>In addition to Segment Routing, which establishes data paths between
+leaf switches, Trellis also takes advantage of the Route and Mcast
+services introduced in Chapter 6. They determine which of the
+leaf-spine switches serve each IP prefix, and where to find all the
+hosts connected to each multicast group, respectively.</p>
+<p>Trellis does not run distributed protocols like OSPF to learn about
+routes or PIM to construct multicast trees.  Instead, it computes the
+right answers based on global information, and then pushes these
+mappings to the Route and Mcast services. This is straightforward to
+do because Trellis imposes the simplifying constraint that each rack
+corresponds to exactly one IP subnet.</p>
+<p>To make this discussion more concrete, consider that all the ONOS
+Services described in Chapter 6 can be invoked via a RESTful API, or
+alternatively, through a CLI that is a thin wrapper around REST’s
+<code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code> and <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> calls.  Using the CLI to illustrate
+(because it is easier to read), one can query the Route service to
+learn the existing routes as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>onos&gt; routes
+
+B: Best route, R: Resolved route
+
+Table: ipv4
+B R  Network            Next Hop        Source (Node)
+     0.0.0.0/0          172.16.0.1      FPM (127.0.0.1)
+&gt; *  1.1.0.0/18         10.0.1.20       STATIC
+&gt; *  10.0.99.0/24       10.0.1.1        FPM (127.0.0.1)
+  *  10.0.99.0/24       10.0.6.1        FPM (127.0.0.1)
+   Total: 2
+
+Table: ipv6
+B R  Network                                     Next Hop                                Source (Node)
+&gt; *  2000::7700/120                              fe80::288:ff:fe00:1                     FPM (127.0.0.1)
+&gt; *  2000::8800/120                              fe80::288:ff:fe00:2                     FPM (127.0.0.1)
+&gt; *  2000::9900/120                              fe80::288:ff:fe00:1                     FPM (127.0.0.1)
+  *  2000::9900/120                              fe80::288:ff:fe00:2                     FPM (127.0.0.1)
+   Total: 3
+</pre></div>
+</div>
+<p>Similarly, one can add a static route to the Route Service:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">onos&gt; route-add &lt;prefix&gt; &lt;nexthop&gt;</span>
+<span class="go">onos&gt; route-add 1.1.0.0/18 10.0.1.20</span>
+<span class="go">onos&gt; route-add 2020::101/120 2000::1</span>
+</pre></div>
+</div>
+<p>One thing to note about these examples is that there are two possible
+sources for routes. One is that the route is <code class="docutils literal notranslate"><span class="pre">STATIC</span></code>, which usually
+means that Trellis inserted it, with full knowledge of the what prefix
+it has assigned to each rack in the cluster. (Human operators could
+also add a <code class="docutils literal notranslate"><span class="pre">STATIC</span></code> route using the CLI, but this would be an
+exception rather than the rule.)</p>
+<p>The second possibility is that <code class="docutils literal notranslate"><span class="pre">FPM</span></code> was the source. FPM is yet
+another ONOS Service (one of the Trellis suite of services), and its
+job is to learn routes from external sources, which it does by tapping
+into a locally running Quagga process that is configured to peer with
+BPG neighbors. Whenever FPM learns about an external route, is adds
+the corresponding prefix-to-nexthop mapping to the Route service,
+indicating that the destination prefix is reachable via the leaf
+switches that connect the fabric to upstream networks (e.g., Switches 3
+and 4 in <a class="reference internal" href="#fig-netconfig"><span class="std std-numref">Figure 36</span></a>).</p>
+<p>The story with multicast is similar. Again using the ONOS CLI, it is
+possible to create a new multicast route and add a sink to it. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">onos&gt; mcast-host-join -sAddr * -gAddr 224.0.0.1 -srcs 00:AA:00:00:00:01/None -srcs 00:AA:00:00:00:05/None -sinks 00:AA:00:00:00:03/None -sinks 00:CC:00:00:00:01/None</span>
+</pre></div>
+</div>
+<p>specifies <em>Any-Source Multicast (ASM)</em>  (<code class="docutils literal notranslate"><span class="pre">sAddr</span> <span class="pre">*</span></code>), a multicast group address
+(<code class="docutils literal notranslate"><span class="pre">gAddr</span></code>), the group source addresses (<code class="docutils literal notranslate"><span class="pre">srcs</span></code>) and the group sink
+addresses (<code class="docutils literal notranslate"><span class="pre">sinks</span></code>). A sink can then be removed as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">onos&gt; mcast-sink-delete -sAddr * -gAddr 224.0.0.1 -h  00:AA:00:00:00:03/None</span>
+</pre></div>
+</div>
+<p>Again, there is no PIM running, but instead, Trellis offers a
+programmatic interface for network operators to define a multicast tree
+through a sequence of such calls. For example, when Trellis runs as
+part of an access network that delivers IPTV to subscribers, one
+option is for software running on the operator’s set-top boxes to
+issue calls similar to the ones shown above (except, of course, using
+the RESTful API rather than the CLI). Another option is to have
+set-top boxes send IGMP messages, which Trellis intercepts using the
+Packet Service (similar to how the Host service intercepts ARP and
+DHCP packets). So the next time you use your TV remote to change
+channels, it is possible you are triggering procedure invocations up
+and down the SDN software stack described throughout this book!</p>
+</div>
+<div class="section" id="customized-forwarding">
+<h2>7.4  Customized Forwarding<a class="headerlink" href="#customized-forwarding" title="Permalink to this headline">¶</a></h2>
+<p>Trellis is an example use case for SDN. It is a set of control
+applications running top of a Network OS, which in turn runs on top of
+a collection white-box switches arranged in a leaf-spine topology,
+where each switch runs a local Switch OS. In this way, Trellis serves
+as a capstone for our bottom-up tour of the SDN software stack.</p>
+<p>But if we knew from the outset that a leaf-spine fabric supporting the
+Trellis feature-set was exactly what we wanted, we might go back to
+lower layers and tailor them for that purpose. This is what has
+happened over time with Trellis, resulting in a customized forwarding
+plane implemented by a P4 program called <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code>. We conclude
+this chapter by giving a high-level summary of <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code>,
+highlighting how its design meshes with the rest of the software
+stack.</p>
+<p>Before doing that, it is important to acknowledge that knowing exactly
+what you want from a network at the outset is an impossibly high
+bar. Networks evolve based on experience using and operating them. No
+one knew how to write <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code> on day one, but after iterating
+through a series of implementations of the other layers up-and-down
+the stack (including the introduction of Tofino as a programmable
+forwarding pipeline), <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code> emerged. <em>The point is that
+treating the network as a programmable platform frees you to
+continually and rapidly evolve it.</em></p>
+<p>Said another way, we introduced <code class="docutils literal notranslate"><span class="pre">forward.p4</span></code> as our canonical
+example of “a forwarding plane customized to do exactly what we want”
+in Chapter 4, but then spent the rest of the chapter describing all
+the machinery that makes something like <code class="docutils literal notranslate"><span class="pre">forward.p4</span></code> possible,
+without ever revisiting what network-specific functionality it might
+actually implement.  In short, <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code> is a specific example of
+<code class="docutils literal notranslate"><span class="pre">forward.p4</span></code>, which we are only now able to describe because of how
+it relates to the control plane.</p>
+<p>There are three things of note about <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code>. First, it is
+loosely based on the Broadcom OF-DPA pipeline, which makes sense
+because Trellis was originally implemented on top of a set of
+Tomahawk-based switches. The <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code> pipeline is simpler than
+OF-DPA, as it eliminates tables that Trellis does not need. This makes
+<code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code> easier to control.</p>
+<p>Second, <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code> is designed to mimic ONOS’s FlowObjective API,
+thereby simplifying the process of mapping FlowObjectives onto
+P4Runtime operations. This is best illustrated by <a class="reference internal" href="#fig-fabric"><span class="std std-numref">Figure 38</span></a> which shows <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code>’s ingress pipeline. The
+egress pipeline is not shown, but it is a straightforward rewriting of
+the header fields in the common case.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-fabric"></span><a class="reference internal image-reference" href="_images/Slide40.png"><img alt="_images/Slide40.png" src="_images/Slide40.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Figure 38. </span><span class="caption-text">Logical pipeline supported by <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code>, designed to parallel
+the Filtering, Forwarding, and Next stages of the FlowObjective API.</span></p>
+</div>
+<p>Third, <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code> is designed to be configurable, making it
+possible to selectively include additional functionality. This is not
+easy when writing code that is optimized for an ASIC-based forwarding
+pipeline, and in practice it makes heavy use of pre-processor
+conditionals (i.e., <code class="docutils literal notranslate"><span class="pre">#ifdefs</span></code>). The code fragment shown below is the
+main control block of <code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code>’s ingress function, annotated to
+highlight optional functionality. The details of the options are
+beyond to scope of this book, but at a high level:</p>
+<div class="sidebar">
+<p class="first sidebar-title">VNF Off-loading</p>
+<p>The SPGW and BNG extensions are examples of an optimization
+technique sometimes called <em>VNF off-loading</em>. VNF is an acronym
+for <em>Virtual Network Function</em>, which refers to functionality that
+sometimes runs as software in virtual machines. Off-loading refers
+to the idea of re-implementing this functionality to run in switch
+forwarding pipeline, rather than on a general-purpose server. This
+generally leads to better performance because packets can be
+forwarded from source to destination without having to be diverted
+to a server.</p>
+<p class="last">Calling out functions like SPGW and BNG as being an off-load
+“optimization” is arguably an example of selective memory. It’s
+just as accurate to say that we’ve off-loaded IP to the switch
+since IP forwarding also sometimes runs in software on
+general-purpose processors. To a first approximation, SPGW and BNG
+are just specialized IP routers, augmented with additional
+features unique to cellular and wireline access networks,
+respectively. In the grand scheme of things, networks are built
+from a combination of forwarding functions, and we now have more
+options as to what hardware chip is the most appropriate target
+for implementing each such function.</p>
+</div>
+<ul class="simple">
+<li><strong>SPGW (Serving and Packet Gateway):</strong> Augments IP functionality in
+support of 4G Mobile Networks.</li>
+<li><strong>BNG (Broadband Network Gateway):</strong> Augments IP functionality in
+support of Fiber-to-the-Home.</li>
+<li><strong>INT (Inband Network Telemetry):</strong> Adds metric collection and
+telemetry output directives.</li>
+</ul>
+<div class="highlight-C notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">apply</span> <span class="p">{</span>
+<span class="hll"><span class="cp">#ifdef WITH_SPGW</span>
+</span><span class="hll">     <span class="n">spgw_normalizer</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">.</span><span class="n">gtpu</span><span class="p">.</span><span class="n">isValid</span><span class="p">(),</span> <span class="n">hdr</span><span class="p">.</span><span class="n">gtpu_ipv4</span><span class="p">,</span> <span class="n">hdr</span><span class="p">.</span><span class="n">gtpu_udp</span><span class="p">,</span>
+</span><span class="hll">                           <span class="n">hdr</span><span class="p">.</span><span class="n">ipv4</span><span class="p">,</span> <span class="n">hdr</span><span class="p">.</span><span class="n">udp</span><span class="p">,</span> <span class="n">hdr</span><span class="p">.</span><span class="n">inner_ipv4</span><span class="p">,</span> <span class="n">hdr</span><span class="p">.</span><span class="n">inner_udp</span><span class="p">);</span>
+</span><span class="hll"><span class="cp">#endif </span><span class="c1">// WITH_SPGW</span>
+</span>     <span class="n">pkt_io_ingress</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+     <span class="n">filtering</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+<span class="hll"><span class="cp">#ifdef WITH_SPGW</span>
+</span><span class="hll">     <span class="n">spgw_ingress</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">.</span><span class="n">gtpu_ipv4</span><span class="p">,</span> <span class="n">hdr</span><span class="p">.</span><span class="n">gtpu_udp</span><span class="p">,</span> <span class="n">hdr</span><span class="p">.</span><span class="n">gtpu</span><span class="p">,</span>
+</span><span class="hll">                        <span class="n">hdr</span><span class="p">.</span><span class="n">ipv4</span><span class="p">,</span> <span class="n">hdr</span><span class="p">.</span><span class="n">udp</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+</span><span class="hll"><span class="cp">#endif </span><span class="c1">// WITH_SPGW</span>
+</span>     <span class="k">if</span> <span class="p">(</span><span class="n">fabric_metadata</span><span class="p">.</span><span class="n">skip_forwarding</span> <span class="o">==</span> <span class="n">_FALSE</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">forwarding</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="n">acl</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">fabric_metadata</span><span class="p">.</span><span class="n">skip_next</span> <span class="o">==</span> <span class="n">_FALSE</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">next</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+<span class="hll"><span class="cp">#if defined WITH_INT</span>
+</span><span class="hll">         <span class="n">process_set_source_sink</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+</span><span class="hll"><span class="cp">#endif </span><span class="c1">// WITH_INT</span>
+</span>     <span class="p">}</span>
+<span class="hll"><span class="cp">#ifdef WITH_BNG</span>
+</span><span class="hll">     <span class="n">bng_ingress</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">fabric_metadata</span><span class="p">,</span> <span class="n">standard_metadata</span><span class="p">);</span>
+</span><span class="hll"><span class="cp">#endif </span><span class="c1">// WITH_BNG</span>
+</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>For example, a companion file, <code class="docutils literal notranslate"><span class="pre">spgw.p4</span></code> (not shown), implements the
+forwarding plane for the SPGW extension, which includes the GTP tunnel
+encapsulation/decapsulation required by the 3GPP cellular standard to
+connect the Trellis fabric to the base stations of the Radio Access
+Network.  Similarly, <code class="docutils literal notranslate"><span class="pre">bng.p4</span></code> (not shown) implements PPPoE
+termination, which is used by some Passive Optical Networks
+deployments to connect the Trellis fabric to home routers. (As an
+aside, the code fragment also illustrates the basic structure of
+<code class="docutils literal notranslate"><span class="pre">fabric.p4</span></code>’s core functionality: lines 6-7 invoke the <em>filtering
+objective</em>, lines 12-14 invoke the <em>forwarding objective</em>, and lines
+16-17 invoke the <em>next objective</em>.)</p>
+<p>In addition to selecting which extensions to include, the pre-processor
+also defines several constants, including the size of each logical
+table.  Clearly, this implementation is a low-level approach to
+building configurable forwarding pipelines. Designing higher level
+language constructs for composition, including the ability to
+dynamically add functions to the pipeline at runtime, is a subject of
+on-going research.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="future.html" class="btn btn-neutral float-right" title="Chapter 8: Future of SDN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="onos.html" class="btn btn-neutral float-left" title="Chapter 6: Network OS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
