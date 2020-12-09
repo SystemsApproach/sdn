@@ -46,7 +46,7 @@ We add two footnotes to that history. The first is a 2001 National
 Academy report, which brought the ossification of the Internet into
 focus as a major challenge. In doing so, the report catalyzed what
 turned out to be a 20-year R&D effort. The fruits of that research are
-now directly impacting networks being deployed by both Cloud Providers
+now directly impacting networks being deployed by Cloud Providers, enterprises,
 and Internet Service Providers.
 
 .. _reading_ossified:
@@ -60,7 +60,7 @@ and Internet Service Providers.
 The second is Scott Shenker’s iconic presentation making the
 intellectual case for SDN. Understanding the central thesis of
 Shenker’s talk—that the practice of building and operating networks is
-in dire need of abstractions to help manage complexity—is the lynchpin
+in dire need of abstractions to help manage complexity—is the linchpin
 to also understanding the systems, platforms, tools, and interfaces
 described in this book.
 
@@ -122,9 +122,10 @@ in turn enable a rich marketplace of networking applications.
     every level.
 
 The value of such a transformation is clear. Opening a vertically
-integrated, closed, and proprietary market is a proven way to increase
-the pace of innovation. Or to restate in market-centric terms: the
-goal is to shift control from the vendors that sell networking
+integrated, closed, and proprietary market creates opportunities for
+innovation that would not otherwise be available. Or to put it another
+way: by opening up these interfaces, it becomes possible 
+to shift control from the vendors that sell networking
 equipment to the network operators that build networks to meet their
 users' needs.
 
@@ -137,7 +138,7 @@ networking industry is an important place to start.
 -----------------------
 
 With the understanding that SDN is an approach rather than a
-point-solution, it is helpful to define the design principles at the
+point solution, it is helpful to define the design principles at the
 core of that approach. Framing the design space is the goal of this
 section, but one important takeaway is that there is more than one
 possible end-state. Each network operator is free to pick different
@@ -162,10 +163,12 @@ allows.
 The seminal idea behind SDN is that networks have distinct *control*
 and *data* planes, and the separation of these two planes should be
 codified in an open interface. In the most basic terms, the control
-plane determines the route packets should follow through the network
-(for example, by running a routing protocol like BGP, OSPF, or RIP),
-where the interconnected set of switches in the network implements a
-data plane, making forwarding decisions at each switch on a
+plane determines *how* the network should behave, while the data plane
+is responsible for implementing that behavior on individual
+packets. For example, one job of the control plane is to determine the route packets should follow through the network
+(perhaps by running a routing protocol like BGP, OSPF, or RIP), and the task
+of forwarding packets along those routes is the job of the
+data plane, in which switches making forwarding decisions at each hop on a
 packet-by-packet basis.
 
 In practice, decoupling the control and data planes manifests in
@@ -222,12 +225,17 @@ forwards packets), this forwarding abstraction should not assume (or
 favor) one data plane implementation over another.
 
 The original interface supporting disaggregation, called *OpenFlow*,
-was introduced in 2008, and although it was hugely instrumental in
+was introduced in 2008 [#]_ , and although it was hugely instrumental in
 launching the SDN journey, it proved to be only a small part of what
 defines SDN today. Equating SDN with OpenFlow significantly
 under-values SDN, but it is an important milestone because it
 introduced *Flow Rules* as a simple-but-powerful way to specify the
 forwarding behavior.
+
+
+.. [#] OpenFlow was actually far from the first effort to do this; it
+       was the one that got the most coverage. Earlier efforts
+       included Ipsilon's GSMP and the ForCES work at the IETF.
 
 A flow rule is a Match-Action pair: Any packet that *Matches* the
 first part of the rule should have the associated *Action* applied to
@@ -311,19 +319,21 @@ disaggregation implied by SDN would not be viable.
 
 At the same time, operators are accustomed to configuring their
 switches and routers. This has historically been done using a *Command
-Line Interface (CLI)* or a management protocol like SNMP, which
-looking back at :numref:`Figure %s <fig-fib>`, corresponds to the
+Line Interface (CLI)* or (less commonly) a management protocol like
+SNMP. 
+Looking back at :numref:`Figure %s <fig-fib>`, this corresponds to the
 northbound interface to the RIB (as opposed to the interface between
-the RIB and the FIB). This includes installing new routes, which on
+the RIB and the FIB). This interface is capable of installing new routes, which on
 the surface seems to be equivalent to installing a new flow
-rule. Would a switch be considered “SDN capable” if it merely exposed
+rule. Would a switch be considered “SDN-capable” if it merely exposed
 a programmatic configuration interface in lieu of the conventional
 CLI?
 
 The answer is likely no, and it comes down to hitting the mark on both
 generality and performance. While a well-defined programmatic
 configuration interface is certainly an improvement over legacy CLIs,
-they are intended for modifying the control plane’s RIB and setting
+they are intended for modifying various settings of the control plane
+(such as RIB entries) and 
 other device parameters (e.g., port speeds/modes) rather than
 modifying the data plane’s FIB. As a consequence, such configuration
 interfaces are (a) unlikely to support the full range of
@@ -365,12 +375,14 @@ availability of low-cost white-box switches built using merchant
 silicon switching chips, network operators can buy hardware from
 white-box switching vendors, and then load the appropriate control
 plane software from some other vendor, or possibly even use an open
-source version of those protocols. Doing so lowers costs and
-potentially reduces complexity (because only the required control
+source version of those protocols. Doing so potentially lowers costs and
+reduces complexity (because only the required control
 modules need to be loaded onto the device), but it does not
 necessarily realize the pace of innovation SDN promises. This is
 because the operator remains stuck in the slow-paced standardization
-processes implied by today’s standardized protocols.
+processes implied by today’s standardized protocols. It also fails to
+deliver the new networking abstractions envisioned by SDN's pioneers (as in
+Shenker's talk noted above, for example).
 
 The alternative, which is the second design principle of SDN, is that
 the control plane should be fully independent of the data plane and
@@ -423,7 +435,7 @@ of distributed algorithms like Link-State and Distance-Vector routing
 protocols) and the app is free to simply run the shortest path
 algorithm on this graph and load the resulting flow rules into the
 underlying switches.  An introduction to Link-State and
-Distance-Vector routing algorithms is available online.
+Distance-Vector routing algorithms is available online. 
 
 .. _reading_routing:
 .. admonition:: Further Reading
@@ -432,10 +444,15 @@ Distance-Vector routing algorithms is available online.
       <https://book.systemsapproach.org/internetworking/routing.html>`__.
       *Computer Networks: A Systems Approach*, 2020.
 
-By centralizing this logic, the goal is to come up with a globally
-optimized solution. As we discuss in later chapters, the published
+By centralizing this logic, it becomes possible to do something that
+wasn't previously possible in distributed networks: compute globally
+optimized solutions. As we discuss in later chapters, the published
 evidence from cloud providers that have embraced this approach
-confirms this advantage.
+confirms this advantage. It was well understood for many years that
+the fully distributed approach of the Internet did not lend itself to
+global optimizations, but until SDN, there wasn't really a feasible
+alternative. SDN brings this possibility to fruition. This is the
+power of offering a centralized network abstraction.
 
 The idea of “collecting network state” is central to SDN and the role
 played by a NOS. We are not talking about collecting the full range of
@@ -447,6 +464,25 @@ and received on each port. Protocols like OpenFlow define the means to
 report such meters to the NOS, in addition to providing the means for
 the NOS to install new flow rules based on the information it
 collects.
+
+There is a related benefit of control plane centralization that will
+become clearer as we get into SDN use cases. A logically centralized
+control plane provides a single point to expose network APIs. The idea
+of putting programmatic APIs on individual switches and routers has
+been around for decades, but failed to make much impact. By contrast,
+a central API to an entire collection of switches or routers has
+enabled all sorts of new use cases. These include network virtualization,
+network automation, and network verification. To take the example of
+automation, it's quite hard to automate something like BGP
+configuration because it so hard to reason about how a set of BGP
+speakers will respond when they all start talking to each other. But
+if your central control plane exposes an API in which you can say
+"create an isolated network that connects the following set of
+endpoints" then it is quite reasonable to make that request part of an
+automated configuration system. This is precisely what happens in many
+modern clouds, where the provisioning of network resources and policies is
+automated along with all sort of other operations such as spinning up
+virtual machines or containers. 
 
 .. sidebar:: Domain of Control
 
@@ -476,20 +512,26 @@ collects.
 
 Returning to the original question of centralized versus distributed 
 control plane, proponents of the latter often base their rationale on 
-the historical reason the Internet adopted distributed routing 
-protocols in the first place: survival in the face of failures. The 
-concern is that any centralized solution results in a single 
+the historical reasons the Internet adopted distributed routing 
+protocols in the first place: scale, and survival in the face of failures. The 
+concern is that any centralized solution results in a bottleneck that
+is also a single 
 point-of-failure. Distributing the centralized control plane over a 
-cluster of servers mitigates this concern, but it is still the case 
-that the control plane is remote (i.e., off-switch), where the link 
+cluster of servers mitigates both these concerns, as techniques developed in
+the distributed systems world can ensure both high availability and
+scalability of such clusters.
+
+A secondary concern raised about control plan centralization is  
+that, since the control plane is remote (i.e., off-switch), the link 
 between the two planes adds a vulnerable attack surface. The 
 counter-argument is that non-SDN networks already have (and depend on) 
 out-of-band management networks, so this attack surface is not a new 
 one. These management networks can be used by off-switch controllers 
-just as readily as by other management software. Plus, having access 
-to global state (as opposed to local, per-switch state) makes it 
-possible to implement a globally optimal solution. Suffice it to say,
-opinions differ. 
+just as readily as by other management software. There is also the
+argument that a small number of centralized controllers can present a
+smaller attack surface than a large number of distributed controllers. Suffice it to say,
+opinions differ, but there is certainly a wealth of support for the
+centralized approach. 
 
 1.2.3 Data Plane: Programmable vs Fixed-Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -580,7 +622,7 @@ for VLAN tags, a cornerstone for creating virtual networks in
 enterprise networks, the 4096 possible VLANs was not sufficient to
 account for all the tenants that a cloud might host.
 
-To address this problem, the IETF introduced a new standard, called
+To address this problem, the IETF introduced a new encapsulation, called
 *Virtual Extensible LAN (VXLAN)*. Unlike the original approach, which
 encapsulated a virtualized ethernet frame inside another ethernet
 frame, VXLAN encapsulates a virtual ethernet frame inside a UDP
@@ -601,7 +643,9 @@ forwarding pipelines is an even more time-consuming endeavor:
 *Hardware needs to change!* One could argue that with VXLAN we are now
 done changing the protocol stack, but that's unlikely. For example,
 QUIC is gaining momentum as an alternative to TCP when used with HTTP.
-Another example on the horizon is MPLS vs SRv6.
+Another example on the horizon is MPLS vs SRv6. Even VXLAN is now
+being superseded in some settings by a new, more flexible encapsulation
+called GENEVE. 
 
 Programmable forwarding pipelines, coupled with a high-level language
 that can be used to program the pipeline, is one viable response to
