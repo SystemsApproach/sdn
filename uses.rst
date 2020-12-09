@@ -24,19 +24,22 @@ phase. The most notable exception is Comcast, which has deployed the
 open source components described in this book throughout their
 production network.
 
-Finally, enterprises are the slowest to adopt SDN, but there are three
+Finally, enterprises have begun to adopt SDN, but there are three
 things to note about this situation. One is that pure play SDN is
 deployed in some Universities, with the goal of supporting research
 and innovation. The second is that the most likely path-to-adoption
 for pure play SDN in enterprises is via managed edge services offered
 by cloud providers. The idea is to connect on-premise clusters running
 edge workloads with public clouds running scalable datacenter
-workloads. The third is that many enterprise vendors offer SDN-lite
-products, primarily focused on helping enterprises manage virtual
-networks. This last example is the first use case we discuss.
+workloads. The third is that many enterprise vendors offer SDN
+products, where the focus has been more on the benefits of logical
+control plane centralization rather than open interfaces to the data
+plane. Network virtualization and SD-WAN (software-defined wide area
+networks) have both had considerable success in the enterprise, as
+discussed below.  
 
-2.1 Virtual Networks
--------------------------
+2.1 Network Virtualization
+---------------------------
 
 The first widely-adopted use case for SDN was to virtualize the
 network. Virtual networks, including both *Virtual Private Networks
@@ -44,50 +47,104 @@ network. Virtual networks, including both *Virtual Private Networks
 the Internet for years. VLANs have historically proven useful within
 enterprises, where they are used to isolate different organizational
 groups, such as departments or labs, giving each of them the
-appearance of having their own private LAN.
+appearance of having their own private LAN. However, these early forms
+of virtualization were quite limited in scope and lacked many of the
+advantages of SDN. You could think of them as virtualizing the address
+space of a network but not all its other properties, such as firewall
+policies or higher-level network services like load balancing. 
 
-In the SDN context, the idea is to make VLAN-like virtual networks
-easy-to-use, so they can be set up, managed, and torn down
-programmatically (i.e., without a sysadmin having to manually
-configure VLAN tags into network switches). In doing so, virtual
-networks become commonplace, providing a way to securely isolate all
-sorts applications and computational activities, not just to separate
-organizational groups. Moreover, since today’s computing environments
-are primarily built around Virtual Machines (VM), these virtual
-networks connect VMs and not just physical servers. It makes sense
-then, that the most widely used virtual network management systems are
-tightly coupled with VM management systems. VMWare’s vSphere is the
-predominant commercial example, where NSX is the virtual network
-management subsystem of vSphere. In the open source arena, OpenStack
-includes a virtual network subsystem called Neutron.
+The original idea behind using SDN to create virtual networks is
+widely credited to the team at Nicira, whose approach is described in
+the NSDI paper listed below. The key insight was that modern clouds required
+networks that could be programmatically created, managed, and 
+torn down, without a sysadmin having to manually
+configure, say, VLAN tags on some number of network switches. By
+separating the control plane from the data plane, and logically
+centralizing the control plane, it became possible to expose a single
+API entry point for the creation, modification, and deletion of
+virtual networks. This meant that the same automation systems that
+were being used to provision compute and storage capacity in a cloud
+(such as OpenStack at the time) could now programmatically provision a
+virtual network with appropriate policies to interconnect those other
+resources.
 
-This use of virtual networks is quite similar to what happens in a
-cloud datacenters, where it is important to isolate the network
-traffic of different cloud tenants. But as briefly discussed in
-Chapter 1, the 4096 possible VLANs are not sufficient to account for
-all the tenants that a cloud might host, or all the virtual networks
-an enterprise might want to create. The VXLAN standard was introduced
-to address this challenge; the important point is that today virtual
-networks are primarily implemented as overlay networks (encapsulated
-in UDP), rather than implemented by VLAN tags embedded in L2 Ethernet
-frames.
+The rise of network virtualization followed by several years the rise
+of compute virtualization, and was very much enabled by it. Compute
+virtualization made manual server provisioning a thing of the past,
+and exposed the manual and time-consuming processes of network
+configuration as the "long pole" in delivering a cloud service. This
+need to automate network provisioning was first recognized by large
+cloud providers but eventually became mainstream in enterprises.
 
-What does this have to do with SDN? On the one hand, managing all
-these virtual networks, and in particular, automatically adding any
-new VM that gets created to the right set of virtual networks, is a
-tedious and error-prone task, but well-defined enough to implement in
-software. That’s what a system like NSX or Neutron does. On the other
-hand, creating and managing virtual networks makes only limited use of
-SDN: (1) it is limited to configuring rather than controlling the
-network, and (2) when running as an overlay, it can be implemented
-entirely on the servers connected to a traditional network built using
-legacy switches.\ [#]_ Supporting network virtualization is a critically
-important use case, but not one that demonstrates the full
-capabilities of SDN.
+As microservices and container-based systems such as Kubernetes have
+gained in popularity, network virtualization has continued to evolve
+to meet the needs of these environments. There are a range of open
+source network "plugins"  (Calico, Flannel, Antrea,
+etc.) that provide network
+virtualization services for Kubernetes. 
+
+Because network virtualization set out to deliver a full set of
+network services in a programmatic way, its impact went beyond the
+simplification and automation of network provisioning. As virtual
+networks became lightweight objects, created and destroyed as needed, with a full set of services (such
+as stateful firewalling, deep-packet inspection, and so on), a new
+approach to network security was enabled. Rather than adding security
+features after the network was created, security features could be
+created as an inherent part of the network itself. Furthermore, with no limit on
+how many virtual networks could be created, as approach known as
+"microsegmentation" took hold. This entails the creation of
+fine-grained, isolated networks (microsegments) specific to the needs
+of, say,  a group of processes implementing a single
+distributed application. Microsegmentation offers clear benefits over
+prior approaches to network security, dramatically reducing the
+attack surface and the impact of attacks spreading throughout an
+enterprise or data center.
+
+It's worth noting that to create virtual networks as we have
+described, it is necessary to encapsulate packets from the virtual
+networks in a way that lets them traverse the underlying physical
+network. As a simple example, a virtual network can have its own
+private address space which is decoupled from the underlying physical
+address space. For this reason, virtual networks have used a range of
+encapsulation techniques, of which VXLAN (briefly discussed in
+Chapter 1) is probably the most well
+known. In recent years, a more flexible encapsulation called GENEVE
+(Generic Network Virtualization Encapsulation) has emerged. 
+
+There have been reasonable debates about whether network
+virtualization is really SDN. Certainly it displays many of the
+properties we discussed in the previous chapter–the original Nicira
+network virtualization platform even used OpenFlow to communicate
+between its central controller and the data plane elements. And the
+centralization benefits of SDN are at the core of what made network
+virtualization possible, particularly as an enabler of network
+automation. On the other hand, network virtualization has not really
+enabled the disaggregation of networks envisioned by SDN: the
+controllers and the switches in a network virtualization system are
+typically quite tightly integrated using proprietary signalling methods
+rather than an open interface. And because the focus of network
+virtualization has been on connecting virtual machines and containers,
+it is usually implemented as an overlay among the servers on which
+those computing abstractions are implemented. Sitting underneath that
+overlay is a physical network, which network virtualization just takes
+as given (and that physical network need not implement SDN at
+all).\ [#]_ In this book we take a broad view of what SDN is, but at the
+same time we can see that not all the potential benefits of SDN are
+delivered by network virtualization. 
+
 
 .. [#] This observation about different aspects of SDN being
        implemented in switches versus end hosts is an important one
        that we return to in Section 3.1.
+
+.. _reading_nicira:
+.. admonition:: Further Reading
+
+   T. Koponen et al. `Network Virtualization in Multi-tenant
+   Datacenters
+   <https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/koponen>`__.
+   NSDI, April, 2014.
+       
 
 2.2 Switching Fabrics
 ----------------------------
@@ -167,7 +224,7 @@ lowest volume on B4, is the most latency sensitive, and is of the
 highest priority.
 
 Through a combination of centralizing the decision-making process,
-programatically rate-limiting traffic at the senders, and
+programmatically rate-limiting traffic at the senders, and
 differentiating three classes of traffic, Google has been able to
 drive their link utilizations to nearly 100%. This is two to three
 times better than the 30-40% average utilization that WAN links are
