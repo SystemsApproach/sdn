@@ -269,6 +269,77 @@ insightful about the thought process in adopting SDN.
 
 2.4 Software-Defined Wide-Area Networks (SD-WAN)
 ------------------------------------------------
+
+Another use-case for SDN that has taken off for enterprise users is
+Software-Defined Wide-Area Networks (SD-WAN). Enterprises have for many
+years been buying WAN services from telecommunications companies,
+mostly to obtain reliable and private network services to interconnect
+their many locations–main offices, branch offices, and corporate data
+centers. For most of the 21st century the most common technical
+approach to building these networks has been MPLS, using a technique
+known as MPLS-BGP VPNs (virtual private networks). The rapid rise of
+SD-WAN as an alternative to MPLS is another example of the power of
+centralized control.
+
+Provisioning a VPN using MPLS, while less complex than most earlier options,
+still requires some significant local configuration of both the
+Customer Edge (CE) router located at each customer site, and the
+Provider Edge (PE)
+router to which that site would be connected. In addition, it would
+typically require the provisioning of a circuit from the customer site
+to the nearest point of presence for the appropriate Telco.
+
+With SD-WAN, there was a realization that VPNs lend themselves to
+centralized configuration. An enterprise wants its sites–and only its
+authorized sites–to be
+interconnected, and it typically wants to apply a set of policies regarding
+security, traffic prioritization, access to shared services and so
+on. These can be input to a central controller, which can then push
+out all the necessary configuration to a switch located at the
+appropriate office. Rather than manually configuring a CE and a PE
+every time a new site is added, it is possible to achieve "zero-touch"
+provisioning: an appliance is shipped to the new site with nothing
+more than a certificate and an address to contact, which it then uses
+to contact the central controller and obtain all the configuration it
+needs. Changes to policy–which might affect many sites–can be input
+centrally and pushed out to all affected sites. An example policy
+would be "put YouTube traffic into the lowest priority traffic class"
+or "allow direct access to a given cloud service from all branch
+offices".
+
+Note that the "private" part of the VPN is generally achieved by the
+creation of encrypted tunnels between locations. This is another
+example of a task that is painful to set up using traditional
+box-by-box configuration but easy to achieve when all switches are
+receiving their configuration from a central controller.
+
+Many factors that are external to SDN came into play to make SD-WAN a
+compelling option. One of these was the ubiquity of broadband Internet
+access, meaning that there is no longer a reason to provision a
+dedicated circuit to connect a remote site, with the corresponding
+time and cost to install. But the privacy issue had to be solved
+before that could happen–as it was, using centrally managed, encrypted tunnels. Another was the increasing
+reliance on cloud services such as Office365 or Salesforce.com, which
+have tended to replace on-premises applications in corporate data centers. It
+seems natural that you would choose to access those services directly
+from an Internet-connected branch, but traditional VPNs would
+*backhaul* traffic to a central site before sending it out to the
+Internet, precisely so that security could be controlled
+centrally. With SD-WAN, the central control over security policy is achieved, while the data
+plane remains fully distributed–meaning that remote sites can directly
+connect to the cloud services without backhaul. This is yet another
+example of how separating the control and data planes leads to a new
+network architecture.
+
+As with some of the other use cases, SD-WAN is not necessarily doing
+everything that SDN promised. The control plane to data plane
+communication channel tends to be proprietary, and, like network
+virtualization, the SD-WAN solutions are overlay networks running on
+top of traditional networks. Nevertheless, SD-WAN has opened up a path
+for innovation because both the edge devices and the control planes
+are implemented in software, and centralization has offered new ways
+of tackling an old problem. Furthermore, there is plenty of competition among
+the players in the SD-WAN marketplace.
       
 2.5 Access Networks
 -------------------------
