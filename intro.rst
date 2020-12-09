@@ -233,8 +233,8 @@ introduced *Flow Rules* as a simple-but-powerful way to specify the
 forwarding behavior.
 
 
-.. [#] OpenFlow was actually far from the first effort to do this; it
-       was the one that got the most coverage. Earlier efforts
+.. [#] OpenFlow was actually not the first effort to do this; it
+       was the one that got the most traction. Earlier efforts
        included Ipsilon's GSMP and the ForCES work at the IETF.
 
 A flow rule is a Match-Action pair: Any packet that *Matches* the
