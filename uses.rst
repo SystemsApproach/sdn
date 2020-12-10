@@ -100,6 +100,44 @@ prior approaches to network security, dramatically reducing the
 attack surface and the impact of attacks spreading throughout an
 enterprise or data center.
 
+.. sidebar:: Bringing SDN to life
+
+	As we saw in Chapter 1, the ideas behind SDN had been in the
+	works for years, but there were two related events
+	that, looking back, had a significant impact in bringing the
+	concept of programmable networks from theory to practice. First
+	was the 2007 founding of the commercial startup Nicira
+	Networks. Nicira was founded by three of the acknowledged
+	pioneers of SDN: Martin Casado, Scott Shenker, and Nick
+	McKeown. While Nicira was founded to make commercial use of
+	SDN, as with many startups, it took a while to find the ideal
+	product for the marketplace. In the end, it was Network
+	Virtualization that became the industry's first successful
+	application of SDN. Nicira's network virtualization platform
+	first shipped in 2011, establishing the category and
+	ultimately paving the way for VMware's acquisition of the
+	company and subsequent development of VMware NSX.
+
+	At around the same time, McKeown and Shenker also created
+	three non-profit organizations to catalyze the SDN
+	transformation across the networking industry: the Open
+	Networking Foundation (ONF) took on responsibility for
+	advancing the cause of network disaggregation, including
+	development of the OpenFlow standard; the Open Networking
+	Laboratory (ON.Lab) was created to produce open source
+	SDN-based solutions and platforms; and the Open Networking
+	Summit (ONS) was created as a conference platform to bring
+	together academics and practitioners interested in SDN. In
+	2018, ONF and ON.Lab merged, and the combined organization has
+	focused on building the open source software that is
+	highlighted throughout this book.
+
+        Of course there have been many other startups, conferences,
+        and consortia that have driven the development of SDN to where
+        it is today, and the effects of their work can be seen
+        throughout this chapter.
+
+
 It's worth noting that to create virtual networks as we have
 described, it is necessary to encapsulate packets from the virtual
 networks in a way that lets them traverse the underlying physical
@@ -305,7 +343,19 @@ needs. Changes to policy–which might affect many sites–can be input
 centrally and pushed out to all affected sites. An example policy
 would be "put YouTube traffic into the lowest priority traffic class"
 or "allow direct access to a given cloud service from all branch
-offices".
+offices". The idea is illustrated in :numref:`Figure %s <fig-sd-wan>`.
+
+.. _fig-sd-wan:
+.. figure:: figures/Slide43.png
+    :width: 700px
+    :align: center
+
+    An SD-WAN controller receives policies centrally and pushes them
+    out to edge switches at various sites. The switches build an
+    overlay of tunnels over the Internet or other physical networks,
+    and implement policies including allowing direct access to cloud
+    services.  
+
 
 Note that the "private" part of the VPN is generally achieved by the
 creation of encrypted tunnels between locations. This is another
@@ -352,7 +402,7 @@ fiber-to-the-home, and the *Radio Access Network (RAN)* at the heart
 of the 4G/5G cellular network.
 
 What’s interesting about these use cases is that unlike all the
-others—which effectively open Ethernet switches to programmable
+others—which effectively open general-purpose switches to programmable
 control—access networks are typically built from special-purpose
 hardware devices. The challenge is to transform these purpose-built
 devices into their merchant silicon/white-box counterparts, so they
@@ -415,7 +465,7 @@ the legacy hardware can be programmed into the switches that comprise
 the fabric. For example, BNG-equivalent functionality, which could be
 packaged as a *Virtual Network Function (VNF)* running on a
 general-purpose processor, is instead programmed directly into a
-white-box switches. This practice is sometimes called *VNF
+white-box switch. This practice is sometimes called *VNF
 off-loading* because the packet processing is moved from the compute
 servers into the switches. This is a great example of what happens
 when switch data planes become programmable: developers write software
@@ -465,9 +515,9 @@ subsets of packets (e.g., sFlow).
 In the INT approach, telemetry “instructions” are encoded into packet
 header fields, and then processed by network switches as they flow
 through the forwarding pipeline. These instructions tell an
-INT-capable device what state to collect, and then how to also write
+INT-capable device what state to collect, and then how to write
 that state into the packet as it transits the network. INT traffic
-sources (e.g., applications, end-host networking stacks, VM
+sources (e.g., applications, end-host networking stacks,
 hypervisors) can embed the instructions either in normal data packets
 or in special probe packets. Similarly, INT traffic sinks retrieve and
 report the collected results of these instructions, allowing the
@@ -477,7 +527,7 @@ observed (experienced) while being forwarded.
 The idea is illustrated in :numref:`Figure %s <fig-int>`, which shows
 an example packet traversing a path from source switch *S1* to sink
 switch *S5* via transit switch *S2*. The INT metadata added by each
-switch along the path both indicates what data is to be collect for the
+switch along the path both indicates what data is to be collected for the
 packet, and records the corresponding data for each switch.
 
 .. _fig-int:
@@ -506,4 +556,10 @@ directed their delivery, for example, with something like: *"In Switch
 is faithfully executing the forwarding behavior the network operator
 intended. We return to the potential of INT to impact how we build and
 operate networks in the concluding chapter of this book.
-    
+
+This example illustrates once again a potential benefit of SDN: the
+ability to try out new ideas that would have in the past been
+infeasible. With traditional fixed-function ASICs doing the packet
+forwarding, you could never get the chance to try an idea like INT to
+see if the benefits justify the cost. It is this freedom to experiment
+that will lead to lasting benefits from SDN in the long run.
