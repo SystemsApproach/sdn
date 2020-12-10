@@ -390,7 +390,7 @@ fiber-to-the-home, and the *Radio Access Network (RAN)* at the heart
 of the 4G/5G cellular network.
 
 What’s interesting about these use cases is that unlike all the
-others—which effectively open Ethernet switches to programmable
+others—which effectively open general-purpose switches to programmable
 control—access networks are typically built from special-purpose
 hardware devices. The challenge is to transform these purpose-built
 devices into their merchant silicon/white-box counterparts, so they
@@ -453,7 +453,7 @@ the legacy hardware can be programmed into the switches that comprise
 the fabric. For example, BNG-equivalent functionality, which could be
 packaged as a *Virtual Network Function (VNF)* running on a
 general-purpose processor, is instead programmed directly into a
-white-box switches. This practice is sometimes called *VNF
+white-box switch. This practice is sometimes called *VNF
 off-loading* because the packet processing is moved from the compute
 servers into the switches. This is a great example of what happens
 when switch data planes become programmable: developers write software
@@ -503,9 +503,9 @@ subsets of packets (e.g., sFlow).
 In the INT approach, telemetry “instructions” are encoded into packet
 header fields, and then processed by network switches as they flow
 through the forwarding pipeline. These instructions tell an
-INT-capable device what state to collect, and then how to also write
+INT-capable device what state to collect, and then how to write
 that state into the packet as it transits the network. INT traffic
-sources (e.g., applications, end-host networking stacks, VM
+sources (e.g., applications, end-host networking stacks,
 hypervisors) can embed the instructions either in normal data packets
 or in special probe packets. Similarly, INT traffic sinks retrieve and
 report the collected results of these instructions, allowing the
@@ -515,7 +515,7 @@ observed (experienced) while being forwarded.
 The idea is illustrated in :numref:`Figure %s <fig-int>`, which shows
 an example packet traversing a path from source switch *S1* to sink
 switch *S5* via transit switch *S2*. The INT metadata added by each
-switch along the path both indicates what data is to be collect for the
+switch along the path both indicates what data is to be collected for the
 packet, and records the corresponding data for each switch.
 
 .. _fig-int:
@@ -544,4 +544,10 @@ directed their delivery, for example, with something like: *"In Switch
 is faithfully executing the forwarding behavior the network operator
 intended. We return to the potential of INT to impact how we build and
 operate networks in the concluding chapter of this book.
-    
+
+This example illustrates once again a potential benefit of SDN: the
+ability to try out new ideas that would have in the past been
+infeasible. With traditional fixed-function ASICs doing the packet
+forwarding, you could never get the chance to try an idea like INT to
+see if the benefits justify the cost. It is this freedom to experiment
+that will lead to lasting benefits from SDN in the long run.
