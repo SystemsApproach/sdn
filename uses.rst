@@ -343,7 +343,19 @@ needs. Changes to policy–which might affect many sites–can be input
 centrally and pushed out to all affected sites. An example policy
 would be "put YouTube traffic into the lowest priority traffic class"
 or "allow direct access to a given cloud service from all branch
-offices".
+offices". The idea is illustrated in :numref:`Figure %s <fig-sd-wan>`.
+
+.. _fig-sd-wan:
+.. figure:: figures/Slide43.png
+    :width: 700px
+    :align: center
+
+    An SD-WAN controller receives policies centrally and pushes them
+    out to edge switches at various sites. The switches build an
+    overlay of tunnels over the Internet or other physical networks,
+    and implement policies including allowing direct access to cloud
+    services.  
+
 
 Note that the "private" part of the VPN is generally achieved by the
 creation of encrypted tunnels between locations. This is another
