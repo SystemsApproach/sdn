@@ -100,6 +100,44 @@ prior approaches to network security, dramatically reducing the
 attack surface and the impact of attacks spreading throughout an
 enterprise or data center.
 
+.. sidebar:: Bringing SDN to life
+
+	As we saw in Chapter 1, the ideas behind SDN had been in the
+	works for years, but there were two related events
+	that, looking back, had a significant impact in bringing the
+	concept of programmable networks from theory to practice. First
+	was the 2007 founding of the commercial startup Nicira
+	Networks. Nicira was founded by three of the acknowledged
+	pioneers of SDN: Martin Casado, Scott Shenker, and Nick
+	McKeown. While Nicira was founded to make commercial use of
+	SDN, as with many startups, it took a while to find the ideal
+	product for the marketplace. In the end, it was Network
+	Virtualization that became the industry's first successful
+	application of SDN. Nicira's network virtualization platform
+	first shipped in 2011, establishing the category and
+	ultimately paving the way for VMware's acquisition of the
+	company and subsequent development of VMware NSX.
+
+	At around the same time, McKeown and Shenker also created
+	three non-profit organizations to catalyze the SDN
+	transformation across the networking industry: the Open
+	Networking Foundation (ONF) took on responsibility for
+	advancing the cause of network disaggregation, including
+	development of the OpenFlow standard; the Open Networking
+	Laboratory (ON.Lab) was created to produce open source
+	SDN-based solutions and platforms; and the Open Networking
+	Summit (ONS) was created as a conference platform to bring
+	together academics and practitioners interested in SDN. In
+	2018, ONF and ON.Lab merged, and the combined organization has
+	focused on building the open source software that is
+	highlighted throughout this book.
+
+        Of course there have been many other startups, conferences,
+        and consortia that have driven the development of SDN to where
+        it is today, and the effects of their work can be seen
+        throughout this chapter.
+
+
 It's worth noting that to create virtual networks as we have
 described, it is necessary to encapsulate packets from the virtual
 networks in a way that lets them traverse the underlying physical
