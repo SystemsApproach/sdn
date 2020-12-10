@@ -24,19 +24,19 @@ phase. The most notable exception is Comcast, which has deployed the
 open source components described in this book throughout their
 production network.
 
-Finally, enterprises have begun to adopt SDN, but there are three
-things to note about this situation. One is that pure play SDN is
+Finally, enterprises have begun to adopt SDN, but there are two things
+to note about this situation. One is that while pure play SDN is
 deployed in some Universities, with the goal of supporting research
-and innovation. The second is that the most likely path-to-adoption
-for pure play SDN in enterprises is via managed edge services offered
-by cloud providers. The idea is to connect on-premise clusters running
-edge workloads with public clouds running scalable datacenter
-workloads. The third is that many enterprise vendors offer SDN
-products, where the focus has been more on the benefits of logical
-control plane centralization rather than open interfaces to the data
-plane. Network virtualization and SD-WAN (software-defined wide area
-networks) have both had considerable success in the enterprise, as
-discussed below.  
+and innovation, adoption is slower for enterprises in general. The
+most likely path-to-adoption for pure play SDN by enterprises is via
+managed edge services offered by cloud providers.  The idea is to
+connect on-premise clusters running edge workloads with public clouds
+running scalable datacenter workloads. The second is that many
+enterprise vendors offer SDN products, where the focus has been more
+on the benefits of logical control plane centralization rather than
+open interfaces to the data plane. Network virtualization and SD-WAN
+(software-defined wide area networks) have both had considerable
+success in the enterprise, as discussed below.
 
 2.1 Network Virtualization
 ---------------------------
@@ -55,9 +55,9 @@ policies or higher-level network services like load balancing.
 
 The original idea behind using SDN to create virtual networks is
 widely credited to the team at Nicira, whose approach is described in
-the NSDI paper listed below. The key insight was that modern clouds required
-networks that could be programmatically created, managed, and 
-torn down, without a sysadmin having to manually
+in an NSDI paper by Teemu Koepnen and colleagues. The key insight was
+that modern clouds required networks that could be programmatically
+created, managed, and torn down, without a sysadmin having to manually
 configure, say, VLAN tags on some number of network switches. By
 separating the control plane from the data plane, and logically
 centralizing the control plane, it became possible to expose a single
@@ -67,6 +67,13 @@ were being used to provision compute and storage capacity in a cloud
 (such as OpenStack at the time) could now programmatically provision a
 virtual network with appropriate policies to interconnect those other
 resources.
+
+.. admonition:: Further Reading
+
+   T. Koponen et al. `Network Virtualization in Multi-tenant
+   Datacenters
+   <https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/koponen>`__.
+   NSDI, April, 2014.
 
 The rise of network virtualization followed by several years the rise
 of compute virtualization, and was very much enabled by it. Compute
@@ -80,27 +87,26 @@ As microservices and container-based systems such as Kubernetes have
 gained in popularity, network virtualization has continued to evolve
 to meet the needs of these environments. There are a range of open
 source network "plugins"  (Calico, Flannel, Antrea,
-etc.) that provide network
-virtualization services for Kubernetes. 
+etc.) that provide network virtualization services for Kubernetes. 
 
 Because network virtualization set out to deliver a full set of
 network services in a programmatic way, its impact went beyond the
 simplification and automation of network provisioning. As virtual
-networks became lightweight objects, created and destroyed as needed, with a full set of services (such
-as stateful firewalling, deep-packet inspection, and so on), a new
-approach to network security was enabled. Rather than adding security
-features after the network was created, security features could be
-created as an inherent part of the network itself. Furthermore, with no limit on
-how many virtual networks could be created, as approach known as
-"microsegmentation" took hold. This entails the creation of
-fine-grained, isolated networks (microsegments) specific to the needs
-of, say,  a group of processes implementing a single
-distributed application. Microsegmentation offers clear benefits over
-prior approaches to network security, dramatically reducing the
-attack surface and the impact of attacks spreading throughout an
-enterprise or data center.
+networks became lightweight objects, created and destroyed as needed,
+with a full set of services (such as stateful firewalling, deep-packet
+inspection, and so on), a new approach to network security was
+enabled. Rather than adding security features after the network was
+created, security features could be created as an inherent part of the
+network itself. Furthermore, with no limit on how many virtual
+networks could be created, as approach known as *microsegmentation*
+took hold. This entails the creation of fine-grained, isolated
+networks (microsegments) specific to the needs of, say, a group of
+processes implementing a single distributed application.
+Microsegmentation offers clear benefits over prior approaches to
+network security, dramatically reducing the attack surface and the
+impact of attacks spreading throughout an enterprise or data center.
 
-.. sidebar:: Bringing SDN to life
+.. sidebar:: Bringing SDN to Life
 
 	As we saw in Chapter 1, the ideas behind SDN had been in the
 	works for years, but there were two related events
@@ -151,7 +157,7 @@ known. In recent years, a more flexible encapsulation called GENEVE
 
 There have been reasonable debates about whether network
 virtualization is really SDN. Certainly it displays many of the
-properties we discussed in the previous chapter–the original Nicira
+properties we discussed in the previous chapter—the original Nicira
 network virtualization platform even used OpenFlow to communicate
 between its central controller and the data plane elements. And the
 centralization benefits of SDN are at the core of what made network
@@ -170,18 +176,9 @@ all).\ [#]_ In this book we take a broad view of what SDN is, but at the
 same time we can see that not all the potential benefits of SDN are
 delivered by network virtualization. 
 
-
 .. [#] This observation about different aspects of SDN being
        implemented in switches versus end hosts is an important one
        that we return to in Section 3.1.
-
-.. _reading_nicira:
-.. admonition:: Further Reading
-
-   T. Koponen et al. `Network Virtualization in Multi-tenant
-   Datacenters
-   <https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/koponen>`__.
-   NSDI, April, 2014.
        
 
 2.2 Switching Fabrics
@@ -237,8 +234,8 @@ Chapter 7, where we describe the specifics of the Trellis
 implementation.
 
 
-2.3 Traffic Engineering for Wide-Area Networks
-----------------------------------------------
+2.3 Traffic Engineering for WANs
+--------------------------------
 
 Another cloud-inspired use case is traffic engineering applied to the
 wide-area links between datacenters. For example, Google has publicly
@@ -251,15 +248,15 @@ The idea of traffic engineering for packet-switched networks is almost
 as old as packet switching itself, with some ideas of traffic-aware
 routing having been tried in the Arpanet. However, traffic engineering
 only really became mainstream for the Internet backbone with the
-advent of MPLS, which provides a set of tools to steer traffic
-to balance load across different paths. However, a notable shortcoming
-of MPLS-based TE is that path calculation is, like traditional
-routing, a fully distributed process. Central planning tools are
-common but the real-time management of MPLS paths remains fully
-distributed. This means that it is near impossible to achieve any
-sort of global optimization, as the path calculation algorithms–which
-kick in any time a link changes status, or as traffic loads change–are making local choices about
-what seems best.
+advent of MPLS, which provides a set of tools to steer traffic to
+balance load across different paths. However, a notable shortcoming of
+MPLS-based TE is that path calculation, like traditional routing, is a
+fully distributed process. Central planning tools are common but the
+real-time management of MPLS paths remains fully distributed. This
+means that it is near impossible to achieve any sort of global
+optimization, as the path calculation algorithms–which kick in any
+time a link changes status, or as traffic loads change–are making
+local choices about what seems best.
 
 B4 recognizes this shortcoming and moves the path calculation to a
 logically centralized SDN controller. When a link fails, for example,
@@ -270,17 +267,18 @@ such a way that no link is overloaded.
 Over many years of operation, B4 has become more sophisticated. For
 example, it evolved from treating all traffic equally to supporting a
 range of traffic classes with different levels of tolerance to delay
-and availability requirements. Examples of traffic classes included: (1) copying user data
-(e.g., email, documents, audio/video) to remote datacenters for
-availability; (2) accessing remote storage by computations that run
-over distributed data sources; and (3) pushing large-scale data to
-synchronize state across multiple datacenters. In this example, user-data represents the
-lowest volume on B4, is the most latency sensitive, and is of the
-highest priority. By breaking traffic up into these classes with
-different properties, and running a path calculation algorithm for
-each one, the team was able to considerably improve the efficiency of
-the network, while still meeting the requirements of the most
-demanding applications.
+and availability requirements. Examples of traffic classes
+included: (1) copying user data (e.g., email, documents, audio/video)
+to remote datacenters for availability; (2) accessing remote storage
+by computations that run over distributed data sources; and (3)
+pushing large-scale data to synchronize state across multiple
+datacenters. In this example, user-data represents the lowest volume
+on B4, is the most latency sensitive, and is of the highest
+priority. By breaking traffic up into these classes with different
+properties, and running a path calculation algorithm for each one, the
+team was able to considerably improve the efficiency of the network,
+while still meeting the requirements of the most demanding
+applications.
 
 Through a combination of centralizing the decision-making process,
 programmatically rate-limiting traffic at the senders, and
@@ -304,13 +302,12 @@ insightful about the thought process in adopting SDN.
    ACM Queue, December 2015.
 
 
-
-2.4 Software-Defined Wide-Area Networks (SD-WAN)
-------------------------------------------------
+2.4 Software-Defined WANs
+-------------------------
 
 Another use-case for SDN that has taken off for enterprise users is
-Software-Defined Wide-Area Networks (SD-WAN). Enterprises have for many
-years been buying WAN services from telecommunications companies,
+*Software-Defined Wide-Area Networks (SD-WAN)*. Enterprises have for
+many years been buying WAN services from telecommunications companies,
 mostly to obtain reliable and private network services to interconnect
 their many locations–main offices, branch offices, and corporate data
 centers. For most of the 21st century the most common technical
@@ -319,35 +316,35 @@ known as MPLS-BGP VPNs (virtual private networks). The rapid rise of
 SD-WAN as an alternative to MPLS is another example of the power of
 centralized control.
 
-Provisioning a VPN using MPLS, while less complex than most earlier options,
-still requires some significant local configuration of both the
-Customer Edge (CE) router located at each customer site, and the
-Provider Edge (PE)
-router to which that site would be connected. In addition, it would
-typically require the provisioning of a circuit from the customer site
-to the nearest point of presence for the appropriate Telco.
+Provisioning a VPN using MPLS, while less complex than most earlier
+options, still requires some significant local configuration of both
+the Customer Edge (CE) router located at each customer site, and the
+Provider Edge (PE) router to which that site would be connected. In
+addition, it would typically require the provisioning of a circuit
+from the customer site to the nearest point of presence for the
+appropriate Telco.
 
 With SD-WAN, there was a realization that VPNs lend themselves to
-centralized configuration. An enterprise wants its sites–and only its
-authorized sites–to be
-interconnected, and it typically wants to apply a set of policies regarding
-security, traffic prioritization, access to shared services and so
-on. These can be input to a central controller, which can then push
-out all the necessary configuration to a switch located at the
-appropriate office. Rather than manually configuring a CE and a PE
-every time a new site is added, it is possible to achieve "zero-touch"
-provisioning: an appliance is shipped to the new site with nothing
-more than a certificate and an address to contact, which it then uses
-to contact the central controller and obtain all the configuration it
-needs. Changes to policy–which might affect many sites–can be input
-centrally and pushed out to all affected sites. An example policy
-would be "put YouTube traffic into the lowest priority traffic class"
-or "allow direct access to a given cloud service from all branch
-offices". The idea is illustrated in :numref:`Figure %s <fig-sd-wan>`.
+centralized configuration. An enterprise wants its sites—and only its
+authorized sites—to be interconnected, and it typically wants to apply
+a set of policies regarding security, traffic prioritization, access
+to shared services and so on. These can be input to a central
+controller, which can then push out all the necessary configuration to
+a switch located at the appropriate office. Rather than manually
+configuring a CE and a PE every time a new site is added, it is
+possible to achieve "zero-touch" provisioning: an appliance is shipped
+to the new site with nothing more than a certificate and an address to
+contact, which it then uses to contact the central controller and
+obtain all the configuration it needs. Changes to policy, which might
+affect many sites, can be input centrally and pushed out to all
+affected sites. An example policy would be *"put YouTube traffic into
+the lowest priority traffic class"* or *"allow direct access to a given
+cloud service from all branch offices"*. The idea is illustrated in
+:numref:`Figure %s <fig-sd-wan>`.
 
 .. _fig-sd-wan:
 .. figure:: figures/Slide43.png
-    :width: 700px
+    :width: 600px
     :align: center
 
     An SD-WAN controller receives policies centrally and pushes them
