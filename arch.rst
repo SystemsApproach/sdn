@@ -195,21 +195,20 @@ the forwarding behavior (the switch), and the other *controls* the
 forwarding behavior (the Network OS).
 
 We return to the details of the compiler toolchain in Chapter 4. For
-now, we will just address the question of why we need a P4 program in the
-case of a fixed-function switching chip (since we are obviously not
-using P4 to modify its fixed behavior). The quick summary is that
-a formal specification of the forwarding pipeline is required to
-generate the API to the data plane.
-P4 programs are written to an abstract model of the forwarding
-pipeline, and whether the chip’s actual hardware pipeline is fixed or
-programmable, we still need to know how to map the abstract pipeline
-onto the physical pipeline. This is where ``arch.p4`` plays a role. As
-for the role of ``forward.p4``, this program actually *prescribes* the
-pipeline in the case of a programmable chip, whereas for the
-fixed-function chip, ``forward.p4`` merely *describes* the
-pipeline. But we still need ``forward.p4`` in both cases because the
-toolchain uses it, along with ``arch.p4``, to generate the API that sits between the control
-and data planes.
+now, we will just address the question of why we need a P4 program in
+the case of a fixed-function switching chip (since we are not using P4
+to modify its fixed behavior). The quick summary is that a formal
+specification of the forwarding pipeline is required to generate the
+API to the data plane.  P4 programs are written to an abstract model
+of the forwarding pipeline, and whether the chip’s actual hardware
+pipeline is fixed or programmable, we still need to know how to map
+the abstract pipeline onto the physical pipeline. This is where
+``arch.p4`` plays a role. As for the role of ``forward.p4``, this
+program actually *prescribes* the pipeline in the case of a
+programmable chip, whereas for the fixed-function chip, ``forward.p4``
+merely *describes* the pipeline. But we still need ``forward.p4`` in
+both cases because the toolchain uses it, along with ``arch.p4``, to
+generate the API that sits between the control and data planes.
 
 3.3 Switch OS
 -------------------
@@ -377,9 +376,8 @@ legacy protocol is involved is when Trellis needs to communicate with
 the outside world (e.g., upstream metro/core routers), in which case
 it uses standard BGP (as implemented by the open source Quagga
 server). This is actually a common feature of SDN environments: they
-can avoid traditional routing protocols internally, or in a
-greenfield, but interaction
-with the outside world still requires them. 
+avoid traditional routing protocols internally, or in a greenfield,
+but interaction with the outside world still requires them.
 
 .. _fig-trellis:
 .. figure:: figures/Slide9.png
