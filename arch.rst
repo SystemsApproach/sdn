@@ -2,8 +2,9 @@ Chapter 3:  Basic Architecture
 ===============================
 
 SDN is an approach to building networks that favors programmable
-commodity hardware, with the intelligence that forwards packets—as
-well as controls packet forwarding—implemented in software. Realizing
+commodity hardware, with the intelligence that controls packet
+forwarding and other network operations implemented in software.
+Realizing
 such a design is independent of any particular protocol stack, but
 instead requires a set of open APIs and a new collection of software
 components that support those APIs. This chapter introduces the basic
@@ -36,17 +37,18 @@ later chapters giving more detail.
 	on **O**\NOS running on **S**\tratum running on **T**\ofino.
 
 Note the similarity between this diagram and :numref:`Figure %s
-<fig-market2>` in Chapter 1, both of which include two open
+<fig-market2>` in Chapter 1. Both figures include two open
 interfaces: one between the Control Apps and the Network OS, and a
 second between the Network OS and the underlying white-box
 switches. These two interfaces are depicted as “API shims” in
 :numref:`Figure %s <fig-stack>`, and in the context of the exemplar
 components, correspond to a combination of *gNMI*, *gNOI* and
 *FlowObjective* in the first case, and a combination of *gNMI*, *gNOI*
-and either *P4Runtime* or *OpenFlow* in the second case. That gRPC is
-shown as the transport protocol for these two APIs is an
-implementation choice, but one that we will take for granted from here
-on.
+and either *P4Runtime* or *OpenFlow* in the second case.  gRPC is
+shown as the transport protocol for these APIs—an implementation
+choice, but one that we will generally assume from here 
+on. (Note that OpenFlow, unlike the other protocols, does not run over gRPC.)
+
 
 .. _fig-stack:
 .. figure:: figures/Slide8.png
@@ -99,11 +101,13 @@ per-switch.
 
 The second is that part of the SDN software stack runs on the end
 hosts. In particular, there is a *Virtual Switch (vSwitch)*—typically
-implemented in software as part of the Virtual Machine Hypervisor
+implemented in software as part of the hypervisor 
 running on the server—that is responsible for forwarding packets to
-and from the VMs running on that server. Just like a physical switch,
+and from the VMs. (Of course, not every end-host runs VMs, but a
+similar architecture applies to containers hosts or bare-metal servers).
+Just like a physical switch,
 the vSwitch forwards packets from input port to output port, but these
-are virtual ports connected to VMs rather than physical ports
+are virtual ports connected to VMs (or containers) rather than physical ports
 connected to physical machines.
 
 Fortunately, we can view a vSwitch as behaving just like a physical
@@ -112,14 +116,15 @@ in software on a general-purpose processor rather than in an ASIC is
 an implementation detail. While this is a true statement, being a
 software switch dramatically lowers the barrier to introducing
 additional features, so the feature set is both richer and more
-dynamic. For example, *Open vSwitch (OvS)* is a widely-used open
-source vSwitch that has been integrated with an assortment of
-complementary tools. One example is DPDK, another open source
-component that optimizes the path from network device to/from
-processes running in user space on the host OS. Although it’s an
+dynamic. For example, *Open vSwitch (OVS)* is a widely-used open
+source vSwitch that supports OpenFlow as a northbound API. It formed
+the data plane for the original Nicira network virtualization
+platform. OVS has been integrated with an assortment of
+complementary tools, such as DPDK (Data Plane Development Kit), another open source
+component that optimizes packet forwarding operations on x86 processors. Although it’s an
 important topic, this book does not explore the full range of
-possibilities for a vSwitch like OvS or other end-host optimizations,
-but instead treats it just like any other switch along the end-to-end
+possibilities for a vSwitch like OVS or other end-host optimizations,
+but instead treats vSwitches just like any other switch along the end-to-end
 path.
 
 Another implementation detail shown in :numref:`Figure %s <fig-e2e>`
@@ -189,9 +194,12 @@ both components need to know about the output because one *implements*
 the forwarding behavior (the switch), and the other *controls* the
 forwarding behavior (the Network OS).
 
-We return to the details of the compiler toolchain in Chapter 4, which
-includes answering the question of why we need a P4 program in the
-case of a fixed-function switching chip. To preview that discussion,
+We return to the details of the compiler toolchain in Chapter 4. For
+now, we will just address the question of why we need a P4 program in the
+case of a fixed-function switching chip (since we are obviously not
+using P4 to modify its fixed behavior). The quick summary is that
+a formal specification of the forwarding pipeline is required to
+generate the API to the data plane.
 P4 programs are written to an abstract model of the forwarding
 pipeline, and whether the chip’s actual hardware pipeline is fixed or
 programmable, we still need to know how to map the abstract pipeline
@@ -200,7 +208,7 @@ for the role of ``forward.p4``, this program actually *prescribes* the
 pipeline in the case of a programmable chip, whereas for the
 fixed-function chip, ``forward.p4`` merely *describes* the
 pipeline. But we still need ``forward.p4`` in both cases because the
-toolchain uses it to generate the API that sits between the control
+toolchain uses it, along with ``arch.p4``, to generate the API that sits between the control
 and data planes.
 
 3.3 Switch OS
@@ -219,7 +227,7 @@ Multiple open source Switch OSes are available (including SONiC,
 originally developed at Microsoft Azure), but we use a combination of
 Stratum and *Open Network Linux (ONL)* as our primary example. ONL is
 a switch-ready distribution of Linux (originally prepared by
-BigSwitch), while Stratum (originally developed at Google) is
+Big Switch Networks), while Stratum (originally developed at Google) is
 primarily responsible for translating between the external-facing API
 and the internal switch resources. For this reason, we sometimes refer
 to Stratum as a *Thin Switch OS*.
@@ -233,8 +241,11 @@ Stratum-managed API is defined as follows:
 
 * **P4Runtime:** An interface for controlling forwarding behavior at
   runtime. It is the key for populating forwarding tables and
-  manipulating forwarding state, and it does so in a P4 program and
-  hardware agnostic way. (For completeness, :numref:`Figure %s
+  manipulating forwarding state. The P4Runtime is independent of any
+  particular P4 program and agnostic to the underlying hardware. This
+  contrasts to OpenFlow which is rather prescriptive about the
+  forwarding model and how the control plane interacts with it.
+  (For completeness, :numref:`Figure %s
   <fig-stack>` also lists OpenFlow as an alternative control interface.)
   
 * **gNMI (gRPC Network Management Interface):** Used to set and
@@ -253,7 +264,8 @@ Control API and the gNMI/gNOI combination as a modern version of a
 switch’s traditional Configuration API. This latter API has
 historically been called the OAM interface (for “Operations,
 Administration, and Maintenance”), and it has most often been
-implemented as a command-line interface.
+implemented as a command-line interface (which is of course not really
+an API).
 
 3.4 Network OS
 -------------------
@@ -286,9 +298,9 @@ things:
   configuration and operation interfaces (also using gNMI and gNOI),
   but does so at the network level rather than the device level.
   
-* **Controlling Switches:** Allows shaping the data plane packet
-  processing pipelines of the network switches and subsequent control
-  of flow rules, group, meters and other building blocks within those
+* **Controlling Switches:** Controls the data plane packet
+  processing pipelines of the network switches and provides subsequent control
+  of flow rules, groups, meters and other building blocks within those
   pipelines.
   
 With respect to this last role, ONOS exports a northbound
@@ -296,7 +308,7 @@ With respect to this last role, ONOS exports a northbound
 pipeline-independent way.\ [#]_ This interface, which Chapter 6
 describes in more detail, is not standardized in the same way as the
 control interface exported by individual switches. As with a
-conventional OS running on a server, applications written to the ONOS
+conventional server OS, applications written to the ONOS
 API do not easily port to another Network OS. The requirement is that
 this interface be open and well-defined; not that there be just one
 such interface. If over time there is consensus about the Network OS
@@ -364,7 +376,10 @@ implementations found in legacy routers and switches. The only time a
 legacy protocol is involved is when Trellis needs to communicate with
 the outside world (e.g., upstream metro/core routers), in which case
 it uses standard BGP (as implemented by the open source Quagga
-server).
+server). This is actually a common feature of SDN environments: they
+can avoid traditional routing protocols internally, or in a
+greenfield, but interaction
+with the outside world still requires them. 
 
 .. _fig-trellis:
 .. figure:: figures/Slide9.png
