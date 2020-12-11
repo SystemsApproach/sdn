@@ -541,10 +541,18 @@ causes of network failures. For example, INT can be used to measure
 and record queuing delay individual packets experience while
 traversing a sequence of switches along an end-to-end path, with a
 packet like the one shown in the figure reporting: *"I visited Switch
-1 @780ns, Switch 2 @1.3µs, Switch 5 @2.4µs."* By correlating this
-information across packet flows that may have followed different
-routes, it is even possible to determine which flows shared buffer
-capacity at each switch.
+1 @780ns, Switch 2 @1.3µs, Switch 5 @2.4µs."* This information can be
+used, for example, to detect *microbursts*—queuing delays measured
+over millisecond or even sub-millisecond time scales—as reported by
+Xiaoqi Chen and colleagues.  It is even possible to correlate this
+information across packet flows that followed different routes, so as
+to to determine which flows shared buffer capacity at each switch.
+
+.. _reading_int:
+.. admonition:: Further Reading
+
+   X. Chen, et. al. `Fine-grained queue measurement in the data plane
+   <https://p4.org/p4/conquest>`__. ACM CoNEXT'19, December 2019.
 
 Similarly, packets can report the decision making process that
 directed their delivery, for example, with something like: *"In Switch
@@ -554,9 +562,10 @@ is faithfully executing the forwarding behavior the network operator
 intended. We return to the potential of INT to impact how we build and
 operate networks in the concluding chapter of this book.
 
-This example illustrates once again a potential benefit of SDN: the
+This use case illustrates once again a potential benefit of SDN: the
 ability to try out new ideas that would have in the past been
 infeasible. With traditional fixed-function ASICs doing the packet
 forwarding, you could never get the chance to try an idea like INT to
 see if the benefits justify the cost. It is this freedom to experiment
-that will lead to lasting benefits from SDN in the long run.
+and innovate that will lead to lasting benefits from SDN in the long
+run.
