@@ -2,8 +2,9 @@ Chapter 3:  Basic Architecture
 ===============================
 
 SDN is an approach to building networks that favors programmable
-commodity hardware, with the intelligence that forwards packets—as
-well as controls packet forwarding—implemented in software. Realizing
+commodity hardware, with the intelligence that controls packet
+forwarding and other network operations implemented in software.
+Realizing
 such a design is independent of any particular protocol stack, but
 instead requires a set of open APIs and a new collection of software
 components that support those APIs. This chapter introduces the basic
@@ -36,17 +37,18 @@ later chapters giving more detail.
 	on **O**\NOS running on **S**\tratum running on **T**\ofino.
 
 Note the similarity between this diagram and :numref:`Figure %s
-<fig-market2>` in Chapter 1, both of which include two open
+<fig-market2>` in Chapter 1. Both figures include two open
 interfaces: one between the Control Apps and the Network OS, and a
 second between the Network OS and the underlying white-box
 switches. These two interfaces are depicted as “API shims” in
 :numref:`Figure %s <fig-stack>`, and in the context of the exemplar
 components, correspond to a combination of *gNMI*, *gNOI* and
 *FlowObjective* in the first case, and a combination of *gNMI*, *gNOI*
-and either *P4Runtime* or *OpenFlow* in the second case. That gRPC is
-shown as the transport protocol for these two APIs is an
-implementation choice, but one that we will take for granted from here
-on.
+and either *P4Runtime* or *OpenFlow* in the second case.  gRPC is
+shown as the transport protocol for these APIs—an implementation
+choice, but one that we will generally assume from here 
+on. (Note that OpenFlow, unlike the other protocols, does not run over gRPC.)
+
 
 .. _fig-stack:
 .. figure:: figures/Slide8.png
@@ -99,11 +101,13 @@ per-switch.
 
 The second is that part of the SDN software stack runs on the end
 hosts. In particular, there is a *Virtual Switch (vSwitch)*—typically
-implemented in software as part of the Virtual Machine Hypervisor
+implemented in software as part of the hypervisor 
 running on the server—that is responsible for forwarding packets to
-and from the VMs running on that server. Just like a physical switch,
+and from the VMs. (Of course, not every end-host runs VMs, but a
+similar architecture applies to containers hosts or bare-metal servers).
+Just like a physical switch,
 the vSwitch forwards packets from input port to output port, but these
-are virtual ports connected to VMs rather than physical ports
+are virtual ports connected to VMs (or containers) rather than physical ports
 connected to physical machines.
 
 Fortunately, we can view a vSwitch as behaving just like a physical
@@ -112,14 +116,15 @@ in software on a general-purpose processor rather than in an ASIC is
 an implementation detail. While this is a true statement, being a
 software switch dramatically lowers the barrier to introducing
 additional features, so the feature set is both richer and more
-dynamic. For example, *Open vSwitch (OvS)* is a widely-used open
-source vSwitch that has been integrated with an assortment of
-complementary tools. One example is DPDK, another open source
-component that optimizes the path from network device to/from
-processes running in user space on the host OS. Although it’s an
+dynamic. For example, *Open vSwitch (OVS)* is a widely-used open
+source vSwitch that supports OpenFlow as a northbound API. It formed
+the data plane for the original Nicira network virtualization
+platform. OVS has been integrated with an assortment of
+complementary tools, such as DPDK (Data Plane Development Kit), another open source
+component that optimizes packet forwarding operations on x86 processors. Although it’s an
 important topic, this book does not explore the full range of
-possibilities for a vSwitch like OvS or other end-host optimizations,
-but instead treats it just like any other switch along the end-to-end
+possibilities for a vSwitch like OVS or other end-host optimizations,
+but instead treats vSwitches just like any other switch along the end-to-end
 path.
 
 Another implementation detail shown in :numref:`Figure %s <fig-e2e>`
