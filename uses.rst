@@ -55,7 +55,7 @@ policies or higher-level network services like load balancing.
 
 The original idea behind using SDN to create virtual networks is
 widely credited to the team at Nicira, whose approach is described in
-in an NSDI paper by Teemu Koepnen and colleagues. The key insight was
+in an NSDI paper by Teemu Koponen and colleagues. The key insight was
 that modern clouds required networks that could be programmatically
 created, managed, and torn down, without a sysadmin having to manually
 configure, say, VLAN tags on some number of network switches. By
