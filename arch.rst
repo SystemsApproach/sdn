@@ -194,9 +194,12 @@ both components need to know about the output because one *implements*
 the forwarding behavior (the switch), and the other *controls* the
 forwarding behavior (the Network OS).
 
-We return to the details of the compiler toolchain in Chapter 4, which
-includes answering the question of why we need a P4 program in the
-case of a fixed-function switching chip. To preview that discussion,
+We return to the details of the compiler toolchain in Chapter 4. For
+now, we will just address the question of why we need a P4 program in the
+case of a fixed-function switching chip (since we are obviously not
+using P4 to modify its fixed behavior). The quick summary is that
+a formal specification of the forwarding pipeline is required to
+generate the API to the data plane.
 P4 programs are written to an abstract model of the forwarding
 pipeline, and whether the chip’s actual hardware pipeline is fixed or
 programmable, we still need to know how to map the abstract pipeline
@@ -205,7 +208,7 @@ for the role of ``forward.p4``, this program actually *prescribes* the
 pipeline in the case of a programmable chip, whereas for the
 fixed-function chip, ``forward.p4`` merely *describes* the
 pipeline. But we still need ``forward.p4`` in both cases because the
-toolchain uses it to generate the API that sits between the control
+toolchain uses it, along with ``arch.p4``, to generate the API that sits between the control
 and data planes.
 
 3.3 Switch OS
@@ -224,7 +227,7 @@ Multiple open source Switch OSes are available (including SONiC,
 originally developed at Microsoft Azure), but we use a combination of
 Stratum and *Open Network Linux (ONL)* as our primary example. ONL is
 a switch-ready distribution of Linux (originally prepared by
-BigSwitch), while Stratum (originally developed at Google) is
+Big Switch Networks), while Stratum (originally developed at Google) is
 primarily responsible for translating between the external-facing API
 and the internal switch resources. For this reason, we sometimes refer
 to Stratum as a *Thin Switch OS*.
@@ -238,8 +241,11 @@ Stratum-managed API is defined as follows:
 
 * **P4Runtime:** An interface for controlling forwarding behavior at
   runtime. It is the key for populating forwarding tables and
-  manipulating forwarding state, and it does so in a P4 program and
-  hardware agnostic way. (For completeness, :numref:`Figure %s
+  manipulating forwarding state. The P4Runtime is independent of any
+  particular P4 program and agnostic to the underlying hardware. This
+  contrasts to OpenFlow which is rather prescriptive about the
+  forwarding model and how the control plane interacts with it.
+  (For completeness, :numref:`Figure %s
   <fig-stack>` also lists OpenFlow as an alternative control interface.)
   
 * **gNMI (gRPC Network Management Interface):** Used to set and
@@ -258,7 +264,8 @@ Control API and the gNMI/gNOI combination as a modern version of a
 switch’s traditional Configuration API. This latter API has
 historically been called the OAM interface (for “Operations,
 Administration, and Maintenance”), and it has most often been
-implemented as a command-line interface.
+implemented as a command-line interface (which is of course not really
+an API).
 
 3.4 Network OS
 -------------------
@@ -291,9 +298,9 @@ things:
   configuration and operation interfaces (also using gNMI and gNOI),
   but does so at the network level rather than the device level.
   
-* **Controlling Switches:** Allows shaping the data plane packet
-  processing pipelines of the network switches and subsequent control
-  of flow rules, group, meters and other building blocks within those
+* **Controlling Switches:** Controls the data plane packet
+  processing pipelines of the network switches and provides subsequent control
+  of flow rules, groups, meters and other building blocks within those
   pipelines.
   
 With respect to this last role, ONOS exports a northbound
@@ -301,7 +308,7 @@ With respect to this last role, ONOS exports a northbound
 pipeline-independent way.\ [#]_ This interface, which Chapter 6
 describes in more detail, is not standardized in the same way as the
 control interface exported by individual switches. As with a
-conventional OS running on a server, applications written to the ONOS
+conventional server OS, applications written to the ONOS
 API do not easily port to another Network OS. The requirement is that
 this interface be open and well-defined; not that there be just one
 such interface. If over time there is consensus about the Network OS
@@ -369,7 +376,10 @@ implementations found in legacy routers and switches. The only time a
 legacy protocol is involved is when Trellis needs to communicate with
 the outside world (e.g., upstream metro/core routers), in which case
 it uses standard BGP (as implemented by the open source Quagga
-server).
+server). This is actually a common feature of SDN environments: they
+can avoid traditional routing protocols internally, or in a
+greenfield, but interaction
+with the outside world still requires them. 
 
 .. _fig-trellis:
 .. figure:: figures/Slide9.png
