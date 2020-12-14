@@ -4,13 +4,14 @@ Chapter 4:  White-Box Switches
 This chapter describes the white-box switches that provide the
 underlying hardware foundation for SDN. Our goal is not to give a
 detailed hardware schematic, but rather, to sketch enough of the
-design to appreciate the software stack that runs on top of it. Also,
-because we ultimately want to be vendor agnostic, this chapter
+design to appreciate the software stack that runs on top of it. Note
+that this stack is still evolving, with different implementation
+approaches taken over time and by different vendors. Hence, this chapter
 discusses both P4 as a language-based approach to programming the
 switch’s data plane, and OpenFlow as the first-generation alternative.
-(It is helpful to keep in mind that we introduce these two approaches
-in reverse chronological order, starting with the more general
-programmable case.)
+We will introduce these two approaches
+in reverse-chronological order, starting with the more general,
+programmable case of P4.
 
 4.1 Switch-Level Schematic
 ----------------------------------
@@ -42,14 +43,17 @@ figure. As of this writing, the state-of-the-art for these chips is
 
     High-Level schematic of a white-box switch. 
 
-Note that our use of the term NPU is a bit non-standard. Historically,
+Note that our use of the term NPU might be considered a bit non-standard. Historically,
 NPU was the name given to more narrowly-defined network processing
 chips used, for example, to implement intelligent firewalls or deep
 packet inspection. They were not as general-purpose as the NPUs we are
-discussing in this chapter, nor were they as high-performance. It
-seems likely that the current merchant silicon switching chips will
-make purpose-built network processors obsolete, but in any case, we
-prefer the NPU nomenclature because it is consistent with the
+discussing in this chapter, nor were they as high-performance. The
+long-term trend, however, has been toward NPUs that match the
+performance of
+fixed-function ASICs while providing a much higher degree of flexibility. 
+It seems likely that the current merchant silicon switching chips will
+make the earlier generation of purpose-built network processors
+obsolete. The NPU nomenclature used here is consistent with the
 industry-wide trend to build programmable domain-specific processors,
 including GPUs (Graphic Processing Units) for graphics and TPUs
 (Tensor Processing Units) for AI.
@@ -178,10 +182,10 @@ filter rules). This is an example of the OpenFlow pipeline shown in
 
 In addition to translating the high-level representation of the
 pipeline onto the underlying PISA stages, the P4 compiler is also
-responsible for allocating the available PISA resources, in this case,
-slots (rows) for the available Match-Action Units (of which
-:numref:`Figure %s <fig-pisa2>` shows four, just as in :numref:`Figure
-%s <fig-pisa1>`). Allocating slots in the available Match-Action units
+responsible for allocating the available PISA resources.  In this
+case, there are four
+slots (rows) for the available Match-Action Units just as in :numref:`Figure
+%s <fig-pisa1>`. Allocating slots in the available Match-Action units
 is the P4/PISA counterpart of register allocation for a conventional
 programming language running on a general-purpose microprocessor. In
 our example, we assume there are many more IPv4 Match-Action rules
@@ -230,7 +234,7 @@ program, resulting in the situation shown in :numref:`Figure %s
 <fig-psa>`. Notice that we are revisiting the two P4 programs
 introduced in :numref:`Figure %s <fig-stack>`. The first program
 (``forward.p4``) defines the functionality we want from the available
-switching chip. This program is written by the developers that want to
+switching chip. This program is written by the developers who want to
 establish the behavior of the data plane. The second program
 (``arch.p4``) is essentially a header file: it represents a contract
 between the P4 program and the P4 compiler. Specifically, ``arch.p4``
@@ -238,7 +242,7 @@ defines what P4-programmable blocks are available, the interface for
 each stage, and the capability for each stage. Who is responsible for
 writing such an architecture program? The P4 Consortium is one source
 of such a definition, but different switch vendors have created their
-own architectures to closely describe the capabilities of their
+own architecture specifications to closely describe the capabilities of their
 switching chips. This makes sense because there is a tension between
 having a single common architecture that enables executing the same P4
 program on different ASICs from different vendors, and having an
@@ -281,9 +285,9 @@ What exactly does ``arch.p4`` define? Essentially three things:
 1. As implied by :numref:`Figure %s <fig-psa>`, it defines the
    inter-block interface signatures in terms of input and output
    signals (think “function parameters and return type”). The goal of
-   a P4 programmer is that of providing an implementation for each
+   a P4 programmer to provide an implementation for each
    P4-programmable block that takes the provided input signals, such
-   as the input port where a packet was received from, and writes to
+   as the input port where a packet was received, and writes to
    the output signals to influence the behavior of the following
    blocks (e.g., the output queue/port where a packet has to be
    directed).
@@ -497,7 +501,11 @@ that forwards packets in the data plane, exposing that programmability
 to developers is the ultimate goal. If you have an innovative new
 function you want to inject into the network, you write both the
 control plane and data plane halves of that function, and turn the
-crank on the toolchain to load them into the SDN software stack!
+crank on the toolchain to load them into the SDN software stack! This
+is a significant step forward from a few years ago, where you might
+have been able to modify a routing protocol (because it was all in
+software) but you had no chance to change the forwarding pipeline
+because it was all in fixed-function hardware.
 
 .. sidebar:: Is the Complexity Worth It?
 
@@ -527,7 +535,7 @@ crank on the toolchain to load them into the SDN software stack!
 	killer-apps. But history teaches us that killer-apps are
 	impossible to predict with any accuracy. On the other hand,
 	history also includes *many* examples of how opening
-	closed/fixed-function systems leads to qualitatively new
+	closed, fixed-function systems leads to qualitatively new
 	capabilities.
 
 4.4 P4 Programs
@@ -923,11 +931,11 @@ agent sits on top of OF-DPA (it implements the over-the-wire aspects
 of the OpenFlow protocol) and the Broadcom SDK sits below OF-DPA (it
 implements the proprietary interface that knows about the low-level
 chip details), but OF-DPA is the layer that provides an abstract
-representation of the Tomahawk’s fixed forwarding
+representation of the Tomahawk ASIC’s fixed forwarding
 pipeline. :numref:`Figure %s <fig-ofdpa1>` shows the resulting
 software stack, where OF-Agent and OF-DPA are open source (the
 OF-Agent corresponds to a software module called Indigo, originally
-written by BigSwitch), whereas the Broadcom SDK is
+written by Big Switch), whereas the Broadcom SDK is
 proprietary. :numref:`Figure %s <fig-ofdpa2>` then depicts what the
 OF-DPA pipeline looks like.
 
