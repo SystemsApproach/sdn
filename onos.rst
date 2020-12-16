@@ -149,7 +149,7 @@ services are designed—it scales across a distributed set of servers,
 and implements a consensus algorithm to achieve fault-tolerance
 in the event of failures. The specific algorithm used in ONOS is Raft,
 which is well described in a paper by Diego
-Ongaro and John Ousterhoust. The web site also provides
+Ongaro and John Ousterhout. The web site also provides
 a helpful visualization tool.
 
 .. _reading_p4:
