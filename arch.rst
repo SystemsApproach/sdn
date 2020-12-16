@@ -25,7 +25,7 @@ running today in production networks.
 -------------------
 
 An overview of the software stack is given in :numref:`Figure %s
-<fig-stack>`, which includes a *White-Box Switch* running a local
+<fig-stack>`, which includes a *Bare-Metal Switch* running a local
 *Switch OS*, controlled by a global Network OS hosting a collection of
 *Control Applications*. :numref:`Figure %s <fig-stack>` also calls out
 a corresponding set of exemplar open source components (*Trellis*,
@@ -39,7 +39,7 @@ later chapters giving more detail.
 Note the similarity between this diagram and :numref:`Figure %s
 <fig-market2>` in Chapter 1. Both figures include two open
 interfaces: one between the Control Apps and the Network OS, and a
-second between the Network OS and the underlying white-box
+second between the Network OS and the underlying programmable
 switches. These two interfaces are depicted as “API shims” in
 :numref:`Figure %s <fig-stack>`, and in the context of the exemplar
 components, correspond to a combination of *gNMI*, *gNOI* and
@@ -164,13 +164,13 @@ another switching element along the end-to-end path.
 	opportunity discussed in Chapter 8.
 	
 
-3.2 White-Box Switch
+3.2 Bare-Metal Switch
 -------------------------
 
 Starting at the bottom and working our way up the stack shown in
 :numref:`Figures %s <fig-stack>` and :numref:`%s <fig-e2e>`, the
 network data plane is implemented by an interconnected set of
-white-box switches. Our focus for now is on a single switch, where the
+bare-metal switches. Our focus for now is on a single switch, where the
 overall network topology is dictated by the Control Applications
 running at the top of the software stack. For example, we describe a
 Control Application that manages a leaf-spine topology in a later
@@ -270,7 +270,7 @@ an API).
 -------------------
 
 The Network OS is a platform for configuring and controlling a network
-of white-box switches. It runs off-switch as a logically centralized
+of switches. It runs off-switch as a logically centralized
 SDN controller, and manages a set of switches on a network-wide
 basis. Central to this role is responsibility for monitoring the state
 of those switches (e.g., detecting port and link failures),
@@ -338,7 +338,7 @@ in more detail.
 Because we use ONOS as the Network OS, we are limited to ONOS-hosted
 SDN Control Applications. For illustrative purposes, we use Trellis as
 that Control App. Trellis implements a *leaf-spine* fabric on a
-network of white-box switches. This means Trellis dictates a
+network of programmable switches. This means Trellis dictates a
 particular network topology: a leaf-spine topology common to
 datacenter clusters. As outlined in Section 2.3, this topology
 includes a set of leaf switches, each of which serves as a Top-of-Rack
