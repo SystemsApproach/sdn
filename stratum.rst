@@ -1,9 +1,10 @@
 Chapter 5:  Switch OS
 ======================
 
-This chapter describes the operating system running on every white-box
-switch, where equating a bare-metal switch with a bare-metal server is
-a good mental model: It has a general-purpose processor running a
+This chapter describes the operating system running on every bare-metal
+switch. 
+A good mental model is to think of this as analogous to a server OS:
+there is a general-purpose processor running a
 Linux-based OS, plus a “packet forwarding accelerator” similar in
 spirit to a GPU.
 
@@ -31,7 +32,7 @@ majority of this chapter focuses on those APIs.
 
 This section describes the set of components that implement an
 SDN-ready Northbound Interface for the Switch OS running on a
-white-box switch. The details are drawn from Stratum, an open source
+bare-metal switch. The details are drawn from Stratum, an open source
 project at the ONF that started with production-quality code made
 available by Google. :numref:`Figure %s <fig-stratum>` gives a
 high-level overview of Stratum, and to re-emphasize, it’s the exposed
@@ -90,7 +91,7 @@ chip. You can think of these SDKs as similar to device drivers in a
 traditional OS: they are used to indirectly read and write memory
 locations on the corresponding chip. The second is the *ONL Platform
 (ONLP)*, which exports the Platform API shown in :numref:`Figure %s
-<fig-stratum>`. This API provides access hardware counters, monitors,
+<fig-stratum>`. This API provides access to hardware counters, monitors,
 status variables, and so on.
 
 As a simple example, which helps illustrate the fundamental difference
@@ -107,8 +108,10 @@ from above are directly passed through to the Barefoot SDK. In the
 case of a fixed-function chip like Tomahawk, Stratum maintains the
 runtime state it needs to translate the P4Runtime calls into their
 Broadcom SDK counterpart. To a first approximation, this implies
-mapping P4Runtime calls to update table entries in a program like
-``switch.p4`` (Section 4.5.1) into Broadcom SDK calls to update
+mapping P4Runtime calls
+``switch.p4`` (Section 4.5.1) into Broadcom SDK calls. For example, a
+P4Runtime call to update table entries in a program like ``switch.p4``
+(Section 4.5.1) would be mapped into a Broadcom SDK call to update
 entries in one of the ASIC tables.
 
 5.2 P4Runtime
@@ -242,18 +245,20 @@ toolchain must be aware of which P4 language elements are
 controllable, and hence, available to be “exposed” by
 ``p4runtime.proto``. Such information is contained in
 ``forward.p4info``, which specifies exactly the set of controllable
-elements and their attributes as defined in the source P4 program. (In
-principle, there is no need to create such P4Info file, as the
-controller and switch can use the source P4 program to derive all the
-information they need to handle P4Rutime methods. However, P4Info
-makes that much easier by extracting the relevant information from the
-P4 program and providing them in a more structured protobuf-defined
-format, which is straightforward to parse by using a protobuf
-library.) The table element is one obvious example, but there are
+elements and their attributes as defined in the source P4 program
+[#]_.
+The table element is one obvious example, but there are
 others, including ``counters`` and ``meters``, which are used to
 report status information up to the controller and to allow the
 controller to specify a QoS rate, respectively, but neither are
 included in our example program.
+
+.. [#] In principle, this P4Info file is not strictly required, as the
+       controller and switch could use the source P4 program to derive all
+       the information they need to handle P4Runtime methods. However, P4Info
+       makes that much easier by extracting the relevant information from the
+       P4 program and providing them in a more structured protobuf-defined
+       format, which is straightforward to parse by using a protobuf library.
 
 Finally, a controller actually writes an entry to this table. While in
 general this controller would run on top of ONOS, and so indirectly
@@ -342,28 +347,29 @@ for network devices.
 
 For completeness, note that NETCONF is another of the post-SNMP
 protocols for communicating configuration information to network
-devices. OpenConfig also works with NETCONF, but our reading of the
-tea leaves points to gNMI as the future transport protocol, and so it
+devices. OpenConfig also works with NETCONF, but our current
+assessment is that gNMI has the weight of industry behind it as the
+future management protocol. For this reason, it
 is the one we highlight in our description of the full SDN software
 stack.
 
-.. sidebar:: Cloud Best-Practices
+.. sidebar:: Cloud Best Practices
 
 	Our commentary on OpenConfig vs NETCONF is grounded in a
-	fundamental tenant of SDN, which is about bringing best
+	fundamental tenet of SDN, which is about bringing best
 	practices in cloud computing to the network. It involves big
 	ideas like implementing the network control plane as a
 	scalable cloud service, but it also includes more narrow
-	benefits, such as using modern transport protocols like
-	gRPC/protobufs.
+	benefits, such as using modern messaging frameworks like
+	gRPC and protobufs.
 
 	The advantages in this particular case are tangible: (1)
 	improved and optimized transport using HTTP/2 and
-	protobuf-based marshalling instead of SSH plus hand-code
+	protobuf-based marshalling instead of SSH plus hand-coded
 	marshalling; (2) binary data encodings instead of text-based
 	encoding; (3) diff-oriented data exchange instead of
 	snapshot-based responses; and (4) native support for server
-	push and client streaming
+	push and client streaming.
 
 OpenConfig defines a hierarchy of object types. For example, the YANG
 model for network interfaces looks like this:
@@ -447,7 +453,7 @@ read-from or written-to network devices using (for example) NETCONF or
 RESTCONF, respectively. But in our context, the target is protobufs,
 which Stratum uses to support gNMI running over gRPC.
 
-The second is the specific set of gRPC methods defined by gNMI to
+The second point is that gNMI defines a specific set of gRPC methods to
 operate on these models. The set is defined collectively as a Service
 in the protobuf specification:
 
@@ -518,7 +524,7 @@ where, for example, the following protobuf message defines the
 		uint64 delay = 2; // Delay in nanoseconds before issuing reboot.
 	  	string message = 3; // Informational reason for the reboot.
 	  	repeated types.Path subcomponents = 4; // Optional sub-components to reboot.
-	  	bool force = 5; // Force reboot if sanity checks fail. (ex. uncommited configuration)
+	  	bool force = 5; // Force reboot if sanity checks fail. (ex. uncommitted configuration)
 	}
 
 As a reminder, if you are unfamiliar with protobufs, a brief overview is available online.
@@ -542,7 +548,7 @@ Stratum, SONiC can also leverage Open Networking Linux (ONL) as its
 underlying operating system. All of which is to say that Stratum and
 SONiC both try to fill the same need. Today their respective
 approaches are largely complementary, with both open source
-communities working towards a “best of both world” solution.
+communities working towards a “best of both worlds” solution.
 
 Both SONiC and Stratum support a configuration interface, so unifying
 those will be a matter of reconciling their respective data models and
@@ -554,9 +560,9 @@ to define a roadmap that will make it possible for interested networks
 to take advantage of programmable pipelines in an incremental and
 low-risk way.
 
-The goal of this effort is to both (1) enable remote SDN
+The goal of this effort is both (1) to enable remote SDN
 Controllers/Apps to interact with SAI using P4Runtime and gNMI,
-and (2) enable SAI extensions using P4 so as to improve feature
+and (2) to enable SAI extensions using P4 so as to improve feature
 velocity in the data plane. Both goals rely on a new representation of
 the SAI behavioral model and pipeline based on a P4 program (the so
 called ``sai.p4`` program shown in :numref:`Figure %s <fig-compare>`
