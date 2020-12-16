@@ -30,7 +30,7 @@ An important aspect of meeting this goal is to use open source. We do
 this in large part by taking advantage of two community-based
 organizations that are leading the way. One is the *Open Compute
 Project (OCP)*, which is actively specifying and certifying commodity
-hardware (e.g., white-box switches) upon which the SDN software stack
+hardware (e.g., bare-metal switches) upon which the SDN software stack
 runs. The second is the *Open Networking Foundation (ONF)*, which is
 actively implementing a suite of software components that can be
 integrated into an end-to-end solution. There are many other players

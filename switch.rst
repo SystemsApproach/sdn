@@ -1,7 +1,7 @@
-Chapter 4:  White-Box Switches 
+Chapter 4:  Bare-Metal Switches 
 ===============================
 
-This chapter describes the white-box switches that provide the
+This chapter describes the bare-metal switches that provide the
 underlying hardware foundation for SDN. Our goal is not to give a
 detailed hardware schematic, but rather, to sketch enough of the
 design to appreciate the software stack that runs on top of it. Note
@@ -16,7 +16,7 @@ programmable case of P4.
 4.1 Switch-Level Schematic
 ----------------------------------
 
-We start by considering a white-box switch as a whole, where the best
+We start by considering a bare-metal switch as a whole, where the best
 analogy is to imagine a PC built from a collection of commodity,
 off-the-shelf components. In fact, a full architectural specification
 for switches that take advantage of such components is available
@@ -24,11 +24,11 @@ on-line at the *Open Compute Project (OCP)*. This is the hardware
 equivalent of open source software, and makes it possible for anyone
 to build a high-performance switch, analogous to a home-built PC. But
 just as the PC ecosystem includes commodity server vendors like Dell
-and HP, you can buy a pre-built (OCP-compliant) switch from white-box
+and HP, you can buy a pre-built (OCP-compliant) switch from bare-metal
 switch vendors such as EdgeCore, Delta and others.
 
 :numref:`Figure %s <fig-switch>` gives a high-level schematic of a
-white-box switch. The *Network Processing Unit (NPU)*\ —a merchant
+bare-metal switch. The *Network Processing Unit (NPU)*\ —a merchant
 silicon switching chip—is optimized to parse packet headers and make
 forwarding decisions. NPUs are able to process and forward packets at
 rates measured in Terabits-per-second (Tbps), easily fast enough to
@@ -41,7 +41,7 @@ figure. As of this writing, the state-of-the-art for these chips is
     :width: 500px 
     :align: center 
 
-    High-Level schematic of a white-box switch. 
+    High-Level schematic of a bare-metal switch. 
 
 Note that our use of the term NPU might be considered a bit non-standard. Historically,
 NPU was the name given to more narrowly-defined network processing
@@ -83,7 +83,7 @@ commoditized world that the computing industry has enjoyed for the
 last two decades.
 
 Finally, although not shown in :numref:`Figure %s <fig-switch>`, each
-white-box switch includes a BIOS, which much like its microprocessor
+switch includes a BIOS, which much like its microprocessor
 counterpart, is firmware that provisions and boots a bare-metal
 switch. A standard BIOS called the *Open Network Install Environment
 (ONIE)* has emerged under the OCP’s stewardship, and so we assume ONIE

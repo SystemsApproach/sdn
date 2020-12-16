@@ -11,7 +11,7 @@ before getting into the details.
   used to interconnect multiple racks of servers in a datacenter (see
   :numref:`Figure %s <fig-leaf-spine>`), but it also supports
   multi-site deployments (see :numref:`Figure %s <fig-trellis>`).
-  Trellis uses only white-box switches to build out the fabric. It can
+  Trellis uses only bare-metal switches to build out the fabric. It can
   run on a mix of fixed-function and programmable pipelines, but is
   running in production with the former.
 
@@ -278,7 +278,7 @@ and down the SDN software stack described throughout this book!
 
 Trellis is an example use case for SDN. It is a set of control
 applications running top of a Network OS, which in turn runs on top of
-a collection white-box switches arranged in a leaf-spine topology,
+a collection programmable switches arranged in a leaf-spine topology,
 where each switch runs a local Switch OS. In this way, Trellis serves
 as a capstone for our bottom-up tour of the SDN software stack.
 

@@ -109,8 +109,15 @@ the same sort of changes in the networking industry, which as the 2001
 National Academy report observed, had ossified. As shown in
 :numref:`Figure %s <fig-market2>`, the end goal is a horizontal
 ecosystem with multiple network operating systems enabled on top of
-white-box switches built from merchant silicon switching chips, which
+bare-metal switches [#]_ built from merchant silicon switching chips, which
 in turn enable a rich marketplace of networking applications.
+
+.. [#] The term "bare-metal" orginated in the server world to refer to
+       a machine without either an OS or hypervisor installed. By
+       analogy, the term has come to apply to switches provided
+       without a bundled operating system or set of networking
+       applications. Unbundling the switching hardware from the software is
+       central to SDN.
 
 .. _fig-market2:
 .. figure:: figures/Slide2.png
@@ -206,10 +213,10 @@ be able to purchase their control plane from vendor X and their data
 plane from vendor Y. Although it did not happen immediately, one
 natural consequence of disaggregation is that the data plane
 components (i.e., the switches) become commodity packet forwarding
-devices—commonly referred to as *white-box switches*—with all the
+devices—commonly referred to as *bare-metal switches*—with all the
 intelligence implemented in software and running in the control
 plane.\ [#]_ This is exactly what happened in the computer industry, where
-microprocessors became commodity. Chapter 4 describes these white-box
+microprocessors became commodity. Chapter 4 describes these bare-metal
 switches in more detail.
 
 .. [#] By our count, over 15 open-source and proprietary disaggregated
@@ -371,9 +378,9 @@ exactly the *distributed control plane* the Internet has employed for
 the last 30+ years.
 
 There is value in this scenario. Because disaggregation led to the
-availability of low-cost white-box switches built using merchant
+availability of low-cost bare-metal switches built using merchant
 silicon switching chips, network operators can buy hardware from
-white-box switching vendors, and then load the appropriate control
+bare-metal switching vendors, and then load the appropriate control
 plane software from some other vendor, or possibly even use an open
 source version of those protocols. Doing so potentially lowers costs and
 reduces complexity (because only the required control
@@ -402,7 +409,7 @@ multiple servers, as is now the best practice for cloud-hosted,
 horizontally scalable services. This is important for both scalability
 and availability, where the key is that the two planes are configured
 and scaled independent of each other. If you need more capacity in the
-data plane you add a white-box switch. If you need more capacity in
+data plane you add a bare-metal switch. If you need more capacity in
 the control plane you add a compute server (or more likely, a virtual
 machine).
 
@@ -591,7 +598,7 @@ focused on opening the control plane to programmability. But early
 experience implementing SDN controllers exposed two problems.
 
 The first problem was that as SDN matured from a research experiment
-to a viable alternative to legacy black-box switches, performance
+to a viable alternative to legacy, proprietary switches, performance
 became increasingly important. And while flow rules were general
 enough to say what forwarding behavior the controller wanted to
 program into a switch, switches didn’t necessarily have the capacity

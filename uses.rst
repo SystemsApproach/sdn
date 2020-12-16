@@ -79,7 +79,10 @@ The rise of network virtualization followed by several years the rise
 of compute virtualization, and was very much enabled by it. Compute
 virtualization made manual server provisioning a thing of the past,
 and exposed the manual and time-consuming processes of network
-configuration as the "long pole" in delivering a cloud service. This
+configuration as the "long pole" in delivering a cloud
+service. Virtual machine migration, which enabled running VMs to move from one
+network location to another (taking their IP addresses with them),
+further exposed the limitations of manual network configuration. This
 need to automate network provisioning was first recognized by large
 cloud providers but eventually became mainstream in enterprises.
 
@@ -186,9 +189,9 @@ delivered by network virtualization.
 
 The predominant use case for pure play SDN is within cloud
 datacenters, where for reasons of both lowering costs and improving
-feature velocity, cloud providers have moved away from black-box
+feature velocity, cloud providers have moved away from proprietary
 switches (i.e., those traditionally sold by network vendors), in favor
-of white-box switches built using merchant silicon switching
+of bare-metal switches built using merchant silicon switching
 chips. These cloud providers then control the *switching fabric* that
 interconnects their servers entirely in software. This is the use case
 we explore in-depth throughout this book, so for now we give only a
@@ -240,7 +243,7 @@ implementation.
 Another cloud-inspired use case is traffic engineering applied to the
 wide-area links between datacenters. For example, Google has publicly
 described their private backbone, called B4, which is built entirely
-using white-box switches and SDN. A central component of B4 is a
+using bare-metal switches and SDN. A central component of B4 is a
 *Traffic Engineering (TE)* control program that provisions the network
 according to the needs of various classes of applications.
 
@@ -402,7 +405,7 @@ What’s interesting about these use cases is that unlike all the
 others—which effectively open general-purpose switches to programmable
 control—access networks are typically built from special-purpose
 hardware devices. The challenge is to transform these purpose-built
-devices into their merchant silicon/white-box counterparts, so they
+devices into their merchant silicon/bare-metal counterparts, so they
 can be controlled by software. In the case of wired networks like PON,
 there are two such devices: *Optical Line Terminals (OLT)* and
 *Broadband Network Gateways (BNG)*. In the case of the cellular
@@ -445,13 +448,13 @@ Progress disaggregating PON-based access networks is quite far along,
 with a solution known as *SEBA (SDN-Enabled Broadband Access)*
 currently being deployed in operator field trials; production
 deployments are expected by 2021. Full details are beyond the scope of
-this book, but the general idea is to add white-box OLT devices to a
+this book, but the general idea is to add bare-metal OLT devices to a
 cluster similar to the one presented in :numref:`Figure %s
 <fig-leaf-spine>`, resulting in configuration like the one depicted in
 :numref:`Figure %s <fig-seba>`. In other words, the cluster includes a
-mix of compute servers and access white-boxes, interconnected by a
+mix of compute servers and access devices, interconnected by a
 switching fabric. And just as the *Open Compute Project (OCP)* has
-certified white-box ethernet switches, they now also certify white-box
+certified bare-metal ethernet switches, they now also certify bare-metal
 OLT devices. Both the fabric switches and access devices are
 controlled by a software-defined control plane, with the code that
 implements that control plane running on servers in the cluster.
@@ -462,7 +465,7 @@ the legacy hardware can be programmed into the switches that comprise
 the fabric. For example, BNG-equivalent functionality, which could be
 packaged as a *Virtual Network Function (VNF)* running on a
 general-purpose processor, is instead programmed directly into a
-white-box switch. This practice is sometimes called *VNF
+programmable switch. This practice is sometimes called *VNF
 off-loading* because the packet processing is moved from the compute
 servers into the switches. This is a great example of what happens
 when switch data planes become programmable: developers write software
