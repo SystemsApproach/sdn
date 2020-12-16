@@ -33,7 +33,7 @@ The overall architecture for ONOS is shown in :numref:`Figure %s
    state. Internal to the core is a scalable key/value store called
    Atomix.
    
-3. A Southbound Interface (SBI) constructed from a collection plugins
+3. A Southbound Interface (SBI) constructed from a collection of plugins
    including shared protocol libraries and device-specific drivers.
    
 .. _fig-onos:
@@ -99,7 +99,7 @@ The second thing to note about :numref:`Figure %s <fig-onos>` is that
 ONOS maps an abstract specification of behavior the control
 application wants to impose on the network onto the concrete
 instructions that need to be communicated to each switch in the
-network. Applications can select from a variety of means of how to
+network. Applications can select from a variety of means to
 affect the network operation. Some applications use high-level
 *Intents*, which are network-wide, topology-independent programming
 constructs. Others that require finer-grained control use Flow
@@ -130,7 +130,7 @@ devices are handled by a set of adaptors (e.g., OpenFlow, P4Runtime),
 which hide the details of communicating with the devices, thereby
 insulating the ONOS core and the applications running on top of it
 from the diversity of network devices. For example, ONOS is being used
-to control black-box switches, white-box switches, optical devices,
+to control proprietary switches, bare-metal switches, optical devices,
 and cellular base stations.
 
 6.2 Distributed Core
@@ -144,30 +144,32 @@ responsible for propagating the state throughout the cluster.
 
 Many ONOS services are built using distributed tables (maps), which
 are in turn implemented using a distributed key/value store. The store
-itself will be familiar to anyone that has looked at how modern cloud
+itself will be familiar to anyone who has looked at how modern cloud
 services are designed—it scales across a distributed set of servers,
-and implements the Raft consensus algorithm to achieve fault-tolerance
-in the event of failures. If you are unfamiliar with Raft, Diego
-Ongaro and John Ousterhoust have written an excellent introduction.
+and implements a consensus algorithm to achieve fault-tolerance
+in the event of failures. The specific algorithm used in ONOS is Raft,
+which is well described in a paper by Diego
+Ongaro and John Ousterhout. The web site also provides
+a helpful visualization tool.
 
 .. _reading_p4:
 .. admonition:: Further Reading 
 
    D. Ongaro and J. Ousterhout. `The Raft Consensus Algorithm <https://raft.github.io/>`__. 
 
-ONOS uses Atomix as its store, where Atomix goes beyond the core Raft
+ONOS uses Atomix as its store. Atomix goes beyond the core Raft
 algorithm to provide a rich set of programming primitives that ONOS
-uses to manage the distributed state and make it easy for control apps
-to access.
+uses to manage the distributed state and to provide easy access to
+that state by the control apps.
 
-This is a common design paradigm, which results in a system that is
+This distributed approach is a common design paradigm, which results in a system that is
 both scalable (runs on enough virtualized instances to handle the
 request workload) and highly available (run on enough instances to
-continue offering service in the face of failure). What’s unique about
+continue offering service in the face of failure). What’s specific to
 ONOS—or any Network OS, for that matter—is the set of maps it defines:
 the semantics of the keys it stores and the types of the values
 associated with those keys. It is this data model that makes a Network
-OS a Network OS (and not a ride-share application or a social
+OS a Network OS (and not, say, a ride-share application or a social
 network).  This section mostly focuses on this set of data models and
 the corresponding services built around them, although we start with a
 brief introduction to the primitives that Atomix supports.
@@ -191,7 +193,7 @@ methods. In the case of ``AtomicMap``, the primitive performs atomic
 updates using optimistic locks, such that all operations are
 guaranteed to be atomic (and each value in a map has a monotonically
 increasing version number). In contrast, the ``DistributedMap``
-primitive supports eventual consistency rather than guarantee
+primitive supports eventual consistency rather than guaranteed
 consistency. Both primitives support event-based notifications of
 changes to the corresponding map. Clients can listen for
 inserted/updated/removed entries by registering event listeners on a
@@ -253,7 +255,7 @@ Note that the Topology Service in :numref:`Figure %s <fig-services1>`
 does not have an associated map, but instead indirectly accesses the
 maps defined by the Link and Device Services. The Topology Service
 caches the resulting network graph in memory, which gives applications
-a low-latency, read-only way access to network state. The Topology
+a low-latency, read-only way to access network state. The Topology
 Service also computes a spanning tree of the graph to ensure that all
 applications see the same broadcast tree.
 
@@ -262,7 +264,7 @@ As a whole, ONOS defines an inter-connected graph of services, with
 subgraph. :numref:`Figure %s <fig-services2>` expands on that view to
 illustrate some other aspects of the ONOS core, this time simplified
 to show the Atomix maps as an attribute of some (but not all) of the
-services. There are several things of note about this example.
+services. 
 
 .. _fig-services2:
 .. figure:: figures/Slide33.png 
@@ -272,7 +274,8 @@ services. There are several things of note about this example.
     Dependency graph of services (some with their own key/value maps)
     involved in building a Path Service.
 
-First, the Path Service, which applications can query to learn
+There are several things of note about this dependency graph. First,
+the Path Service, which applications can query to learn
 end-to-end paths between host pairs, depends on both the Topology
 Service (which tracks the network graph) and a Host Service (which
 tracks the hosts connected to the network). Note that arrow
@@ -285,7 +288,7 @@ host-related information, while the Host Location Provider uses its
 south-bound interface to write host-related information. The Host
 Service itself is little more than a wrapper around the Atomix Map
 that stores information about hosts. We return to the *Provider*
-abstraction in Section 6.4, but in a nutshell, they are modules that
+abstraction in Section 6.4, but, in a nutshell, they are modules that
 interact with the underlying network devices.
 
 Third, the Host Location Provider snoops network traffic—for example,
@@ -327,7 +330,7 @@ from :numref:`Figure %s <fig-ztp>`.
 
 The sequence of examples we just walked through (:numref:`Figures %s
 <fig-services1>`, :numref:`%s <fig-services2>`, and :numref:`%s
-<fig-services3>`) illustrate the basics of how ONOS is built from
+<fig-services3>`) illustrates the basics of how ONOS is built from
 parts. For completeness, the following gives a summary of the most
 commonly used ONOS services:
 
@@ -341,16 +344,16 @@ commonly used ONOS services:
 
   **Link:** Records attributes of links connecting pairs of
   infrastructure devices/ports. Populated by one or more link
-  discovery apps (e.g., by emitting an intercepting LLDP packets).
+  discovery apps (e.g., by emitting and intercepting LLDP packets).
 
   **Topology:** Represents the network as a whole using a graph
   abstraction. It is built on top of the Device and Link services and
   provides a coherent graph comprised of infrastructure devices as
   vertices and infrastructure links as edges. The graph converges on the
-  network topology using eventual consistency approach as events about
+  network topology using an eventual consistency approach as events about
   device and link inventory are received.
 
-  **Mastership:** Runs leadership contests (using Atomix leader-election
+  **Mastership:** Runs leadership contests (using the Atomix leader-election
   primitive) to elect which ONOS instance in the cluster should be the
   master for each infrastructure device. In cases when an ONOS instance
   fails (e.g., server power failure), it makes sure a new master is
@@ -360,8 +363,8 @@ commonly used ONOS services:
   information about the Atomix cluster nodes as well as about all peer
   ONOS nodes. Atomix nodes form the actual cluster that is the basis
   for consensus, while the ONOS nodes are effectively mere clients
-  used to scale control logic and I/O to network devices. Entries set
-  by ONOS using Atomix membership primitive.
+  used to scale control logic and I/O to network devices. Entries are set
+  by ONOS using the Atomix membership primitive.
 
   **Network Config:** Prescribes meta-information about the network,
   such as devices and their ports, hosts, links, etc. Provides outside
@@ -420,7 +423,7 @@ include:
 
   **Intent:** Provides a topology-agnostic way to establish flows
   across the network. High-level specifications, call *intents*,
-  indicate various hints and constraints for the end-to-endpath,
+  indicate various hints and constraints for the end-to-end path,
   including the type of traffic and the source and destination hosts,
   or ingress and egress ports to request connectivity. The service
   provisions this connectivity over the appropriate paths and then
@@ -623,7 +626,7 @@ an example of this in Section 6.2.2, where Host Location Provider (an
 ONOS service) sits behind *HostProvider* (an SBI plugin); the latter
 defines the API for host discovery and the former defines one specific
 approach to discovering hosts (e.g., using Packet Service to intercept
-ARP, NDP and DHCP packets). Similarly, Lldp Link Provider
+ARP, NDP and DHCP packets). Similarly, the LLDP Link Provider Service
 (corresponding to the *LinkProvider* SBI plugin) uses Packet Service
 to intercept LLDP and BDDP packets to surmise links between
 infrastructure devices.
@@ -639,7 +642,7 @@ very narrow facet of control or configuration capabilities. As with
 the Protocol Providers, no limitations are placed on how the device
 driver chooses to implement those capabilities. Device drivers are
 also deployed as ONOS applications, which allows them to be installed
-and uninstalled dynamically allowing operators to introduce new device
+and uninstalled dynamically, allowing operators to introduce new device
 types and models on the fly.
 
 6.5 Scalable Performance
@@ -649,9 +652,10 @@ ONOS is a logically centralized SDN controller, and as such, must
 ensure that it is able to respond to a scalable number of control
 events in a timely way. It must also remain available in the face of
 failures. This section describes how ONOS scales to meet these
-performance and availability requirements. But first the numbers,
-where ONOS represents the state-of-the-art in centralized network
-control:
+performance and availability requirements. We start with some scale
+and performance numbers,
+to provide a sense of the state-of-the-art in centralized network
+control (at the time of writing):
 
 * **Scale:** ONOS supports up to 50 network devices; 5000 network
   ports; 50k subscribers, 1M routes; and 5M flow rules/groups/meters.
@@ -666,7 +670,7 @@ is more for availability than performance. Each instance runs on a
 32-Core/128GB-RAM server, and is deployed as a Docker container using
 Kubernetes. Each instance bundles an identical (but configurable)
 collection of core services, control applications, and protocol
-providers, where ONOS uses Karaf as its internal modularity framework.
+providers, and ONOS uses Karaf as its internal modularity framework.
 The bundle also includes Atomix, although ONOS supports an optional
 configuration that scales the key/value store independently from the
 rest of ONOS.
@@ -677,7 +681,7 @@ rest of ONOS.
     :align: center 
 
     Multiple ONOS instances, all sharing network state via Atomix,
-    provides scalable performance and high availability. 
+    provide scalable performance and high availability. 
     
 :numref:`Figure %s <fig-ha>` illustrates ONOS scaling across multiple
 instances, where the set of instances share network state via Atomix
@@ -694,7 +698,7 @@ different subsystems independently. Although in principle each of of
 the core services introduced in this chapter could be packaged as an
 independent microservice, doing so is much too fine-grain to be
 practical. Instead, µONOS adopts the following approach. First, it
-encapsulates Atomix in its own microservice. Second, it runs each each
+encapsulates Atomix in its own microservice. Second, it runs each
 control application and southbound adaptor as a separate
 microservice. Third, it partitions the core into four distinct
 microservices: (1) a *Topology Management* microservice that exports a
