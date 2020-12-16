@@ -112,11 +112,11 @@ ecosystem with multiple network operating systems enabled on top of
 bare-metal switches [#]_ built from merchant silicon switching chips, which
 in turn enable a rich marketplace of networking applications.
 
-.. [#] The term "bare-metal" orginated in the server world to refer to
+.. [#] The term "bare-metal" originated in the server world to refer to
        a machine without either an OS or hypervisor installed. By
        analogy, the term has come to apply to switches provided
        without a bundled operating system or set of networking
-       applications. Unbundling the switching hardware from the software is
+       applications. Disaggregating the switching hardware from the software is
        central to SDN.
 
 .. _fig-market2:
