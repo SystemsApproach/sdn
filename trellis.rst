@@ -11,7 +11,8 @@ before getting into the details.
   used to interconnect multiple racks of servers in a datacenter (see
   :numref:`Figure %s <fig-leaf-spine>`), but it also supports
   multi-site deployments (see :numref:`Figure %s <fig-trellis>`).
-  Trellis uses only bare-metal switches to build out the fabric. It can
+  Trellis uses only bare-metal switches, equipped with software
+  described in the previous chapters, to build out the fabric. It can
   run on a mix of fixed-function and programmable pipelines, but is
   running in production with the former.
 
@@ -46,6 +47,7 @@ website.
 SDN provides an opportunity to customize the network, but for
 pragmatic reasons, the first requirement for adoption is to reproduce
 functionality that already exists, and do so in a way that reproduces
+(or improves upon)
 the resilience and scalability of legacy solutions. Trellis has
 satisfied this requirement, which we summarize here.
 
@@ -69,12 +71,12 @@ Third, Trellis provides high availability in the face of link or
 switch failures. It does this through a combination of well-known
 techniques: dual-homing, link binding, and ECMP link groups. As
 illustrated in :numref:`Figure %s <fig-netconfig>`, each server in a
-Trellis cluster is connected to a pair of ToR (leaf) switches, where
+Trellis cluster is connected to a pair of Top-of-Rack (ToR, or leaf) switches, where
 the OS running on each compute server implements active-active link
-bonding. Each leaf switch is then connected by a pair of links to a
-pair of spine switches, with an ECMP group defined for the pair of
+bonding. Each leaf switch is then connected by a pair of links to two
+or more spine switches, with an ECMP group defined for the pair of
 links connecting each leaf to a given spine and for the set of links
-connecting each leaf to a pair of spines. The cluster as a whole then
+connecting each leaf to a set of spines. The cluster as a whole then
 has multiple connections to external routes, shown via leaf switches 3
 and 4 in the Figure. Not shown in :numref:`Figure %s <fig-netconfig>`
 is the fact that Trellis runs on top of ONOS, which is itself
@@ -119,11 +121,13 @@ to ONOS’s ability to scale.
 -------------------
 
 The previous section focused on *what* Trellis does. This section
-focuses on *how*, where the core strategy is based on *Segment Routing
+focuses on *how*.  The core strategy in Trellis is based on *Segment Routing
 (SR)*. The term “segment routing” comes from the idea that the
 end-to-end path between any pair of hosts can be defined by a sequence
 of segments, where label-switching is used to traverse a sequence of
-segments along an end-to-end path. The idea is an application of
+segments along an end-to-end path. Segment routing is a general
+approach to source routing which can be implemented in a number of
+ways. In the case of Trellis, segment routing leverages the forwarding plane of
 *Multi-Protocol Label Switching (MPLS)*, which you can read more about
 online.
 
@@ -135,8 +139,9 @@ online.
    Networks: A Systems Approach*, 2020.
 
 When applied to a leaf-spine fabric, there are always two segments
-involved—leaf-to-spine and spine-to-leaf—where Trellis programs the
-switches to match and then push/pop MPLS labels.  :numref:`Figure %s
+involved: leaf-to-spine and spine-to-leaf.  Trellis programs the
+switches to match labeled or unlabeled packets, and to push or pop
+MPLS labels as needed.  :numref:`Figure %s
 <fig-sr>` illustrates how SR works in Trellis using a simple
 configuration that forwards traffic between a pair of hosts: 10.0.1.1
 and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
@@ -235,8 +240,9 @@ it has assigned to each rack in the cluster. (Human operators could
 also add a ``STATIC`` route using the CLI, but this would be an
 exception rather than the rule.)
 
-The second possibility is that ``FPM`` was the source. FPM is yet
-another ONOS Service (one of the Trellis suite of services), and its
+The second possibility is that ``FPM`` was the source. FPM (Forwarding
+Plane Manager) is yet
+another ONOS Service–one of the Trellis suite of services. Its
 job is to learn routes from external sources, which it does by tapping
 into a locally running Quagga process that is configured to peer with
 BGP neighbors. Whenever FPM learns about an external route, is adds
