@@ -12,7 +12,7 @@ If you make use of this work, the attribution should include the
 following information:
 
 | *Title: Software-Defined Networks: A Systems Approach* 
-| *Authors: Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska* 
+| *Authors: Larry Peterson, Carmelo Cascone, Bruce Davie, Brian O'Connor, and Thomas Vachuska* 
 | *Source:* https://github.com/SystemsApproach/SDN 
 | *License:* \ `CC BY-NC-ND 4.0 <https://creativecommons.org/licenses/by-nc-nd/4.0>`__
 

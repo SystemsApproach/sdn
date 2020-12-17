@@ -40,7 +40,7 @@ def get_version():
 
 project = u'Software-Defined Networks: A Systems Approach'
 copyright = u'2020'
-author = u'Peterson, Cascone, OConnor, Vachuska'
+author = u'Peterson, Cascone, Davie, OConnor, Vachuska'
 
 # The short X.Y version
 version = get_version()
@@ -179,7 +179,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'book.tex', u'Software-Defined Networks: A Systems Approach',
-     u'Peterson, Cascone, OConnor and Vachuska ', 'manual', True),
+     u'Peterson, Cascone, Davie, OConnor and Vachuska ', 'manual', True),
 ]
 
 latex_toplevel_sectioning = 'chapter'
@@ -202,7 +202,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'Software-Defined Networks', u'Software-Defined Networks',
-     author, 'Peterson, Cascone, OConnor and Vachuska', 'A Systems Approach',
+     author, 'Peterson, Cascone, Davie, OConnor and Vachuska', 'A Systems Approach',
      'Miscellaneous'),
 ]
 

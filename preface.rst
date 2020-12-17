@@ -56,9 +56,8 @@ engineering team and the open source community that works with
 them. We acknowledge their contributions, with a special thank-you to
 Yi Tseng, Max Pudelko, and Charles Chan for their contributions to the
 tutorials that this book includes as hands-on exercises. Finally, we
-thank Bruce Davie for his significant contributions, and Charles Chan,
-Jennifer Rexford, and Nick McKeown for their feedback on early drafts
-of the manuscript.
+thank Charles Chan, Jennifer Rexford, and Nick McKeown for their
+feedback on early drafts of the manuscript.
 
 .. To include in epub and printed versions
 
@@ -66,6 +65,6 @@ The cover photo of the Ueno Station (Tokyo) is
 by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
 on `Unsplash <https://unsplash.com>`__.
 
-| Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska
+| Larry Peterson, Carmelo Cascone, Bruce Davie, Brian O'Connor, and Thomas Vachuska
 | December 2020
 
