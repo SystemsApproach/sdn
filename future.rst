@@ -4,11 +4,17 @@ Chapter 8:  Future of SDN
 It is still early days for SDN. Cloud-hosted control planes are being
 deployed in production networks, but we are only just starting to see
 SDN being trialed in access networks and programmable pipelines being
-used to introduce new data plane functionality. As the technology
-matures and the APIs stabilize we expect to see increased adoption,
+used to introduce new data plane functionality. Enterprises have
+adopted network virtualization and SD-WAN to varying degrees, but
+there are still a lot more traditional networks than software-defined
+ones. As the technology
+matures and the APIs stabilize we expect to see increased adoption of
+the use cases discussed earlier,
 but it may be new use cases still on the horizon that have the biggest
-impact on the role SDN eventually plays. This chapter looks at two
-promising examples.
+impact on the role SDN eventually plays. Indeed, the ability to support
+capabilities that were impossible in traditional networks is a great
+part of the promise of SDN. This chapter looks at two
+promising examples of emerging capabilities.
 
 8.1 Verifiable Networks
 -----------------------
@@ -29,7 +35,7 @@ self-driving cars, and drones. If we cannot secure these networks, the
 risk of cyber disasters is much worse than anything experienced to
 date.
 
-The most critical capability for securing the Internet is verifiability:
+A critical capability for securing the Internet is verifiability:
 the ability to ensure that every packet in the network follows an
 operator-specified path and encounters only a set of forwarding rules
 within every device that the operator intended. Nothing more and
@@ -120,7 +126,7 @@ verification is both powerful and practical.
 This claim of practicality is grounded in the current
 state-of-the-art.  Once the forwarding behavior is defined and known,
 then forwarding table state defines forwarding behavior. For example,
-if everything is known to be IPv4 forwarded, then the forwarding table
+if everything is known to be IPv4-forwarded, then the forwarding table
 state in all routers is enough to define the network behavior. This
 idea has been reduced to practice by techniques like Veriflow and
 Header Space Analysis (HSA), and is now available commercially.
@@ -165,7 +171,7 @@ now in the second phase of SDN. :numref:`Figure %s <fig-phase3>`
 extends this into the future with a third phase, during which
 verifiable closed loop control will empower network operators to take
 full ownership of the software that defines their networks. This gives
-network owners the ability to tailor their networks in ways that
+network owners further ability to tailor their networks in ways that
 differentiate them from their competitors.
 
 8.2 SD-RAN
