@@ -13,7 +13,7 @@ important thing we hope readers take away is an understanding of an
 SDN-based network as a scalable distributed system running on
 commodity hardware.
 
-Anyone that has taken an introductory networking class recognizes the
+Anyone who has taken an introductory networking class recognizes the
 protocol stack as the canonical framework for describing the
 network. Whether that stack has seven layers or just three, it shapes
 and constrains the way we think about computer networks. Textbooks are
