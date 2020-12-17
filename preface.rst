@@ -54,16 +54,18 @@ Acknowledgements
 
 The software described in this book is due to the hard work of the ONF
 engineering team and the open source community that works with
-them. We acknowledge their contributions. We also thank Charles Chan,
-Jennifer Rexford, and Nick McKeown for their feedback on early drafts
-of the manuscript.
+them. We acknowledge their contributions, with a special thank-you to
+Yi Tseng, Max Pudelko, and Charles Chan for their contributions to the
+tutorials that this book includes as hands-on exercises. Finally, we
+thank Charles Chan, Jennifer Rexford, and Nick McKeown for their
+feedback on early drafts of the manuscript.
 
 .. To include in epub and printed versions
-.. The cover photo of the Ueno Station (Tokyo) is
-.. by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
-.. on `Unsplash <https://unsplash.com>`__.
 
-| Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska
-| Open Networking Foundation
-| October 2020
+The cover photo of the Ueno Station (Tokyo) is
+by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
+on `Unsplash <https://unsplash.com>`__.
+
+| Larry Peterson, Carmelo Cascone, Bruce Davie, Brian O'Connor, and Thomas Vachuska
+| December 2020
 
