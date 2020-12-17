@@ -62,10 +62,10 @@ feedback on early drafts of the manuscript.
 
 .. To include in epub and printed versions
 
-The cover photo of the Ueno Station (Tokyo) is
-by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
-on `Unsplash <https://unsplash.com>`__.
+.. The cover photo of the Ueno Station (Tokyo) is
+.. by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
+.. on `Unsplash <https://unsplash.com>`__.
 
-| Larry Peterson, Carmelo Cascone, Bruce Davie, Brian O'Connor, and Thomas Vachuska
+| Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska
 | December 2020
 
