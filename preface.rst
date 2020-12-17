@@ -17,14 +17,13 @@ Anyone who has taken an introductory networking class recognizes the
 protocol stack as the canonical framework for describing the
 network. Whether that stack has seven layers or just three, it shapes
 and constrains the way we think about computer networks. Textbooks are
-organized accordingly. SDN suggests a completely different world-view,
-one that comes with a new software stack. This book is organized
-around that new stack, with the goal of presenting a top-to-bottom
-tour of SDN without leaving any significant gaps that the reader might
-suspect can only be filled with magic or proprietary code. *We invite
-you do the hands-on programming exercises included at the end of the
-book to prove to yourself that the software stack is both real and
-complete.*
+organized accordingly. SDN suggests an alternative world-view, one
+that comes with a new software stack. This book is organized around
+that new stack, with the goal of presenting a top-to-bottom tour of
+SDN without leaving any significant gaps that the reader might suspect
+can only be filled with magic or proprietary code. *We invite you do
+the hands-on programming exercises included at the end of the book to
+prove to yourself that the software stack is both real and complete.*
 
 An important aspect of meeting this goal is to use open source. We do
 this in large part by taking advantage of two community-based
@@ -57,14 +56,15 @@ engineering team and the open source community that works with
 them. We acknowledge their contributions, with a special thank-you to
 Yi Tseng, Max Pudelko, and Charles Chan for their contributions to the
 tutorials that this book includes as hands-on exercises. Finally, we
-thank Charles Chan, Jennifer Rexford, and Nick McKeown for their
-feedback on early drafts of the manuscript.
+thank Bruce Davie for his significant contributions, and Charles Chan,
+Jennifer Rexford, and Nick McKeown for their feedback on early drafts
+of the manuscript.
 
 .. To include in epub and printed versions
 
-.. The cover photo of the Ueno Station (Tokyo) is
-.. by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
-.. on `Unsplash <https://unsplash.com>`__.
+The cover photo of the Ueno Station (Tokyo) is
+by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
+on `Unsplash <https://unsplash.com>`__.
 
 | Larry Peterson, Carmelo Cascone, Brian O'Connor, and Thomas Vachuska
 | December 2020
