@@ -55,7 +55,7 @@ The software described in this book is due to the hard work of the ONF
 engineering team and the open source community that works with
 them. We acknowledge their contributions, with a special thank-you to
 Yi Tseng, Max Pudelko, and Charles Chan for their contributions to the
-tutorials that this book includes as hands-on exercises. Finally, we
+tutorials that this book includes as hands-on exercises. We also
 thank Charles Chan, Jennifer Rexford, and Nick McKeown for their
 feedback on early drafts of the manuscript.
 
