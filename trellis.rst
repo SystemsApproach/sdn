@@ -121,15 +121,15 @@ to ONOS’s ability to scale.
 -------------------
 
 The previous section focused on *what* Trellis does. This section
-focuses on *how*.  The core strategy in Trellis is based on *Segment Routing
-(SR)*. The term “segment routing” comes from the idea that the
-end-to-end path between any pair of hosts can be defined by a sequence
-of segments, where label-switching is used to traverse a sequence of
-segments along an end-to-end path. Segment routing is a general
-approach to source routing which can be implemented in a number of
-ways. In the case of Trellis, segment routing leverages the forwarding plane of
-*Multi-Protocol Label Switching (MPLS)*, which you can read more about
-online.
+focuses on *how*.  The core strategy in Trellis is based on *Segment
+Routing (SR)*. The term “segment routing” comes from the idea that the
+end-to-end path between any pair of hosts can be constructed from a
+sequence of segments, where label-switching is used to traverse a
+sequence of segments along an end-to-end path. Segment routing is a
+general approach to source routing which can be implemented in a
+number of ways. In the case of Trellis, segment routing leverages the
+forwarding plane of *Multi-Protocol Label Switching (MPLS)*, which you
+can read more about online.
 
 .. _reading_mpls:
 .. admonition:: Further Reading
