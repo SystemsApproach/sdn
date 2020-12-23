@@ -63,11 +63,11 @@ online.
 .. admonition:: Further Reading
 
    `gRPC
-   <https://book.systemsapproach.org/ee/rpc.html#grpc>`__.
+   <https://book.systemsapproach.org/e2e/rpc.html#grpc>`__.
    *Computer Networks: A Systems Approach*, 2020.
 
    `Protocol Buffers
-   <https://book.systemsapproach.org/e2e/presentation.html#protobufs>`__.
+   <https://book.systemsapproach.org/data/presentation.html#protobufs>`__.
    *Computer Networks: A Systems Approach*, 2020.
 
 The important take-away is that by using protobufs and gRPC, Stratum
@@ -533,7 +533,7 @@ As a reminder, if you are unfamiliar with protobufs, a brief overview is availab
 .. admonition:: Further Reading
 
    `Protocol Buffers
-   <https://book.systemsapproach.org/e2e/presentation.html#protobufs>`__.
+   <https://book.systemsapproach.org/data/presentation.html#protobufs>`__.
    *Computer Networks: A Systems Approach*, 2020.
 
 5.4 SONiC
