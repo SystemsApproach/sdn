@@ -365,48 +365,48 @@ every programmable element in the abstract depiction shown in
 
 	/* Parser */
 	parser MyParser(
-			packet_in packet,
-			out headers hdr,
-			inout metadata meta,
-			inout standard_metadata_t smeta) {
-		...
+		packet_in packet,
+		out headers hdr,
+		inout metadata meta,
+		inout standard_metadata_t smeta) {
+	    ...
 	}
 
 	/* Checksum Verification */
 	control MyVerifyChecksum(
-			in headers, hdr,
-			inout metadata meta) {
-		...
+		in headers, hdr,
+		inout metadata meta) {
+	    ...
 	}
 
 	/* Ingress Processing */
 	control MyIngress(
-			inout headers hdr,
-			inout metadata meta,
-			inout standard_metadata_t smeta) {
-		...
+		inout headers hdr,
+		inout metadata meta,
+		inout standard_metadata_t smeta) {
+	    ...
 	}
 
 	/* Egress Processing */
 	control MyEgress(
-			inout headers hdr,
-			inout metadata meta,
-			inout standard_metadata_t smeta) {
-		...
+		inout headers hdr,
+		inout metadata meta,
+		inout standard_metadata_t smeta) {
+	    ...
 	}
 
 	/* Checksum Update */
 	control MyComputeChecksum(
-			inout headers, hdr,
-			inout metadata meta) {
-		...
+		inout headers, hdr,
+		inout metadata meta) {
+	    ...
 	}
 
 	/* Deparser */
 	parser MyDeparser(
-			inout headers hdr,
-			inout metadata meta) {
-		...
+		inout headers hdr,
+		inout metadata meta) {
+	    ...
 	}
 
 	/* Switch */
@@ -658,10 +658,10 @@ available to the other routines, as we will see below.
 	****************************************************/
 
 	parser MyParser(
-			packet_in packet,
-	                out headers hdr,
-	                inout metadata meta,
-	                inout standard_metadata_t standard_metadata) {
+		packet_in packet,
+		out headers hdr,
+		inout metadata meta,
+		inout standard_metadata_t standard_metadata) {
 
 	    state start {
 	        transition parse_ethernet;
@@ -711,7 +711,8 @@ defined by the logical pipeline model.
 	***  C H E C K S U M    V E R I F I C A T I O N   ***
 	****************************************************/
 
-	control MyVerifyChecksum(inout headers hdr, inout metadata meta) {   
+	control MyVerifyChecksum(
+		inout headers hdr, inout metadata meta) {   
 	    apply {  }
 	}
 
@@ -752,9 +753,9 @@ marked the IP header as valid.
 	****************************************************/
 
 	control MyIngress(
-		       	inout headers hdr,
-			inout metadata meta,
-			inout standard_metadata_t standard_metadata) {			
+		inout headers hdr,
+		inout metadata meta,
+		inout standard_metadata_t standard_metadata) {			
 
 	    action drop() {
 	        mark_to_drop(standard_metadata);
@@ -813,9 +814,9 @@ intercepted packets passed up to the control plane.
 	****************************************************/
 
 	control MyEgress(
-			inout headers hdr,
-	                inout metadata meta,
-	                inout standard_metadata_t standard_metadata) {
+		inout headers hdr,
+		inout metadata meta,
+		inout standard_metadata_t standard_metadata) {
    
 	    apply {  }
 	}
@@ -825,8 +826,8 @@ intercepted packets passed up to the control plane.
 	****************************************************/
 
 	control MyComputeChecksum(
-			inout headers  hdr,
-			inout metadata meta) {
+		inout headers  hdr,
+		inout metadata meta) {
    
 	     apply {
 		update_checksum(
@@ -869,8 +870,8 @@ of a special metadata value consumed by the deparser.
 	****************************************************/
 
 	control MyDeparser(
-			packet_out packet,
-			in headers hdr) {
+		packet_out packet,
+		in headers hdr) {
 			
 	    apply {
 	        packet.emit(hdr.ethernet);
@@ -893,12 +894,12 @@ references to all the other routines defined above.
 	****************************************************/
 
 	V1Switch(
-	  MyParser(),
-	  MyVerifyChecksum(),
-	  MyIngress(),
-	  MyEgress(),
-	  MyComputeChecksum(),
-	  MyDeparser()
+	    MyParser(),
+	    MyVerifyChecksum(),
+	    MyIngress(),
+	    MyEgress(),
+	    MyComputeChecksum(),
+	    MyDeparser()
 	) main;
 
 Keep in mind this example is minimal, but it does serve to illustrate

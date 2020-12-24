@@ -336,16 +336,66 @@ the header fields in the common case.
     :align: center
 
     Logical pipeline supported by ``fabric.p4``, designed to parallel
-    the Filtering, Forwarding, and Next stages of the FlowObjective API.
+    the Filtering, Forwarding, and Next stages of the FlowObjective
+    API.
 
-Third, ``fabric.p4`` is designed to be configurable, making it 
-possible to selectively include additional functionality. This is not 
-easy when writing code that is optimized for an ASIC-based forwarding 
-pipeline, and in practice it makes heavy use of pre-processor 
-conditionals (i.e., ``#ifdefs``). The code fragment shown below is the 
-main control block of ``fabric.p4``\'s ingress function, annotated to 
-highlight optional functionality. The details of the options are 
-beyond to scope of this book, but at a high level:
+Third, ``fabric.p4`` is designed to be configurable, making it
+possible to selectively include additional functionality. This is not
+easy when writing code that is optimized for an ASIC-based forwarding
+pipeline, and in practice it makes heavy use of pre-processor
+conditionals (i.e., ``#ifdefs``). The code fragment shown below is the
+main control block of ``fabric.p4``\'s ingress function. The details
+of the options are beyond to scope of this book, but at a high level:
+
+* **SPGW (Serving and Packet Gateway):** Augments IP functionality in
+  support of 4G Mobile Networks.
+
+* **BNG (Broadband Network Gateway):** Augments IP functionality in
+  support of Fiber-to-the-Home.
+
+* **INT (Inband Network Telemetry):** Adds metric collection and
+  telemetry output directives.
+
+.. code-block:: C
+		
+   apply {
+   #ifdef SPGW
+        spgw_normalizer.apply(hdr.gtpu.isValid(), hdr.gtpu_ipv4, hdr.gtpu_udp,
+                              hdr.ipv4, hdr.udp, hdr.inner_ipv4, hdr.inner_udp);
+   #endif // SPGW
+        pkt_io_ingress.apply(hdr, fabric_metadata, standard_metadata);
+        filtering.apply(hdr, fabric_metadata, standard_metadata);
+   #ifdef SPGW
+        spgw_ingress.apply(hdr.gtpu_ipv4, hdr.gtpu_udp, hdr.gtpu,
+                           hdr.ipv4, hdr.udp, fabric_metadata, standard_metadata);
+   #endif // SPGW
+        if (fabric_metadata.skip_forwarding == _FALSE) {
+            forwarding.apply(hdr, fabric_metadata, standard_metadata);
+        }
+        acl.apply(hdr, fabric_metadata, standard_metadata);
+        if (fabric_metadata.skip_next == _FALSE) {
+            next.apply(hdr, fabric_metadata, standard_metadata);
+   #ifdef INT
+            process_set_source_sink.apply(hdr, fabric_metadata, standard_metadata);
+   #endif // INT
+        }	
+   #ifdef BNG
+        bng_ingress.apply(hdr, fabric_metadata, standard_metadata);
+   #endif // BNG
+   }
+
+For example, a companion file, ``spgw.p4`` (not shown), implements the
+forwarding plane for the SPGW extension, which includes the GTP tunnel
+encapsulation/decapsulation required by the 3GPP cellular standard to
+connect the Trellis fabric to the base stations of the Radio Access
+Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
+termination, which is used by some Passive Optical Networks
+deployments to connect the Trellis fabric to home routers. Finally, it
+is worth nothing that the code fragment illustrates the basic
+structure of ``fabric.p4``\'s core functionality, which first applies
+the *filtering objective* (``filtering.apply`` and ``acl.apply``),
+then applies the *forwarding objective* (``forwarding.apply``), and
+finally applies the *next objective* (``next.apply``).
 
 .. sidebar:: VNF Off-loading
 
@@ -371,57 +421,6 @@ beyond to scope of this book, but at a high level:
     options as to what hardware chip is the most appropriate target
     for implementing each such function.
 
-* **SPGW (Serving and Packet Gateway):** Augments IP functionality in
-  support of 4G Mobile Networks.
-
-* **BNG (Broadband Network Gateway):** Augments IP functionality in
-  support of Fiber-to-the-Home.
-
-* **INT (Inband Network Telemetry):** Adds metric collection and
-  telemetry output directives.
-
-.. code-block:: C
-   :linenos:
-   :emphasize-lines: 2-5,8-11,18-20,22-24
-		
-   apply {
-   #ifdef WITH_SPGW
-        spgw_normalizer.apply(hdr.gtpu.isValid(), hdr.gtpu_ipv4, hdr.gtpu_udp,
-                              hdr.ipv4, hdr.udp, hdr.inner_ipv4, hdr.inner_udp);
-   #endif // WITH_SPGW
-        pkt_io_ingress.apply(hdr, fabric_metadata, standard_metadata);
-        filtering.apply(hdr, fabric_metadata, standard_metadata);
-   #ifdef WITH_SPGW
-        spgw_ingress.apply(hdr.gtpu_ipv4, hdr.gtpu_udp, hdr.gtpu,
-                           hdr.ipv4, hdr.udp, fabric_metadata, standard_metadata);
-   #endif // WITH_SPGW
-        if (fabric_metadata.skip_forwarding == _FALSE) {
-            forwarding.apply(hdr, fabric_metadata, standard_metadata);
-        }
-        acl.apply(hdr, fabric_metadata, standard_metadata);
-        if (fabric_metadata.skip_next == _FALSE) {
-            next.apply(hdr, fabric_metadata, standard_metadata);
-   #if defined WITH_INT
-            process_set_source_sink.apply(hdr, fabric_metadata, standard_metadata);
-   #endif // WITH_INT
-        }	
-   #ifdef WITH_BNG
-        bng_ingress.apply(hdr, fabric_metadata, standard_metadata);
-   #endif // WITH_BNG
-   }
-
-For example, a companion file, ``spgw.p4`` (not shown), implements the
-forwarding plane for the SPGW extension, which includes the GTP tunnel
-encapsulation/decapsulation required by the 3GPP cellular standard to
-connect the Trellis fabric to the base stations of the Radio Access
-Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
-termination, which is used by some Passive Optical Networks
-deployments to connect the Trellis fabric to home routers. (As an
-aside, the code fragment also illustrates the basic structure of
-``fabric.p4``\'s core functionality: lines 6-7 invoke the *filtering
-objective*, lines 12-14 invoke the *forwarding objective*, and lines
-16-17 invoke the *next objective*.)
-
 In addition to selecting which extensions to include, the pre-processor 
 also defines several constants, including the size of each logical 
 table.  Clearly, this implementation is a low-level approach to 
@@ -429,5 +428,3 @@ building configurable forwarding pipelines. Designing higher level
 language constructs for composition, including the ability to 
 dynamically add functions to the pipeline at runtime, is a subject of 
 on-going research. 
-
-    

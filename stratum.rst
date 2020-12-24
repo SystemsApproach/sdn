@@ -332,6 +332,24 @@ and vendors have an equally strong incentive to adhere to those
 models. YANG makes the process of creating, using, and modifying
 models programmable, and hence, adaptable to this iterative process.
 
+.. sidebar:: Cloud Best Practices
+
+	Our commentary on OpenConfig vs NETCONF is grounded in a
+	fundamental tenet of SDN, which is about bringing best
+	practices in cloud computing to the network. It involves big
+	ideas like implementing the network control plane as a
+	scalable cloud service, but it also includes more narrow
+	benefits, such as using modern messaging frameworks like
+	gRPC and protobufs.
+
+	The advantages in this particular case are tangible: (1)
+	improved and optimized transport using HTTP/2 and
+	protobuf-based marshalling instead of SSH plus hand-coded
+	marshalling; (2) binary data encodings instead of text-based
+	encoding; (3) diff-oriented data exchange instead of
+	snapshot-based responses; and (4) native support for server
+	push and client streaming.
+
 This is where an industry-wide standardization effort, called
 *OpenConfig*, comes into play. OpenConfig is a group of network
 operators trying to drive the industry towards a common set of
@@ -352,24 +370,6 @@ assessment is that gNMI has the weight of industry behind it as the
 future management protocol. For this reason, it
 is the one we highlight in our description of the full SDN software
 stack.
-
-.. sidebar:: Cloud Best Practices
-
-	Our commentary on OpenConfig vs NETCONF is grounded in a
-	fundamental tenet of SDN, which is about bringing best
-	practices in cloud computing to the network. It involves big
-	ideas like implementing the network control plane as a
-	scalable cloud service, but it also includes more narrow
-	benefits, such as using modern messaging frameworks like
-	gRPC and protobufs.
-
-	The advantages in this particular case are tangible: (1)
-	improved and optimized transport using HTTP/2 and
-	protobuf-based marshalling instead of SSH plus hand-coded
-	marshalling; (2) binary data encodings instead of text-based
-	encoding; (3) diff-oriented data exchange instead of
-	snapshot-based responses; and (4) native support for server
-	push and client streaming.
 
 OpenConfig defines a hierarchy of object types. For example, the YANG
 model for network interfaces looks like this:
@@ -459,12 +459,12 @@ in the protobuf specification:
 
 .. code-block:: proto
 
-	Service gNMI {
-		rpc Capabilities(CapabilityRequest) returns (CapabilityResponse);
-		rpc Get(GetRequest) returns (GetResponse);
-		rpc Set(SetRequest) returns (SetResponse);
-		rpc Subscribe(stream SubscribeRequest) returns (stream SubscribeResponse);
-	}
+  Service gNMI {
+      rpc Capabilities(CapabilityRequest) returns (CapabilityResponse);
+      rpc Get(GetRequest) returns (GetResponse);
+      rpc Set(SetRequest) returns (SetResponse);
+      rpc Subscribe(stream SubscribeRequest) returns (stream SubscribeResponse);
+  }
 
 The ``Capabilities`` method is used to retrieve the set of model
 definitions supported by the device. The ``Get`` and ``Set`` methods
@@ -505,27 +505,27 @@ the protobuf specification for the ``System`` service:
 
 .. code-block:: proto
 
-	service System {
-		rpc Ping(PingRequest) returns (stream PingResponse) {}
-		rpc Traceroute(TracerouteRequest) returns (stream TracerouteResponse) {}
-		rpc Time(TimeRequest) returns (TimeResponse) {}
-		rpc SetPackage(stream SetPackageRequest) returns (SetPackageResponse) {}
-		rpc Reboot(RebootRequest) returns (RebootResponse) {}
-	 	// ...
-	}
+  service System {
+      rpc Ping(PingRequest) returns (stream PingResponse) {}
+      rpc Traceroute(TracerouteRequest) returns (stream TracerouteResponse) {}
+      rpc Time(TimeRequest) returns (TimeResponse) {}
+      rpc SetPackage(stream SetPackageRequest) returns (SetPackageResponse) {}
+      rpc Reboot(RebootRequest) returns (RebootResponse) {}
+      // ...
+  }
 
 where, for example, the following protobuf message defines the
 ``RebootRequest`` parameter:
 
 .. code-block:: proto
 
-	message RebootRequest {
-		RebootMethod method = 1; // COLD, POWERDOWN, HALT, WARM, NSF, ...
-		uint64 delay = 2; // Delay in nanoseconds before issuing reboot.
-	  	string message = 3; // Informational reason for the reboot.
-	  	repeated types.Path subcomponents = 4; // Optional sub-components to reboot.
-	  	bool force = 5; // Force reboot if sanity checks fail. (ex. uncommitted configuration)
-	}
+  message RebootRequest {
+      RebootMethod method = 1; // COLD, POWERDOWN, HALT, WARM, NSF, ...
+      uint64 delay = 2; // Delay in nanoseconds before issuing reboot.
+      string message = 3; // Informational reason for the reboot.
+      repeated types.Path subcomponents = 4; // Optional sub-components to reboot.
+      bool force = 5; // Force reboot if sanity checks fail. (ex. uncommitted configuration)
+  }
 
 As a reminder, if you are unfamiliar with protobufs, a brief overview is available online.
 
