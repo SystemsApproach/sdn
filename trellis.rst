@@ -218,11 +218,11 @@ learn the existing routes as follows:
        Total: 2
 
     Table: ipv6
-    B R  Network                                     Next Hop                                Source (Node)
-    > *  2000::7700/120                              fe80::288:ff:fe00:1                     FPM (127.0.0.1)
-    > *  2000::8800/120                              fe80::288:ff:fe00:2                     FPM (127.0.0.1)
-    > *  2000::9900/120                              fe80::288:ff:fe00:1                     FPM (127.0.0.1)
-      *  2000::9900/120                              fe80::288:ff:fe00:2                     FPM (127.0.0.1)
+    B R  Network           Next Hop              Source (Node)
+    > *  2000::7700/120    fe80::288:ff:fe00:1   FPM (127.0.0.1)
+    > *  2000::8800/120    fe80::288:ff:fe00:2   FPM (127.0.0.1)
+    > *  2000::9900/120    fe80::288:ff:fe00:1   FPM (127.0.0.1)
+      *  2000::9900/120    fe80::288:ff:fe00:2   FPM (127.0.0.1)
        Total: 3
 
 Similarly, one can add a static route to the Route Service:
