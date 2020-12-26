@@ -384,19 +384,6 @@ of the options are beyond to scope of this book, but at a high level:
    #endif // BNG
    }
 
-For example, a companion file, ``spgw.p4`` (not shown), implements the
-forwarding plane for the SPGW extension, which includes the GTP tunnel
-encapsulation/decapsulation required by the 3GPP cellular standard to
-connect the Trellis fabric to the base stations of the Radio Access
-Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
-termination, which is used by some Passive Optical Networks
-deployments to connect the Trellis fabric to home routers. Finally, it
-is worth nothing that the code fragment illustrates the basic
-structure of ``fabric.p4``\'s core functionality, which first applies
-the *filtering objective* (``filtering.apply`` and ``acl.apply``),
-then applies the *forwarding objective* (``forwarding.apply``), and
-finally applies the *next objective* (``next.apply``).
-
 .. sidebar:: VNF Off-loading
 
     The SPGW and BNG extensions are examples of an optimization
@@ -420,6 +407,19 @@ finally applies the *next objective* (``next.apply``).
     from a combination of forwarding functions, and we now have more
     options as to what hardware chip is the most appropriate target
     for implementing each such function.
+    
+For example, a companion file, ``spgw.p4`` (not shown), implements the
+forwarding plane for the SPGW extension, which includes the GTP tunnel
+encapsulation/decapsulation required by the 3GPP cellular standard to
+connect the Trellis fabric to the base stations of the Radio Access
+Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
+termination, which is used by some Passive Optical Networks
+deployments to connect the Trellis fabric to home routers. Finally, it
+is worth nothing that the code fragment illustrates the basic
+structure of ``fabric.p4``\'s core functionality, which first applies
+the *filtering objective* (``filtering.apply`` and ``acl.apply``),
+then applies the *forwarding objective* (``forwarding.apply``), and
+finally applies the *next objective* (``next.apply``).
 
 In addition to selecting which extensions to include, the pre-processor 
 also defines several constants, including the size of each logical 

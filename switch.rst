@@ -486,27 +486,6 @@ discover we need a new feature.
        narrowly written to support Trellis (see Chapter 7) than
        serving as a general-purpose L2/L3 data plane.
 
-To summarize, the overarching goal is to enable the development of
-control apps without regard to the specific details of the device
-forwarding pipeline. Introducing the P4 architecture model helps meet
-this goal, as it enables portability of the same forwarding pipeline
-(P4 program) across multiple targets (switching chips) that support
-the corresponding architecture model. However, it doesn’t totally
-solve the problem because the industry is still free to define
-multiple forwarding pipelines. But looking beyond the current
-state-of-affairs, having one or more programmable switches opens the
-door to programming the control app(s) and the forwarding pipeline in
-tandem. When everything is programmable, all the way down to the chip
-that forwards packets in the data plane, exposing that programmability
-to developers is the ultimate goal. If you have an innovative new
-function you want to inject into the network, you write both the
-control plane and data plane halves of that function, and turn the
-crank on the toolchain to load them into the SDN software stack! This
-is a significant step forward from a few years ago, where you might
-have been able to modify a routing protocol (because it was all in
-software) but you had no chance to change the forwarding pipeline
-because it was all in fixed-function hardware.
-
 .. sidebar:: Is the Complexity Worth It?
 
 	At this point you may be wondering if all the complexity being
@@ -537,6 +516,27 @@ because it was all in fixed-function hardware.
 	history also includes *many* examples of how opening
 	closed, fixed-function systems leads to qualitatively new
 	capabilities.
+
+To summarize, the overarching goal is to enable the development of
+control apps without regard to the specific details of the device
+forwarding pipeline. Introducing the P4 architecture model helps meet
+this goal, as it enables portability of the same forwarding pipeline
+(P4 program) across multiple targets (switching chips) that support
+the corresponding architecture model. However, it doesn’t totally
+solve the problem because the industry is still free to define
+multiple forwarding pipelines. But looking beyond the current
+state-of-affairs, having one or more programmable switches opens the
+door to programming the control app(s) and the forwarding pipeline in
+tandem. When everything is programmable, all the way down to the chip
+that forwards packets in the data plane, exposing that programmability
+to developers is the ultimate goal. If you have an innovative new
+function you want to inject into the network, you write both the
+control plane and data plane halves of that function, and turn the
+crank on the toolchain to load them into the SDN software stack! This
+is a significant step forward from a few years ago, where you might
+have been able to modify a routing protocol (because it was all in
+software) but you had no chance to change the forwarding pipeline
+because it was all in fixed-function hardware.
 
 4.4 P4 Programs
 ---------------------

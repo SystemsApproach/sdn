@@ -460,10 +460,12 @@ in the protobuf specification:
 .. code-block:: proto
 
   Service gNMI {
-      rpc Capabilities(CapabilityRequest) returns (CapabilityResponse);
+      rpc Capabilities(CapabilityRequest)
+          returns (CapabilityResponse);
       rpc Get(GetRequest) returns (GetResponse);
       rpc Set(SetRequest) returns (SetResponse);
-      rpc Subscribe(stream SubscribeRequest) returns (stream SubscribeResponse);
+      rpc Subscribe(stream SubscribeRequest)
+          returns (stream SubscribeResponse);
   }
 
 The ``Capabilities`` method is used to retrieve the set of model
@@ -506,11 +508,16 @@ the protobuf specification for the ``System`` service:
 .. code-block:: proto
 
   service System {
-      rpc Ping(PingRequest) returns (stream PingResponse) {}
-      rpc Traceroute(TracerouteRequest) returns (stream TracerouteResponse) {}
-      rpc Time(TimeRequest) returns (TimeResponse) {}
-      rpc SetPackage(stream SetPackageRequest) returns (SetPackageResponse) {}
-      rpc Reboot(RebootRequest) returns (RebootResponse) {}
+      rpc Ping(PingRequest)
+          returns (stream PingResponse) {}
+      rpc Traceroute(TracerouteRequest)
+	  returns (stream TracerouteResponse) {}
+      rpc Time(TimeRequest)
+          returns (TimeResponse) {}
+      rpc SetPackage(stream SetPackageRequest)
+          returns (SetPackageResponse) {}
+      rpc Reboot(RebootRequest)
+          returns (RebootResponse) {}
       // ...
   }
 
@@ -520,11 +527,16 @@ where, for example, the following protobuf message defines the
 .. code-block:: proto
 
   message RebootRequest {
-      RebootMethod method = 1; // COLD, POWERDOWN, HALT, WARM, NSF, ...
-      uint64 delay = 2; // Delay in nanoseconds before issuing reboot.
-      string message = 3; // Informational reason for the reboot.
-      repeated types.Path subcomponents = 4; // Optional sub-components to reboot.
-      bool force = 5; // Force reboot if sanity checks fail. (ex. uncommitted configuration)
+      RebootMethod method = 1; // COLD, POWERDOWN,
+                  // HALT, WARM, NSF, ...
+      uint64 delay = 2; // Delay in nanoseconds before
+                  // issuing reboot.
+      string message = 3; // Informational reason for
+                  // the reboot.
+      repeated types.Path subcomponents = 4; // Optional
+                  // sub-components to reboot.
+      bool force = 5; // Force reboot if sanity checks
+                  // fail. (ex. uncommitted config)
   }
 
 As a reminder, if you are unfamiliar with protobufs, a brief overview is available online.

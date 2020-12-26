@@ -110,6 +110,30 @@ the vSwitch forwards packets from input port to output port, but these
 are virtual ports connected to VMs (or containers) rather than physical ports
 connected to physical machines.
 
+.. sidebar:: Host-Centric Perspective
+
+	This book adopts a network-oriented perspective of SDN, one
+	that treats the end-host (both the virtual switch running in
+	the host OS and the NIC connecting the host to the network) as
+	an extension of the network, running under the control of a
+	Network OS. A more host-centric perspective is equally valid,
+	and perhaps more importantly, comes with a robust ecosystem of
+	open source software that runs as part of the host OS.
+
+	DPDK is one example, but another gaining traction is the
+	combination of eBPF (extended Berkeley Packet Filter) and XDP
+	(eXpress Data Path). When used together, they provide a way to
+	program generalized Match-Action rules in the OS kernel, or
+	potentially even on a SmartNIC.  This is similar in spirit to
+	OpenFlow and P4, except they allow for the Action part to be
+	an arbitrary program. In contrast, OpenFlow defines a fixed
+	set of Actions, and P4 is a restricted language for expressing
+	Actions (e.g., it does not include loops). This is necessary
+	when the Action must execute within a fixed cycle budget, as
+	is the case for a switch-based forwarding pipeline. It also
+	enables formal verification of the data plane, a promising
+	opportunity discussed in Chapter 8.
+
 Fortunately, we can view a vSwitch as behaving just like a physical
 switch, including the APIs it supports. That a vSwitch is implemented
 in software on a general-purpose processor rather than in an ASIC is
@@ -137,32 +161,7 @@ forwarding pipeline found on the network switches. Again, there are a
 range of possible implementation choices, including both FPGA and
 ASIC, as well as whether the NIC is fixed-function or programmable
 (using P4). For our purposes, we will treat such Smart NICs as yet
-another switching element along the end-to-end path.
-
-.. sidebar:: Host-Centric Perspective
-
-	This book adopts a network-oriented perspective of SDN, one
-	that treats the end-host (both the virtual switch running in
-	the host OS and the NIC connecting the host to the network) as
-	an extension of the network, running under the control of a
-	Network OS. A more host-centric perspective is equally valid,
-	and perhaps more importantly, comes with a robust ecosystem of
-	open source software that runs as part of the host OS.
-
-	DPDK is one example, but another gaining traction is the
-	combination of eBPF (extended Berkeley Packet Filter) and XDP
-	(eXpress Data Path). When used together, they provide a way to
-	program generalized Match-Action rules in the OS kernel, or
-	potentially even on a SmartNIC.  This is similar in spirit to
-	OpenFlow and P4, except they allow for the Action part to be
-	an arbitrary program. In contrast, OpenFlow defines a fixed
-	set of Actions, and P4 is a restricted language for expressing
-	Actions (e.g., it does not include loops). This is necessary
-	when the Action must execute within a fixed cycle budget, as
-	is the case for a switch-based forwarding pipeline. It also
-	enables formal verification of the data plane, a promising
-	opportunity discussed in Chapter 8.
-	
+another switching element along the end-to-end path.	
 
 3.2 Bare-Metal Switch
 -------------------------
