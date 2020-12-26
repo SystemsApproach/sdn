@@ -138,7 +138,7 @@ html_static_path = ['_static']
 html_favicon = 'bridge.ico'
 
 # HTML Index
-html_use_index = 'False'
+html_use_index = False
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -215,7 +215,7 @@ epub_title = project
 epub_description = 'The New Network Software Stack'
 epub_cover = ('_static/cover.jpg', '')
 epub_show_urls = 'False'
-epub_use_index = 'False'
+epub_use_index = False
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
