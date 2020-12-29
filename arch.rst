@@ -112,15 +112,15 @@ connected to physical machines.
 
 .. sidebar:: Host-Centric Perspective
 
-	This book adopts a network-oriented perspective of SDN, one
+	*This book adopts a network-oriented perspective of SDN, one
 	that treats the end-host (both the virtual switch running in
 	the host OS and the NIC connecting the host to the network) as
 	an extension of the network, running under the control of a
 	Network OS. A more host-centric perspective is equally valid,
 	and perhaps more importantly, comes with a robust ecosystem of
-	open source software that runs as part of the host OS.
+	open source software that runs as part of the host OS.*
 
-	DPDK is one example, but another gaining traction is the
+	*DPDK is one example, but another gaining traction is the
 	combination of eBPF (extended Berkeley Packet Filter) and XDP
 	(eXpress Data Path). When used together, they provide a way to
 	program generalized Match-Action rules in the OS kernel, or
@@ -132,7 +132,7 @@ connected to physical machines.
 	when the Action must execute within a fixed cycle budget, as
 	is the case for a switch-based forwarding pipeline. It also
 	enables formal verification of the data plane, a promising
-	opportunity discussed in Chapter 8.
+	opportunity discussed in Chapter 8.*
 
 Fortunately, we can view a vSwitch as behaving just like a physical
 switch, including the APIs it supports. That a vSwitch is implemented

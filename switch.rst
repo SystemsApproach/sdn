@@ -488,7 +488,7 @@ discover we need a new feature.
 
 .. sidebar:: Is the Complexity Worth It?
 
-	At this point you may be wondering if all the complexity being
+	*At this point you may be wondering if all the complexity being
 	introduced is worth it, and we haven't even gotten to the
 	control plane yet! What we've covered so far is complex with
 	or without SDN. That's because we're working at the SW/HW
@@ -496,26 +496,26 @@ discover we need a new feature.
 	rates measured in Terabits-per-second. This complexity use to
 	be hidden inside proprietary devices. All that SDN has done is
 	put pressure on the marketplace to open up that space so
-	others can innovate.
+	others can innovate.*
 
-	But before anyone can innovate, the first step is to reproduce
+	*But before anyone can innovate, the first step is to reproduce
 	what we had running before, except now using open interfaces
 	and programmable hardware. Even though this chapter uses
-	``forward.p4`` as a hypothetical new data plane function
-	someone might write, it's really programs like ``switch.p4``
+	forward.p4 as a hypothetical new data plane function
+	someone might write, it's really programs like switch.p4
 	(plus the Switch OS described in the next chapter) that
 	establish parity with legacy networking gear. Once we have
-	that in place, we are ready to do something new. But what?
+	that in place, we are ready to do something new. But what?*
 
-	It is not our goal to answer that question with any certainty.
+	*It is not our goal to answer that question with any certainty.
 	The VNF off-loading and INT examples introduced in Chapter 2
 	are a start. Chapter 8 goes on to introduce closed-loop
 	verification and software-defined 5G networks as potential
 	killer-apps. But history teaches us that killer-apps are
 	impossible to predict with any accuracy. On the other hand,
-	history also includes *many* examples of how opening
+	history also includes many examples of how opening
 	closed, fixed-function systems leads to qualitatively new
-	capabilities.
+	capabilities.*
 
 To summarize, the overarching goal is to enable the development of
 control apps without regard to the specific details of the device
@@ -894,12 +894,12 @@ references to all the other routines defined above.
 	****************************************************/
 
 	V1Switch(
-	    MyParser(),
-	    MyVerifyChecksum(),
-	    MyIngress(),
-	    MyEgress(),
-	    MyComputeChecksum(),
-	    MyDeparser()
+		MyParser(),
+		MyVerifyChecksum(),
+		MyIngress(),
+		MyEgress(),
+		MyComputeChecksum(),
+		MyDeparser()
 	) main;
 
 Keep in mind this example is minimal, but it does serve to illustrate

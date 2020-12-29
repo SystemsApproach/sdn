@@ -386,17 +386,17 @@ of the options are beyond to scope of this book, but at a high level:
 
 .. sidebar:: VNF Off-loading
 
-    The SPGW and BNG extensions are examples of an optimization
-    technique sometimes called *VNF off-loading*. VNF is an acronym
-    for *Virtual Network Function*, which refers to functionality that
+    *The SPGW and BNG extensions are examples of an optimization
+    technique sometimes called VNF off-loading. VNF is an acronym
+    for Virtual Network Function, which refers to functionality that
     sometimes runs as software in virtual machines. Off-loading refers
     to the idea of re-implementing this functionality to run in switch
     forwarding pipeline, rather than on a general-purpose server. This
     generally leads to better performance because packets can be
     forwarded from source to destination without having to be diverted
-    to a server.
+    to a server.*
 
-    Calling out functions like SPGW and BNG as being an off-load
+    *Calling out functions like SPGW and BNG as being an off-load
     "optimization" is arguably an example of selective memory. It's
     just as accurate to say that we've off-loaded IP to the switch
     since IP forwarding also sometimes runs in software on
@@ -406,7 +406,7 @@ of the options are beyond to scope of this book, but at a high level:
     respectively. In the grand scheme of things, networks are built
     from a combination of forwarding functions, and we now have more
     options as to what hardware chip is the most appropriate target
-    for implementing each such function.
+    for implementing each such function.*
     
 For example, a companion file, ``spgw.p4`` (not shown), implements the
 forwarding plane for the SPGW extension, which includes the GTP tunnel

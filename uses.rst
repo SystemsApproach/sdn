@@ -111,7 +111,7 @@ impact of attacks spreading throughout an enterprise or data center.
 
 .. sidebar:: Bringing SDN to Life
 
-	As we saw in Chapter 1, the ideas behind SDN had been in the
+	*As we saw in Chapter 1, the ideas behind SDN had been in the
 	works for years, but there were two related events
 	that, looking back, had a significant impact in bringing the
 	concept of programmable networks from theory to practice. First
@@ -125,9 +125,9 @@ impact of attacks spreading throughout an enterprise or data center.
 	application of SDN. Nicira's network virtualization platform
 	first shipped in 2011, establishing the category and
 	ultimately paving the way for VMware's acquisition of the
-	company and subsequent development of VMware NSX.
+	company and subsequent development of VMware NSX.*
 
-	At around the same time, McKeown and Shenker also created
+	*At around the same time, McKeown and Shenker also created
 	three non-profit organizations to catalyze the SDN
 	transformation across the networking industry: the Open
 	Networking Foundation (ONF) took on responsibility for
@@ -139,12 +139,12 @@ impact of attacks spreading throughout an enterprise or data center.
 	together academics and practitioners interested in SDN. In
 	2018, ONF and ON.Lab merged, and the combined organization has
 	focused on building the open source software that is
-	highlighted throughout this book.
+	highlighted throughout this book.*
 
-        Of course there have been many other startups, conferences,
+        *Of course there have been many other startups, conferences,
         and consortia that have driven the development of SDN to where
         it is today, and the effects of their work can be seen
-        throughout this chapter.
+        throughout this chapter.*
 
 
 It's worth noting that to create virtual networks as we have

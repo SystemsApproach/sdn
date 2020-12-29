@@ -334,21 +334,21 @@ models programmable, and hence, adaptable to this iterative process.
 
 .. sidebar:: Cloud Best Practices
 
-	Our commentary on OpenConfig vs NETCONF is grounded in a
+	*Our commentary on OpenConfig vs NETCONF is grounded in a
 	fundamental tenet of SDN, which is about bringing best
 	practices in cloud computing to the network. It involves big
 	ideas like implementing the network control plane as a
 	scalable cloud service, but it also includes more narrow
 	benefits, such as using modern messaging frameworks like
-	gRPC and protobufs.
+	gRPC and protobufs.*
 
-	The advantages in this particular case are tangible: (1)
+	*The advantages in this particular case are tangible: (1)
 	improved and optimized transport using HTTP/2 and
 	protobuf-based marshalling instead of SSH plus hand-coded
 	marshalling; (2) binary data encodings instead of text-based
 	encoding; (3) diff-oriented data exchange instead of
 	snapshot-based responses; and (4) native support for server
-	push and client streaming.
+	push and client streaming.*
 
 This is where an industry-wide standardization effort, called
 *OpenConfig*, comes into play. OpenConfig is a group of network

@@ -493,16 +493,16 @@ virtual machines or containers.
 
 .. sidebar:: Domain of Control
 
-	The “Centralized vs Decentralized” framing of this section is
+	*The “Centralized vs Decentralized” framing of this section is
 	intended to characterize one dimension of the SDN design
 	space, not to indicate that network operators face an
 	either-or situation. There are many factors that impact where
 	a given operator comes down on this spectrum, but one place to
 	start is to scope the domain to which SDN is being applied. We
 	discuss example use cases in Chapter 2, but there is a natural
-	evolution of networking that highlights the thought process.
+	evolution of networking that highlights the thought process.*
 
-	Historically, there has been one control plane instance per
+	*Historically, there has been one control plane instance per
 	switch and they both run together on the same box. As simple
 	routers grew into chassis routers, there were typically N
 	control plane instances for M line cards. They ran on discrete
@@ -515,7 +515,7 @@ virtual machines or containers.
 	distribution and management, rather than being tied to
 	standards. The key is to find domains for which it is possible
 	to optimize performance with a logically centralized control
-	plane.
+	plane.*
 
 Returning to the original question of centralized versus distributed 
 control plane, proponents of the latter often base their rationale on 
