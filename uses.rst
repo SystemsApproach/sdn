@@ -214,7 +214,7 @@ hops (server-leaf-spine-leaf-server in the inter-rack case).
 
 .. _fig-leaf-spine:
 .. figure:: figures/Slide20.png
-    :width: 400px
+    :width: 450px
     :align: center
 
     Example of a leaf-spine switching fabric common to cloud

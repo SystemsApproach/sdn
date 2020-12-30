@@ -86,7 +86,7 @@ replicated on three to five servers.
 
 .. _fig-netconfig:
 .. figure:: figures/Slide31.png
-    :width: 400px
+    :width: 500px
     :align: center
 
     High availability through a combination of dual-homing, link
@@ -151,7 +151,7 @@ subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
 
 .. _fig-sr:
 .. figure:: figures/Slide32.png
-    :width: 400px
+    :width: 550px
     :align: center
 
     Example of Segment Routing being used to forward traffic between a

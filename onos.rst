@@ -88,7 +88,7 @@ currently operates in a single trust domain.
 
 .. _fig-ztp:
 .. figure:: figures/Slide28.png 
-    :width: 400px 
+    :width: 500px 
     :align: center 
 
     Example of a Zero-Touch Provisioning (ZTP) application taking a

@@ -695,7 +695,7 @@ OF-DPA pipeline looks like.
 
 .. _fig-ofdpa2:
 .. figure:: figures/Slide14.png 
-    :width: 650px 
+    :width: 700px 
     :align: center
 
     Logical fixed-function pipeline defined by OF-DPA.
