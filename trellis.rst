@@ -203,35 +203,11 @@ alternatively, through a CLI that is a thin wrapper around REST's
 (because it is easier to read), one can query the Route service to
 learn the existing routes as follows:
 
-.. code-block:: text
-
-    onos> routes
-
-    B: Best route, R: Resolved route
-
-    Table: ipv4
-    B R  Network            Next Hop        Source (Node)
-         0.0.0.0/0          172.16.0.1      FPM (127.0.0.1)
-    > *  1.1.0.0/18         10.0.1.20       STATIC
-    > *  10.0.99.0/24       10.0.1.1        FPM (127.0.0.1)
-      *  10.0.99.0/24       10.0.6.1        FPM (127.0.0.1)
-       Total: 2
-
-    Table: ipv6
-    B R  Network           Next Hop              Source (Node)
-    > *  2000::7700/120    fe80::288:ff:fe00:1   FPM (127.0.0.1)
-    > *  2000::8800/120    fe80::288:ff:fe00:2   FPM (127.0.0.1)
-    > *  2000::9900/120    fe80::288:ff:fe00:1   FPM (127.0.0.1)
-      *  2000::9900/120    fe80::288:ff:fe00:2   FPM (127.0.0.1)
-       Total: 3
+.. literalinclude:: code/onos1.txt
 
 Similarly, one can add a static route to the Route Service:
 
-.. code-block:: console
-
-    onos> route-add <prefix> <nexthop>
-    onos> route-add 1.1.0.0/18 10.0.1.20
-    onos> route-add 2020::101/120 2000::1	
+.. literalinclude:: code/onos2.txt
 
 One thing to note about these examples is that there are two possible
 sources for routes. One is that the route is ``STATIC``, which usually
@@ -254,17 +230,13 @@ and 4 in :numref:`Figure %s <fig-netconfig>`).
 The story with multicast is similar. Again using the ONOS CLI, it is
 possible to create a new multicast route and add a sink to it. For example:
 
-.. code-block:: console
-
-    onos> mcast-host-join -sAddr * -gAddr 224.0.0.1 -srcs 00:AA:00:00:00:01/None -srcs 00:AA:00:00:00:05/None -sinks 00:AA:00:00:00:03/None -sinks 00:CC:00:00:00:01/None
+.. literalinclude:: code/onos3.txt
 
 specifies *Any-Source Multicast (ASM)*  (``sAddr *``), a multicast group address
 (``gAddr``), the group source addresses (``srcs``) and the group sink
 addresses (``sinks``). A sink can then be removed as follows:
 
-.. code-block:: console
-
-    onos> mcast-sink-delete -sAddr * -gAddr 224.0.0.1 -h  00:AA:00:00:00:03/None
+.. literalinclude:: code/onos4.txt
 
 Again, there is no PIM running, but instead, Trellis offers a
 programmatic interface for network operators to define a multicast tree
@@ -356,33 +328,7 @@ of the options are beyond to scope of this book, but at a high level:
 * **INT (Inband Network Telemetry):** Adds metric collection and
   telemetry output directives.
 
-.. code-block:: C
-		
-   apply {
-   #ifdef SPGW
-        spgw_normalizer.apply(hdr.gtpu.isValid(), hdr.gtpu_ipv4, hdr.gtpu_udp,
-                              hdr.ipv4, hdr.udp, hdr.inner_ipv4, hdr.inner_udp);
-   #endif // SPGW
-        pkt_io_ingress.apply(hdr, fabric_metadata, standard_metadata);
-        filtering.apply(hdr, fabric_metadata, standard_metadata);
-   #ifdef SPGW
-        spgw_ingress.apply(hdr.gtpu_ipv4, hdr.gtpu_udp, hdr.gtpu,
-                           hdr.ipv4, hdr.udp, fabric_metadata, standard_metadata);
-   #endif // SPGW
-        if (fabric_metadata.skip_forwarding == _FALSE) {
-            forwarding.apply(hdr, fabric_metadata, standard_metadata);
-        }
-        acl.apply(hdr, fabric_metadata, standard_metadata);
-        if (fabric_metadata.skip_next == _FALSE) {
-            next.apply(hdr, fabric_metadata, standard_metadata);
-   #ifdef INT
-            process_set_source_sink.apply(hdr, fabric_metadata, standard_metadata);
-   #endif // INT
-        }	
-   #ifdef BNG
-        bng_ingress.apply(hdr, fabric_metadata, standard_metadata);
-   #endif // BNG
-   }
+.. literalinclude:: code/fabric.p4
 
 .. sidebar:: VNF Off-loading
 
@@ -417,8 +363,8 @@ termination, which is used by some Passive Optical Networks
 deployments to connect the Trellis fabric to home routers. Finally, it
 is worth nothing that the code fragment illustrates the basic
 structure of ``fabric.p4``\'s core functionality, which first applies
-the *filtering objective* (``filtering.apply`` and ``acl.apply``),
-then applies the *forwarding objective* (``forwarding.apply``), and
+the *filtering objective* (``filtering.apply``), then applies the
+*forwarding objective* (``forwarding.apply`` and ``acl.apply``), and
 finally applies the *next objective* (``next.apply``).
 
 In addition to selecting which extensions to include, the pre-processor 

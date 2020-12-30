@@ -1,0 +1,18 @@
+Module: openconfig-if-ethernet
+	augment /ocif:interfaces/ocif:interface:
+		+--rw ethernet
+		+--rw config
+		 |	+--rw mac-address?
+		 |	+--rw auto-negotiate?
+		 |	+--rw duplex-mode?
+		 |	+--rw port-speed?
+		 |	+--rw enable-flow-control? 
+		+--ro state
+			+--ro mac-address?
+			+--ro auto-negotiate?
+			+--ro duplex-mode?
+			+--ro port-speed?
+			+--ro enable-flow-control?
+			+--ro hw-mac-address?
+			+--ro counters
+			       ...

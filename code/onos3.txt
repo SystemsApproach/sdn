@@ -1,0 +1,6 @@
+onos> mcast-host-join -sAddr *
+    -gAddr 224.0.0.1
+    -srcs 00:AA:00:00:00:01/None
+    -srcs 00:AA:00:00:00:05/None
+    -sinks 00:AA:00:00:00:03/None
+    -sinks 00:CC:00:00:00:01/None

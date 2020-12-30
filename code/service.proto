@@ -1,0 +1,8 @@
+Service gNMI {
+    rpc Capabilities(CapabilityRequest)
+        returns (CapabilityResponse);
+    rpc Get(GetRequest) returns (GetResponse);
+    rpc Set(SetRequest) returns (SetResponse);
+    rpc Subscribe(stream SubscribeRequest)
+        returns (stream SubscribeResponse);
+}

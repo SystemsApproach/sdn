@@ -1,0 +1,10 @@
+service System {
+    rpc Ping(PingRequest) returns (stream PingResponse) {}
+    rpc Traceroute(TracerouteRequest)
+        returns (stream TracerouteResponse) {}
+    rpc Time(TimeRequest) returns (TimeResponse) {}
+    rpc SetPackage(stream SetPackageRequest)
+        returns (SetPackageResponse) {}
+    rpc Reboot(RebootRequest) returns (RebootResponse) {}
+    // ...
+}

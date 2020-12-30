@@ -160,19 +160,7 @@ plane. Using the simple forwarding program presented in Section 4.4 as
 an example, we see that ``forward.p4`` defines a lookup table, which
 we restate here:
 
-.. code-block:: c
-
-    table ipv4_lpm {
-        key = {
-            hdr.ipv4.dstAddr: lpm;
-        }
-        actions = {
-            ipv4_forward;
-            drop;
-            NoAction;
-        }
-        size = 1024;
-        default_action = drop();
+.. literalinclude:: code/table.p4
 
 Correspondingly, the file ``forward.p4info`` output by the compiler
 *specifies* the P4Runtime Contract. As shown in the following example,
@@ -183,62 +171,7 @@ example, the ``table`` definition identifies the field to match
 (``hdr.ipv4.dstAddr``) and the type of match (``LPM``), along with the
 three possible ``actions``.
 
-.. code-block:: proto
-
-	actions {
-	    preamble {
-	        id: 16800567
-	        name: "NoAction"
-	        alias: "NoAction"
-	    }
-	}
-	actions {
-	    preamble {
-	        id: 16805608
-	        name: "MyIngress.drop"
-	        alias: "drop"
-	    }
-	}
-	actions {
-	    preamble {
-	        id: 16799317
-	        name: "MyIngress.ipv4_forward"
-	        alias: "ipv4_forward"
-	    }
-	    params {
-	        id: 1
-	        name: "dstAddr"
-	        bitwidth: 48
-	    }
-	    params {
-	        id: 2
-	        name: "port"
-	        bitwidth: 9
-	    }
-	}
-	tables {
-	    preamble {
-	        id: 33574068
-	        name: "MyIngress.ipv4_lpm"
-	        alias: "ipv4_lpm"
-	    }
-	    match_fields {
-	        id: 1
-	        name: "hdr.ipv4.dstAddr"
-	        bitwidth: 32
-	        match_type: LPM
-	    }
-	    action_refs {
-	        id: 16799317
-	    }
-	    action_refs {
-	        id: 16805608
-	    }
-	    action_refs {
-	        id: 16800567
-	    }
-	    size: 1024
-	}
+.. literalinclude:: code/actions.p4
 
 The gRPC toolchain takes over from there. For this to work, the
 toolchain must be aware of which P4 language elements are
@@ -266,22 +199,7 @@ interact with the switch, we can look at a simpler example in which a
 Python program implements the controller, and writes an entry directly
 into the table (assisted by a P4Runtime library).
 
-.. code-block:: py
-
-	import p4runtime_lib.helper
-	...
-	table_entry = p4info_helper.buildTableEntry(
-	    table_name="MyIngress.ipv4_lpm",
-	    match_fields={
-	        "hdr.ipv4.dstAddr": (dst_ip_addr, 32)
-	    },
-	    action_name="MyIngress.ipv4_forward",
-	    action_params={
-	        "dstAddr": next_hop_mac_addr,
-	        "port": outport,
-	    })
-	ingress_sw.WriteTableEntry(table_entry)
-
+.. literalinclude:: code/p4rt.py
 
 5.3 gNMI and gNOI
 --------------------
@@ -374,43 +292,11 @@ stack.
 OpenConfig defines a hierarchy of object types. For example, the YANG
 model for network interfaces looks like this:
 
-.. code-block:: xml
-
-	Module: openconfig-interfaces
-		+--rw interfaces	 							
-			+--rw interface*   [name]
-				+--rw name
-				+--rw config
-			 	 |   ...	
-				+--ro state
-				 |    ...	 							
-				+--rw hold-time	
-				 |    ...	 
-				+--rw subinterfaces 							
-			    	 |    ... 
+.. literalinclude:: code/iface.yang
 
 This is a base model that can be augmented, for example, to model an Ethernet interface:
 
-.. code-block:: xml
-
-	Module: openconfig-if-ethernet
-		augment /ocif:interfaces/ocif:interface:
-			+--rw ethernet
-			+--rw config
-			 |	+--rw mac-address?
-			 |	+--rw auto-negotiate?
-			 |	+--rw duplex-mode?
-			 |	+--rw port-speed?
-			 |	+--rw enable-flow-control? 
-			+--ro state
-				+--ro mac-address?
-				+--ro auto-negotiate?
-				+--ro duplex-mode?
-				+--ro port-speed?
-				+--ro enable-flow-control?
-				+--ro hw-mac-address?
-				+--ro counters
-				       ...
+.. literalinclude:: code/eth.yang
 
 Other similar augmentations might be defined to support link
 aggregation, IP address assignment, VLAN tags, and so on.
@@ -457,16 +343,7 @@ The second point is that gNMI defines a specific set of gRPC methods to
 operate on these models. The set is defined collectively as a Service
 in the protobuf specification:
 
-.. code-block:: proto
-
-  Service gNMI {
-      rpc Capabilities(CapabilityRequest)
-          returns (CapabilityResponse);
-      rpc Get(GetRequest) returns (GetResponse);
-      rpc Set(SetRequest) returns (SetResponse);
-      rpc Subscribe(stream SubscribeRequest)
-          returns (stream SubscribeResponse);
-  }
+.. literalinclude:: code/service.proto
 
 The ``Capabilities`` method is used to retrieve the set of model
 definitions supported by the device. The ``Get`` and ``Set`` methods
@@ -505,39 +382,12 @@ aligned to collectively be referred to as gNXI.
 As an illustrative example of what gNOI is used for, the following is
 the protobuf specification for the ``System`` service:
 
-.. code-block:: proto
-
-  service System {
-      rpc Ping(PingRequest)
-          returns (stream PingResponse) {}
-      rpc Traceroute(TracerouteRequest)
-	  returns (stream TracerouteResponse) {}
-      rpc Time(TimeRequest)
-          returns (TimeResponse) {}
-      rpc SetPackage(stream SetPackageRequest)
-          returns (SetPackageResponse) {}
-      rpc Reboot(RebootRequest)
-          returns (RebootResponse) {}
-      // ...
-  }
+.. literalinclude:: code/system.proto
 
 where, for example, the following protobuf message defines the
 ``RebootRequest`` parameter:
 
-.. code-block:: proto
-
-  message RebootRequest {
-      RebootMethod method = 1; // COLD, POWERDOWN,
-                  // HALT, WARM, NSF, ...
-      uint64 delay = 2; // Delay in nanoseconds before
-                  // issuing reboot.
-      string message = 3; // Informational reason for
-                  // the reboot.
-      repeated types.Path subcomponents = 4; // Optional
-                  // sub-components to reboot.
-      bool force = 5; // Force reboot if sanity checks
-                  // fail. (ex. uncommitted config)
-  }
+.. literalinclude:: code/reboot.proto
 
 As a reminder, if you are unfamiliar with protobufs, a brief overview is available online.
 

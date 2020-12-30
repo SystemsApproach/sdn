@@ -1,0 +1,3 @@
+onos> mcast-sink-delete -sAddr *
+    -gAddr 224.0.0.1
+    -h  00:AA:00:00:00:03/None

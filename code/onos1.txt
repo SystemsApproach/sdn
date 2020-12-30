@@ -1,0 +1,20 @@
+onos> routes
+
+B: Best route, R: Resolved route
+
+Table: ipv4
+B R  Network            Next Hop        Source (Node)
+     0.0.0.0/0          172.16.0.1      FPM (127.0.0.1)
+> *  1.1.0.0/18         10.0.1.20       STATIC
+> *  10.0.99.0/24       10.0.1.1        FPM (127.0.0.1)
+  *  10.0.99.0/24       10.0.6.1        FPM (127.0.0.1)
+   Total: 2
+
+Table: ipv6
+B R  Network                   Next Hop                  Source (Node)
+> *  2000::7700/120            fe80::288:ff:fe00:1       FPM (127.0.0.1)
+> *  2000::8800/120            fe80::288:ff:fe00:2       FPM (127.0.0.1)
+> *  2000::9900/120            fe80::288:ff:fe00:1       FPM (127.0.0.1)
+  *  2000::9900/120            fe80::288:ff:fe00:2       FPM (127.0.0.1)
+   Total: 3
+
