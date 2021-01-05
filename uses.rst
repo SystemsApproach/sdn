@@ -243,7 +243,9 @@ implementation.
 Another cloud-inspired use case is traffic engineering applied to the
 wide-area links between datacenters. For example, Google has publicly
 described their private backbone, called B4, which is built entirely
-using bare-metal switches and SDN. A central component of B4 is a
+using bare-metal switches and SDN. Similarly, Microsoft has described
+an approach to interconnecting their data centers called SWAN. A
+central component of both B4 and SWAN is a
 *Traffic Engineering (TE)* control program that provisions the network
 according to the needs of various classes of applications.
 
@@ -261,14 +263,14 @@ optimization, as the path calculation algorithms–which kick in any
 time a link changes status, or as traffic loads change–are making
 local choices about what seems best.
 
-B4 recognizes this shortcoming and moves the path calculation to a
+B4 and SWAN recognize this shortcoming and move the path calculation to a
 logically centralized SDN controller. When a link fails, for example,
 the controller calculates a new mapping of traffic demands onto
 available links, and programs the switches to forward traffic flows in
 such a way that no link is overloaded.
 
-Over many years of operation, B4 has become more sophisticated. For
-example, it evolved from treating all traffic equally to supporting a
+Over many years of operation, these approaches have become more sophisticated. For
+example, B4 evolved from treating all traffic equally to supporting a
 range of traffic classes with different levels of tolerance to delay
 and availability requirements. Examples of traffic classes
 included: (1) copying user data (e.g., email, documents, audio/video)
@@ -289,8 +291,9 @@ differentiating classes of traffic, Google has been able to
 drive their link utilizations to nearly 100%. This is two to three
 times better than the 30-40% average utilization that WAN links are
 typically provisioned for, which is necessary to allow those networks
-to deal with both traffic bursts and link/switch failures. The Google
-experience with SDN is an interesting one, and shows both the value of
+to deal with both traffic bursts and link/switch failures. Microsoft's
+reported experience with SWAN was similar. These hyperscale
+experiences with SDN show both the value of
 being able to customize the network and the power of centralized
 control to change networking abstractions. A conversation with
 Amin Vahdat, Jennifer Rexford, and David Clark is especially
