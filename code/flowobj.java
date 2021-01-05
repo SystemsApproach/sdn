@@ -5,16 +5,14 @@ public void createFlow(
       int priority, boolean applyTreatment,
       List<Objective> objectives,
       List<DeviceId> devices) {
-   TrafficSelector selector =
-   DefaultTrafficSelector.builder(originalSelector)
+   TrafficSelector selector = DefaultTrafficSelector.builder(originalSelector)
       .matchInPort(ingress.port())
       .build();
 
    // Optionally apply the specified treatment
    TrafficTreatment.Builder treatmentBuilder;
    if (applyTreatment) {
-      treatmentBuilder =
-      DefaultTrafficTreatment.builder(originalTreatment);
+      treatmentBuilder = DefaultTrafficTreatment.builder(originalTreatment);
    } else {
       treatmentBuilder =
       DefaultTrafficTreatment.builder();
