@@ -170,11 +170,11 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
+    # 'preamble': 'private/latex/preamble.tex',
 
     # Latex figure (float) alignment
     #
-    'figure_align': 'h!',
+    'figure_align': 'ht',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples

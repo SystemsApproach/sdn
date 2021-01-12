@@ -15,6 +15,7 @@ Peterson, Cascone, Davie, O’Connor, and Vachuska
    :maxdepth: 2 
    :caption: Table of Contents 
 
+   foreword.rst	     
    preface.rst	     
    intro.rst
    uses.rst
