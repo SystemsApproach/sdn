@@ -24,6 +24,13 @@
   white-space: normal;
 }
 
+/* Colors for navigation */
+
+.wy-side-nav-search, .wy-nav-top {
+    background: #2F5597;
+}
+
+
 /* Headings */
 h1, h2 {
   font-weight: bold;
