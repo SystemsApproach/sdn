@@ -261,10 +261,7 @@ from recommonmark.transform import AutoStructify
 # -- Set up Google Analytics
 # -- using approach at https://stackoverflow.com/questions/9444342/adding-a-javascript-script-tag-some-place-so-that-it-works-for-every-file-in-sph/41885884#41885884
 
-GA_SETUP_JS = """
-<!-- Global site tag (gtag.js) - Google Analytics -->
-async src="https://www.googletagmanager.com/gtag/js?id=G-QLSP3FJWGT"
-"""
+
 GA_INVOKE_JS = """
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -283,5 +280,5 @@ def setup(app):
 
     app.add_transform(AutoStructify)
 
-    app.add_js_file(None, body=GA_SETUP_JS)
+    app.add_js_file('https://www.googletagmanager.com/gtag/js?id=G-QLSP3FJWGT')
     app.add_js_file(None, body=GA_INVOKE_JS)
