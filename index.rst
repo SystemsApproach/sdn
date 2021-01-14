@@ -8,7 +8,7 @@
 Software-Defined Networks: A Systems Approach
 =============================================
 
-Peterson, Cascone, Davie, O’Connor, and Vachuska
+Peterson, Cascone, O’Connor, Vachuska, and Davie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |

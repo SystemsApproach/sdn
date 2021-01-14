@@ -663,9 +663,16 @@ We now return to fixed-function forwarding pipelines, with the goal of
 placing them in the larger ecosystem. Keeping in mind that
 fixed-function switching chips still dominate the market, we do not
 mean to understate their value or the role they will undoubtedly
-continue to play. But they do remove one degree-of-freedom—the ability
-to reprogram the data plane—which helps to highlight the the
+continue to play.\ [#]_ But they do remove one degree-of-freedom—the
+ability to reprogram the data plane—which helps to highlight the the
 relationship between all the moving parts introduced in this chapter.
+
+.. [#] The distinction between fixed-function and programmable
+  pipelines is not as black-and-white as this discussion implies,
+  since fixed-function pipelines can also be configured. But
+  parameterizing a switching chip and programming a switching chip are
+  qualitatively different, with only the latter able to accommodate
+  new functionality.
 
 4.5.1 OF-DPA
 ~~~~~~~~~~~~~~~~~~~
