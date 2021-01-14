@@ -810,7 +810,7 @@ tooling described in the next Chapter.
 
 The two leftmost examples exist today, and represent the canonical
 layers for programmable and fixed-function ASICs, respectively. The
-middle example is purely hypothetical, but it illustrate that it is
+middle example is purely hypothetical, but it illustrates that it is
 possible to define a P4-based stack even for a fixed-function pipeline
 (and by implication, control it using P4Runtime). The fourth example
 also exists today, and is how Broadcom ASICs conform to the
