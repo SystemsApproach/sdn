@@ -126,9 +126,8 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 html_theme_options = {
-  'prev_next_buttons_location': 'both',
-  'analytics_id': 'G-QLSP3FJWGT'
-  }
+  'prev_next_buttons_location': 'both'
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -259,6 +258,21 @@ todo_include_todos = True
 import recommonmark
 from recommonmark.transform import AutoStructify
 
+# -- Set up Google Analytics
+# -- using approach at https://stackoverflow.com/questions/9444342/adding-a-javascript-script-tag-some-place-so-that-it-works-for-every-file-in-sph/41885884#41885884
+
+GA_SETUP_JS = """
+<!-- Global site tag (gtag.js) - Google Analytics -->
+async src="https://www.googletagmanager.com/gtag/js?id=G-QLSP3FJWGT"
+"""
+GA_INVOKE_JS = """
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QLSP3FJWGT');
+"""
+
 def setup(app):
 
     app.add_css_file('css/rtd_theme_mods.css')
@@ -268,3 +282,6 @@ def setup(app):
             }, True)
 
     app.add_transform(AutoStructify)
+
+    app.add_js_file(None, body=GA_SETUP_JS)
+    app.add_js_file(None, body=GA_INVOKE_JS)
