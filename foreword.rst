@@ -15,7 +15,7 @@ protocol. Decentralized control let the Internet grow rapidly.
 
 The router manufacturers faced a dilemma: It’s hard to maintain a
 thriving profitable business selling devices that are simple and
-streamlined. Whatsmore, if a big network of simple devices is easy to
+streamlined. What's more, if a big network of simple devices is easy to
 manage remotely, all the intelligence (and value) is provided by the
 network operator, not the router manufacturer. So the external API was
 kept minimal (“network management” was considered a joke) and the
