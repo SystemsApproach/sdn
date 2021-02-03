@@ -199,7 +199,8 @@ brief introduction.
 
 A datacenter switching fabric is a network often designed according to
 a *leaf-spine* topology. The basic idea is illustrated by the small
-4-rack/3-tier example shown in Figure 8. Each rack has a *Top-of-Rack
+4-rack/3-tier example shown in :numref:`Figure %s <fig-leaf-spine>`.
+Each rack has a *Top-of-Rack
 (ToR)* switch that interconnects the servers in that rack; these are
 referred to as the *leaf* switches of the fabric. (There are typically
 two such ToR switches per rack for resilience, but the figure shows
