@@ -255,7 +255,7 @@ developers implementing forwarding programs like ``forward.p4`` with
 an abstract target machine, analogous to a Java Virtual Machine. The
 goal is the same as for Java: to support a *write-once-run-anywhere*
 programming paradigm. (Note that :numref:`Figure %s <fig-psa>`
-includes the generic ``arch.p4`` as the the architecture model spec,
+includes the generic ``arch.p4`` as the architecture model spec,
 but in practice the architecture model would PSA specific, such as
 ``psa.p4``.)
 
@@ -265,7 +265,7 @@ but in practice the architecture model would PSA specific, such as
     :align: center
 
     P4 architecture known as the Portable Switch Architecture
-    (PSA). Includes the generic ``arch.p4`` as the the architecture
+    (PSA). Includes the generic ``arch.p4`` as the architecture
     model spec, but for PSA this would be replaced by ``psa.p4``.
 
 When compared to the simpler PISA model used in :numref:`Figure %s
