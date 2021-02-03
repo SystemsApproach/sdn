@@ -221,7 +221,7 @@ Plane Manager) is yet
 another ONOS Service–one of the Trellis suite of services. Its
 job is to learn routes from external sources, which it does by tapping
 into a locally running Quagga process that is configured to peer with
-BGP neighbors. Whenever FPM learns about an external route, is adds
+BGP neighbors. Whenever FPM learns about an external route, it adds
 the corresponding prefix-to-nexthop mapping to the Route service,
 indicating that the destination prefix is reachable via the leaf
 switches that connect the fabric to upstream networks (e.g., Switches 3
