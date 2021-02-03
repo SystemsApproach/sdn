@@ -102,8 +102,8 @@ that multiple packets can be processed at the same time. For example,
 Stage 2 can be making a second lookup on packet A while Stage 1 is
 doing an initial lookup on packet B, and so on. This means the
 pipeline as a whole is able to keep up with the aggregate bandwidth of
-all its input ports. Repeating the numbers from Chapter 3, the
-state-of-the-art is currently 25.6 Tbps.
+all its input ports. Repeating the numbers from the previous section,
+the state-of-the-art is currently 25.6 Tbps.
 
 The main distinction in how a given NPU implements this pipeline is
 whether the stages are fixed-function (i.e., each stage understands
