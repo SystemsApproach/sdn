@@ -1,0 +1,33 @@
+Order code fragments are used (substituted in book.tex)
+
+switch.rst:	code/v1model.p4
+switch.rst:	code/headers.p4
+switch.rst:	code/parser.p4
+switch.rst:	code/checksum.p4
+switch.rst:	code/ingress.p4
+switch.rst:	code/egress.p4
+switch.rst:	code/deparser.p4
+switch.rst:	code/switch.p4
+
+stratum.rst:	code/table.p4
+stratum.rst:	code/actions.p4
+stratum.rst:	code/p4rt.py
+stratum.rst:	code/iface.yang
+stratum.rst:	code/eth.yang
+stratum.rst:	code/service.proto
+stratum.rst:	code/system.proto
+stratum.rst:	code/reboot.proto
+
+onos.rst:	code/flowobj.java
+
+trellis.rst:	code/onos1.txt
+trellis.rst:	code/onos2.txt
+trellis.rst:	code/onos3.txt
+trellis.rst:	code/onos4.txt
+trellis.rst:	code/fabric.p4
+
+exercises.rst:	code/clone.sh
+exercises.rst:	code/pull.sh
+exercises.rst:	code/make.sh
+
+README.rst:	code/build.sh

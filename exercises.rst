@@ -83,16 +83,12 @@ To work on the exercises you will need to clone the following repo:
 
 .. code-block:: shell
 
-    $ cd ~
-    $ git clone -b advanced https://github.com/opennetworkinglab/ngsdn-tutorial
+.. literalinclude:: code/clone.sh
 
 If the ``ngsdn-tutorial`` directory is already present in the VM, make
 sure to update its content:
 
-.. code-block:: shell 
-
-    $ cd ~/ngsdn-tutorial
-    $ git pull origin advanced
+.. literalinclude:: code/pull.sh
 
 Note that there are multiple branches of the repo, each with a
 different configuration of the exercises. Always make sure you are in
@@ -107,8 +103,7 @@ using the following command:
 
 .. code-block:: shell 
 
-    $ cd ~/ngsdn-tutorial
-    $ make deps
+.. literalinclude:: code/make.sh
 
 This command downloads all necessary Docker images (~1.5 GB), which
 allows you to work through the exercises off-line.
