@@ -2,7 +2,6 @@
 *.tex
 .DS_Store
 */.DS_Store
-*.sh
 figures-pdf/
 figures-high_res/
 figures-low_res/
@@ -12,4 +11,3 @@ scripts/
 onosproject.github.io/
 _build/
 doc_venv/
-cover.docx
