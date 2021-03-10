@@ -81,8 +81,6 @@ Clone Repository
 
 To work on the exercises you will need to clone the following repo:
 
-.. code-block:: shell
-
 .. literalinclude:: code/clone.sh
 
 If the ``ngsdn-tutorial`` directory is already present in the VM, make
@@ -100,8 +98,6 @@ Upgrade Dependencies
 The VM may have shipped with an older version of the dependencies than
 you need for the exercises. You can upgrade to the latest version
 using the following command:
-
-.. code-block:: shell 
 
 .. literalinclude:: code/make.sh
 
