@@ -51,7 +51,7 @@ on. (Note that OpenFlow, unlike the other protocols, does not run over gRPC.)
 
 
 .. _fig-stack:
-.. figure:: figures/Slide8.png
+.. figure:: figures/Slide08.png
     :width: 550px
     :align: center
 
@@ -379,7 +379,7 @@ avoid traditional routing protocols internally, or in a greenfield,
 but interaction with the outside world still requires them.
 
 .. _fig-trellis:
-.. figure:: figures/Slide9.png
+.. figure:: figures/Slide09.png
     :width: 600px
     :align: center
 

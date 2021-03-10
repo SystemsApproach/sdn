@@ -90,7 +90,7 @@ the underlying hardware (including processor chips), to the operating
 system running on that hardware, to the application itself.
 
 .. _fig-market1:
-.. figure:: figures/Slide1.png 
+.. figure:: figures/Slide01.png 
     :width: 600px 
     :align: center 
 
@@ -120,7 +120,7 @@ in turn enable a rich marketplace of networking applications.
        central to SDN.
 
 .. _fig-market2:
-.. figure:: figures/Slide2.png
+.. figure:: figures/Slide02.png
     :width: 600px
     :align: center
 
@@ -256,7 +256,7 @@ packet) and its IP header ``DstAddr`` field be contained in some
 subnet (e.g., ``192.12.69/24``).
 
 .. _fig-headers:
-.. figure:: figures/Slide3.png
+.. figure:: figures/Slide03.png
     :width: 600px
     :align: center
 
@@ -280,7 +280,7 @@ controller off-switch. This enabled the configuration shown in
 :numref:`Figure %s <fig-flowtab>`.
 
 .. _fig-flowtab:
-.. figure:: figures/Slide4.png
+.. figure:: figures/Slide04.png
     :width: 500px
     :align: center
 
@@ -414,7 +414,7 @@ the control plane you add a compute server (or more likely, a virtual
 machine).
 
 .. _fig-nos:
-.. figure:: figures/Slide5.png
+.. figure:: figures/Slide05.png
     :width: 500px
     :align: center
 
@@ -582,7 +582,7 @@ accumulated as the packet flows through the pipeline, and executed as
 a set in the last stage.
 
 .. _fig-pipeline:
-.. figure:: figures/Slide7.png
+.. figure:: figures/Slide07.png
     :width: 500px
     :align: center
 
@@ -638,7 +638,7 @@ with all the packet headers a switch might have to process to make a
 forwarding decision.
 
 .. _fig-vxlan:
-.. figure:: figures/Slide6.png
+.. figure:: figures/Slide06.png
     :width: 500px
     :align: center
 
