@@ -66,7 +66,7 @@ measurement, code generation, and verification elements needed for
 verifiable closed-loop control. Fine-grained measurements can be
 implemented using INT (Inband Network Telemetry), which allows every
 packet to be stamped by the forwarding elements to indicate the path
-it took, the queueing delay it experienced, and the rules it matched.
+it took, the queuing delay it experienced, and the rules it matched.
 These measurements can then be analyzed and fed back into code
 generation and formal verification tools. This closed loop complements
 the intrinsic value of disaggregation, which makes it possible to

@@ -36,7 +36,7 @@ bare-metal switch. The details are drawn from Stratum, an open source
 project at the ONF that started with production-quality code made
 available by Google. :numref:`Figure %s <fig-stratum>` gives a
 high-level overview of Stratum, and to re-emphasize, it’s the exposed
-interfaces—P4Runtime, gNMI, and gNOI—that are the important take-aways
+interfaces—P4Runtime, gNMI, and gNOI—that are the important takeaways
 of this chapter. We show these few implementation details in this
 section only as a way of grounding the description of an end-to-end
 workflow for developers implementing SDN-based solutions.
@@ -369,7 +369,7 @@ platform variables (of which the switch’s fan speed is everyone’s
 favorite example).
 
 We conclude this section by briefly turning our attention to gNOI, but
-there isn’t a lot to say. This is because the underlying mechanism
+there isn't a lot to say. This is because the underlying mechanism
 used by gNOI is exactly the same as for gNMI, and in the larger scheme
 of things, there is little difference between a switch’s configuration
 interface and its operations interface. Generally speaking, persistent

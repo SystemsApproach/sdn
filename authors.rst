@@ -29,7 +29,7 @@ received a BS and MS in Computer Science from Stanford Univesity in
 2012 and 2013, respectively.
 
 **Thomas Vachuska** is Chief Architect at the Open Networking
-Forundation (ONF), where he leads the ONOS project. Before joining ONF,
+Foundation (ONF), where he leads the ONOS project. Before joining ONF,
 Vachuska was a Software Architect at Hewlett-Packard. Vachuska
 received a BA in Mathematics from California State
 University-Sacramento in 1994.

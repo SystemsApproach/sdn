@@ -47,7 +47,7 @@ This book explains why the SDN movement happened. It was essentially
 about a change in control: the owners and operators of big networks
 took control of how their networks work, grabbing the keys to
 innovation from the equipment vendors. It started with data center
-companies because they couldn’t build big-enough scale-out networks
+companies because they couldn't build big-enough scale-out networks
 using off-the-shelf networking equipment. So they bought switching
 chips and wrote the software themselves. Yes, it saved them money
 (often reducing the cost by a factor of five or more), but it was

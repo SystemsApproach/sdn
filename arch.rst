@@ -30,11 +30,8 @@ An overview of the software stack is given in :numref:`Figure %s
 *Control Applications*. :numref:`Figure %s <fig-stack>` also calls out
 a corresponding set of exemplar open source components (*Trellis*,
 *ONOS*, and *Stratum*) on the right, as well as a related *P4
-Toolchain* on the left.\ [#]_ This chapter introduces these components, with
+Toolchain* on the left. This chapter introduces these components, with
 later chapters giving more detail.
-
-.. [#] We sometimes call this the **TOST** stack: **T**\rellis running
-	on **O**\NOS running on **S**\tratum running on **T**\ofino.
 
 Note the similarity between this diagram and :numref:`Figure %s
 <fig-market2>` in Chapter 1. Both figures include two open
@@ -95,7 +92,7 @@ Virtual Machines (VMs).
     the end hosts and the Virtual Machines (VMs) they host.
 
 This perspective highlights two important aspects of the system. The
-first re-enforces the point we’ve been making: that the Network OS
+first re-enforces the point we've been making: that the Network OS
 (e.g., ONOS) is network-wide, while the Switch OS (e.g., Stratum) is
 per-switch.
 

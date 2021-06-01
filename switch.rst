@@ -403,7 +403,7 @@ common/non-differentiating features (e.g., simple match-action tables
 or a P4 extern to count packets)? Do I want the P4 program I develop
 to be public on GitHub?
 
-As for that forwarding program (which we’ve been generically referring
+As for that forwarding program (which we've been generically referring
 to as ``forward.p4``), an interesting tangible example is a program
 that faithfully implements all the features that a conventional L2/L3
 switch supports. Let’s call that program ``switch.p4``.\ [#]_ Strangely
@@ -456,7 +456,7 @@ control apps without regard to the specific details of the device
 forwarding pipeline. Introducing the P4 architecture model helps meet
 this goal, as it enables portability of the same forwarding pipeline
 (P4 program) across multiple targets (switching chips) that support
-the corresponding architecture model. However, it doesn’t totally
+the corresponding architecture model. However, it doesn't totally
 solve the problem because the industry is still free to define
 multiple forwarding pipelines. But looking beyond the current
 state-of-affairs, having one or more programmable switches opens the
@@ -595,7 +595,7 @@ core P4 language types, where their definitions can be found in
 example, PSA also defines ``range`` and ``selector`` matches.
 
 The final step of the ingress routine is to “apply” the table we just
-defined. This is done only if the parser (or previous pipeline strage)
+defined. This is done only if the parser (or previous pipeline stage)
 marked the IP header as valid.
 	
 .. literalinclude:: code/ingress.p4
@@ -722,8 +722,8 @@ running a common SDN software stack. This can be accomplished by
 hiding both types of chips behind the ``v1model.p4`` (or similar)
 architecture model, and letting the P4 compiler output the backend
 code understood by their respective SDKs. Obviously this scenario
-doesn’t work for an arbitrary P4 program that wants to do something
-that the Tomahawk chip doesn’t support, but it will work for standard
+doesn't work for an arbitrary P4 program that wants to do something
+that the Tomahawk chip doesn't support, but it will work for standard
 L2/L3 switch behavior.
 
 4.5.2 SAI

@@ -201,7 +201,7 @@ Information Base (FIB)*, as depicted in :numref:`Figure %s <fig-fib>`.
 
 There is no controversy about the value of decoupling the network
 control and data planes. It is a well-established practice in
-networking, where closed/proprietary routers that pre-date SDN adopted
+networking, where closed/proprietary routers that predate SDN adopted
 this level of modularity. But the first principle of SDN is that the
 interface between the control and data planes should be both
 well-defined and open. This strong level of modularity is often
@@ -601,7 +601,7 @@ The first problem was that as SDN matured from a research experiment
 to a viable alternative to legacy, proprietary switches, performance
 became increasingly important. And while flow rules were general
 enough to say what forwarding behavior the controller wanted to
-program into a switch, switches didn’t necessarily have the capacity
+program into a switch, switches didn't necessarily have the capacity
 to implement that functionality in an efficient way. To ensure high
 forwarding performance, flow tables were implemented using highly
 optimized data structures that required specialized memories, like
