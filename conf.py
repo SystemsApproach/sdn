@@ -61,19 +61,33 @@ warning_is_error = True
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones. ***Replace "mathjax" with "imgmath" for epub output.***
 extensions = [
-    'recommonmark',
     'sphinx.ext.coverage',
+    'sphinx.ext.graphviz',
     'sphinx.ext.ifconfig',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     'sphinx.ext.todo',
-    'sphinx.ext.autosectionlabel',
-    'sphinxcontrib.actdiag',
-    'sphinxcontrib.blockdiag',
-    'sphinxcontrib.nwdiag',
-    'sphinxcontrib.packetdiag',
-    'sphinxcontrib.rackdiag',
-    'sphinxcontrib.seqdiag',
+    'sphinxcontrib.spelling',
+    "sphinx_multiversion",
 ]
+
+#extensions = [
+#    'recommonmark',
+#    'sphinx.ext.coverage',
+#    'sphinx.ext.ifconfig',
+#    'sphinx.ext.mathjax',
+#    'sphinx.ext.todo',
+#    'sphinx.ext.autosectionlabel',
+#    'sphinxcontrib.actdiag',
+#    'sphinxcontrib.blockdiag',
+#    'sphinxcontrib.nwdiag',
+#    'sphinxcontrib.packetdiag',
+#    'sphinxcontrib.rackdiag',
+#    'sphinxcontrib.seqdiag',
+#]
+
+# Text files with lists of words that shouldn't fail the spellchecker:
+spelling_word_list_filename=['dict.txt', ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -255,8 +269,8 @@ todo_include_todos = True
 # -- Configure recommonmark to use AutoStructify -----------------------------
 # Docs: https://recommonmark.readthedocs.io/en/latest/auto_structify.html
 
-import recommonmark
-from recommonmark.transform import AutoStructify
+#import recommonmark
+#from recommonmark.transform import AutoStructify
 
 # -- Set up Google Analytics
 # -- using approach at https://stackoverflow.com/questions/9444342/adding-a-javascript-script-tag-some-place-so-that-it-works-for-every-file-in-sph/41885884#41885884
@@ -278,7 +292,7 @@ def setup(app):
             'auto_toc_tree_section': 'Contents',
             }, True)
 
-    app.add_transform(AutoStructify)
+#    app.add_transform(AutoStructify)
 
     app.add_js_file('https://www.googletagmanager.com/gtag/js?id=G-QLSP3FJWGT')
     app.add_js_file(None, body=GA_INVOKE_JS)
