@@ -432,7 +432,7 @@ extensibility.
 As shown in the figure, Geneve looks quite similar to VXLAN, the
 notable difference being the presence of a set of variable length
 options. The presence of options was a critical feature that built on
-the experience of earlier systems, where it was realised that the
+the experience of earlier systems, where it was realized that the
 limited space in a VXLAN header was insufficient to pass metadata
 related to virtual networks from one end of a tunnel to another. An
 example use of such metadata is to convey the logical source port of a
