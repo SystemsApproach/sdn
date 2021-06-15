@@ -500,14 +500,95 @@ of the same components as one for VMs, and mixed environments (where
 containers and VMs communicate in a single virtual network) are also
 possible.
 
+.. sidebar:: Performance Optimizations: SR-IOV, DPDK, and Offloads
+             
+             *Since the virtual switch sits in the data path for all
+             traffic entering of leaving VMs and containers in a
+             virtual network, the performance of the virtual switch is
+             critical. The OVS paper from 2015 discusses a number of
+             performance optimizations made over the years. Two
+             approaches to improving vswitch performance warrant some
+             discussion.*
 
+             *SR-IOV (Single Root IO Virtualization) has been around
+             for many years as a possible option for improving the IO
+             performance between VMs and the outside world. The basic
+             idea is that a single physical NIC presents itself to the
+             hypervisor as a set of virtual NICs,
+             each of which has its own set of resources. Each VM could
+             then have its own virtual NIC, and bypass the hypervisor
+             completely, which in principle would improve
+             performance. However, this isn't really a useful approach
+             for network virtualization, because the virtual switch is
+             bypassed. Much of the value of network virtualization
+             comes from the flexibility of a programmable virtual
+             switch, so bypassing it runs counter to the direction of
+             network virtualization.*
 
-DPDK
-Sidebar: SR-IOV
+             *DPDK (Data Path Development Kit) is a set of libraries
+             developed for the Intel x86 platform to improve
+             performance of data-moving operations such as virtual
+             switching. Many of the concepts are straightforward
+             (e.g. packets can be processed in batches, context
+             switches are avoided) but the set of optimizations is
+             large and, when applied properly, effective. It has been
+             successfully used to implement OVS with performance gains
+             that can be significant, depending on the exact operating
+             environment. We'll discuss one such environment below,
+             the virtual-to-physical gateway.*
+
+             *Finally, there is a long tradition of offloading certain
+             functions from the server to the NIC, notably TCP
+             segmentation offload (TSO). As NICs have gained more
+             capability in recent years with the rise of SmartNICs,
+             the potential exists to move more of the vswitch
+             capability to the NIC with a potential performance
+             gain. The challenge is one of trading flexibility for
+             performance, as SmartNICs are still more
+             resource-constrained than a general purpose CPU. It seems
+             the latest generation of SmartNICs may be reaching a
+             level of sophistication where offloading most or all of
+             the vswitch functions would be effective.*
+
 
 8.3.3 Virtual-to-physical gateways
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-X86, switch-based
+In the discussion to date we have only covered communication among
+endpoints that are virtualized in some way, either VMs or
+containers. However, it is usually the case that traffic needs to
+enter and leave the virtual environment, e.g., to enter or leave a data
+center, or to connect virtual resources to non-virtualized ones. For
+this reason there is usually some sort of gateway between the virtual
+and the physical world that forms part of a network virtualization
+system.
+
+A common way to implement a virtual-to-physical gateway is to use a
+server that has a software switching path running on it. This is the
+approach described in the Nicira paper. Because such an appliance is
+effectively a software switch, with little to do other than forwarding
+packets between virtual and physical networks, it is a good candidate
+for DPDK implementation of the forwarding path.
+
+Even a well-implemented software switch on general-purpose hardware is
+going to perform relatively poorly compared to a dedicated switching
+ASIC, and for this reason there have also been implementations of
+gateways that leverage such switching hardware. One example, which took
+advantage of the VXLAN implementations on many top-of-rack switches,
+is described in the following paper.
+
+.. _reading_OVSDB:
+.. admonition:: Further Reading
+                
+   B. Davie et al. `A Database Approach to SDN Control Plane
+   Design. <https://dl.acm.org/doi/10.1145/3041027.3041030>`__.
+   Computer Communications Review, January 2017.
+
+As in many other networking environments, there is a trade-off between
+the flexibility of fully programmable devices and the performance of
+less flexible, dedicated hardware. In most commercial deployments of
+network virtualization, the more flexible approach of general purpose
+hardware has been preferred.
+
 
 
 8.4 Example Systems
@@ -519,11 +600,42 @@ CNI + Antrea, Calico, Multus...
 
 8.5 Impact of Network Virtualization
 ------------------------------------
+
+
 Microsegmentation
 
 
-Sidebar: But is it SDN?
-Yes, because it’s software forwarding, centralized control plane, OpenFlow
-No because it doesn’t change the underlying physical network
+.. sidebar:: Is Network Virtualization SDN?
+
+             *At the very start of this chapter we observed that
+             Network Virtualization was the most successful early
+             application of SDN. But is it really SDN? There has been
+             considerable debate on this topic, which reflects that
+             there has been plenty of argument about exactly what SDN
+             is.*
+             
+             *The main argument against network virtualization's
+             inclusion in SDN is that it didn't change the way
+             physical networking was built and implemented. It simply
+             runs as an overlay on top of a standard network, which
+             might run standard routing protocols and be configured
+             one box at a time as is traditional. However, that seems
+             to be a less prevalent view now that network virtualization has
+             become widespread.*
+
+             *Network virtualization definitely adheres to most if not
+             all of the core principles laid out by SDN's
+             inventors. There is a clear separation between control
+             plane and data plane. The protocol by which those
+             planes communicate has (in some cases) been implemented with
+             OpenFlow, which is almost synonymous with SDN. The
+             centralized control plane of SDN is absolutely critical
+             to network virtualization, and delivered many of its key
+             benefits such as automation and improved security. And
+             the fact that network virtualization uses a completely
+             programmable forwarding plane, as exemplified by OVS,
+             also places it squarely in the SDN universe.*
+             
+
 
 
