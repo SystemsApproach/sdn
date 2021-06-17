@@ -601,8 +601,74 @@ CNI + Antrea, Calico, Multus...
 8.5 Impact of Network Virtualization
 ------------------------------------
 
+Network virtualization has certainly had an impact on networking,
+particularly in the data center, in the years since Nicira's first
+product. Both Cisco and VMware have periodically reported the adoption rates for
+network virtualization and the technology is now widespread in telcos
+and large enterprise data centers. It is also ubiquitous in the data
+centers of large cloud companies, as an essential component of
+delivering infrastructure as a service.
 
-Microsegmentation
+8.5.1 Microsegmentation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+One of the interesting side-effects of network virtualization is that
+it enabled a change in the way security is implemented in the data
+center. As noted above, network virtualization enables security
+features to be implemented in a distributed manner, in software. It
+also makes it relatively straightforward to create a large number of
+isolated networks, compared to the traditional approach of configuring
+VLANs by hand. These two factors combined to lead to the idea of
+"microsegmentation".
+
+Microsegmentation stands in contrast to traditional approaches to
+segmenting networks, in which relatively large sets of machines would
+connect to a "zone" and then firewalls would be used to filter traffic
+passing between zones. While this made for relatively simple network
+configuration, it meant that lots of machines would be in the same
+zone even if there was no need for them to communicate. Furthermore,
+the complexity of firewall rules would grow over time as more and more
+rules would need to be added to describe the traffic allowed to pass
+from one zone to another.
+
+By contrast, network virtualization allows for the creation of
+microsegments, which are precisely defined virtual networks that
+determine both which machines can communicate with each other and how
+they can do so. Thus, for example, a three-tier application can have
+its own microsegmentation policy which says that the machines in the
+web-facing tier of the application can talk to the machines in the
+application tier on some set of specified ports, but that web-facing
+machines may not talk to each other. This is a policy that was
+difficult to implement in the past, because all the web-facing
+machines would sit on the same network segment.
+
+Prior to microsegmentation, the
+complexity of configuring segments was such that machines
+from many applications would likely sit on the same segment, creating
+opportunities for an attack to spread from one application to
+another. The lateral movement of attacks within data centers has been
+well documented as a key strategy of successful cyber-attacks over many
+years.
+
+Consider the arrangement of VMs and the firewall in :numref:`Figure %s
+<fig-standard-firewall>`. Suppose that, without network
+virtualization, we wanted to put VM A and VM B in different segments
+and apply a firewall rule for traffic going from VM A to VM B. We
+would have to configure two VLANs in the physical network, connect A
+to one of them, and B to the other, and then configure the routing
+such that the path from the first VLAN to the second passed through
+the firewall. If at some point VM A was moved to another server, we'd
+have to make sure the appropriate VLAN reached that server, connect VM
+A to it, and ensure that the routing configuration was still forcing
+traffic through the firewall. This situation is admittedly a little
+contrived, but it demonstrates why microsegmentation was effectively
+impossible before the arrival of network virtualization.
+
+
+Microsegmentation has become an accepted best practice for data center
+networking, providing a starting point for "zero-trust"
+networking. This illustrates the far-reaching impact of network
+virtualization. 
 
 
 .. sidebar:: Is Network Virtualization SDN?
