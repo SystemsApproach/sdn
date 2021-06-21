@@ -443,7 +443,7 @@ discover we need a new feature.
 
 	*It is not our goal to answer that question with any certainty.
 	The VNF off-loading and INT examples introduced in Chapter 2
-	are a start. Chapter 8 goes on to introduce closed-loop
+	are a start. Chapter 9 goes on to introduce closed-loop
 	verification and software-defined 5G networks as potential
 	killer-apps. But history teaches us that killer-apps are
 	impossible to predict with any accuracy. On the other hand,

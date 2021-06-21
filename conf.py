@@ -39,7 +39,7 @@ def get_version():
 # -- Project information -----------------------------------------------------
 
 project = u'Software-Defined Networks: A Systems Approach'
-copyright = u'2020'
+copyright = u'2020,2021'
 author = u'Peterson, Cascone, OConnor, Vachuska, Davie'
 
 # The short X.Y version

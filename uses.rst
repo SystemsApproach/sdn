@@ -181,7 +181,7 @@ delivered by network virtualization.
 
 .. [#] This observation about different aspects of SDN being
        implemented in switches versus end hosts is an important one
-       that we return to in Section 3.1.
+       that we return to in Section 3.1, and again in Chapter 8.
        
 
 2.2 Switching Fabrics
@@ -488,7 +488,7 @@ Progress on *Software-Defined Radio Access Networks (SD-RAN)* lags
 software-defined broadband, with development still in the
 proof-of-concept stage. Disaggregating the RAN is a bigger challenge,
 but the payoff will likely be even larger, as it leads to a
-5G-empowered edge cloud. We revisit SD-RAN in Chapter 8, but for a
+5G-empowered edge cloud. We revisit SD-RAN in Chapter 9, but for a
 broad introduction to how 5G is being implemented according to SDN
 principles, we recommend a companion book.
 

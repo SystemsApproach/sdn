@@ -1,4 +1,4 @@
-Chapter 8:  Future of SDN
+Chapter 9:  Future of SDN
 ===========================
 
 It is still early days for SDN. Cloud-hosted control planes are being
@@ -16,7 +16,7 @@ capabilities that were impossible in traditional networks is a great
 part of the promise of SDN. This chapter looks at two
 promising examples of emerging capabilities.
 
-8.1 Verifiable Networks
+9.1 Verifiable Networks
 -----------------------
 
 Networks are notoriously difficult to make verifiably robust and
@@ -174,7 +174,7 @@ full ownership of the software that defines their networks. This gives
 network owners further ability to tailor their networks in ways that
 differentiate them from their competitors.
 
-8.2 SD-RAN
+9.2 SD-RAN
 ----------
 
 Much of the early hype surrounding 5G is about the increase in

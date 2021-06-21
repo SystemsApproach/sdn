@@ -697,7 +697,7 @@ to operators, but ultimately, it is about shifting control from
 vendors to operators to users. That's the long-term goal, inspired by
 what commodity servers and open source software did for the computing
 industry. But we still have a ways to go, so we return to more modest
-predictions about the next phase of the SDN journey in Chapter 8.
+predictions about the next phase of the SDN journey in Chapter 9.
 
 .. _reading_future:
 .. admonition:: Further Reading
