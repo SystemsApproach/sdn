@@ -31,6 +31,28 @@ and `Twitter <https://twitter.com/SystemsAppr>`__. To read a running
 commentary on how the Internet is evolving, follow the `Systems Approach
 Blog <https://www.systemsapproach.org>`__.
 
+Releases and Editions 
+---------------------
+
+We continually release open source content in GitHub, with `print and
+ebook editions <https://www.systemsapproach.org/books.html>`__
+published from time-to-time. The latest print and ebook (1st Edition)
+corresponds to the ``v1.1`` tag.
+
+In general, ``master`` contains a coherent and internally consistent
+version of the material. (If it were code, the book would build and
+run.) Minor fixes are checked directly into ``master``, but new
+content under development is checked into branches until it can be
+merged into ``master`` without breaking self-consistency. The web
+version of the book available at https://sdn.systemsapproach.org is
+then continuously generated from ``master``.
+
+Minor releases (e.g., ``v1.1``) are tagged whenever there is
+sufficient improvements or new content to warrant the effort. This is
+done primarily to create a snapshot so that everyone in a course can
+know they are using the same version.
+
+
 Build the Book
 --------------
 
@@ -42,15 +64,22 @@ To build a web-viewable version, you first need to download the source:
    $ cd ~/SDN 
    $ git clone https://github.com/SystemsApproach/SDN.git 
 
-The build process is stored in the Makefile and requires Python be 
-installed. The Makefile will create a virtualenv (``doc_venv``) which 
-installs the documentation generation toolset. 
+The build process is stored in the Makefile and requires Python be
+installed. The Makefile will create a virtualenv (``doc_venv``) which
+installs the documentation generation toolset. You may also need to
+install the ``enchant`` C library using your system’s package manager
+for the spelling checker to function properly.
 
 To generate HTML in ``_build/html``,  run ``make html``.
 
 To check the formatting of the book, run ``make lint``.
 
+To check spelling, run ``make spelling``. If there are additional
+words, names, or acronyms that are correctly spelled but not in the dictionary,
+please add them to the ``dict.txt`` file.
+
 To see the other available output formats, run ``make``.
+
 
 Contribute to the Book
 ----------------------
