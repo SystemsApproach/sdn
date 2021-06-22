@@ -28,14 +28,14 @@ fundamental to SDN.
 
 The application of SDN to create virtual networks is generally
 credited to the team at Nicira, as discussed in Chapter 2, with a 2014
-paper by Koponen *et. al.* laying out the architecture of an SDN-based
+paper by Koponen *et al.* laying out the architecture of an SDN-based
 system to implement network virtualization.
 
 
 .. _reading_NVP:
 .. admonition:: Further Reading
                 
-   T. Koponen et. al. `Network Virtualization in Multi-tenant Datacenters
+   T. Koponen et al. `Network Virtualization in Multi-tenant Datacenters
    <https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/koponen>`__.
    NSDI, April, 2014.
    
@@ -101,7 +101,7 @@ virtualization and could leave underutilized server resources
 “stranded” on another subnet.
 
 
-The approach proposed by Greenberg, *et. al.* can be considered a
+The approach proposed by Greenberg, *et al.* can be considered a
 first step in network virtualization. They created a *Virtual Layer 2
 (VL2)* network such that the addresses used by virtual machines are
 decoupled from the addresses used in the physical network, thus
@@ -585,12 +585,12 @@ going to perform relatively poorly compared to a dedicated switching
 ASIC, and for this reason there have also been implementations of
 gateways that leverage such switching hardware. One example, which took
 advantage of the VXLAN implementations on many top-of-rack switches,
-is described in a paper by Davie, *et. al.*
+is described in a paper by Davie, *et al.*
 
 .. _reading_OVSDB:
 .. admonition:: Further Reading
                 
-   B. Davie, et. al. `A Database Approach to SDN Control Plane
+   B. Davie, et al. `A Database Approach to SDN Control Plane
    Design <https://dl.acm.org/doi/10.1145/3041027.3041030>`__.
    Computer Communications Review, January 2017.
 
@@ -692,7 +692,7 @@ that it didn't change the way physical networking was built and
 implemented. It simply runs as an overlay on top of a standard
 network, which might run standard routing protocols and be configured
 one box at a time as is traditional. However, that seems to be a less
-prevalent view now that network virtualization has become widespread.*
+prevalent view now that network virtualization has become widespread.
 
 Network virtualization definitely adheres to most if not all of the
 core principles laid out by SDN's inventors. There is a clear
@@ -704,6 +704,15 @@ delivered many of its key benefits such as automation and improved
 security. And the fact that network virtualization uses a completely
 programmable forwarding plane, as exemplified by OVS, also places it
 squarely in the SDN universe.
+
+One way to think about the debate is one of architecture versus
+outcome. The architecture of network virtualization matches that of
+SDN. But if you think the outcome of SDN should be to disaggregate
+networking devices, then network virtualization didn't do
+that. However, because network virtualization moved a lot of the
+complexity of data center networking into the virtual overlay, it
+actually *did* simplify the physical network, opening the way for bare
+metal switches to take a larger role in the data center. 
              
 ..
    Expand this section; e.g.,talk about being overlay/underlay-aware.
