@@ -100,6 +100,7 @@ directionality
 disaggregate
 disaggregated
 disaggregating
+ebook
 et
 ethernet
 extern
