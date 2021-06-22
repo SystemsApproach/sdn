@@ -129,7 +129,7 @@ connected to physical machines.
 	when the Action must execute within a fixed cycle budget, as
 	is the case for a switch-based forwarding pipeline. It also
 	enables formal verification of the data plane, a promising
-	opportunity discussed in Chapter 8.*
+	opportunity discussed in Chapter 9.*
 
 Fortunately, we can view a vSwitch as behaving just like a physical
 switch, including the APIs it supports. That a vSwitch is implemented
