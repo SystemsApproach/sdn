@@ -87,26 +87,38 @@ configuration and provisioning needed to move towards a model more
 similar to virtual compute, setting the stage for network
 virtualization.
 
-
 A second effect of server virtualization was to enable virtual machine
-mobility. Since a VM has an IP address, this introduced some real
-challenges for data center networking. If a VM were to move from one
-subnet to another—an entirely reasonable thing to do—it would need to
-be assigned a new IP address, which is potentially disruptive to the
-applications running on it. One solution to this would be to build
-larger and larger layer 2 subnets, but that is unattractive for scale
-and performance reasons. Alternatively, one could restrict VMs to move
-only within their local subnet, which undercuts the value of server
-virtualization and could leave underutilized server resources
-“stranded” on another subnet.
+mobility. This introduced some real challenges for data center
+networking. In the absence of network virtualization, the IP address
+of a VM is drawn from the physical network on which it resides, and
+must be specific to a subnet that connects to the server hosting the
+VM.\ [#]_ So if a VM is to migrate to another server, either it needs
+to move to a server where that subnet is also present, or it needs a
+new IP address. The first choice limits where it can move within the
+data center, which affects the efficiency of resource usage. The
+second option is quite a disruptive thing: TCP connections are
+dropped, and applications may need to be restarted. Furthermore, some
+applications depend on layer-2 adjacency between communicating peers,
+and thus depend on some set of VMs staying in a given subnet even as
+they move around within the data center.
 
+.. [#] Technically more than one subnet can connect to a given server
+       in which case an IP address for a VM needs to be
+       drawn from one of those subnets.
+
+One proposed solution to this issue was to make layer-2 subnets ever
+larger in the physical network, but that is not really a scalable
+solution. Large data centers invariably use layer-3 networking to
+connect racks of servers.
 
 The approach proposed by Greenberg, *et al.* can be considered a
 first step in network virtualization. They created a *Virtual Layer 2
 (VL2)* network such that the addresses used by virtual machines are
 decoupled from the addresses used in the physical network, thus
-solving the VM mobility issue.
-
+solving the mobility-related issues described above. A VM draws its IP
+address from a *virtual* layer 2 network, and VL2 constructs the
+appropriate overlay to extend that virtual network wherever it needs
+to go, even as VMs migrate across physical networks.
 
 Solving the problem of network configuration is a bit more
 complex. Networks are not just simple subnets to connect servers; they
