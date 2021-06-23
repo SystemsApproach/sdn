@@ -11,7 +11,7 @@ an existing network was a great help in terms of deployment. At the
 same time, this ease of deployment meant that it left the physical
 network untouched, thus not really impacting the level of innovation
 in physical networks. It did, however, result in considerable
-simplification in the *operation* of physical networks, as this
+simplification in how physical networks are managed, as this
 chapter illustrates.
 
 
@@ -42,40 +42,49 @@ system to implement network virtualization.
 
 The following sections show how a particular set of technology
 challenges, combined with the new capabilities offered by SDN, set the
-stage for network virtualization as a successful use case for
-Software-Defined Networks.
+stage for network virtualization as a successful use case of
+Software-Defined Networking.
 
 8.1 Challenges
 --------------
 
 Network virtualization as we understand it today is closely linked to
-the evolution of modern data centers, in which large numbers of
+the evolution of modern datacenters, in which large numbers of
 commodity servers communicate with each other to solve computational
-tasks. These data centers are common for both large cloud providers
+tasks. These datacenters are common for both large cloud providers
 (e.g., AWS, Azure, Google), as well as many enterprise organizations.
-Some of the challenges involved in building networks for such data
-centers were laid out in the VL2 paper from Microsoft Research back
+Some of the challenges involved in building networks for such
+datacenters were laid out in the VL2 paper from Microsoft Research back
 in 2009.
 
 
 .. _reading_VL2:
 .. admonition:: Further Reading
 
-   Greenberg et al. `VL2: a scalable and flexible data center network
+   Greenberg et al. `VL2: a scalable and flexible datacenter network
    <https://dl.acm.org/doi/10.1145/1594977.1592576>`__.
    SIGCOMM, August, 2009.
 
-In such data centers, there is a substantial amount of “east-west”
+In such datacenters, there is a substantial amount of “east-west”
 traffic; that is, server-to-server traffic, as distinct from
-“north-south” traffic entering or leaving the data center. To
+“north-south” traffic entering or leaving the datacenter. To
 efficiently support high volumes of traffic between any pair of
-servers in the data center, leaf-spine fabrics of the sort described
+servers in the datacenter, leaf-spine fabrics of the sort described
 in Chapter 7 became popular due to their high cross-sectional
-bandwidth and scalable layer-3 forwarding.
+bandwidth and scalable layer-3 forwarding.\ [#]_ 
 
+.. [#] This is a good place to note that even though network
+       virtualization can be entirely implemented as an overlay,
+       without touching the physical underlay, the leaf-spine based
+       physical underlay found in datacenters is also implemented
+       using SDN, as described in Chapter 7. In this case, the overlay
+       and underlay are managed as two distinct SDN domains. An
+       interesting question whether blurring the line between the two,
+       resulting in an overlay-aware underlay / underlay-aware
+       overlay, provides value.
 
 At the same time, server virtualization became mainstream, which had
-several implications for data center operations. Provisioning virtual
+several implications for datacenter operations. Provisioning virtual
 machines (VMs) can be carried out entirely in software, by contrast to
 installing and configuring physical servers, a time-consuming and
 manual process. As the ease of provisioning a VM shrank the time to
@@ -88,19 +97,19 @@ similar to virtual compute, setting the stage for network
 virtualization.
 
 A second effect of server virtualization was to enable virtual machine
-mobility. This introduced some real challenges for data center
+mobility. This introduced some real challenges for datacenter
 networking. In the absence of network virtualization, the IP address
 of a VM is drawn from the physical network on which it resides, and
 must be specific to a subnet that connects to the server hosting the
 VM.\ [#]_ So if a VM is to migrate to another server, either it needs
 to move to a server where that subnet is also present, or it needs a
 new IP address. The first choice limits where it can move within the
-data center, which affects the efficiency of resource usage. The
+datacenter, which affects the efficiency of resource usage. The
 second option is quite a disruptive thing: TCP connections are
 dropped, and applications may need to be restarted. Furthermore, some
 applications depend on layer-2 adjacency between communicating peers,
 and thus depend on some set of VMs staying in a given subnet even as
-they move around within the data center.
+they move around within the datacenter.
 
 .. [#] Technically more than one subnet can connect to a given server
        in which case an IP address for a VM needs to be
@@ -108,7 +117,7 @@ they move around within the data center.
 
 One proposed solution to this issue was to make layer-2 subnets ever
 larger in the physical network, but that is not really a scalable
-solution. Large data centers invariably use layer-3 networking to
+solution. Large datacenters invariably use layer-3 networking to
 connect racks of servers.
 
 The approach proposed by Greenberg, *et al.* can be considered a
@@ -126,7 +135,7 @@ have a host of features that need to be configured, including VLANs
 (or some equivalent construct to segment the network), firewall rules,
 network address translation (NAT) rules, and so on. It is the
 complexity of these tasks that made network configuration the barrier
-to agility in data center configuration.
+to agility in datacenter configuration.
 
 Tackling these issues of configuration and provisioning ultimately led
 to the realization that SDN provided a means to simplify the creation
@@ -136,7 +145,7 @@ to an SDN controller provides the ideal way to specify the desired
 behavior of the virtual network, with the central controller then
 taking responsibility for figuring out how to implement the network
 with the available resources, such as virtual switches in the
-hypervisors of the data center's servers. The core principles of SDN—separation
+hypervisors of the datacenter's servers. The core principles of SDN—separation
 of data plane from control plane, and centralization of the controller
 to manage a multitude of switching elements—provide the basis for this
 approach. The coming sections dig deeper into how this
@@ -173,7 +182,7 @@ that is required. Let’s look more closely at that abstraction.
 
     A Basic Network Virtualization System.
 
-Since the VMs should be free to move around the data center, their IP
+Since the VMs should be free to move around the datacenter, their IP
 addresses need to be independent of the physical network topology
 (indicated by the underlay network in the figure). In particular, we
 don’t want a particular VM to be restricted in its location by the
@@ -291,15 +300,26 @@ this against the desired state. If the desired state does not match
 the actual state, the control plane calculates the necessary changes
 and pushes them to the data plane, as indicated by the *realized
 state* arrow. This paradigm, of continuously reconciling actual state
-with desired state, is a common one in distributed systems.\ [#]_
+with desired state, is a common one in distributed systems.
 
-.. [#] In principle, ONOS could be used to implement the Control Plane
-       layer in the Figure, with a new "Virtual Network App" running
-       on top of ONOS implementing the Management Plane. But no such
-       ONOS app exists today (at least not with the full set of
-       capabilities described in this chapter), and so we describe
-       these two planes of the Network Virtualization solution using
-       more generic (implementation-neutral) terminology.
+The mapping between this architecture (:numref:`Figure %s
+<fig-three-planes>`) and the one depicted in :numref:`Figures %s
+<fig-stack>` and :numref:`%s <fig-e2e>` in Chapter 3 is
+straightforward. At the base is a distributed data plane, be it
+assembled from bare-metal switches or software switches, on top of
+which a centralized controller collects operational state and issues
+control directives. (When implemented in a general, use-case agnostic
+way, this controller is called a Network OS.) At the top-most level is
+a management layer that understands and implements the abstraction of
+a virtual network. (This management layer can be thought of as control
+application; two names for the same concept.) In short, the
+architecture presented in this Chapter is purpose-built to support
+virtual networks, whereas the one outlined in Chapter 3 is intended to
+be general-purpose, and in fact, there was at one time a ONOS-based
+virtual network application, called *Virtual Tenant Network (VTN)*,
+that was integrated with OpenStack. VTN is no longer being maintained,
+due in part to the availability of network virtualization subsystems
+in popular container management sysetms like Kubernetes.
 
 Consider a simple example. We want to create a virtual network that
 connects two VMs, A and B, to a single L2 subnet. We can express that
@@ -497,10 +517,15 @@ virtualization while also providing high performance.
     Open vSwitch Functional Blocks.
 
 As depicted in :numref:`Figure %s <fig-ovs-blocks>`, OVS is programmed
-by a control plane using OpenFlow, just like many hardware switches
+by the control plane using OpenFlow, just like many hardware switches
 described in previous chapters. It also receives configuration
 information over a separate channel using the *Open vSwitch Database
-(OVSDB)* protocol.
+(OVSDB)* protocol, which is to say, OVSDB effectively serves the same
+purpose as gNMI/gNOI does for a hardware-based data plane. Again, the
+mapping between these building blocks and the components described in
+earlier chapters is straightforward, the differences in terminology and
+details largely being attributed to network virtualization evolving as
+purpose-built solution.
 
 
 Performance in the forwarding plane has been achieved via a long
@@ -511,7 +536,11 @@ userspace daemon ``ovs-vswitchd``, which looks up the flow in a set of
 tables. This set of tables, being implemented in software, can be
 effectively unlimited in number, a distinct advantage over hardware
 implementations of OpenFlow switching. This enables the high degree of
-flexibility that is required in network virtualization.
+flexibility that is required in network virtualization. At the same
+time, there is also an effort to unify software- and hardware-based
+forwarding elements, using P4 as the lingua franca for writing packet
+forwarders. This also brings P4Runtime into the mix as the
+auto-generated interface for controlling the data plane.
 
 
 Note that OVS can be used not only to forward packets between VMs and
@@ -579,11 +608,11 @@ possible.
 The discussion up to this point covers only communication among
 endpoints that are virtualized in some way, either VMs or
 containers. However, it is usually the case that traffic also needs to
-enter and leave the virtual environment, e.g., to enter or leave a data
-center, or to connect virtual resources to non-virtualized ones. For
-this reason there is usually some sort of gateway between the virtual
-and the physical world that forms part of a network virtualization
-system.
+enter and leave the virtual environment, e.g., to enter or leave a
+datacenter, or to connect virtual resources to non-virtualized
+ones. For this reason there is usually some sort of gateway between
+the virtual and the physical world that forms part of a network
+virtualization system.
 
 A common way to implement a virtual-to-physical gateway is to use a
 server that has a software switching path running on it. This is the
@@ -620,12 +649,12 @@ hardware has been preferred.
 ---------------------
 
 Network virtualization has certainly had an impact on networking,
-particularly in the data center, in the years since Nicira's first 
-product. Both Cisco and VMware have periodically reported the adoption rates for 
-network virtualization and the technology is now widespread in Telcos 
-and large enterprise data centers. It is also ubiquitous in the data 
-centers of large cloud companies, as an essential component of 
-delivering infrastructure as a service. 
+particularly in the datacenter, in the years since Nicira's first
+product. Both Cisco and VMware have periodically reported the adoption
+rates for network virtualization and the technology is now widespread
+in Telcos and large enterprise datacenters. It is also ubiquitous in
+the datacenters of large cloud companies, as an essential component of
+delivering infrastructure as a service.
 
 ..
   May eventually generalize to "Impact of Network Virtualization" with
@@ -633,8 +662,8 @@ delivering infrastructure as a service.
   we make it a top-level section.
   
 One of the interesting side-effects of network virtualization is that
-it enabled a change in the way security is implemented in the data
-center. As noted above, network virtualization enables security
+it enabled a change in the way security is implemented in the
+datacenter. As noted above, network virtualization enables security
 features to be implemented in a distributed manner, in software. It
 also makes it relatively straightforward to create a large number of
 isolated networks, compared to the traditional approach of configuring
@@ -666,7 +695,7 @@ Prior to microsegmentation, the
 complexity of configuring segments was such that machines
 from many applications would likely sit on the same segment, creating
 opportunities for an attack to spread from one application to
-another. The lateral movement of attacks within data centers has been
+another. The lateral movement of attacks within datacenters has been
 well documented as a key strategy of successful cyber-attacks over many
 years.
 
@@ -685,7 +714,7 @@ contrived, but it demonstrates why microsegmentation was effectively
 impossible before the arrival of network virtualization.
 
 
-Microsegmentation has become an accepted best practice for data center
+Microsegmentation has become an accepted best practice for datacenter
 networking, providing a starting point for "zero-trust"
 networking. This illustrates the far-reaching impact of network
 virtualization. 
@@ -722,9 +751,9 @@ outcome. The architecture of network virtualization matches that of
 SDN. But if you think the outcome of SDN should be to disaggregate
 networking devices, then network virtualization didn't do
 that. However, because network virtualization moved a lot of the
-complexity of data center networking into the virtual overlay, it
+complexity of datacenter networking into the virtual overlay, it
 actually *did* simplify the physical network, opening the way for bare
-metal switches to take a larger role in the data center. 
+metal switches to take a larger role in the datacenter. 
              
 ..
    Expand this section; e.g.,talk about being overlay/underlay-aware.
