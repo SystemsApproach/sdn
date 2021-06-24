@@ -71,17 +71,7 @@ traffic; that is, server-to-server traffic, as distinct from
 efficiently support high volumes of traffic between any pair of
 servers in the datacenter, leaf-spine fabrics of the sort described
 in Chapter 7 became popular due to their high cross-sectional
-bandwidth and scalable layer-3 forwarding.\ [#]_ 
-
-.. [#] This is a good place to note that even though network
-       virtualization can be entirely implemented as an overlay,
-       without touching the physical underlay, the leaf-spine based
-       physical underlay found in datacenters is often also implemented
-       using SDN, as described in Chapter 7. In this case, the overlay
-       and underlay are managed as two distinct SDN domains. An
-       interesting question is whether blurring the line between the two,
-       resulting in an overlay-aware underlay / underlay-aware
-       overlay, provides value.
+bandwidth and scalable layer-3 forwarding.
 
 At the same time, server virtualization became mainstream, which had
 several implications for datacenter operations. Provisioning virtual
@@ -725,38 +715,52 @@ virtualization.
 ----------------------------------
 
 At the very start of this chapter we observed that Network
-Virtualization was the most successful early application of SDN. But
+Virtualization is the most successful early application of SDN. But
 is it really SDN? There has been considerable debate on this topic,
 which reflects that there has been plenty of argument about exactly
 what SDN is.
              
-The main argument against network virtualization's inclusion in SDN is
-that it didn't change the way physical networking was built and
-implemented. It simply runs as an overlay on top of a standard
-network, which might run standard routing protocols and be configured
-one box at a time as is traditional. However, that seems to be a less
-prevalent view now that network virtualization has become widespread.
+The main argument against Network Virtualization's inclusion in SDN is
+that it didn't change the way physical networks are built. It simply
+runs as an overlay on top of a standard L2/L3 network, which might run
+distributed routing protocols and be configured one box at a
+time. This argument seems to be a less prevalent view now that network
+virtualization has become so widespread, but it misses the point.
 
-Network virtualization definitely adheres to most if not all of the
-core principles laid out by SDN's inventors. There is a clear
-separation between control plane and data plane. The protocol by which
-those planes communicate has (in some cases) been implemented with
-OpenFlow, which is almost synonymous with SDN. The centralized control
-plane of SDN is absolutely critical to network virtualization, and
-delivered many of its key benefits such as automation and improved
-security. And the fact that network virtualization uses a completely
-programmable forwarding plane, as exemplified by OVS, also places it
-squarely in the SDN universe.
+Simply stated, Network Virtualization adheres to the core
+architectural principles laid out by SDN's inventors (and summarized
+in Section 1.3). There is a clear separation between control and data
+planes, with a centralized controller responsible for a distributed
+set of forwarding elements. It even uses OpenFlow as one possible
+control interface, although that was always an implementation detail
+and not fundamental to SDN. Finally, the fact that network
+virtualization uses a completely programmable forwarding plane, as
+exemplified by OVS, also places it squarely in the SDN universe.
 
-One way to think about the debate is one of architecture versus
-outcome. The architecture of network virtualization matches that of
-SDN. But if you think the outcome of SDN should be to disaggregate
-networking devices, then network virtualization didn't do
-that. However, because network virtualization moved a lot of the
-complexity of datacenter networking into the virtual overlay, it
-actually *did* simplify the physical network, opening the way for bare
-metal switches to take a larger role in the datacenter. 
-             
-..
-   Expand this section; e.g.,talk about being overlay/underlay-aware.
-   Also talk about in-network / at-the-edge convergence (or not).
+The differences between Network Virtualization and the other use cases
+described in this book can all be described as implementation choices,
+with the dependency on software switches rather than hardware switches
+being pivotal. This use of software-based switches accelerated
+adoption and deployment, and opened the door to more powerful
+forwarding functions (albeit at the cost of being able to prove
+properties about how those functions perform and behave at runtime). It
+is also the case that these software-based implementations evolved in
+a way that was optimized for Network Virtualization, as opposed pursuing
+the general-purpose, use-case agnostic approach embodied in the
+SDN software stack introduced in Chapter 3.
+
+None of this should come as a surprise. SDN has always been an
+approach to building and operating networks, applied to isolated
+domains where it provides value. There is no requirement of
+universality. (See the *Domain of Control* sidebar in Chapter 1.)
+Datacenter underlays, as exemplified by leaf-spine switching fabrics,
+are one such domain. Virtual networking overlays are another such
+domain. Both are even deployed simultaneously in the same datacenters,
+without either being aware that the other exists. Going forward, it
+will be interesting to see how many mechanisms these two domains come
+to share (e.g., a common Network OS, a common language for writing
+forwarding functions, a common toolchain to generate the control
+interface). It will also be interesting to see if the line separating
+the two domains begins to blur, which will happen as soon as an
+overlay-aware underlay / underlay-aware overlay is shown to provide
+value.
