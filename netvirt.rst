@@ -61,7 +61,7 @@ in 2009.
 .. _reading_VL2:
 .. admonition:: Further Reading
 
-   Greenberg et al. `VL2: a scalable and flexible datacenter network
+   Greenberg et al. `VL2: a scalable and flexible data center network
    <https://dl.acm.org/doi/10.1145/1594977.1592576>`__.
    SIGCOMM, August, 2009.
 
@@ -76,10 +76,10 @@ bandwidth and scalable layer-3 forwarding.\ [#]_
 .. [#] This is a good place to note that even though network
        virtualization can be entirely implemented as an overlay,
        without touching the physical underlay, the leaf-spine based
-       physical underlay found in datacenters is also implemented
+       physical underlay found in datacenters is often also implemented
        using SDN, as described in Chapter 7. In this case, the overlay
        and underlay are managed as two distinct SDN domains. An
-       interesting question whether blurring the line between the two,
+       interesting question is whether blurring the line between the two,
        resulting in an overlay-aware underlay / underlay-aware
        overlay, provides value.
 
@@ -308,18 +308,20 @@ The mapping between this architecture (:numref:`Figure %s
 straightforward. At the base is a distributed data plane, be it
 assembled from bare-metal switches or software switches, on top of
 which a centralized controller collects operational state and issues
-control directives. (When implemented in a general, use-case agnostic
-way, this controller is called a Network OS.) At the top-most level is
+control directives. When implemented in a general, use-case agnostic
+way, this controller is called a Network OS. The Nicira team built an
+early network OS called Onix, which can be thought of as a precursor of
+ONOS. At the top-most level is
 a management layer that understands and implements the abstraction of
-a virtual network. (This management layer can be thought of as control
-application; two names for the same concept.) In short, the
+a virtual network. This management layer can be thought of as an
+application that runs on the network OS. In short, the
 architecture presented in this Chapter is purpose-built to support
 virtual networks, whereas the one outlined in Chapter 3 is intended to
 be general-purpose, and in fact, there was at one time a ONOS-based
 virtual network application, called *Virtual Tenant Network (VTN)*,
 that was integrated with OpenStack. VTN is no longer being maintained,
 due in part to the availability of network virtualization subsystems
-in popular container management sysetms like Kubernetes.
+in popular container management systems like Kubernetes.
 
 Consider a simple example. We want to create a virtual network that
 connects two VMs, A and B, to a single L2 subnet. We can express that
@@ -524,7 +526,7 @@ information over a separate channel using the *Open vSwitch Database
 purpose as gNMI/gNOI does for a hardware-based data plane. Again, the
 mapping between these building blocks and the components described in
 earlier chapters is straightforward, the differences in terminology and
-details largely being attributed to network virtualization evolving as
+details largely being attributed to network virtualization evolving as a
 purpose-built solution.
 
 
@@ -538,7 +540,7 @@ effectively unlimited in number, a distinct advantage over hardware
 implementations of OpenFlow switching. This enables the high degree of
 flexibility that is required in network virtualization. At the same
 time, there is also an effort to unify software- and hardware-based
-forwarding elements, using P4 as the lingua franca for writing packet
+forwarding elements, using P4 as the *lingua franca* for writing packet
 forwarders. This also brings P4Runtime into the mix as the
 auto-generated interface for controlling the data plane.
 
