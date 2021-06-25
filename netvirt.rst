@@ -302,7 +302,7 @@ control directives. When implemented in a general, use-case agnostic
 way, this controller is called a Network OS. The Nicira team built an
 early network OS called Onix, which can be thought of as a precursor of
 ONOS. At the top-most level is
-a management layer that understands and implements the abstraction of
+a management layer that serves API requests, and understands the abstraction of
 a virtual network. This management layer can be thought of as an
 application that runs on the network OS. In short, the
 architecture presented in this Chapter is purpose-built to support
@@ -310,8 +310,8 @@ virtual networks, whereas the one outlined in Chapter 3 is intended to
 be general-purpose, and in fact, there was at one time a ONOS-based
 virtual network application, called *Virtual Tenant Network (VTN)*,
 that was integrated with OpenStack. VTN is no longer being maintained,
-due in part to the availability of network virtualization subsystems
-in popular container management systems like Kubernetes.
+due in part to the availability of other network virtualization subsystems
+that integrate with container management systems like Kubernetes.
 
 Consider a simple example. We want to create a virtual network that
 connects two VMs, A and B, to a single L2 subnet. We can express that
