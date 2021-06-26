@@ -18,7 +18,9 @@ Deparser
 Disaggregating
 École
 Feamster
+Ganga
 Gbps
+Greenberg
 IPv
 Inband
 IntelliJ
@@ -34,11 +36,14 @@ Microsegmentation
 Milano
 Mininet
 Montréal
+Mpps
 Multicast
 Multiprotocol
 OCP
 Ongaro
+Onix
 Ousterhout
+Pfaff
 PON
 Ph
 Pipeconf
@@ -55,6 +60,7 @@ Repo
 Rexford
 Runtime
 SAI
+Sridhar
 SNMP
 SRv
 Shenker
@@ -62,6 +68,7 @@ Stratum
 Sunay
 Tbps
 Telco
+Telcos
 Tofino
 Trellis
 Tseng
@@ -81,6 +88,7 @@ aspirational
 backend
 backends
 backhaul
+balancers
 bmv
 centric
 checksums
@@ -105,12 +113,15 @@ et
 ethernet
 extern
 externs
+extensibility
 failover
 firewalling
 gNMI
 gNOI
 gNXI
 gRPC
+hairpinned
+hairpinning
 handoffs
 hyperscale
 incrementing
@@ -118,6 +129,7 @@ interoperable
 intra
 judgement
 microsegments
+microsegmentation
 microservice
 misconfigurations
 modularity
@@ -141,6 +153,7 @@ scalability
 subdirectory
 subgraph
 subnet
+subnets
 syscall
 toolchain
 toolchains
@@ -148,6 +161,7 @@ toolset
 transformative
 ttl
 unicast
+userspace
 utilizations
 vSwitch
 vSwitches
