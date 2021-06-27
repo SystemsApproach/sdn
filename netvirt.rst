@@ -288,9 +288,9 @@ desired state and the actual state of the system. As the control plane
 receives discovered state information from the data plane, it compares
 this against the desired state. If the desired state does not match
 the actual state, the control plane calculates the necessary changes
-and pushes them to the data plane, as indicated by the *realized
-state* arrow. This paradigm, of continuously reconciling actual state
-with desired state, is a common one in distributed systems.
+and pushes them to the data plane, as indicated by the *control
+directives* arrow. This paradigm, of continuously reconciling actual
+state with desired state, is a common one in distributed systems.
 
 The mapping between this architecture (:numref:`Figure %s
 <fig-three-planes>`) and the one depicted in :numref:`Figures %s
