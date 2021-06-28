@@ -635,9 +635,24 @@ hardware has been preferred.
 
 
 ..
-  New section: Example Systems (describe OVN and mention others)
+  New section:
 
-8.4 Microsegmentation
+8.4 Example Systems
+-------------------
+There have been several successful implementations of network
+virtualization systems, of which we have already mentioned several. In
+this section we will explore the Open Virtual Network (OVN) system as
+a well-documented open source implementation of network
+virtualization.
+
+OVN was built as a set of enhancements to OVS, leveraging OVS for the
+data plane and OVSDB for the control and management planes. The high
+level architecture of OVN is shown in Figure
+
+
+
+
+8.5 Microsegmentation
 ---------------------
 
 Network virtualization has certainly had an impact on networking,
