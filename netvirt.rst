@@ -657,6 +657,15 @@ level architecture of OVN is shown in :numref:`Figure %s
 
     OVN High-level Architecture.
 
+
+An important aspect of OVN is its use of two databases (referred to as
+Northbound and Southbound) to store state
+information. Theses databases happen to be implemented using OVSDB,
+which was originally created to store configuration state for OVS, as
+discussed in Section 8.3.2. In OVN, OVSDB has a larger role, being
+used for both configuration state and control state, as described
+below.    
+
 OVN is assumed to operate in an environment where a cloud management
 system (CMS) is responsible for the creation of virtual networks. This is
 likely to be OpenStack, which was the first CMS to be supported by
@@ -670,21 +679,35 @@ The control plane of OVN is a little more complicated than that shown
 in the generic architecture of :numref:`Figure %s
 <fig-three-planes>`. Significantly, it is divided into a centralized
 component, known as *ovn-northd*, and a distributed component that
-runs on every hypervisor, called the *OVN controller*. ovn-northd
+runs on every hypervisor, called the *OVN controller*. Recall that in
+Section 1.2.2 we discussed the tradeoff between centralized and
+distributed control for SDN; in OVN, a hybrid model is used. The
+advantage of this approach is that we retain *logically* centralized control, so that
+a single API entry point can be used to create networks, query status,
+and so on, but we distribute out some of the control functions to
+improve the scalability of the system.
+
+ovn-northd, a centralized component,
 translates the logical network configuration, expressed in terms of
 conventional network concepts like switching and routing, into logical
 datapath flows, which it stores in the *OVN Southbound
-Database*. Logical data path flows provide an abstract representation
+Database*. We referred to this in the generic architecture above as *realized state*.
+
+Logical data path flows provide an abstract representation
 of the forwarding rules that will eventually be populated in the data
 plane, specified in a way that is independent of the physical
 location of VMs. So, for example, if VM A and VM B are on the same
-logical switch, there will be a logical datapath flow to forward
-packets sent by A to B stored in the OVN Southbound database. But
+logical switch, a logical datapath flow to forward
+packets sent by A to B is entered in the OVN Southbound database. But
 there is not enough information to actually forward packets in this
 flow, because that depends on which hypervisors currently host those
 VMs.  Providing the binding of physical hypervisor nodes to VMs is a
 task performed by the OVN controller running on the appropriate
-hypervisor.
+hypervisor. This is an example of *discovered state*, in the sense
+that the hypervisors discover the location of VMs and report it up to
+the database. As the controller running in each hypervisor reports up
+its state, logical flows can be mapped into physical flows between
+actual hypervisor nodes.
 
 When it comes to programming the data plane, the OVN controller for
 each hypervisor queries the OVN Southbound DB to identify the logical
@@ -694,7 +717,7 @@ regarding the location of other VMs, it is able to construct the rules
 that need to be programmed into the instance of OVS that is running
 locally on the hypervisor in question. Continuing with the example 
 above, if VM A is on hypervisor 1, and VM B is on hypervisor 2, then
-hypervisor 1 needs flow rule in OVS to forward packets from VM A to
+hypervisor 1 needs a flow rule in OVS to forward packets from VM A to
 VM B. It is able to see this by looking at the logical flows in OVN
 Southbound DB, and it is able to determine the details of how to
 encapsulate packets destined for VM B by looking for binding
