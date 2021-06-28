@@ -543,82 +543,78 @@ of the same components as one for VMs, and mixed environments (where
 containers and VMs communicate in a single virtual network) are also
 possible.
 
-.. sidebar:: Performance Optimizations: SR-IOV, DPDK, and Offloads
-             
-             *Since the virtual switch sits in the data path for all
-             traffic entering of leaving VMs and containers in a
-             virtual network, the performance of the virtual switch is
-             critical. The OVS paper from 2015 discusses a number of
-             performance optimizations made over the years. Two
-             approaches to improving vSwitch performance warrant some
-             discussion.*
+8.3.3 Performance Optimizations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-             *SR-IOV (Single Root IO Virtualization) has been around
-             for many years as a possible option for improving the IO
-             performance between VMs and the outside world. The basic
-             idea is that a single physical NIC presents itself to the
-             hypervisor as a set of virtual NICs,
-             each of which has its own set of resources. Each VM could
-             then have its own virtual NIC, and bypass the hypervisor
-             completely, which in principle would improve
-             performance. However, this isn't really a useful approach
-             for network virtualization, because the virtual switch is
-             bypassed. Much of the value of network virtualization
-             comes from the flexibility of a programmable virtual
-             switch, so bypassing it runs counter to the direction of
-             network virtualization.*
+Since the virtual switch sits in the data path for all traffic
+entering of leaving VMs and containers in a virtual network, the
+performance of the virtual switch is critical. The OVS paper from 2015
+discusses a number of performance optimizations made over the years,
+but approaches to improving vSwitch performance warrant further
+discussion.
 
-             *DPDK (Data Path Development Kit) is a set of libraries
-             developed for the Intel x86 platform to improve
-             performance of data-moving operations such as virtual
-             switching. Many of the concepts are straightforward
-             (e.g. packets can be processed in batches, context
-             switches are avoided) but the set of optimizations is
-             large and, when applied properly, effective. It has been
-             successfully used to implement OVS with performance gains
-             that can be significant, depending on the exact operating
-             environment. We'll discuss one such environment below,
-             the virtual-to-physical gateway.*
+The first is *DPDK (Data Path Development Kit)*, a set of libraries
+developed for the Intel x86 platform to improve performance of
+data-moving operations, including virtual switching. Many of the
+concepts are straightforward (e.g., packets can be processed in
+batches, context switches are avoided) but the set of optimizations is
+large and, when applied properly, effective. It has been successfully
+used to implement OVS with performance gains that can be significant,
+depending on the exact operating environment.
 
-             *Finally, there is a long tradition of offloading certain
-             functions from the server to the NIC, notably TCP
-             segmentation offload (TSO). As NICs have gained more
-             capability in recent years with the rise of SmartNICs,
-             the potential exists to move more of the vSwitch
-             capability to the NIC with a potential performance
-             gain. The challenge is one of trading flexibility for
-             performance, as SmartNICs are still more
-             resource-constrained than a general purpose CPU. It seems
-             the latest generation of SmartNICs may be reaching a
-             level of sophistication where offloading most or all of
-             the vSwitch functions would be effective.*
+One such environment is using OVS to forward packets between a virtual
+and a non-virtual network, which typically happens when a VM needs to
+communicate with a process on the public Internet. This scenario is
+referred to as a Virtual-to-Physical Gateway, and it is a good
+candidate for DPDK because it has little to do other than forward
+packets (i.e., no other CPU-bound processing is involved). In this
+setting, experiments reported by RedHat Developer shows OVS-DPDK is
+able to forward over 16Mpps on a high-end Intel processor. (This is
+compared to a forwarding rate closer to 1Mpps with OVS alone.)
 
+.. _reading_OVS-perf:
+.. admonition:: Further Reading
 
-8.3.3 Virtual-to-Physical Gateways
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   RedHat Developer. `Measuring and Comparing Open vSwtich Performance
+   <https://developers.redhat.com/blog/2017/06/05/measuring-and-comparing-open-vswitch-performance>`__,
+   June 2017.
 
-The discussion up to this point covers only communication among
-endpoints that are virtualized in some way, either VMs or
-containers. However, it is usually the case that traffic also needs to
-enter and leave the virtual environment, e.g., to enter or leave a
-datacenter, or to connect virtual resources to non-virtualized
-ones. For this reason there is usually some sort of gateway between
-the virtual and the physical world that forms part of a network
-virtualization system.
+The second is *SR-IOV (Single Root IO Virtualization)*, a hardware
+feature designed to improve IO performance between VMs and the outside
+world. The basic idea is that a single physical NIC presents itself to
+the hypervisor as a set of virtual NICs, each of which has its own set
+of resources. Each VM could then have its own virtual NIC, and bypass
+the hypervisor completely, which in principle would improve
+performance. However, this isn't really a useful approach for network
+virtualization, because the virtual switch is bypassed. Much of the
+value of network virtualization comes from the flexibility of a
+programmable virtual switch, so bypassing it runs counter to the
+direction of network virtualization.
 
-A common way to implement a virtual-to-physical gateway is to use a
-server that has a software switching path running on it. This is the
-approach described in the Nicira paper. Because such an appliance is
-effectively a software switch, with little to do other than forwarding
-packets between virtual and physical networks, it is a good candidate
-for DPDK implementation of the forwarding path.
+On the other hand, there is value in recognizing that the NIC has a
+role to play in the end-to-end story. There is a long tradition of
+offloading certain functions from the server to the NIC, with *TCP
+Segmentation Offload (TSO)* being a notable example. As NICs have
+gained more capability in recent years with the rise of SmartNICs, the
+potential exists to move more of the vSwitch capability to the NIC
+with a potential performance gain. The challenge is one of trading
+flexibility for performance, as SmartNICs are still more
+resource-constrained than a general purpose CPU. The latest generation
+of SmartNICs are reaching a level of sophistication where offloading
+some or all of the vSwitch functions could be effective.\ [#]_ 
 
-Even a well-implemented software switch on general-purpose hardware is
-going to perform relatively poorly compared to a dedicated switching
-ASIC, and for this reason there have also been implementations of
-gateways that leverage such switching hardware. One example, which took
-advantage of the VXLAN implementations on many top-of-rack switches,
-is described in a paper by Davie, *et al.*
+.. [#] As an aside, P4 is gaining traction as a way to program
+     SmartNICs, suggesting the possibility of convergence in how the
+     data plane—whether implemented as a vSwitch, a SmartNIC, or a
+     bare-metal switch—exports its capabilities to the control plane.
+
+Finally, it is worth noting that even a well-implemented software
+switch on general-purpose hardware is going to perform relatively
+poorly compared to a dedicated switching hardware, and for this reason,
+there have also been implementations of gateways that leverage such
+bare-metal switches. One example, which took advantage of the VXLAN
+implementations on many top-of-rack switches, is described in a paper
+by Davie, *et al.*
 
 .. _reading_OVSDB:
 .. admonition:: Further Reading
@@ -631,7 +627,10 @@ As in many other networking environments, there is a trade-off between
 the flexibility of fully programmable devices and the performance of
 less flexible, dedicated hardware. In most commercial deployments of
 network virtualization, the more flexible approach of general purpose
-hardware has been preferred.
+hardware has been preferred. Over time, the trick will be to identify
+the relatively fixed (but universally applicable) subset of that
+functionality that provides the biggest performance benefit when
+implemented in hardware.
 
 
 ..
