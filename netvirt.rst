@@ -288,8 +288,8 @@ desired state and the actual state of the system. As the control plane
 receives discovered state information from the data plane, it compares
 this against the desired state. If the desired state does not match
 the actual state, the control plane calculates the necessary changes
-and pushes them to the data plane, as indicated by the *realized
-state* arrow. This paradigm, of continuously reconciling actual state
+and pushes them to the data plane, as indicated by the *control
+directives* arrow. This paradigm, of continuously reconciling actual state
 with desired state, is a common one in distributed systems.
 
 The mapping between this architecture (:numref:`Figure %s
@@ -564,13 +564,15 @@ depending on the exact operating environment.
 
 One such environment is using OVS to forward packets between a virtual
 and a non-virtual network, which typically happens when a VM needs to
-communicate with a process on the public Internet. This scenario is
-referred to as a Virtual-to-Physical Gateway, and it is a good
-candidate for DPDK because it has little to do other than forward
-packets (i.e., no other CPU-bound processing is involved). In this
-setting, experiments reported by RedHat Developer shows OVS-DPDK is
-able to forward over 16Mpps on a high-end Intel processor. (This is
-compared to a forwarding rate closer to 1Mpps with OVS alone.)
+communicate with something outside the virtual network. This could be,
+for example, an unvirtualized server such as a mainframe or database,
+or some device on the public Internet. This scenario is referred to as
+a Virtual-to-Physical Gateway, and it is a good candidate for DPDK
+because it has little to do other than forward packets (i.e., no other
+CPU-bound processing is involved). In this setting, experiments
+reported by RedHat Developer shows OVS-DPDK is able to forward over
+16Mpps on a high-end Intel processor. (This is compared to a
+forwarding rate closer to 1Mpps with OVS alone.)
 
 .. _reading_OVS-perf:
 .. admonition:: Further Reading
@@ -633,10 +635,9 @@ functionality that provides the biggest performance benefit when
 implemented in hardware.
 
 
-..
-  New section:
 
-8.4 Example Systems
+
+8.4 OVN (Open Virtual Network)
 -------------------
 There have been several successful implementations of network
 virtualization systems, of which we have already mentioned several. In
@@ -646,9 +647,67 @@ virtualization.
 
 OVN was built as a set of enhancements to OVS, leveraging OVS for the
 data plane and OVSDB for the control and management planes. The high
-level architecture of OVN is shown in Figure
+level architecture of OVN is shown in :numref:`Figure %s
+<fig-ovn-arch>`.
 
+.. _fig-ovn-arch:
+.. figure:: figures/Slide51.png
+    :width: 450px
+    :align: center
 
+    OVN High-level Architecture.
+
+OVN is assumed to operate in an environment where a cloud management
+system (CMS) is responsible for the creation of virtual networks. This is
+likely to be OpenStack, which was the first CMS to be supported by
+OVN. The OVN/CMS plugin is responsible for mapping abstractions that
+match those of the CMS with generic virtual network abstractions that
+can be stored in the *Northbound Database*. OVN uses OVSDB as its
+database of this part of the system. We can think of the plugin as the
+management plane and the Northbound DB is the desired state repository.
+
+The control plane of OVN is a little more complicated than that shown
+in the generic architecture of :numref:`Figure %s
+<fig-three-planes>`. Significantly, it is divided into a centralized
+component, known as *ovn-northd*, and a distributed component that
+runs on every hypervisor, called the *OVN controller*. ovn-northd
+translates the logical network configuration, expressed in terms of
+conventional network concepts like switching and routing, into logical
+datapath flows, which it stores in the *OVN Southbound
+Database*. Logical data path flows provide an abstract representation
+of the forwarding rules that will eventually be populated in the data
+plane, specified in a way that is independent of the physical
+location of VMs. So, for example, if VM A and VM B are on the same
+logical switch, there will be a logical datapath flow to forward
+packets sent by A to B stored in the OVN Southbound database. But
+there is not enough information to actually forward packets in this
+flow, because that depends on which hypervisors currently host those
+VMs.  Providing the binding of physical hypervisor nodes to VMs is a
+task performed by the OVN controller running on the appropriate
+hypervisor.
+
+When it comes to programming the data plane, the OVN controller for
+each hypervisor queries the OVN Southbound DB to identify the logical
+flows that are relevant to it, based on the VMs that it is currently
+hosting. Combined with the information provided by other hypervisors
+regarding the location of other VMs, it is able to construct the rules
+that need to be programmed into the instance of OVS that is running
+locally on the hypervisor in question. Continuing with the example 
+above, if VM A is on hypervisor 1, and VM B is on hypervisor 2, then
+hypervisor 1 needs flow rule in OVS to forward packets from VM A to
+VM B. It is able to see this by looking at the logical flows in OVN
+Southbound DB, and it is able to determine the details of how to
+encapsulate packets destined for VM B by looking for binding
+information provided by hypervisor 2.
+
+Everything discussed up to this point has assumed that we are talking
+about VMs as the endpoints for our virtual networks, but everything
+that works for VMs also works for containers (glossing over some
+implementation details). We can connect a set of container hosts to
+the OVN Southbound DB and they can create flow rules for their OVS instances to
+build virtual networks for the containers they are hosting. In this
+case, the "cloud management system" that OVN integrates with is likely
+to be a container management system such as Kubernetes.
 
 
 8.5 Microsegmentation
@@ -725,7 +784,7 @@ networking, providing a starting point for "zero-trust"
 networking. This illustrates the far-reaching impact of network
 virtualization. 
 
-8.5 Is Network Virtualization SDN?
+8.6 Is Network Virtualization SDN?
 ----------------------------------
 
 At the very start of this chapter we observed that Network
