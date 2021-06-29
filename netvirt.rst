@@ -513,12 +513,16 @@ by the control plane using OpenFlow, just like many hardware switches
 described in previous chapters. It also receives configuration
 information over a separate channel using the *Open vSwitch Database
 (OVSDB)* protocol, which is to say, OVSDB effectively serves the same
-purpose as gNMI/gNOI does for a hardware-based data plane. Again, the
+purpose as gNMI/gNOI does for a hardware-based data plane.\ [#]_ Again, the
 mapping between these building blocks and the components described in
 earlier chapters is straightforward, the differences in terminology and
 details largely being attributed to network virtualization evolving as a
 purpose-built solution.
 
+.. [#] Note that OVSDB here refers to a protocol to access a database,
+       which is called the ovsdb-server. OVSDB can refer to a protocol
+       or to the database itself, and we try to keep that clear by
+       providing enough context.
 
 Performance in the forwarding plane has been achieved via a long
 series of optimizations described in the Pfaff paper, notably a
@@ -577,7 +581,7 @@ forwarding rate closer to 1Mpps with OVS alone.)
 .. _reading_OVS-perf:
 .. admonition:: Further Reading
 
-   RedHat Developer. `Measuring and Comparing Open vSwtich Performance
+   RedHat Developer. `Measuring and Comparing Open vSwitch Performance
    <https://developers.redhat.com/blog/2017/06/05/measuring-and-comparing-open-vswitch-performance>`__,
    June 2017.
 
@@ -638,7 +642,7 @@ implemented in hardware.
 
 
 8.4 OVN (Open Virtual Network)
--------------------
+------------------------------
 There have been several successful implementations of network
 virtualization systems, of which we have already mentioned several. In
 this section we will explore the Open Virtual Network (OVN) system as
@@ -646,9 +650,9 @@ a well-documented open source implementation of network
 virtualization.
 
 OVN was built as a set of enhancements to OVS, leveraging OVS for the
-data plane and OVSDB for the control and management planes. The high
-level architecture of OVN is shown in :numref:`Figure %s
-<fig-ovn-arch>`.
+data plane and a set of databases (built on OVSDB) for the control and
+management planes. The high level architecture of OVN is shown in
+:numref:`Figure %s <fig-ovn-arch>`.
 
 .. _fig-ovn-arch:
 .. figure:: figures/Slide51.png
@@ -671,8 +675,8 @@ system (CMS) is responsible for the creation of virtual networks. This is
 likely to be OpenStack, which was the first CMS to be supported by
 OVN. The OVN/CMS plugin is responsible for mapping abstractions that
 match those of the CMS with generic virtual network abstractions that
-can be stored in the *Northbound Database*. OVN uses OVSDB as its
-database of this part of the system. We can think of the plugin as the
+can be stored in the *Northbound Database*. OVN uses an instance of
+ovsdb-server to implement this database. We can think of the plugin as the
 management plane and the Northbound DB is the desired state repository.
 
 The control plane of OVN is a little more complicated than that shown
@@ -680,7 +684,7 @@ in the generic architecture of :numref:`Figure %s
 <fig-three-planes>`. Significantly, it is divided into a centralized
 component, known as *ovn-northd*, and a distributed component that
 runs on every hypervisor, called the *OVN controller*. Recall that in
-Section 1.2.2 we discussed the tradeoff between centralized and
+Section 1.2.2 we discussed the trade-off between centralized and
 distributed control for SDN; in OVN, a hybrid model is used. The
 advantage of this approach is that we retain *logically* centralized control, so that
 a single API entry point can be used to create networks, query status,
@@ -715,13 +719,27 @@ flows that are relevant to it, based on the VMs that it is currently
 hosting. Combined with the information provided by other hypervisors
 regarding the location of other VMs, it is able to construct the rules
 that need to be programmed into the instance of OVS that is running
-locally on the hypervisor in question. Continuing with the example 
-above, if VM A is on hypervisor 1, and VM B is on hypervisor 2, then
-hypervisor 1 needs a flow rule in OVS to forward packets from VM A to
-VM B. It is able to see this by looking at the logical flows in OVN
-Southbound DB, and it is able to determine the details of how to
-encapsulate packets destined for VM B by looking for binding
-information provided by hypervisor 2.
+locally on the hypervisor in question. (Note that the OVS instances
+shown in :numref:`Figure %s <fig-ovn-arch>` include all the components
+shown as part of the OVS data plane in :numref:`Figure %s
+<fig-ovs-blocks>`.)  Continuing with the example above, if VM A is on
+hypervisor 1, and VM B is on hypervisor 2, then hypervisor 1 needs a
+flow rule in OVS to forward packets from VM A to VM B. It is able to
+see this by looking at the logical flows in OVN Southbound DB, and it
+is able to determine the details of how to encapsulate packets
+destined for VM B by looking for binding information provided by
+hypervisor 2.
+
+You can find a lot more detail on OVN in its online documentation,
+including descriptions of the structure of the Northbound and
+Southbound databases.
+
+.. _reading_OVN:
+.. admonition:: Further Reading
+                
+   Open Virtual Network. `OVN Reference Guide
+   <https://docs.ovn.org/en/latest/ref/index.html>`__.
+                
 
 Everything discussed up to this point has assumed that we are talking
 about VMs as the endpoints for our virtual networks, but everything
