@@ -16,11 +16,11 @@ applications on top of ONOS, and using ONOS to manage an equally wide
 range of network devices. This chapter also discusses the critically
 important issues of scalable performance and high availability.
 
-6.1 ONOS Architecture
+6.1 Architecture
 ---------------------
 
-The overall architecture for ONOS is shown in :numref:`Figure %s
-<fig-onos>`. It consists of three main layers:
+Using ONOS as our model, the architecture of an Network OS is shown in
+:numref:`Figure %s <fig-onos>`. It consists of three main layers:
 
 1. A collection of Northbound Interfaces (NBI) that applications use to
    stay informed about the network state (e.g. traverse topology graph,

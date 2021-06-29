@@ -97,6 +97,7 @@ commoditized
 compositional
 config
 cyber
+datapath
 de
 di
 decapsulation
@@ -136,6 +137,7 @@ modularity
 multicast
 nexthop
 orchestrator
+ovsdb
 parameterizing
 pluggable
 pre
@@ -161,6 +163,7 @@ toolset
 transformative
 ttl
 unicast
+unvirtualized
 userspace
 utilizations
 vSwitch

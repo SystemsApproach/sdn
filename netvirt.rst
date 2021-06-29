@@ -323,10 +323,9 @@ reflected in the actual state, so it needs to determine where A and B
 are located, and the IP addresses of the relevant hypervisors. With
 this information, it determines what the encapsulation of packets
 should be if A and B are to communicate with each other. From this, it
-computes a set of forwarding rules that need to be installed into
-the appropriate vSwitches. These rules are pushed to the vSwitches as
-realized state. They could, for example, be expressed as OpenFlow
-rules.
+computes a set of control directives that need to be installed into
+the appropriate vSwitches. These directive are pushed to the vSwitches,
+expressed, for example, as a set of OpenFlow rules.
 
 If at some later in time, one of the VMs moves to a different
 hypervisor, this information is passed to the control plane, which
@@ -497,13 +496,14 @@ vSwitch (OVS).*
 
 Open vSwitch has been used in proprietary systems such as Nicira’s
 Network Virtualization Platform and VMware NSX, as well as open source
-systems such as *Open Virtual Network (OVN)*. It was designed to have
-the necessary flexibility to meet the requirements of network
-virtualization while also providing high performance.
+systems such as *Open Virtual Network (OVN)* described in Section 8.4.
+It was designed to have the necessary flexibility to meet the
+requirements of network virtualization while also providing high
+performance.
 
 .. _fig-ovs-blocks:
 .. figure:: figures/Slide50.png
-    :width: 450px
+    :width: 500px
     :align: center
 
     Open vSwitch Functional Blocks.
@@ -519,10 +519,15 @@ earlier chapters is straightforward, the differences in terminology and
 details largely being attributed to network virtualization evolving as a
 purpose-built solution.
 
-.. [#] Note that OVSDB here refers to a protocol to access a database,
-       which is called the ovsdb-server. OVSDB can refer to a protocol
-       or to the database itself, and we try to keep that clear by
-       providing enough context.
+.. [#] Note that OVSDB here refers to an RPC protocol used to access
+       the database, which is called the ``ovsdb-server``. OVSDB can
+       refer to either the protocol or the database itself, and we try
+       to keep that clear by providing enough context. As a database,
+       OVSDB has a schema, which you can think as OVS's counterpart to
+       the OpenConfig schema described in Section 5.3.  As a protocol,
+       OVSDB uses a JSON-based message format, analogous to gNMI's
+       use of protobufs.
+       
 
 Performance in the forwarding plane has been achieved via a long
 series of optimizations described in the Pfaff paper, notably a
@@ -641,42 +646,41 @@ implemented in hardware.
 
 
 
-8.4 OVN (Open Virtual Network)
-------------------------------
-There have been several successful implementations of network
-virtualization systems, of which we have already mentioned several. In
-this section we will explore the Open Virtual Network (OVN) system as
-a well-documented open source implementation of network
-virtualization.
+8.4 Example System
+----------------------
 
-OVN was built as a set of enhancements to OVS, leveraging OVS for the
-data plane and a set of databases (built on OVSDB) for the control and
+There have been several successful implementations of network
+virtualization systems, of which we have already mentioned several.
+This section describes *Open Virtual Network (OVN)*, a well-documented
+open source project, as an example of a network virtualization system.
+
+OVN is built as a set of enhancements to OVS, leveraging OVS for the
+data plane and a set of databases (built on OVSDB) for its control and
 management planes. The high level architecture of OVN is shown in
 :numref:`Figure %s <fig-ovn-arch>`.
 
 .. _fig-ovn-arch:
 .. figure:: figures/Slide51.png
-    :width: 450px
+    :width: 400px
     :align: center
 
     OVN High-level Architecture.
 
 
 An important aspect of OVN is its use of two databases (referred to as
-Northbound and Southbound) to store state
-information. Theses databases happen to be implemented using OVSDB,
-which was originally created to store configuration state for OVS, as
-discussed in Section 8.3.2. In OVN, OVSDB has a larger role, being
-used for both configuration state and control state, as described
-below.    
+Northbound and Southbound) to store state. Theses databases are
+implemented using OVSDB, which was originally created to store
+configuration state for OVS, as discussed in Section 8.3.2. In OVN,
+OVSDB has a larger role, being used for both configuration state and
+control state.
 
-OVN is assumed to operate in an environment where a cloud management
-system (CMS) is responsible for the creation of virtual networks. This is
+OVN is assumed to operate in an environment where a *Cloud Management
+System (CMS)* is responsible for the creation of virtual networks. This is
 likely to be OpenStack, which was the first CMS to be supported by
 OVN. The OVN/CMS plugin is responsible for mapping abstractions that
-match those of the CMS with generic virtual network abstractions that
+match those of the CMS into generic virtual network abstractions that
 can be stored in the *Northbound Database*. OVN uses an instance of
-ovsdb-server to implement this database. We can think of the plugin as the
+``ovsdb-server`` to implement this database. We can think of the plugin as the
 management plane and the Northbound DB is the desired state repository.
 
 The control plane of OVN is a little more complicated than that shown
@@ -691,16 +695,16 @@ a single API entry point can be used to create networks, query status,
 and so on, but we distribute out some of the control functions to
 improve the scalability of the system.
 
-ovn-northd, a centralized component,
+A centralized component, ``ovn-northd``,
 translates the logical network configuration, expressed in terms of
 conventional network concepts like switching and routing, into logical
 datapath flows, which it stores in the *OVN Southbound
-Database*. We referred to this in the generic architecture above as *realized state*.
+Database*. 
 
 Logical data path flows provide an abstract representation
-of the forwarding rules that will eventually be populated in the data
+of the forwarding rules that are populated in the data
 plane, specified in a way that is independent of the physical
-location of VMs. So, for example, if VM A and VM B are on the same
+location of VMs. For example, if VM A and VM B are on the same
 logical switch, a logical datapath flow to forward
 packets sent by A to B is entered in the OVN Southbound database. But
 there is not enough information to actually forward packets in this
@@ -710,13 +714,13 @@ task performed by the OVN controller running on the appropriate
 hypervisor. This is an example of *discovered state*, in the sense
 that the hypervisors discover the location of VMs and report it up to
 the database. As the controller running in each hypervisor reports up
-its state, logical flows can be mapped into physical flows between
+its state, logical flows are mapped into physical flows between
 actual hypervisor nodes.
 
 When it comes to programming the data plane, the OVN controller for
 each hypervisor queries the OVN Southbound DB to identify the logical
-flows that are relevant to it, based on the VMs that it is currently
-hosting. Combined with the information provided by other hypervisors
+flows that are relevant to it, based on the VMs that it currently
+hosts. Combined with the information provided by other hypervisors
 regarding the location of other VMs, it is able to construct the rules
 that need to be programmed into the instance of OVS that is running
 locally on the hypervisor in question. (Note that the OVS instances
@@ -748,7 +752,7 @@ implementation details). We can connect a set of container hosts to
 the OVN Southbound DB and they can create flow rules for their OVS instances to
 build virtual networks for the containers they are hosting. In this
 case, the "cloud management system" that OVN integrates with is likely
-to be a container management system such as Kubernetes.
+to be a container management system, such as Kubernetes.
 
 
 8.5 Microsegmentation
