@@ -175,13 +175,12 @@ it is usually implemented as an overlay among the servers on which
 those computing abstractions are implemented. Sitting underneath that
 overlay is a physical network, which network virtualization just takes
 as given (and that physical network need not implement SDN at
-all).\ [#]_ In this book we take a broad view of what SDN is, but at the
-same time we can see that not all the potential benefits of SDN are
-delivered by network virtualization. 
+all).
 
-.. [#] This observation about different aspects of SDN being
-       implemented in switches versus end hosts is an important one
-       that we return to in Section 3.1, and again in Chapter 8.
+This observation about different aspects of SDN being implemented in
+switches versus end hosts is an important one that we return to in
+Section 3.1 (where we outline the overall SDN architecture), and again
+in Chapter 8 (where we describe Network Virtualization in more detail).
        
 
 2.2 Switching Fabrics
@@ -450,17 +449,16 @@ commodity hardware and to implement the latter in software.
 
 Progress disaggregating PON-based access networks is quite far along,
 with a solution known as *SEBA (SDN-Enabled Broadband Access)*
-currently being deployed in operator field trials; production
-deployments are expected by 2021. Full details are beyond the scope of
-this book, but the general idea is to add bare-metal OLT devices to a
-cluster similar to the one presented in :numref:`Figure %s
-<fig-leaf-spine>`, resulting in configuration like the one depicted in
-:numref:`Figure %s <fig-seba>`. In other words, the cluster includes a
-mix of compute servers and access devices, interconnected by a
-switching fabric. And just as the *Open Compute Project (OCP)* has
-certified bare-metal ethernet switches, they now also certify bare-metal
-OLT devices. Both the fabric switches and access devices are
-controlled by a software-defined control plane, with the code that
+currently being deployed in production. Full details are beyond the
+scope of this book, but the general idea is to add bare-metal OLT
+devices to a cluster similar to the one presented in :numref:`Figure
+%s <fig-leaf-spine>`, resulting in configuration like the one depicted
+in :numref:`Figure %s <fig-seba>`. In other words, the cluster
+includes a mix of compute servers and access devices, interconnected
+by a switching fabric. And just as the *Open Compute Project (OCP)*
+has certified bare-metal ethernet switches, they now also certify
+bare-metal OLT devices. Both the fabric switches and access devices
+are controlled by a software-defined control plane, with the code that
 implements that control plane running on servers in the cluster.
 
 Moreover, when the fabric is constructed using switches with
@@ -485,8 +483,8 @@ ways.
     Access.
 
 Progress on *Software-Defined Radio Access Networks (SD-RAN)* lags
-software-defined broadband, with development still in the
-proof-of-concept stage. Disaggregating the RAN is a bigger challenge,
+software-defined broadband, with early-stage systems starting to run
+in trial deployments. Disaggregating the RAN is a bigger challenge,
 but the payoff will likely be even larger, as it leads to a
 5G-empowered edge cloud. We revisit SD-RAN in Chapter 9, but for a
 broad introduction to how 5G is being implemented according to SDN
