@@ -20,6 +20,7 @@ Disaggregating
 Feamster
 Ganga
 Gbps
+Geneve
 Greenberg
 IPv
 Inband

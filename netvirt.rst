@@ -267,7 +267,7 @@ the management plane.
 
 .. _fig-three-planes:
 .. figure:: figures/Slide46.png
-    :width: 500px
+    :width: 450px
     :align: center
             
     The Three Planes of a Network Virtualization System.
@@ -513,23 +513,25 @@ by the control plane using OpenFlow, just like many hardware switches
 described in previous chapters. It also receives configuration
 information over a separate channel using the *Open vSwitch Database
 (OVSDB)* protocol, which is to say, OVSDB effectively serves the same
-purpose as gNMI/gNOI does for a hardware-based data plane.\ [#]_ Again, the
+purpose as gNMI/gNOI does for a hardware-based data plane. Again, the
 mapping between these building blocks and the components described in
 earlier chapters is straightforward, the differences in terminology and
 details largely being attributed to network virtualization evolving as a
 purpose-built solution.
 
-.. [#] Note that OVSDB here refers to an RPC protocol used to access
-       the database, which is called the ``ovsdb-server``. OVSDB can
-       refer to either the protocol or the database itself, and we try
-       to keep that clear by providing enough context. As a database,
-       OVSDB has a schema, which you can think as OVS's counterpart to
-       the OpenConfig schema described in Section 5.3.  As a protocol,
-       OVSDB uses a JSON-based message format, analogous to gNMI's
-       use of protobufs.
+OVSDB as depicted in the Figure refers to an RPC protocol used to
+access the database (called ``ovsdb-server``), but in general, OVSDB
+can refer to either the protocol or the database. As a database, OVSDB
+has a schema, which you can think as OVS's counterpart to the
+OpenConfig schema described in Section 5.3.  As a protocol, OVSDB uses
+a JSON-based message format, analogous to gNMI's use of protobufs. It
+is also worth noting that OVSDB has taken on a life of its own, beyond
+the role shown in :numref:`Figure %s <fig-ovs-blocks>`, as a general
+way to represent network forwarding state. We'll see an example of
+this broader role in Section 8.4.
        
 
-Performance in the forwarding plane has been achieved via a long
+As for the OVS data plane, performance has been achieved via a long
 series of optimizations described in the Pfaff paper, notably a
 fast-path in the kernel that uses a flow cache to forward all packets
 in a flow after the first. The first packet in a flow is passed to the
@@ -661,7 +663,7 @@ management planes. The high level architecture of OVN is shown in
 
 .. _fig-ovn-arch:
 .. figure:: figures/Slide51.png
-    :width: 400px
+    :width: 350px
     :align: center
 
     OVN High-level Architecture.
