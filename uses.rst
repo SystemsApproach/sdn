@@ -84,7 +84,8 @@ service. Virtual machine migration, which enabled running VMs to move from one
 network location to another (taking their IP addresses with them),
 further exposed the limitations of manual network configuration. This
 need to automate network provisioning was first recognized by large
-cloud providers but eventually became mainstream in enterprises.
+cloud providers but eventually became mainstream in enterprise
+datacenters.
 
 As microservices and container-based systems such as Kubernetes have
 gained in popularity, network virtualization has continued to evolve
