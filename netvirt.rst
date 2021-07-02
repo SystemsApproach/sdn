@@ -683,56 +683,81 @@ can be stored in the *Northbound Database*. OVN uses an instance of
 ``ovsdb-server`` to implement this database. We can think of the plugin as the
 management plane and the Northbound DB is the desired state repository.
 
-The control plane of OVN is a little more complicated than that shown
-in the generic architecture of :numref:`Figure %s
-<fig-three-planes>`. Significantly, it is divided into a centralized
+The control plane of OVN demonstrates a significant novel feature
+compared to the generic architecture of :numref:`Figure %s
+<fig-three-planes>`. Importantly, it is divided into a centralized
 component, known as *ovn-northd*, and a distributed component that
 runs on every hypervisor, called the *OVN controller*. Recall that in
 Section 1.2.2 we discussed the trade-off between centralized and
 distributed control for SDN; in OVN, a hybrid model is used. The
-advantage of this approach is that we retain *logically* centralized control, so that
-a single API entry point can be used to create networks, query status,
-and so on, but we distribute out some of the control functions to
-improve the scalability of the system.
+decision to make this split followed the experience of the OVN team in
+working on earlier systems where the centralized controller had a full
+view of all flows, which presented a scaling challenge. OVN retains
+*logically* centralized control, so that a single API entry point can
+be used to create networks, query status, and so on, but distributes
+out to each hypervisor the control functions related to physical
+information such as the location of VMs in specific servers. This led
+to significant gains in the scalability of the system.
 
 A centralized component, ``ovn-northd``,
 translates the logical network configuration, expressed in terms of
 conventional network concepts like switching and routing, into logical
 datapath flows, which it stores in the *OVN Southbound
-Database*. 
+Database*. We can see how logical flows work with an example shown in
+:numref:`Figure %s <fig-ovn-tables>`.
+
+
+.. _fig-ovn-tables:
+.. figure:: figures/Slide52.png
+    :width: 700px
+    :align: center
+
+    Logical and Physical Flows in OVN.
+        
 
 Logical data path flows provide an abstract representation
 of the forwarding rules that are populated in the data
 plane, specified in a way that is independent of the physical
-location of VMs. For example, if VM A and VM B are on the same
-logical switch, a logical datapath flow to forward
-packets sent by A to B is entered in the OVN Southbound database. But
-there is not enough information to actually forward packets in this
-flow, because that depends on which hypervisors currently host those
-VMs.  Providing the binding of physical hypervisor nodes to VMs is a
-task performed by the OVN controller running on the appropriate
-hypervisor. This is an example of *discovered state*, in the sense
-that the hypervisors discover the location of VMs and report it up to
-the database. As the controller running in each hypervisor reports up
-its state, logical flows are mapped into physical flows between
-actual hypervisor nodes.
+location of VMs. In this example, we have created a logical switch
+``LS1``, with two ports, ``LP1`` and ``LP2``. Each port connects to a VM and the
+MAC addresses of the VMs are ``AA`` and ``BB`` as shown in the
+``Logical_Port`` table.
 
-When it comes to programming the data plane, the OVN controller for
+The ``Logical_Flows`` table, built from the information in the
+``Logical_Switch`` and ``Logical_Port`` tables, shows how packets are
+to be forwarded to implement this logical switch. For example, the
+first row indicates that packets destined for a MAC address of ``AA``
+need to be sent to port ``LP1``. But there is not enough information
+to actually forward packets in this flow, because that depends on
+which hypervisors currently host those VMs.  Providing the binding of
+physical hypervisor nodes to VMs is a task performed by the OVN
+controller running on the appropriate hypervisor. This is an example
+of *discovered state*, in the sense that the hypervisors discover the
+location of VMs and report it up to the database. So we see that the
+controller on ``HV1`` (hypervisor 1) has reported into the ``Chassis``
+table that it can be reached using the Geneve encapsulation at IP
+address ``10.0.0.10``. And that same hypervisor has reported into the
+``Port_Binding`` table that it is hosting the VM with ``LP1``. 
+
+
+In order to program the data plane, the OVN controller for
 each hypervisor queries the OVN Southbound DB to identify the logical
 flows that are relevant to it, based on the VMs that it currently
 hosts. Combined with the information provided by other hypervisors
 regarding the location of other VMs, it is able to construct the rules
-that need to be programmed into the instance of OVS that is running
+that need to be programmed into the instance of OVS running
 locally on the hypervisor in question. (Note that the OVS instances
 shown in :numref:`Figure %s <fig-ovn-arch>` include all the components
 shown as part of the OVS data plane in :numref:`Figure %s
-<fig-ovs-blocks>`.)  Continuing with the example above, if VM A is on
-hypervisor 1, and VM B is on hypervisor 2, then hypervisor 1 needs a
-flow rule in OVS to forward packets from VM A to VM B. It is able to
-see this by looking at the logical flows in OVN Southbound DB, and it
-is able to determine the details of how to encapsulate packets
-destined for VM B by looking for binding information provided by
-hypervisor 2.
+<fig-ovs-blocks>`.)  Continuing with the example above, hypervisor 2 needs a
+flow rule in OVS to forward packets from ``LP2`` to ``LP1``. It is able to
+see this by looking at the ``Logical_Flows`` in OVN Southbound DB, and it
+is able to determine the details of how to encapsulate packets and
+forward them to the right destination server using information in the
+``Port_Binding`` and ``Chassis`` tables. You see the results for both
+hypervisors in the table at the bottom of the figure, which is *not*
+part of the Southbound DB but is a collation of the flows computed at
+the two hypervisors.
 
 You can find a lot more detail on OVN in its online documentation,
 including descriptions of the structure of the Northbound and
