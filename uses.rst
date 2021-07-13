@@ -157,7 +157,24 @@ address space. For this reason, virtual networks have used a range of
 encapsulation techniques, of which VXLAN (briefly discussed in
 Chapter 1) is probably the most well
 known. In recent years, a more flexible encapsulation called GENEVE
-(Generic Network Virtualization Encapsulation) has emerged. 
+(Generic Network Virtualization Encapsulation) has emerged.
+
+.. _fig-nv-over:
+.. figure:: figures/Slide44.png
+    :width: 450px
+    :align: center
+
+    An example network virtualization system
+
+A typical network virtualization system looks something like
+:numref:`Figure %s <fig-nv-over>`. The Network Virtualization
+Controller is an SDN controller that exposes a northbound API by which
+networks can be created, monitored and modified. It connects to
+virtual switches running on hosts–in this case, hypervisors supporting
+virtual machines. Virtual networks are created by programming the
+virtual switches to forward packets, with appropriate encapsulation,
+from host to host across the underlay network. 
+            
 
 There have been reasonable debates about whether network
 virtualization is really SDN. Certainly it displays many of the
