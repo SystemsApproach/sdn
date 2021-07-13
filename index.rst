@@ -27,6 +27,7 @@ Peterson, Cascone, O’Connor, Vachuska, and Davie
    onos.rst
    trellis.rst
    netvirt.rst
+   access.rst
    future.rst
    exercises.rst
    README.rst
