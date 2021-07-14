@@ -4,26 +4,169 @@ Chapter 9:  Access Networks
 If Network Virtualization was the first successful use case of SDN,
 then bringing SDN principles to the Access Network—both
 Fiber-to-the-Home and the Mobile Cellular Network—is the latest, and
-potentially just as impactful. It is still early (producion
-deployments are just starting to happen), but the general approach is
-clear. This chapter describes the approach by looking at two example
-access networks: *Passive Optical Networks PON)* and *Radio Access
-Networks (RAN)*, the technologies at the core of Fiber-to-the-Home and
-the Mobile Cellular Network, respectively.
+potentially just as impactful. It is still early (production
+deployments are just now being rolled out), but the general approach
+is clear. This chapter describes the approach by looking at two
+example access networks: *Passive Optical Networks (PON)* and *Radio
+Access Networks (RAN)*, the technologies at the core of
+Fiber-to-the-Home and the Mobile Cellular Network, respectively.
 
 
 9.1 Background
 -------------------
 
-General background about cellular and fiber-to-the-home, and how
-both include a unique access network technology (RAN, PON) and an
-Access-to-IP gateway (Core, BNG). Preview how Core & BNG can be
-implemented as extensions to Trellis (in P4), but hone in on the
-uniqueness of the access technology.
+The technologies used to implement the *last mile* networks connecting
+homes, businesses, and mobile devices to the Internet have evolved
+independently from the rest of the Internet. This evolution, which has
+spanned decades, started with support for voice communication—this is
+true for both wired land-line phones and wireless cell phones—and then
+incrementally added support for data (i.e., broadband), and embraced
+IP-based technologies. The end result is a baroque collection of
+purpose-built devices that look quite unfamiliar to anyone that
+understands how to build a network out of a collection of L2/L3
+ethernet switches.
 
-Transition to the present: Talk about motivation and what's driving
-this. Focus on disaggregation and cloudification. Tell the O-RAN vs
-3GPP story.
+But this makes the access network fertile ground for SDN, and the
+introduction of disaggregation, commodity hardware, and cloud-based
+software. To understand what this means, we need to start with a brief
+overview of the legacy systems being replaced. We do this in the
+context of the two specific access technologies mentioned in the
+introduction: PON and RAN. Fortunately, from our 10,000-foot view,
+their respective architectures are strikingly similar. Of course the
+details differ significantly, but hiding (or even eliminating)
+gratuitous detail is one of the key benefits of SDN.
+
+Before getting to the specifics, we need a little more context. ISPs
+(e.g., Telco or Cable companies) often operate a national backbone,
+and connected to the periphery of that backbone are hundreds or
+thousands of edge sites, each of which serves a city or neighborhood.
+These edge sites are commonly called *Central Offices* in the Telco
+world and *Head Ends* in the cable world, but despite their names
+implying “centralized” and “root of the hierarchy” these sites are at
+the very edge of the ISP’s network; the ISP-side of the last-mile that
+directly connects to customers. The PON and RAN-based access networks
+are anchored in these facilities.
+
+Passive Optical Network 
+~~~~~~~~~~~~~~~~~~~~~~~
+
+We start with PON, which adopts a point-to-multipoint design.  The
+network is structured as a tree, with a single point starting in the
+ISP’s network and then fanning out to reach up to 1024 homes. PON gets
+its name from the fact that the splitters are passive: they forward
+optical signals downstream and upstream without actively
+storing-and-forwarding frames. Framing then happens at the source in
+the ISP’s premises, in a device called an *Optical Line Terminal*
+(OLT), and at the end-points in individual homes, in a device called
+an *Optical Network Unit* (ONU).
+
+:numref:`Figure %s <fig-pon>` shows an example PON, simplified to
+depict just one ONU and one OLT. In practice, a Central Office would
+include multiple OLTs connecting to thousands of customer homes.
+:numref:`Figure %s <fig-pon>` also highlights one other detail about
+how the PON is connected to the rest of the Internet. The *BNG
+(Broadband Network Gateway)* is a piece of Telco equipment that, among
+many other things, authenticates users and meters Internet traffic for
+the sake of billing. As its name implies, the BNG is effectively the
+gateway between the access network (everything to the left of the BNG)
+and the Internet (everything to the right of the BNG).
+  
+.. _fig-pon:
+.. figure:: access/Slide1.png
+   :width: 600px
+   :align: center
+
+   An example PON that connects OLTs in the Central Office 
+   to ONUs in homes and businesses.
+
+Because the splitters are passive, PON implements a multi-access
+protocol. Briefly, upstream and downstream traffic are transmitted on
+two different optical wavelengths, so they are completely independent
+of each other. Downstream traffic starts at the OLT and the signal is
+propagated down every link in the PON. As a consequence, every frame
+reaches every ONU. This device then looks at a unique identifier in
+the individual frames sent over the wavelength, and either keeps the
+frame (if the identifier is for it) or drops it (if not). Encryption
+is used to keep ONUs from eavesdropping on their neighbors’ traffic.
+Upstream traffic is then time-division multiplexed on the upstream
+wavelength, with each ONU periodically getting a turn to transmit.
+
+PON is similar to Ethernet in the sense that it defines a sharing
+algorithm that has evolved over time to accommodate higher and higher
+bandwidths. G-PON (Gigabit-PON) is the most widely deployed today,
+supporting a bandwidth of 2.25-Gbps. XGS-PON (10 Gigabit-PON) is now
+being deployed.
+
+Radio Access Network
+~~~~~~~~~~~~~~~~~~~~
+
+The RAN, of course, implements the last hop by encoding and
+transmitting data at various bandwidths in the radio spectrum.  For
+example, traditional cellular technologies range from 700-MHz to
+2400-MHz, with new mid-spectrum allocations now happening at
+6-GHz and millimeter-wave (mmWave) allocations opening above
+24-GHz. For our purposes, it's everything that comes before the
+over-the-air transmission that is up for grabs.
+
+As shown in :numref:`Figure %s <fig-ran>`, this includes the set of
+base stations connected to each other (and back to the Central
+Office), and the Mobile Core that connects the RAN to the rest of the
+Internet. The Mobile Core is like the BNG in that it is an IP gateway
+and is responsible for authentication and billing, but it also has the
+added responsibility of tracking mobility (i.e., recording which base
+station is currently serving each active device, or UE).
+
+.. _fig-ran:
+.. figure:: access/Slide2.png
+   :width: 600px
+   :align: center
+
+   A Radio Access Network (RAN) connecting a set of cellular devices 
+   (UEs) to a Mobile Core hosted in a Central Office.
+
+The figure also shows the Mobile Core and set of base stations
+interconnected by a backhaul network. The technology used to implement
+this backhaul is an implementation choice—e.g., it could be an
+point-to-point ethernet, a metro ring, or even PON-based—but for our
+purposes, the important point is that the RAN is effectively a
+regional (e.g., metro-area) packet-switched network, where the base
+stations are the "nodes" of that network (nodes that just happen to
+have one or more radio transmitters connected to it).   
+
+Key Takeaways
+~~~~~~~~~~~~~~~~
+
+There are three observations to make about these two network
+technologies before we get to how they can be SDN-tized. The first is
+the distinction between the "access network" and the "IP gateway".
+Broadly defined, Fiber-to-the-Home implies both the PON and the BNG,
+and similarly, the 5G Cellular Mobile Network implies both the RAN and
+the Mobile Core. This chapter focuses on how to apply SDN to the PON
+and RAN, but we have already seen (albeit briefly) how SDN can be
+applied to the BNG and Mobile Core: Both are just enhanced IP routers
+that can be implemented by P4 programs running in the switching
+fabric, as introduced in Section 7.4. We return to this topic in the
+last section, where we give more detail.
+
+Second, because the PON is passive, there is no opportunity for
+software control *inside* the network. Applying SDN to PON involves
+software control of the end-points (i.e., the OLTs and ONUs) and
+treating everything between these end-points as a passive
+interconnect. The key is disaggregating the OLT.
+
+The third is that because the RAN is a packet-switch network
+interconnecting a set of base stations, there is an opportunity for
+software control of the base stations. The key is disaggregating the
+base stations, which as as we will see later in this chapter, have
+historically run a full (ironically, 7-layer) protocol stack. The key
+is disaggregating the base station, and in the process, distributing
+disaggregated pieces throughout the network (including a central
+element co-located with the Mobile Core in the Central Office).
+
+.. todo::
+
+   Somewhere, perhaps in a sidebar, we should talk about 3GPP and
+   O-RAN.
 
 9.2 SD-PON
 -------------
