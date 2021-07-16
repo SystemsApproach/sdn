@@ -19,10 +19,11 @@ The technologies used to implement the *last mile* networks connecting
 homes, businesses, and mobile devices to the Internet have evolved
 independently from the rest of the Internet. This evolution, which has
 spanned decades, started with support for circuit-based voice
-communication and then incrementally added support for IP-based data.
-The end result is a baroque collection of purpose-built devices that
-look quite unfamiliar to anyone that understands how to build a
-network out of a collection of L2/L3 ethernet switches.
+communication and then incrementally added support for IP-based data
+communication.  The end result is a baroque collection of
+purpose-built devices that look quite unfamiliar to anyone that
+understands how to build a network out of a collection of L2/L3
+ethernet switches.
 
 But this makes the access network fertile ground for SDN, and the
 introduction of disaggregation, commodity hardware, and cloud-based
@@ -109,14 +110,14 @@ that is of interest here.  As shown in :numref:`Figure %s <fig-ran>`,
 this includes the set of base stations connected to each other (and
 back to the Central Office), and the Mobile Core that connects the RAN
 to the rest of the Internet. The Mobile Core is like the BNG in that
-it is an IP gateway and is responsible for authentication, QoS, and
-billing, but it also has the added responsibility of tracking mobility
-(i.e., recording which base station is currently serving each active
-device, or so-called UE).
+it is an IP gateway that is also responsible for authentication, QoS,
+and billing. Plus the Mobile Core has added responsibility of tracking
+mobility (i.e., recording which base station is currently serving each
+active device, or so-called UE).
 
 .. _fig-ran:
 .. figure:: access/Slide2.png
-   :width: 600px
+   :width: 700px
    :align: center
 
    A Radio Access Network (RAN) connecting a set of cellular devices 
@@ -124,14 +125,25 @@ device, or so-called UE).
 
 The figure also shows the Mobile Core and set of base stations
 interconnected by a backhaul network. The technology used to implement
-this backhaul is an implementation choice—e.g., it could be an
-packet-switched ethernet, a metro ring, or even PON-based—but for our
-purposes, the important point is that the RAN is effectively a
-regional (e.g., metro-area) packet-switched network, where the base
-stations are the "nodes" of that network (nodes that just happen to
-have one or more radio antennas connected to it). Packets are "routed"
-through this network to reach the best base station(s), at any given
-point in time, to serve each UE.
+this backhaul is an implementation choice—e.g., it could be
+ethernet-based or PON-based—but for our purposes, the important point
+is that the RAN is effectively a regional (e.g., metro-area)
+packet-switched network, overlaid on the backhaul, where the base
+stations are the "nodes" of that overlay network. Packets are "routed"
+through this network to reach the best base station(s) to serve each
+UE at a given moment in time.\ [#]_ These forwarding decisions are
+implemented by the base stations, which make decisions about
+*handovers* (one base station handing a given UE's traffic off to
+another) and *link aggregation* (multiple base stations deciding to
+jointly transmit to a given UE).
+
+.. [#] We say "routed" because the decision is based on a combination
+       of mobility tracking and monitoring how to most efficiently use
+       the radio spectrum, as opposed to the shortest-path criteria
+       typically used in wired networks. What's important, however, is
+       that the base stations cooperatively implement a distributed
+       decision-making algorithm, and then forward packets to each
+       other based on those decisions.
 
 Key Takeaways
 ~~~~~~~~~~~~~~~~
@@ -139,15 +151,15 @@ Key Takeaways
 There are three observations to make about these two network
 technologies before we get to the question of how to apply SDN
 principles. The first is the distinction between the "access network"
-and the "IP gateway".  Broadly defined, Fiber-to-the-Home corresponds
-to both the PON and the BNG, and similarly, the 5G Cellular Mobile
+and the "IP gateway".  For example, Fiber-to-the-Home corresponds to
+both the PON and the BNG, and similarly, the 5G Cellular Mobile
 Network is implemented by a combination of the RAN and the Mobile
 Core. This chapter focuses on how to apply SDN to the PON and RAN, but
-we have already seen (albeit briefly in Section 7.4) how SDN can be
-applied to the BNG and Mobile Core: Both are just enhanced IP routers
-that can be implemented as extensions to the P4 program running in the
-switching fabric. We return to this topic in the last section, where
-we describe these extensions in more detail.
+as we have already seen (briefly) in Section 7.4, SDN can also be
+applied to the BNG and Mobile Core. Both are just enhanced IP routers,
+with the new features implemented as extensions to the P4 program
+running in the switching fabric. We return to this topic in the last
+section, where we describe these extensions in more detail.
 
 Second, because the PON is passive, there is no opportunity for
 software control *inside* the network. Applying SDN to PON involves
@@ -158,13 +170,13 @@ directives from the OLT, all of which points to disaggregating the OLT
 as the key.
 
 Third, because the RAN is a packet-switch network that interconnects a
-set of base stations, there is an opportunity for software control of
-the base stations. This requires disaggregating the base stations,
-which as as we will see later in this chapter, have historically run a
-multi-layer protocol stack. Once disaggregated, the pieces are then
-distribued throughout the network, with some elements co-located with
-the radio antenna, and some elements co-located with the Mobile Core
-in the Central Office. In other words, the plan is to both "split" and
+set of base stations, there is an opportunity for software
+control. This requires disaggregating the base stations, which as as
+we will see later in this chapter, have historically run a multi-layer
+protocol stack. Once disaggregated, the pieces are then distributed
+throughout the network, with some elements co-located with the radio
+antenna, and some elements co-located with the Mobile Core in the
+Central Office. In other words, the plan is to both "split" and
 "distribute" the RAN.
 
 .. todo::
