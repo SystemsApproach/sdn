@@ -86,6 +86,8 @@ Zegura
 adaptor
 adaptors
 al
+analytics
+architected
 aspirational
 backend
 backends
@@ -107,6 +109,7 @@ decapsulation
 decrementing
 decrypt
 demarking
+demultiplexing
 deparser
 directionality
 disaggregate
