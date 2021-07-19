@@ -281,6 +281,27 @@ optimization, as the path calculation algorithms–which kick in any
 time a link changes status, or as traffic loads change–are making
 local choices about what seems best.
 
+Consider the example in :numref:`Figure %s <fig-te-example>`. Assume
+that all links are of unit capacity and we are trying to find paths
+for three unit flows of traffic. In the figure on the left, Flow A is
+placed first and picks one of the two shortest paths available. Flow B
+is placed next and takes the shortest remaining path, as the
+single-hop path is already filled by Flow A. When placing Flow C last,
+there is no choice but the long path. But a central algorithm that
+looked at all three flows at once and tried to place them optimally
+would end up with the much less wasteful set of paths shown on the
+right hand side of the figure. While this is a contrived example,
+sub-optimal outcomes as shown on the left are unavoidable when there
+is no central view of traffic.
+
+.. _fig-te-example:
+.. figure:: figures/Slide53.png
+    :width: 600px
+    :align: center
+            
+    Example of non-optimal traffic engineering (left) and optimal
+    placement (right).
+            
 B4 and SWAN recognize this shortcoming and move the path calculation to a
 logically centralized SDN controller. When a link fails, for example,
 the controller calculates a new mapping of traffic demands onto
