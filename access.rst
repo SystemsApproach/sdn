@@ -370,15 +370,10 @@ ONOS for the SD-RAN use case.
     3GPP-compliant RAN Intelligent Controller (RIC) built by adapting
     and extending ONOS.
 
-Most notably, the ONOS-based RIC supports the standardized
-3GPP-defined interfaces.  This includes the **C1** interface by which
-control applications communicate with the RIC, the **A1** interface by
-which the operator configures the RAN, and the **E2** interface by
-which the RIC communicates with the underlying RAN elements. We
-describe these interfaces in the next subsection, but for now the main
-takeaway is that, despite their cryptic names, these interfaces are no
-different than supporting any other standard north- and south-facing
-interface (e.g., gNMI, gNOI, OpenFlow).
+Most notably, the ONOS-based RIC supports a set of RAN-specific north-
+and south-facing interfaces, similar in spirit (but not detail) to the
+interfaces described in earlier chapters (e.g., gNMI, gNOI,
+OpenFlow). We discuss these interfaces in the next subsection.
 
 .. sidebar:: O-RAN Alliance
 
@@ -400,17 +395,17 @@ interface (e.g., gNMI, gNOI, OpenFlow).
    operators will be successful in their ultimate goal is yet to be
    seen.
 
-The ONOS-based RIC takes advantage of the Topology Service described
-in Chapter 6, but it also introduces two new services: *Control* and
-*Telemetry*. The Control Service, which builds on the Atomix key/value
-store, manages the control state for all the base stations and user
-devices, including which base station is serving each user device, as
-well as the set of  “potential links” that could connect the device.
-The Telemetry Service, which builds on a *Time Series Database
-(TSDB)*, tracks all the link quality information being reported back
-by the RAN elements. Various of the control applications then analyze
-this data to make informed decisions about how the RAN can best meet
-its data delivery objectives.
+As for the core, ONOS-based RIC takes advantage of the Topology
+Service (among others) described in Chapter 6, but it also introduces
+two new services: *Control* and *Telemetry*. The Control Service,
+which builds on the Atomix key/value store, manages the control state
+for all the base stations and user devices, including which base
+station is serving each user device, as well as the set of “potential
+links” that could connect the device.  The Telemetry Service, which
+builds on a *Time Series Database (TSDB)*, tracks all the link quality
+information being reported back by the RAN elements. Various of the
+control applications then analyze this data to make informed decisions
+about how the RAN can best meet its data delivery objectives.
 
 The example Control Apps (xApps) in :numref:`Figure %s <fig-ric>`
 include a range of possibilities, but are not intended to be an
@@ -427,27 +422,29 @@ RIC Interfaces
 
 Returning to the three interfaces called out in :numref:`Figure %s
 <fig-ric>`, each serves a purpose similar to the interfaces described
-in earlier chapters.
+in earlier chapters. The first two, **A1** and **E2**, are
+3GPP-defined. The third, denoted **xApp SDK** in :numref:`Figure %s
+<fig-ric>`, is specific to the ONOS-based implementation (and similar
+in spirit to Flow Objectives).
 
-The first is the **A1** interface that the mobile operator's
+The A1 interface provides a means for the mobile operator's
 management plane—typically called the *OSS/BSS (Operations Support
-System / Business Support System)* in the Telco world—uses to
-configure the RAN.  We have not discussed the Telco OSS/BSS up to this
-point, but it safe to assume such a component sits at the top of any
-Telco software stack. It is the source of all configuration settings
-and business logic needed to operate a network. You can think of it as
-the RAN counterpart to gNMI/gNOI.
+System / Business Support System)* in the Telco world—to configure the
+RAN.  We have not discussed the Telco OSS/BSS up to this point, but it
+safe to assume such a component sits at the top of any Telco software
+stack. It is the source of all configuration settings and business
+logic needed to operate a network. You can think of it as the RAN
+counterpart to gNMI/gNOI.
 
-The second is the **E2** interface that the Near-RT RIC uses to
-control the underlying RAN elements. You can think of it as the RAN
-counterpart to OpenFlow. A requirement of the E2 interface is that it
-be able to connect the Near-RT RIC to different types of RAN
-elements. This range is reflected in the API, which revolves around a
-*Service Model* abstraction. The idea is that each RAN element
-advertises a Service Model, which effectively defines the set of RAN
-Functions the element is able to support. The RIC then issues a
-combination of the following four operations against this Service
-Model.
+The E2 interface that the Near-RT RIC uses to control the underlying
+RAN elements. You can think of it as the RAN counterpart to
+OpenFlow. A requirement of the E2 interface is that it be able to
+connect the Near-RT RIC to different types of RAN elements. This range
+is reflected in the API, which revolves around a *Service Model*
+abstraction. The idea is that each RAN element advertises a Service
+Model, which effectively defines the set of RAN Functions the element
+is able to support. The RIC then issues a combination of the following
+four operations against this Service Model.
 
 * **Report:** RIC asks the element to report a function-specific value setting.
 * **Insert:** RIC instructs the element to activate a user plane function.
@@ -487,11 +484,13 @@ elsewhere. The Non-RT RIC would then interact with the Near-RT RIC to
 deliver relevant operator policies from the Management Plane to the
 Near RT-RIC over the A1 interface.
 
-Finally, the **C1** interface, which in principle is the RAN
-counterpart of Flow Objectives, is essentially a "pass through" of the
-E1 interface. This implies the xApps must be aware of the available
-Service Models.
-
+Finally, the xApp SDK, which in principle is the RAN counterpart of
+Flow Objectives, is specific to the ONOS-based implmentation. It is
+currently little more than a "pass through" of the E1 interface, which
+implies the xApps must be aware of the available Service Models. This
+is problematic in that it implicitly couples applications with
+devices, but defining a device-agnostic version is still a
+work-in-progress.
  
 9.4  Relationship to SD-Fabric
 -----------------------------------
