@@ -190,6 +190,68 @@ the following companion book.
 9.2 SD-PON
 -------------
 
+The opportunity for applying SDN to PON hinges on the fact that the
+OLTs that anchor the network's fan-out topology, are essentially
+glorified L2 switches, outfitted with a different MAC-layer framing
+protocol running on each port. And just as it's possible to buy a
+bare-metal L2 switch built to OCP specifications, the same is now true
+for OLTs. But there are three complications that we have to deal with
+before we can realize a Software-Defined PON (SD-PON) in practice.
+
+The first is that a PON requires substantial configuration, with a
+*Traffic Profile (TP)* loaded into each OLT so it knows what levels of
+service the network is to support. The second is that the ONUs
+deployed to homes are limited devices, controlled indirectly through
+the upstream OLTs they connect to. The third is that network operators
+don't necessarily have the luxury of a clean-slate deployment of only
+bare-metal hardware, and must instead deal with an assortment of
+legacy devices.
+
+To address these issues, the SD-PON architecture depicted in
+:numref:`Figure %s <fig-sdpon>` has emerged. Production networks based
+on this design are now being deployed by Telcos throughout the world.
+The following describes the high-points of the architecture.
+
+.. _fig-sdpon:
+.. figure:: access/Slide8.png 
+    :width: 500px
+    :align: center
+	    
+    Software-Defined PON architecture.
+
+First, a hardware abstraction layer, called *VOTHA (Virtual OLT
+Hardware Abstraction)* sits between the Network OS (e.g., ONOS) and
+the individual OLTs. VOLTHA exports a north-facing OpenFlow interface,
+making it possible for ONOS to control an OLT like any other
+SDN-capable device. Vendor-specific adaptors then translate between
+OpenFlow and each individual OLT. In principle, this adaptation could
+have been handled inside ONOS, which already has a robust southbound
+adaptor framework, but VOLTHA was designed to be Network OS agnostic,
+and so replicates much of that machinery.
+
+There are many details VOLTHA must get right, but conceptually there
+is nothing new here, with one major exception: the need to load a
+Traffic Profile (denoted TP in the diagram). These profiles specify
+the set of QoS classes the operator wants their PON to support. This
+is configuration state, typically loaded when an OLT boots, and in
+principle, this could have been managed by ONOS using gNMI/gNOI.  OLTs
+do not currently support a common API (like gNMI) at the per-device
+level, so this is handled in a one-off way.
+
+Finally, and most interestingly, because ONOS needs to be aware of the
+ONUs, but they are not directly controllable using OpenFlow or any
+other API, the architecture layers a switch abstraction on top of an
+OLT and its connected set of ONUs. This is represented in
+:numref:`Figure %s <fig-sdpon>` by the outer gray boxes. You can think
+of this network-modeled-as-switch as having a set of network-facing
+ports (these are called NNIs in the Telco world) and a set of
+user-facing ports (these are called UNIs in the Telco world). ONOS
+treats this aggregate as a logical switch, so whenever a customer
+powers up the ONU in their home, ONOS will see a "port active" event
+on the corresponding UNI, and take that appropriate actions. These
+actions are implemented by the SD-PON control app shown in the figure.
+
+
 9.3 SD-RAN
 -------------
 
@@ -359,7 +421,7 @@ loop required by the MAC scheduler running in the DU.
     Where RIC sits in the larger scheme of things...
 
 Drilling down to the next level of detail, :numref:`Figure %s
-<fig-ric>` shows an exemplare implementation based on a retargeting of
+<fig-ric>` shows an exemplar implementation based on a retargeting of
 ONOS for the SD-RAN use case.
 
 .. _fig-ric:
@@ -485,7 +547,7 @@ deliver relevant operator policies from the Management Plane to the
 Near RT-RIC over the A1 interface.
 
 Finally, the xApp SDK, which in principle is the RAN counterpart of
-Flow Objectives, is specific to the ONOS-based implmentation. It is
+Flow Objectives, is specific to the ONOS-based implementation. It is
 currently little more than a "pass through" of the E1 interface, which
 implies the xApps must be aware of the available Service Models. This
 is problematic in that it implicitly couples applications with

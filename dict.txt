@@ -20,6 +20,7 @@ Disaggregating
 Feamster
 Ganga
 Gbps
+GPP
 Geneve
 Greenberg
 IPv
@@ -80,6 +81,8 @@ VMware
 Vachuska
 Vahdat
 Veriflow
+xApp
+xApps
 Xiaoqi
 Yi
 Zegura
@@ -94,6 +97,7 @@ backends
 backhaul
 backplane
 balancers
+basestation
 bmv
 centric
 checksums
