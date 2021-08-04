@@ -198,14 +198,13 @@ bare-metal L2 switch built to OCP specifications, the same is now true
 for OLTs. But there are three complications that we have to deal with
 before we can realize a Software-Defined PON (SD-PON) in practice.
 
-The first is that a PON requires substantial configuration, with a
-*Traffic Profile (TP)* loaded into each OLT so it knows what levels of
-service the network is to support. The second is that the ONUs
-deployed to homes are limited devices, controlled indirectly through
-the upstream OLTs they connect to. The third is that network operators
-don't necessarily have the luxury of a clean-slate deployment of only
-bare-metal hardware, and must instead deal with an assortment of
-legacy devices.
+The first is that a PON requires substantial configurationto be loaded
+into each OLT so it knows what levels of service the network is to
+support. The second is that the ONUs deployed to homes are limited
+devices, controlled indirectly through the upstream OLTs they connect
+to. The third is that network operators don't necessarily have the
+luxury of a clean-slate deployment of only bare-metal hardware, and
+must instead deal with an assortment of legacy devices.
 
 To address these issues, the SD-PON architecture depicted in
 :numref:`Figure %s <fig-sdpon>` has emerged. Production networks based
@@ -224,26 +223,26 @@ Hardware Abstraction)* sits between the Network OS (e.g., ONOS) and
 the individual OLTs. VOLTHA exports a north-facing OpenFlow interface,
 making it possible for ONOS to control an OLT like any other
 SDN-capable device. Vendor-specific adaptors then translate between
-OpenFlow and each individual OLT. In principle, this adaptation could
-have been handled inside ONOS, which already has a robust southbound
-adaptor framework, but VOLTHA was designed to be Network OS agnostic,
-and so replicates much of that machinery.
+OpenFlow and each OLT. In principle, this adaptation could have been
+handled inside ONOS, which already has a robust southbound adaptor
+framework, but VOLTHA was designed to be Network OS agnostic, and so
+replicates much of that machinery.
 
 There are many details VOLTHA must get right, but conceptually there
 is nothing new here, with one major exception: the need to load a
-Traffic Profile (denoted TP in the diagram). These profiles specify
-the set of QoS classes the operator wants their PON to support. This
-is configuration state, typically loaded when an OLT boots, and in
-principle, this could have been managed by ONOS using gNMI/gNOI.  OLTs
-do not currently support a common API (like gNMI) at the per-device
-level, so this is handled in a one-off way.
+*Traffic Profile* (denoted *TP* in the diagram). These profiles
+specify the set of QoS classes the operator wants their PON to
+support. This is configuration state, typically loaded when an OLT
+boots, and in principle, this again could have been managed by ONOS
+using gNMI/gNOI.  OLTs do not currently support a common API (like
+gNMI) at the per-device level, so this is handled in a one-off way.
 
 Finally, and most interestingly, because ONOS needs to be aware of the
 ONUs, but they are not directly controllable using OpenFlow or any
 other API, the architecture layers a switch abstraction on top of an
 OLT and its connected set of ONUs. This is represented in
 :numref:`Figure %s <fig-sdpon>` by the outer gray boxes. You can think
-of this network-modeled-as-switch as having a set of network-facing
+of this network-modeled-as-a-switch as having a set of network-facing
 ports (these are called NNIs in the Telco world) and a set of
 user-facing ports (these are called UNIs in the Telco world). ONOS
 treats this aggregate as a logical switch, so whenever a customer
