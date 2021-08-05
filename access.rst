@@ -22,7 +22,7 @@ communication and then incrementally added support for IP-based data
 communication.  The end result is a baroque collection of
 purpose-built devices that look quite unfamiliar to anyone that
 understands how to build a network out of a collection of L2/L3
-ethernet switches.
+Ethernet switches.
 
 But this makes the access network fertile ground for SDN, and the
 introduction of disaggregation, commodity hardware, and cloud-based
@@ -49,14 +49,14 @@ anchored in these facilities.
 Passive Optical Network 
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-A PON is a tree-structured network, with a single point starting in
-one of the ISP's edge sites, and then fanning out to reach up to 1024
-homes. PON gets its name from the fact that the splitters are passive:
-they forward optical signals downstream and upstream without actively
-storing-and-forwarding frames. Framing then happens at the edges, at
-the ISP’s premises in a device called an *Optical Line Terminal*
-(OLT), and at the end-points in individual homes in a device called an
-*Optical Network Unit* (ONU).
+A PON is a tree-structured, fiber-based network, with a single point
+starting in one of the ISP's edge sites, and fanning out to reach up
+to 1024 homes. PON gets its name from the fact that the splitters are
+passive: they forward optical signals downstream and upstream without
+actively storing-and-forwarding frames. Framing then happens at the
+edges, at the ISP’s premises in a device called an *Optical Line
+Terminal* (OLT), and at the end-points in individual homes in a device
+called an *Optical Network Unit* (ONU).
 
 :numref:`Figure %s <fig-pon>` shows an example PON, simplified to
 depict just one ONU and one OLT. In practice, a Central Office would
@@ -65,7 +65,8 @@ include multiple OLTs, fanning out to thousands of customer homes.
 is a *BNG (Broadband Network Gateway)* connecting the access network
 to the Internet. The BNG is a piece of Telco equipment that, in
 addition to forwarding packets, also authenticates users,
-differentiates service, and meters traffic for the sake of billing.
+differentiates the level of service delivered to each customer, and
+meters traffic for the sake of billing.
   
 .. _fig-pon:
 .. figure:: access/Slide1.png
@@ -102,14 +103,14 @@ cellular technologies range from 700-MHz to 2400-MHz, with new
 mid-spectrum allocations now happening at 6-GHz and millimeter-wave
 (mmWave) allocations opening above 24-GHz.
 
-As shown in :numref:`Figure %s <fig-ran>`, the set of base stations
-are connected to each other, and back to the Mobile Core running in
-the Central Office. The Mobile Core is like the BNG in that it is an
-IP gateway connecting the access network to the Internet, as well as
-being responsible for authentication, QoS, and billing. Unlike the
-BNG, Mobile Core has added responsibility of tracking mobility (i.e.,
-recording which base station is currently serving each active device,
-or so-called UE).
+As shown in :numref:`Figure %s <fig-ran>`, the set of base stations in
+a given geographic region (e.g., a metro-area) are connected to each
+other, and back to the Mobile Core running in the Central Office. The
+Mobile Core is like the BNG in that it is an IP gateway connecting the
+access network to the Internet, as well as being responsible for
+authentication, QoS, and billing. Unlike the BNG, the Mobile Core also
+has responsibility for tracking mobility (i.e., recording which base
+station is currently serving each active device, or so-called UE).
 
 .. _fig-ran:
 .. figure:: access/Slide2.png
@@ -123,15 +124,14 @@ The figure shows the Mobile Core and set of base stations
 interconnected by a backhaul network. The technology used to implement
 this backhaul is an implementation choice—e.g., it could be
 ethernet-based or PON-based—but for our purposes, the important point
-is that the RAN is effectively a regional (e.g., metro-area)
-packet-switched network, overlaid on the backhaul, where the base
-stations are the "nodes" of that overlay network. Packets are "routed"
-through this network to reach the best base station(s) to serve each
-UE at a given moment in time.\ [#]_ These forwarding decisions are
-implemented by the base stations, which make decisions about
-*handovers* (one base station handing a given UE's traffic off to
-another) and *link aggregation* (multiple base stations deciding to
-jointly transmit to a given UE).
+is that the RAN is effectively a regional packet-switched network,
+overlaid on the backhaul, where the base stations are the "nodes" of
+that overlay network. Packets are "routed" through this network to
+reach the best base station(s) to serve each UE at a given moment in
+time.\ [#]_ These forwarding decisions are implemented by the base
+stations, which make decisions about *handovers* (one base station
+handing a given UE's traffic off to another) and *link aggregation*
+(multiple base stations deciding to jointly transmit to a given UE).
 
 .. [#] We say quote "routed" because the decision is based on a
        combination of mobility tracking and monitoring how to most
@@ -155,7 +155,8 @@ and RAN, but as we have already seen (briefly) in Section 7.4, SDN can
 also be applied to the BNG and Mobile Core. Both are just enhanced IP
 routers, with the new features implemented as extensions to the P4
 program running in the switching fabric. We return to this topic in
-the last section, where we describe these extensions in more detail.
+the last section, where we describe the interplay between SD-Fabric
+and access networks.
 
 Second, because the PON is passive, there is no opportunity for
 software control *inside* the network. Applying SDN to PON involves
@@ -193,23 +194,34 @@ the following companion book.
 The opportunity for applying SDN to PON hinges on the fact that the
 OLTs that anchor the network's fan-out topology, are essentially
 glorified L2 switches, outfitted with a different MAC-layer framing
-protocol running on each port. And just as it's possible to buy a
-bare-metal L2 switch built to OCP specifications, the same is now true
-for OLTs. But there are three complications that we have to deal with
-before we can realize a Software-Defined PON (SD-PON) in practice.
+protocol running on each switch port. And just as it's possible to buy
+a bare-metal L2 switch built to OCP specifications, the same is now
+true for OLTs. But there are three complications that we have to deal
+with before we can realize a Software-Defined PON (SD-PON) in
+practice.\ [#]_
 
-The first is that a PON requires substantial configurationto be loaded
-into each OLT so it knows what levels of service the network is to
-support. The second is that the ONUs deployed to homes are limited
-devices, controlled indirectly through the upstream OLTs they connect
-to. The third is that network operators don't necessarily have the
-luxury of a clean-slate deployment of only bare-metal hardware, and
-must instead deal with an assortment of legacy devices.
+.. [#] We call this SD-PON to be consistent with how all the other use
+       cases are named in this book, but the actual ONF open source
+       software project is called SEBA: SDN-Enabled Broadband Access.
+
+The first is that a PON requires substantial configuration to be
+loaded into each OLT, primarily so it knows what levels of service the
+network is to support. The second is that the ONUs deployed to homes
+are limited devices, controlled indirectly through the upstream OLTs
+they connect to. The third is that network operators don't necessarily
+have the luxury of a clean-slate deployment of only bare-metal
+hardware, and must instead deal with an assortment of legacy devices.
 
 To address these issues, the SD-PON architecture depicted in
-:numref:`Figure %s <fig-sdpon>` has emerged. Production networks based
-on this design are now being deployed by Telcos throughout the world.
-The following describes the high-points of the architecture.
+:numref:`Figure %s <fig-sdpon>` has emerged.  Production networks
+based on this design are now being deployed by Telcos throughout the
+world.  For simplicity, the figure shows only a single ONT, but it is
+connected to two fabric switches. The fabric is necessary to aggregate
+the set of OLTs that are likely to be deployed in practice, and while
+we postpone the details to Section 9.4, one could imagine these
+switches being under the control of the SD-Fabric application
+described in Chapter 7.  The following describes the high-points of
+the rest of SD-PON architecture.
 
 .. _fig-sdpon:
 .. figure:: access/Slide8.png 
@@ -229,13 +241,16 @@ framework, but VOLTHA was designed to be Network OS agnostic, and so
 replicates much of that machinery.
 
 There are many details VOLTHA must get right, but conceptually there
-is nothing new here, with one major exception: the need to load a
-*Traffic Profile* (denoted *TP* in the diagram). These profiles
-specify the set of QoS classes the operator wants their PON to
-support. This is configuration state, typically loaded when an OLT
-boots, and in principle, this again could have been managed by ONOS
-using gNMI/gNOI.  OLTs do not currently support a common API (like
-gNMI) at the per-device level, so this is handled in a one-off way.
+is nothing new here: control state flows down (e.g., assigning
+subscribers to particular QoS classes) and monitoring state flows up
+(e.g., recognizing when an ONU attaches or detaches).  There is one
+major exception: loading a *Traffic Profile* (denoted *TP* in the
+diagram) into the OLT. These profiles specify the set of QoS classes
+the operator wants their PON to support. This is configuration state,
+typically loaded when an OLT boots, and in principle, this again could
+have been managed by ONOS using gNMI/gNOI.  OLTs do not currently
+support a common API like gNMI at the per-device level, so this is
+handled in a one-off way.
 
 Finally, and most interestingly, because ONOS needs to be aware of the
 ONUs, but they are not directly controllable using OpenFlow or any
@@ -248,8 +263,21 @@ user-facing ports (these are called UNIs in the Telco world). ONOS
 treats this aggregate as a logical switch, so whenever a customer
 powers up the ONU in their home, ONOS will see a "port active" event
 on the corresponding UNI, and take that appropriate actions. These
-actions are implemented by the SD-PON control app shown in the figure.
+actions are implemented by the suite of SD-PON control apps shown in
+the figure.
 
+As for what these actions entail, they primarily correspond to work
+involved in securely connecting a subscriber to the Internet. For
+example, when an ONU comes online (corresponding to a port on the
+logical switch becoming active), an 802.1X authorization sequence is
+initiated, verifying that the ONU is registered to a known customer.
+One outcome of a successful authorization is that the SD-PON
+application instructs ONOS to set up a path though the fabric (with
+the prescribed QoS profile) connecting that subscriber to the L2
+network. Typically, a home router connected to the ONU will then send
+a DHCP request, both triggering an IP address assignment and causing
+ONOS to set up a route through the fabric connecting that home router
+to the upstream BNG (and hence, the rest of the Internet).
 
 9.3 SD-RAN
 -------------
@@ -428,7 +456,7 @@ ONOS for the SD-RAN use case.
     :width: 400px
     :align: center
 
-    3GPP-compliant RAN Intelligent Controller (RIC) built by adapting
+    O-RAN compliant RAN Intelligent Controller (RIC) built by adapting
     and extending ONOS.
 
 Most notably, the ONOS-based RIC supports a set of RAN-specific north-
@@ -444,19 +472,23 @@ OpenFlow). We discuss these interfaces in the next subsection.
    operators defining an SDN-based implementation strategy for 5G.
 
    If you are wondering why there is an O-RAN Alliance in the first
-   place, given that 3GPP is already the standardization body responsible
-   for interoperability across the global cellular network.  The answer
-   is that over time 3GPP has become a vendor-dominated organization,
-   whereas O-RAN was created more recently by network operators. (AT&T
-   and China Mobile were the founding members.) O-RAN’s goal is to
-   catalyze a software-based implementation that breaks the vendor
-   lock-in that dominates today’s marketplace. The E2 interface in
-   particular, which is architected around the idea of supporting
-   different Service Models, is central to this strategy. Whether the
-   operators will be successful in their ultimate goal is yet to be
-   seen.
+   place, given that 3GPP is already the standardization body
+   responsible for interoperability across the global cellular
+   network, the answer is that over time 3GPP has become a
+   vendor-dominated organization. O-RAN was created more recently by
+   network operators (AT&T and China Mobile were the founding
+   members), with the goal of catalyzing a software-based
+   implementation that breaks the vendor lock-in dominating today’s
+   marketplace.
 
-As for the core, ONOS-based RIC takes advantage of the Topology
+   To be more specific, 3GPP defined the possible RAN split points,
+   and O-RAN is specifying (and codifying) the corresponding
+   interfaces.  The E2 interface in particular, which is architected
+   around the idea of supporting different Service Models, is central
+   to this strategy.  Whether the operators will be successful in
+   their ultimate goal is yet to be seen.
+
+As for the core, the ONOS-based RIC takes advantage of the Topology
 Service (among others) described in Chapter 6, but it also introduces
 two new services: *Control* and *Telemetry*. The Control Service,
 which builds on the Atomix key/value store, manages the control state
@@ -483,10 +515,12 @@ RIC Interfaces
 
 Returning to the three interfaces called out in :numref:`Figure %s
 <fig-ric>`, each serves a purpose similar to the interfaces described
-in earlier chapters. The first two, **A1** and **E2**, are
-3GPP-defined. The third, denoted **xApp SDK** in :numref:`Figure %s
-<fig-ric>`, is specific to the ONOS-based implementation (and similar
-in spirit to Flow Objectives).
+in earlier chapters. The first two, **A1** and **E2**, are well on
+their way to being standardized by O-RAN. The third, denoted **xApp
+SDK** in :numref:`Figure %s <fig-ric>`, is specific to the ONOS-based
+implementation (and similar in spirit to Flow Objectives), although
+the O-RAN has a long-term goal of converging on a unified API (and
+corresponding SDK).
 
 The A1 interface provides a means for the mobile operator's
 management plane—typically called the *OSS/BSS (Operations Support
@@ -497,15 +531,16 @@ stack. It is the source of all configuration settings and business
 logic needed to operate a network. You can think of it as the RAN
 counterpart to gNMI/gNOI.
 
-The E2 interface that the Near-RT RIC uses to control the underlying
-RAN elements. You can think of it as the RAN counterpart to
-OpenFlow. A requirement of the E2 interface is that it be able to
-connect the Near-RT RIC to different types of RAN elements. This range
-is reflected in the API, which revolves around a *Service Model*
-abstraction. The idea is that each RAN element advertises a Service
-Model, which effectively defines the set of RAN Functions the element
-is able to support. The RIC then issues a combination of the following
-four operations against this Service Model.
+The Near-RT RIC uses the E2 interface to control the underlying RAN
+elements, including the CU, DUs, and RUs. You can think of it as the
+RAN counterpart to OpenFlow. A requirement of the E2 interface is that
+it be able to connect the Near-RT RIC to different types of RAN
+elements from different vendors. This range is reflected in the API,
+which revolves around a *Service Model* abstraction. The idea is that
+each RAN element advertises a Service Model, which effectively defines
+the set of RAN Functions the element is able to support. The RIC then
+issues a combination of the following four operations against this
+Service Model.
 
 * **Report:** RIC asks the element to report a function-specific value setting.
 * **Insert:** RIC instructs the element to activate a user plane function.
@@ -526,15 +561,7 @@ of the RAN pipeline. The two outer control loops have rough time
 bounds of >>1sec and >10ms, respectively, and the real-time control
 loop is assumed to be <1ms.
 
-This raises the question of how specific functionality is distributed
-between the Non-RT RIC, Near-RT RIC, and DU. Starting with the second
-pair (i.e., the two inner loops), it is important to recognize that
-not all RRM functions can be centralized. After horizontal and
-vertical CUPS disaggregation, the RRM functions are split between CU-C
-and DU. For this reason, the SDN-based vertical disaggregation focuses
-on centralizing CU-C-side RRM functions in the Near-RT RIC.
-
-Turning to the outer two control loops, the Near RT-RIC opens the
+Focusing on the outer two control loops, the Near RT-RIC opens the
 possibility of introducing policy-based RAN control, whereby
 interrupts (exceptions) to operator-defined policies would signal the
 need for the outer loop to become involved. For example, one can
@@ -547,7 +574,7 @@ Near RT-RIC over the A1 interface.
 
 Finally, the xApp SDK, which in principle is the RAN counterpart of
 Flow Objectives, is specific to the ONOS-based implementation. It is
-currently little more than a "pass through" of the E1 interface, which
+currently little more than a "pass through" of the E2 interface, which
 implies the xApps must be aware of the available Service Models. This
 is problematic in that it implicitly couples applications with
 devices, but defining a device-agnostic version is still a
