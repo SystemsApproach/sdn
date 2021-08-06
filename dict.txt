@@ -20,6 +20,7 @@ Disaggregating
 Feamster
 Ganga
 Gbps
+GTP
 GPP
 Geneve
 Greenberg
@@ -75,6 +76,7 @@ Todo
 Tofino
 Trellis
 Tseng
+UDP
 Ueno
 Univesity
 VMware
@@ -109,6 +111,7 @@ cyber
 datapath
 de
 di
+decapsulate
 decapsulation
 decrementing
 decrypt
