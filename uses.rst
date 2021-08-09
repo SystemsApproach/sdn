@@ -234,7 +234,7 @@ MPLS.) Having the fabric control software also provide L2-bridging
 comes from the need to support legacy workloads that often expect to
 communicate over an L2 network. There is much more to implementing a
 leaf-spine fabric, but we postpone a more complete description until
-Chapter 7, where we describe the specifics of the Trellis
+Chapter 7, where we describe the specifics of the SD-Fabric
 implementation.
 
 

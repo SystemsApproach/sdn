@@ -169,10 +169,15 @@ The following lists (and links) the individual exercises. That there
 are 8 exercises and 8 chapters is a coincidence. Exercises 1 and 2
 focus on Stratum, and are best attempted after reading through Chapter
 5. Exercises 3 through 6 focus on ONOS and are best attempted after
-reading through Chapter 6. Exercises 7 and 8 focus on Trellis and are
-best attempted after reading through Chapter 7. Note that the
+reading through Chapter 6. Exercises 7 and 8 focus on SD-Fabric and
+are best attempted after reading through Chapter 7.\ [#]_ Note that the
 exercises build on each other, so it is best to work through them in
 order.
+
+.. [#] SD-Fabric was previously known as Trellis, and still is in the
+       code. UPF was previously known as SPGW, and still is in the
+       code.
+       
 
 1. `P4Runtime Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-1.md>`__ 
 2. `YANG, OpenConfig, gNMI Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-2.md>`__   
@@ -180,7 +185,8 @@ order.
 4. `Enabling ONOS Built-in Services <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-4.md>`__   
 5. `Implementing IPv6 Routing with ECMP <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-5.md>`__ 
 6. `Implementing SRv6 <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-6.md>`__   
-7. `Trellis Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-7.md>`__ 
+7. `SD-Fabric (Trellis) Basics
+   <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-7.md>`__
 8. `GTP Termination with fabric.p4 <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-8.md>`__   
 
 You can find solutions for each exercise in the ``solution``

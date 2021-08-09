@@ -417,7 +417,7 @@ discover we need a new feature.
        chipset and uses ``tna.p4`` as its architecture model), but it
        is not open source. A roughly equivalent open source variant,
        called ``fabric.p4``, uses ``v1model.p4``, but it is more
-       narrowly written to support Trellis (see Chapter 7) than
+       narrowly written to support SD-Fabric (see Chapter 7) than
        serving as a general-purpose L2/L3 data plane.
 
 .. sidebar:: Is the Complexity Worth It?

@@ -1,14 +1,13 @@
 Chapter 9:  Access Networks
 ===========================
 
-We now turn our attention to the latest emerging use case: the Access
-Network, which includes both Fiber-to-the-Home and the Mobile Cellular
-Network. It is still early (production deployments are just now being
-rolled out), but the opportunity is substantial. This chapter
-describes two examples of how SDN is being applied to access
-networks—*Passive Optical Networks (PON)* and *Radio Access Networks
-(RAN)*—the technologies at the core of Fiber-to-the-Home and the
-Mobile Cellular Network, respectively.
+We now turn our attention to the latest emerging use case for SDN: the
+Access Network. This includes both Fiber-to-the-Home and the Mobile
+Cellular Network. It is still early (production deployments are just
+now being rolled out), but the opportunity is substantial. This
+chapter describes two examples—*Passive Optical Networks (PON)* and
+*Radio Access Networks (RAN)*—the technologies at the core of
+Fiber-to-the-Home and the Mobile Cellular Network, respectively.
 
 
 9.1 Background
@@ -24,16 +23,14 @@ purpose-built devices that look quite unfamiliar to anyone that
 understands how to build a network out of a collection of L2/L3
 Ethernet switches.
 
-But this makes the access network fertile ground for SDN, and the
-introduction of disaggregation, commodity hardware, and cloud-based
-software. To understand what this means, we need to start with a brief
-overview of the legacy systems being replaced. We do this in the
-context of the two specific access technologies mentioned in the
-introduction: PON and RAN. Fortunately, from our 10,000-foot view,
-their respective architectures are strikingly similar. Of course the
-details differ significantly, but hiding (or even eliminating)
-gratuitous detail is one of the main values that SDN brings to the
-table.
+But this makes the access network fertile ground for SDN. To
+understand what this means, we need to start with a brief overview of
+the legacy systems being replaced. We do this in the context of the
+two specific access technologies mentioned in the introduction: PON
+and RAN. Fortunately, from our 10,000-foot view, their respective
+architectures are strikingly similar. Of course the details differ
+significantly, but hiding (or even eliminating) gratuitous detail is
+one of the main values that SDN brings to the table.
 
 Before getting to the specifics, we need one more bit of context. ISPs
 (e.g., Telco or Cable companies) that offer broadband service often
