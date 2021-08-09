@@ -580,78 +580,93 @@ is problematic in that it implicitly couples applications with
 devices, but defining a device-agnostic version is still a
 work-in-progress.
  
-9.4  Relationship to SD-Fabric
+9.4  Role of SD-Fabric
 -----------------------------------
 
 As outlined earlier in this chapter, both PON and RAN are paired with
 an IP gateway that has been augmented with access-specific features.
 This is because the operator at the edge of the network is responsible
 for authorizing user access, differentiating the level of service
-delivered to each user, and potentially billing those users. The
-Mobile Core has the added responsibility of dealing with mobility as
-users move from one base station to another.
+delivered to users, and potentially billing those users. The Mobile
+Core has the added responsibility of tracking mobility as users move
+from one base station to another.
 
 Much of this additional functionality runs in the control plane (or
 even the management plane), with the data plane behaving very much
 like any other L3 network. This means the data plane can be
 implemented by mechanisms seen in earlier chapters, or more
-specifically, the SD-Fabric solution described in Chapter 7. Consider
-our two specific examples, and the implications of each with respect
-to SD-Fabric.
+specifically, by the SD-Fabric solution described in
+Chapter 7. Consider our two specific access technologies, and the
+implications of each with respect to SD-Fabric.
 
 The BNG that connects a PON to the Internet has a vendor-defined
 control/management plane, as there is no need for a industry-wide
-standard. As a general rule, the data plane requires support for
-Q-in-Q tagging as a mechanism to differentiate subscriber service,
-which is one reason this capability is provided by SD-Fabric. This
-means the fabric switches shown in :numref:`Figure %s <fig-sdpon>` are
-exactly the same fabric switches as shown in :numref:`Figure %s
-<fig-seba>` (from Chapter 2) and :numref:`Figure %s <fig-netconfig>`
-(from Chapter 7). In other words, SD-Fabric not only connects the OLTs
-to the Internet, it also interconnect a set of servers that host the
-BNG control and management processes (along with any other Virtual
-Network Functions that operator wants to run at the edge).
+standard. The data plane requires support for Q-in-Q tagging as a
+mechanism to differentiate subscriber service, which is one reason
+SD-Fabric provides this capability. This means the fabric switches
+shown in :numref:`Figure %s <fig-sdpon>` are exactly the same fabric
+switches as shown in :numref:`Figure %s <fig-seba>` (from Chapter 2)
+and :numref:`Figure %s <fig-netconfig>` (from Chapter 7). In other
+words, SD-Fabric not only connects the OLTs to the Internet, it also
+interconnects a set of servers that host the BNG control and
+management processes (along with any other Virtual Network Functions
+that the operator wants to run at the edge).
 
 The Mobile Core that connects a RAN to the Internet is standardized by
 3GPP, making it a well-defined example to discuss (albeit at a
 high-level since the full 3GPP specification for the 5G Mobile Core is
 well beyond the scope of this book). :numref:`Figure %s <fig-core>`
-gives an architectural overview.
+gives an architectural overview, identifying the functional blocks
+that make up the 5G Mobile Core.
 
 .. _fig-core:
 .. figure:: access/Slide9.png
-    :width: 500px
+    :width: 600px
     :align: center
 
     Architectural overview of the 5G Mobile Core.
 
-The main point to take from this diagram is that the *UPF (User Plan
-Function)* implements the data plane (which 3GPP calls the "User
-Plane"). Everything else is a control plane function, and while most
-of the details aren't important to our discussion, AMF is responsible
-for mobility management, SMF is responsible for session management,
-and AUSF is responsible for authentication. For our purposes, you can
+The main point to take from this diagram is that the *UPF (User Plane
+Function)* implements the data plane (which 3GPP calls the *User
+Plane*). Everything else is a control plane function, and while the
+details aren't important to our discussion, AMF is responsible for
+mobility management, SMF is responsible for session management, and
+AUSF is responsible for authentication. For our purposes, you can
 think of these and all the other functional boxes that make up the
-control plane as microservices running on a commodity server. What's
-important to our discussion is that while the UPF can also be
-implemented as a server-hosted microservice—it reads packet
-from an input port and writes them to an output port—because we
-have access to a programmable switching fabric, we can offload that
-function to the switches. This is exactly what the ``upf`` extension
-to ``fabric.p4`` shown in Section 7.4 does.
+control plane as microservices running on a commodity server. For more
+details about the Mobile Core control plane, as well as examples of
+specific implementation choices, we recommend the *Magma* and
+*SD-Core* open source projects.
 
-What is this extra functionality beyond forwarding IP packets? UPF
-performs three additional tasks. First, it has to
-encapsulate/decapsulate packets sent between to/from the base
-station. (These are GTP-over-UDP encapsulated packets.) Second, it has
-to queue packets according to the different QoS levels the operator
-wants to provide. Both are easily implemented in P4 and the underlying
-programmable switches. The third function is to "hold" packets
+.. _reading_core:
+.. admonition:: Further Reading
+
+   `Magma Core Project <https://www.magmacore.org/>`__.
+   Linux Foundation. 2021.
+
+   `SD-Core Project  <https://opennetworking.org/sd-core/>`__. 
+   Open Networking Foundation. 2021.
+
+What is important to our discussion is that while the UPF can also
+be implemented as a server-hosted microservice—it runs a loop that
+reads packet from an input port and writes them to an output
+port—because we have access to a programmable switching fabric, we can
+offload that function to the switches. This is exactly what the
+``upf`` extension to ``fabric.p4`` shown in Section 7.4 does.
+
+But what is this extra functionality beyond forwarding IP packets? UPF
+performs three additional tasks. First, it encapsulates/decapsulates
+packets sent between to/from the base station. These are
+GTP-over-UDP/IP encapsulated packets. Second, queues packets according
+to the different QoS levels the operator wants to provide. Both of
+these tasks can be implemented in a straightforward way in P4 and the
+underlying programmable switches. The third task is to "hold" packets
 destined for a UE that has recently moved, so that no packets are
 dropped during the period of time the corresponding session state is
-in flux. This is not something that today's P4 switches are able to
-support, so instead the switch temporarily redirects those packets to
-a server for hold-and-replay. McDavid and colleagues describe the
+in transition. This is not something that today's P4 switches are able
+to support. So instead, the switch temporarily redirects those packets
+to a server for hold-and-replay, or alternatively, to a SmartNIC
+connected to those servers. McDavid and colleagues describe the
 mechanism for doing this is more detail.
 
 .. _reading_upf:
@@ -666,4 +681,15 @@ switching fabrics are complementary use cases for SDN. The switching
 fabric not only interconnects servers that are able to host access
 network control plane functionality, but the fabric itself is also
 able to run some data plane functionality on behalf of the access
-networks.
+networks. When you combine all these use cases, the end result is an
+*access-edge cloud*: a modest-sized cluster built from commodity
+servers and switches, deployed in enterprises and other edge sites,
+and able to host both access network workloads and edge service
+workloads. Aether is an example open source instance of such an edge
+cloud.
+
+.. _reading_aether:
+.. admonition:: Further Reading  
+
+   `Aether: 5G-Connected Edge  <https://opennetworking.org/aether/>`__. 
+   Open Networking Foundation. 2021.

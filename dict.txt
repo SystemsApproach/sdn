@@ -111,7 +111,7 @@ cyber
 datapath
 de
 di
-decapsulate
+decapsulates
 decapsulation
 decrementing
 decrypt
