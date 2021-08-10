@@ -316,8 +316,9 @@ possible to selectively include additional functionality. This is not
 easy when writing code that is optimized for an ASIC-based forwarding
 pipeline, and in practice it makes heavy use of pre-processor
 conditionals (i.e., ``#ifdefs``). The code fragment shown below is the
-main control block of ``fabric.p4``\'s ingress function. The details
-of the options are beyond to scope of this book, but at a high level:
+main control block of ``fabric.p4``\'s ingress function. Chapter 9
+discusses these optional extensions in more depth, but at a high
+level:
 
 * **UPF (User Plane Function):** Augments IP functionality in
   support of 4G/5G Mobile Networks.
@@ -360,8 +361,8 @@ encapsulation/decapsulation required by the 3GPP cellular standard to
 connect the SD-Fabric fabric to the base stations of the Radio Access
 Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
 termination, which is used by some Passive Optical Networks
-deployments to connect the SD-Fabric fabric to home routers. Finally, it
-is worth nothing that the code fragment illustrates the basic
+deployments to connect the SD-Fabric fabric to home routers. Finally,
+it is worth nothing that the code fragment illustrates the basic
 structure of ``fabric.p4``\'s core functionality, which first applies
 the *filtering objective* (``filtering.apply``), then applies the
 *forwarding objective* (``forwarding.apply`` and ``acl.apply``), and
