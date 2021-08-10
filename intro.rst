@@ -109,7 +109,7 @@ the same sort of changes in the networking industry, which as the 2001
 National Academy report observed, had ossified. As shown in
 :numref:`Figure %s <fig-market2>`, the end goal is a horizontal
 ecosystem with multiple network operating systems enabled on top of
-bare-metal switches [#]_ built from merchant silicon switching chips, which
+bare-metal switches\ [#]_ built from merchant silicon switching chips, which
 in turn enable a rich marketplace of networking applications.
 
 .. [#] The term "bare-metal" originated in the server world to refer to
@@ -232,7 +232,7 @@ forwards packets), this forwarding abstraction should not assume (or
 favor) one data plane implementation over another.
 
 The original interface supporting disaggregation, called *OpenFlow*,
-was introduced in 2008 [#]_ , and although it was hugely instrumental in
+was introduced in 2008\ [#]_ , and although it was hugely instrumental in
 launching the SDN journey, it proved to be only a small part of what
 defines SDN today. Equating SDN with OpenFlow significantly
 under-values SDN, but it is an important milestone because it
@@ -315,7 +315,7 @@ data plane, which implies making real-time decisions about how to
 respond to link and switch failures, as well as other data plane
 events. If the data plane reports a failure, the control plane needs
 to learn about this failure and provide a remedy (e.g., a new
-Match/Action flow rule) generally within milliseconds. \ [#]_  Otherwise, the
+Match/Action flow rule) generally within milliseconds.\ [#]_  Otherwise, the
 disaggregation implied by SDN would not be viable.
 
 .. [#] There are also events that require attention in sub-millisecond
@@ -394,12 +394,10 @@ Shenker's talk noted above, for example).
 The alternative, which is the second design principle of SDN, is that
 the control plane should be fully independent of the data plane and
 logically centralized. This implies the control plane is implemented
-*off-switch*, for example, by running the controller in the cloud. \ [#]_
-
-.. [#] For completeness, we note that it is also possible to adopt a
-       mixed approach, with some control functionality running
-       on-switch and some running off-switch, in a cloud-hosted
-       controller.
+*off-switch*, for example, by running the controller in the cloud. For
+completeness, we note that it is also possible to adopt a mixed
+approach, with some control functionality running on-switch and some
+running off-switch, in a cloud-hosted controller.
 
 We say logically centralized because while the state collected by the
 controller is maintained in a global data structure (think of this as
@@ -515,7 +513,8 @@ virtual machines or containers.
 	distribution and management, rather than being tied to
 	standards. The key is to find domains for which it is possible
 	to optimize performance with a logically centralized control
-	plane.*
+	plane. This book describes several such domains where SDN is
+	providing value.*
 
 Returning to the original question of centralized versus distributed 
 control plane, proponents of the latter often base their rationale on 
@@ -670,7 +669,7 @@ To summarize, the original definition of SDN is simple to state:
 
 	*A network in which the control plane is physically separate
         from the forwarding plane, and a single control plane
-        controls several forwarding devices*. \ [#]_
+        controls several forwarding devices*.\ [#]_
 
 This is a succinct way of saying what Sections 1.2.1 and 1.2.2 explain
 in long-form. Since that original definition, SDN has been interpreted

@@ -317,7 +317,7 @@ work-in-progress. It represents an idealized architecture that sits
 between the P4 developer and the underlying hardware, but the
 architectural model that developers are coding to today is somewhat
 simpler. That model, called V1Model, is shown in :numref:`Figure %s
-<fig-v1model>`. \ [#]_ It does not include a re-parsing step after the
+<fig-v1model>`.\ [#]_ It does not include a re-parsing step after the
 Traffic Manager. Instead it implicitly bridges all metadata from
 ingress to egress processing. Also, V1Model includes a checksum
 verification/update block, whereas PSA treats checksums as an extern,
@@ -391,9 +391,9 @@ In contrast to ``v1model.p4`` and ``psa.p4``, which aspire to
 abstracting commonality across different switching chips,
 architectures like ``tna.p4`` faithfully define the low-level
 capabilities of a given chip. Often, such capabilities are those that
-differentiate a chip like Tofino from the competition (For this
+differentiate a chip like Tofino from the competition. (For this
 reason, the definition of such vendor/chip-specific architectures is
-not public and often requires signing a non-disclosure agreement.)
+not always public and may require signing a non-disclosure agreement.)
 When picking an architecture model for a new P4 program, it is
 important to ask questions like: Which of the available architectures
 are supported by the switches I intend to program? Does my program
@@ -713,7 +713,7 @@ For our purposes, what is instructive is to see how OF-DPA maps onto
 its programmable pipeline counterparts. In the programmable case, it’s
 not until you add a program like ``switch.p4`` that you get something
 roughly equivalent OF-DPA. That is, ``v1model.p4`` defines the available
-stages (control blocks). It’s not until you add ``switch.p4`` that you
+stages (control blocks). bit it's not until you add ``switch.p4`` that you
 have the functionality that runs in those stages.
 
 With this relationship in mind, we might want to incorporate both

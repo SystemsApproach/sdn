@@ -26,7 +26,7 @@ running today in production networks.
 
 An overview of the software stack is given in :numref:`Figure %s
 <fig-stack>`, which includes a *Bare-Metal Switch* running a local
-*Switch OS*, controlled by a global Network OS hosting a collection of
+*Switch OS*, controlled by a global *Network OS* hosting a collection of
 *Control Applications*. :numref:`Figure %s <fig-stack>` also calls out
 a corresponding set of exemplar open source components (*SD-Fabric*,
 *ONOS*, and *Stratum*) on the right, as well as a related *P4
@@ -101,7 +101,7 @@ hosts. In particular, there is a *Virtual Switch (vSwitch)*—typically
 implemented in software as part of the hypervisor 
 running on the server—that is responsible for forwarding packets to
 and from the VMs. (Of course, not every end-host runs VMs, but a
-similar architecture applies to containers hosts or bare-metal servers).
+similar architecture applies to containers hosts or bare-metal servers.)
 Just like a physical switch,
 the vSwitch forwards packets from input port to output port, but these
 are virtual ports connected to VMs (or containers) rather than physical ports
@@ -312,7 +312,7 @@ with server operating systems, the higher one goes up the software
 stack, the more difficult it becomes to reach such a consensus.
 
 .. [#] We make no claim that FlowObjectives are an ideal interface for
-       controlling a switch. They evolved out of necessity, allowing
+       controlling a switch. The API evolved out of necessity, allowing
        developers to deal with different pipelines. Defining a general
        interface is the subject of ongoing research.
 
@@ -332,10 +332,10 @@ in more detail.
 ---------------------------
 
 Because we use ONOS as the Network OS, we are limited to ONOS-hosted
-SDN Control Applications. For illustrative purposes, we use SD-Fabric as
-that Control App. SD-Fabric implements a *leaf-spine* fabric on a
-network of programmable switches. This means SD-Fabric dictates a
-particular network topology: a leaf-spine topology common to
+SDN Control Applications. For illustrative purposes, we use SD-Fabric
+as that Control App—it implements a *leaf-spine* fabric on a network
+of programmable switches. This means SD-Fabric dictates a particular
+network topology, in particular, the leaf-spine topology common to
 datacenter clusters. As outlined in Section 2.3, this topology
 includes a set of leaf switches, each of which serves as a Top-of-Rack
 switch (i.e., it connects all the servers in a single rack), where the
@@ -347,7 +347,7 @@ those servers—in a multi-rack cluster. Second, it connects the cluster
 as a whole upstream to peer networks, including the Internet, using
 BGP (i.e., it behaves much like a router). Third, it connects the
 cluster as a whole to downstream access networks (i.e., it terminates
-access network technologies like PON and LTE/5G). In other words,
+access network technologies like PON and RAN). In other words,
 instead of thinking about SD-Fabric as a conventional leaf-spine fabric
 that’s locked away in some datacenter, SD-Fabric is best viewed an
 interconnect running at the network edge, helping to bridge
@@ -383,8 +383,8 @@ but interaction with the outside world still requires them.
     SD-Fabric suite of control apps managing a (potentially distributed)
     leaf-spine fabric.
 
-Finally, SD-Fabric is sometimes deployed at a single site with multiple
-mobile base stations connected via SD-Fabric leaf-switches. But SD-Fabric
-can also be extended to multiple sites deeper into the network using
-multiple stages of spines, as shown in :numref:`Figure %s
-<fig-trellis>`. Chapter 7 describes all of this in more detail.
+Finally, SD-Fabric is sometimes deployed at a single site with
+multiple RAN base stations connected via SD-Fabric leaf-switches. But
+SD-Fabric can also be extended to multiple sites deeper into the
+network using multiple stages of spines, as shown in :numref:`Figure
+%s <fig-trellis>`. Chapter 7 describes all of this in more detail.
