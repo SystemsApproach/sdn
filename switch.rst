@@ -417,11 +417,12 @@ differences: (1) we can control that switch using an SDN controller
 via P4Runtime, and (2) we can easily modify that program should we
 discover we need a new feature.
 
-.. [#] Such a program exists. It was written by Barefoot for their
-       chipset and uses ``tna.p4`` as its architecture model. A
-       roughly equivalent open source variant, called ``fabric.p4``,
-       uses ``v1model.p4``. It supports most L2/L3 features,
-       customized for the SD-Fabric use case presented in Chapter 7.
+.. [#] Such a program was written by Barefoot for their chipset and
+       uses ``tna.p4`` as its architecture model, but it is not open
+       source. A roughly equivalent open source variant, called
+       ``fabric.p4``, uses ``v1model.p4``. It supports most L2/L3
+       features, customized for the SD-Fabric use case presented in
+       Chapter 7.
 
 .. sidebar:: Is the Complexity Worth It?
 
