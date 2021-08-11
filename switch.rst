@@ -378,30 +378,34 @@ a standardization process. The *Tofino Native Architecture (TNA)*,
 which is an architecture model defined by Barefoot for their family of
 programmable switching chips, is an example.
 
-We do not give this example because we plan to define TNA, but rather,
-because having a second tangible example helps to illustrate all the
-degrees of freedom available in this space. In effect, the P4 language
-defines a general framework for writing programs (we’ll see the syntax
-in the next section), but it’s not until you supply a P4 architecture
+We aren't going to describe TNA in detail here (information is
+available on GitHub for those that want a closer look), but having a
+second tangible example does help to illustrate all the degrees of
+freedom available in this space. In effect, the P4 language defines a
+general framework for writing programs (we’ll see the syntax in the
+next section), but it’s not until you supply a P4 architecture
 definition (generically we refer to this as ``arch.p4``, but specific
 examples are ``v1model.p4``, ``psa.p4``, and ``tna.p4``) that a
 developer is able to actually write and compile a forwarding program.
+
+.. _reading_tofino:
+.. admonition:: Further Reading
+
+   `Open Tofino
+   <https://github.com/barefootnetworks/Open-Tofino>`__. 2021.
 
 In contrast to ``v1model.p4`` and ``psa.p4``, which aspire to
 abstracting commonality across different switching chips,
 architectures like ``tna.p4`` faithfully define the low-level
 capabilities of a given chip. Often, such capabilities are those that
-differentiate a chip like Tofino from the competition. (For this
-reason, the definition of such vendor/chip-specific architectures is
-not always public and may require signing a non-disclosure agreement.)
-When picking an architecture model for a new P4 program, it is
-important to ask questions like: Which of the available architectures
-are supported by the switches I intend to program? Does my program
-need access to chip-specific capabilities (e.g., a P4 extern to
-encrypt/decrypt packet payload) or can it rely solely on
-common/non-differentiating features (e.g., simple match-action tables
-or a P4 extern to count packets)? Do I want the P4 program I develop
-to be public on GitHub?
+differentiate a chip like Tofino from the competition.  When picking
+an architecture model for a new P4 program, it is important to ask
+questions like: Which of the available architectures are supported by
+the switches I intend to program? Does my program need access to
+chip-specific capabilities (e.g., a P4 extern to encrypt/decrypt
+packet payload) or can it rely solely on common/non-differentiating
+features (e.g., simple match-action tables or a P4 extern to count
+packets)? 
 
 As for that forwarding program (which we've been generically referring
 to as ``forward.p4``), an interesting tangible example is a program
@@ -413,23 +417,22 @@ differences: (1) we can control that switch using an SDN controller
 via P4Runtime, and (2) we can easily modify that program should we
 discover we need a new feature.
 
-.. [#] Such a program exists (it was written by Barefoot for their
-       chipset and uses ``tna.p4`` as its architecture model), but it
-       is not open source. A roughly equivalent open source variant,
-       called ``fabric.p4``, uses ``v1model.p4``, but it is more
-       narrowly written to support SD-Fabric (see Chapter 7) than
-       serving as a general-purpose L2/L3 data plane.
+.. [#] Such a program exists. It was written by Barefoot for their
+       chipset and uses ``tna.p4`` as its architecture model. A
+       roughly equivalent open source variant, called ``fabric.p4``,
+       uses ``v1model.p4``. It supports most L2/L3 features,
+       customized for the SD-Fabric use case presented in Chapter 7.
 
 .. sidebar:: Is the Complexity Worth It?
 
-	*At this point you may be wondering if all the complexity being
-	introduced is worth it, and we haven't even gotten to the
-	control plane yet! What we've covered so far is complex with
-	or without SDN. That's because we're working at the SW/HW
+	*At this point you may be wondering if all the complexity
+	being introduced is worth it, and we haven't even gotten to
+	the control plane yet! What we've covered so far is complex
+	with or without SDN. That's because we're working at the SW/HW
 	boundary, and the hardware is designed to forward packets at
 	rates measured in Terabits-per-second. This complexity use to
-	be hidden inside proprietary devices. All that SDN has done is
-	put pressure on the marketplace to open up that space so
+	be hidden inside proprietary devices. One thing SDN has done
+	is put pressure on the marketplace to open up that space so
 	others can innovate.*
 
 	*But before anyone can innovate, the first step is to reproduce
@@ -441,13 +444,13 @@ discover we need a new feature.
 	establish parity with legacy networking gear. Once we have
 	that in place, we are ready to do something new. But what?*
 
-	*It is not our goal to answer that question with any certainty.
-	The VNF off-loading and INT examples introduced in Chapter 2
-	are a start. Chapter 10 goes on to introduce closed-loop
-	verification and software-defined 5G networks as potential
-	killer-apps. But history teaches us that killer-apps are
-	impossible to predict with any accuracy. On the other hand,
-	history also includes many examples of how opening
+	*It is not our goal to answer that question with any
+	certainty.  The VNF off-loading and INT examples introduced in
+	Chapter 2 are a start. Software-defined 5G networks
+	(Chapter 9) and closed-loop verification (Chapter 10) are
+	potential killer-apps. But history teaches us that killer-apps
+	are impossible to predict with any accuracy. On the other
+	hand, history also includes many examples of how opening
 	closed, fixed-function systems leads to qualitatively new
 	capabilities.*
 
