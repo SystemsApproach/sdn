@@ -437,7 +437,7 @@ this set with their own services and to back their implementations
 with their own distributed stores. This is why ONOS provides
 applications with direct access to Atomix primitives, such as
 ``AtomicMaps`` and ``DistributedMaps``. We will see examples of such
-extensions in the next Chapter when we take a closer look at Trellis.
+extensions in the next Chapter when we take a closer look at SD-Fabric.
 
 6.3 Northbound Interface
 ------------------------

@@ -26,9 +26,9 @@ running today in production networks.
 
 An overview of the software stack is given in :numref:`Figure %s
 <fig-stack>`, which includes a *Bare-Metal Switch* running a local
-*Switch OS*, controlled by a global Network OS hosting a collection of
+*Switch OS*, controlled by a global *Network OS* hosting a collection of
 *Control Applications*. :numref:`Figure %s <fig-stack>` also calls out
-a corresponding set of exemplar open source components (*Trellis*,
+a corresponding set of exemplar open source components (*SD-Fabric*,
 *ONOS*, and *Stratum*) on the right, as well as a related *P4
 Toolchain* on the left. This chapter introduces these components, with
 later chapters giving more detail.
@@ -101,7 +101,7 @@ hosts. In particular, there is a *Virtual Switch (vSwitch)*—typically
 implemented in software as part of the hypervisor 
 running on the server—that is responsible for forwarding packets to
 and from the VMs. (Of course, not every end-host runs VMs, but a
-similar architecture applies to containers hosts or bare-metal servers).
+similar architecture applies to containers hosts or bare-metal servers.)
 Just like a physical switch,
 the vSwitch forwards packets from input port to output port, but these
 are virtual ports connected to VMs (or containers) rather than physical ports
@@ -129,7 +129,7 @@ connected to physical machines.
 	when the Action must execute within a fixed cycle budget, as
 	is the case for a switch-based forwarding pipeline. It also
 	enables formal verification of the data plane, a promising
-	opportunity discussed in Chapter 9.*
+	opportunity discussed in Chapter 10.*
 
 Fortunately, we can view a vSwitch as behaving just like a physical
 switch, including the APIs it supports. That a vSwitch is implemented
@@ -312,7 +312,7 @@ with server operating systems, the higher one goes up the software
 stack, the more difficult it becomes to reach such a consensus.
 
 .. [#] We make no claim that FlowObjectives are an ideal interface for
-       controlling a switch. They evolved out of necessity, allowing
+       controlling a switch. The API evolved out of necessity, allowing
        developers to deal with different pipelines. Defining a general
        interface is the subject of ongoing research.
 
@@ -332,28 +332,28 @@ in more detail.
 ---------------------------
 
 Because we use ONOS as the Network OS, we are limited to ONOS-hosted
-SDN Control Applications. For illustrative purposes, we use Trellis as
-that Control App. Trellis implements a *leaf-spine* fabric on a
-network of programmable switches. This means Trellis dictates a
-particular network topology: a leaf-spine topology common to
+SDN Control Applications. For illustrative purposes, we use SD-Fabric
+as that Control App—it implements a *leaf-spine* fabric on a network
+of programmable switches. This means SD-Fabric dictates a particular
+network topology, in particular, the leaf-spine topology common to
 datacenter clusters. As outlined in Section 2.3, this topology
 includes a set of leaf switches, each of which serves as a Top-of-Rack
 switch (i.e., it connects all the servers in a single rack), where the
 leaf switches are, in turn, interconnected by a set of spine switches.
 
-At a high level, Trellis plays three roles. First, it provides a
+At a high level, SD-Fabric plays three roles. First, it provides a
 switching fabric that interconnects servers—and the VMs running on
 those servers—in a multi-rack cluster. Second, it connects the cluster
 as a whole upstream to peer networks, including the Internet, using
 BGP (i.e., it behaves much like a router). Third, it connects the
 cluster as a whole to downstream access networks (i.e., it terminates
-access network technologies like PON and LTE/5G). In other words,
-instead of thinking about Trellis as a conventional leaf-spine fabric
-that’s locked away in some datacenter, Trellis is best viewed an
+access network technologies like PON and RAN). In other words,
+instead of thinking about SD-Fabric as a conventional leaf-spine fabric
+that’s locked away in some datacenter, SD-Fabric is best viewed an
 interconnect running at the network edge, helping to bridge
 access-specific edge clouds to IP-based datacenter clouds.
 
-In terms of implementation, Trellis actually corresponds to a suite of
+In terms of implementation, SD-Fabric actually corresponds to a suite of
 Control Apps running on ONOS, as opposed to a single app. This suite
 supports several control plane features, including:
 
@@ -368,7 +368,7 @@ For each of these features, the corresponding Control App interacts
 with ONOS—by observing changes in the network topology and issuing
 Flow Objectives—rather than by using any of the standard protocol
 implementations found in legacy routers and switches. The only time a
-legacy protocol is involved is when Trellis needs to communicate with
+legacy protocol is involved is when SD-Fabric needs to communicate with
 the outside world (e.g., upstream metro/core routers), in which case
 it uses standard BGP (as implemented by the open source Quagga
 server). This is actually a common feature of SDN environments: they
@@ -380,11 +380,11 @@ but interaction with the outside world still requires them.
     :width: 600px
     :align: center
 
-    Trellis suite of control apps managing a (potentially distributed)
+    SD-Fabric suite of control apps managing a (potentially distributed)
     leaf-spine fabric.
 
-Finally, Trellis is sometimes deployed at a single site with multiple
-mobile base stations connected via Trellis leaf-switches. But Trellis
-can also be extended to multiple sites deeper into the network using
-multiple stages of spines, as shown in :numref:`Figure %s
-<fig-trellis>`. Chapter 7 describes all of this in more detail.
+Finally, SD-Fabric is sometimes deployed at a single site with
+multiple RAN base stations connected via SD-Fabric leaf-switches. But
+SD-Fabric can also be extended to multiple sites deeper into the
+network using multiple stages of spines, as shown in :numref:`Figure
+%s <fig-trellis>`. Chapter 7 describes all of this in more detail.

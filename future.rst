@@ -1,41 +1,42 @@
-Chapter 9:  Future of SDN
+Chapter 10:  Future of SDN
 ===========================
 
 It is still early days for SDN. Cloud-hosted control planes are being
 deployed in production networks, but we are only just starting to see
-SDN being trialed in access networks and programmable pipelines being
+SDN being applied to access networks and programmable pipelines being
 used to introduce new data plane functionality. Enterprises have
 adopted network virtualization and SD-WAN to varying degrees, but
 there are still a lot more traditional networks than software-defined
-ones. As the technology
-matures and the APIs stabilize we expect to see increased adoption of
-the use cases discussed earlier,
-but it may be new use cases still on the horizon that have the biggest
-impact on the role SDN eventually plays. Indeed, the ability to support
+ones.
+
+As the technology matures and the APIs stabilize we expect to
+see increased adoption of the use cases discussed earlier, but it may
+be new use cases still on the horizon that have the biggest impact on
+the role SDN eventually plays. Indeed, the ability to support
 capabilities that were impossible in traditional networks is a great
-part of the promise of SDN. This chapter looks at two
-promising examples of emerging capabilities.
+part of the promise of SDN.
 
-9.1 Verifiable Networks
------------------------
-
-Networks are notoriously difficult to make verifiably robust and
-secure against failures, attacks, and configuration mistakes. Despite
-progress on application-level security, little has been done to
-address the security and robustness of the underlying network
-infrastructure. And despite progress making computer networks more
-programmable, most networks are still built using closed/proprietary
-software and complex/fixed-function hardware, whose correctness is
-hard to prove and whose design has unknown provenance.
+This chapter looks at a promising opportunity, revolving around the
+verification of correctness. Networks are notoriously difficult to make
+verifiably robust and secure against failures, attacks, and
+configuration mistakes. While network verification has been a field of
+interest for several years, the lack of clear abstractions in
+networking has limited the progress that can be made. Most networks are still built
+using closed/proprietary software and complex/fixed-function hardware,
+whose correctness is hard to prove and whose design has unknown
+provenance. The distributed algorithms that determine how networks
+operate are notoriously difficult to reason about, with BGP being a
+classic example of a protocol whose failure modes have kept
+researchers and practitioners occupied for decades.
 
 The emergence of 5G networks and applications will only exacerbate the
 situation. 5G networks will connect not only smart phones and people,
 but also everything from doorbells, to lights, refrigerators,
-self-driving cars, and drones. If we cannot secure these networks, the
-risk of cyber disasters is much worse than anything experienced to
-date.
+self-driving cars, and drones. If we cannot correctly configure and
+secure these networks, the risk of cyber disasters is much worse than
+anything experienced to date.
 
-A critical capability for securing the Internet is verifiability:
+A critical capability for a reliable and secure Internet is verifiability:
 the ability to ensure that every packet in the network follows an
 operator-specified path and encounters only a set of forwarding rules
 within every device that the operator intended. Nothing more and
@@ -47,10 +48,13 @@ disaggregated) manner. Being able to reason about small pieces makes
 verification tractable, and the reasoning needed to stitch the
 components together into the composite system can also lead to
 insights. With disaggregation as the foundation, verifiability follows
-from (a) the ability to state intent, and (b) the ability to observe
+from (a) the ability to state intent *at the network level* rather
+than at the box level, and (b) the ability to observe
 behavior at fine granularity and in real-time. This is exactly the
 value SDN brings to the table, which leads to optimism that
 *verifiable closed-loop control* is now within reach.
+
+
 
 .. _reading_pronto:
 .. admonition:: Further Reading  
@@ -147,16 +151,27 @@ opportunity, we recommend a paper by Jed Liu and colleagues.
    SIGCOMM 2018.
 
 The second insight is that, in addition to building tools for
-analyzing network programs, it is important to also develop
-technologies that provide higher levels of assurance through
-*defense-in-depth*. This addresses one of the main weaknesses of
-current approaches to network verification—they are based on
-mathematical models of the network components, and therefore can
-produce incorrect answers when those components behave in different
-ways than are captured in the model. By exploiting the ability of P4
-data planes to collect rich telemetry and other monitoring data, it is
-possible to develop network verification tools that combine
-statically-verified components with runtime verification.
+analyzing network programs, it is important also to develop
+technologies that map the high-level intent of the network operator to
+code that implements that intent. One of the challenges of current
+approaches to network verification is that they take existing network
+equipment, with their complex distributed control planes, as their
+starting point, and build mathematical models of how those
+control planes behave. If the reality doesn't precisely match the
+model, then verification won't ensure that the network behaves as
+required. But with the centralized control model of SDN,
+the control plane is designed to map a centrally specified request
+into a set of control directives that can be implemented in the data
+plane. And we are starting to see systems in which the SDN control
+plane itself is compiled from a high level specification of its
+desired properties. Thus we can hope to see control planes that are
+correct by construction, rather than trying to build models that
+accurately capture the behavior of historically hard-to-analyze
+systems like BGP [#]_.
+
+.. [#] It's hard to imagine BGP ever going away entirely for
+       interdomain routing, but at least for the large set of intradomain use
+       cases the chance to design for verifiability seems possible.
 
 .. _fig-phase3:
 .. figure:: figures/Slide37.png
@@ -166,115 +181,20 @@ statically-verified components with runtime verification.
     Projecting into the future, with Phase 3 of SDN focusing on
     verifiable, top-down control of network behavior.
 
-To put this all in an historical context, Section 1.3 suggests we are
-now in the second phase of SDN. :numref:`Figure %s <fig-phase3>`
-extends this into the future with a third phase, during which
+To put this all in an historical context, :numref:`Figure %s
+<fig-phase3>` illustrates a view of three phases of SDN. It is fair to
+say that we are in the early stages of phase 2, where the most
+advanced operators have been able to take control of their software,
+via disaggregated control planes, and of their packet processing,  via
+P4-programmable data planes. We see an emerging third phase, during which
 verifiable closed loop control will empower network operators to take
-full ownership of the software that defines their networks. This gives
-network owners further ability to tailor their networks in ways that
-differentiate them from their competitors.
+full ownership of the software that defines their networks. Not only
+will they be able to determine the behavior of their networks through
+software, but they will be able to provide that the network is
+implementing their intent. Just as the hardware industry has developed
+high confidence that chips will work as intended before they go into
+manufacturing, network operators will have confidence that their
+networks are reliable, secure, and meeting their specified
+objectives. 
 
-9.2 SD-RAN
-----------
 
-Much of the early hype surrounding 5G is about the increase in
-bandwidth it brings, but 5G’s promise is mostly about the transition
-from a single access service (broadband connectivity) to a richer
-collection of edge services and devices, including support for
-immersive user interfaces (e.g., AR/VR), mission-critical applications
-(e.g., public safety, autonomous vehicles), and the Internet-of-Things
-(IoT). Many of these new applications will be feasible only if SDN
-principles are applied to the Radio Access Network (RAN), resulting in
-increased feature velocity. Because of this, mobile network operators
-are working to make Software-Defined RAN (SD-RAN) happen.
-
-.. _reading_sdran:
-.. admonition:: Further Reading  
-   
-   `SD-RAN Project  
-   <https://opennetworking.org/sd-ran/>`__.
-   Open Networking Foundation. August 2020. 
-   
-To understand SD-RAN at a technical level, it is important to
-recognize that the base stations that make up the RAN are, for all
-practical purposes, packet forwarders. The set of base stations in a
-given geographic area coordinate with each other to allocate the
-shared—and extremely scarce—radio spectrum. They make hand-off
-decisions, decide to jointly serve a given user (think of this as a
-RAN variant of link aggregation), and make packet scheduling decisions
-based on the observed signal quality. Today these are purely local
-decisions, but transforming it into a global optimization problem is
-in SDN’s wheelhouse.
-
-The idea of SD-RAN is for each base station to report locally
-collected statistics about radio transmission quality back to a
-central SDN controller, which combines information from a set of base
-stations to construct a global view of how the radio spectrum is being
-utilized. A suite of control applications—for example, one focused on
-handoffs, one focused on link aggregation, one focused on load
-balancing, and one focused on frequency management—can then use this
-information to make globally optimal decisions, and push control
-instructions back to the individual base stations. These control
-instructions are not at the granularity of scheduling individual
-segments for transmission (i.e., there is still a real-time scheduler
-on each base station, just as an SDN-controlled ethernet switch still
-has a local packet scheduler), but they do exert near real-time
-control over the base stations, with control loops measured in less
-than ten milliseconds.
-
-.. _fig-ric:
-.. figure:: figures/Slide36.png
-    :width: 500px
-    :align: center
-
-    3GPP-compliant RAN Intelligent Controller (RIC) built by adapting
-    and extending ONOS.
-
-Like the verified closed-loop control example, the scenario just
-described is within reach, with a retargeting of ONOS at the SD-RAN
-use case already underway. :numref:`Figure %s <fig-ric>` shows the
-design, which introduces some new components, but largely builds on
-the existing ONOS architecture. In some cases, the changes are
-superficial. For example, ONOS adopts terminology coming out of the
-3GPP and O-RAN standardization bodies,\ [#]_ most notably, that the
-NOS is called a *RAN Intelligent Controller (RIC)*. In other cases,
-it’s a matter of adopting standardized interfaces: the **C1**
-interface by which control applications communicate with the RIC, the
-**A1** interface by which the operator configures the RAN, and the
-**E2** interface by which the RIC communicates with the underlying RAN
-elements. The details of these interfaces is beyond the scope of this
-book, but the important takeaway for our purposes is that they are no
-different than supporting any other standard north- and south-facing
-interface (e.g., gNMI, gNOI, OpenFlow).
-
-.. [#] 3GPP (3rd Generation Partnership Project) has been responsible for
-       standardizing the mobile cellular network ever since 3G, and
-       O-RAN (Open-RAN Alliance) is a consortium of mobile network
-       operators defining an SDN-based implementation strategy for 5G.
-
-The ONOS-based RIC takes advantage of the Topology Service described
-in Chapter 6, but it also introduces two new services: *Control* and
-*Telemetry*. The Control Service, which builds on the Atomix key/value
-store, manages the control state for all the base stations and user
-devices, including which base station is serving each user device, as
-well as the set of  “potential links” that could connect the device.
-The Telemetry Service, which builds on a *Time Series Database
-(TSDB)*, tracks all the link quality information being reported back
-by the RAN elements. Various of the control applications then analyze
-this data to make informed decisions about how the RAN can best meet
-its data delivery objectives.
-
-For a broad introduction into what’s involved in disaggregating 5G
-mobile networks so they can be implemented in software, we recommend
-the following companion book.
-
-.. _reading_5g:
-.. admonition:: Further Reading  
-
-   L. Peterson and O. Sunay.
-   `5G Mobile Networks: A Systems Approach <https://5g.systemsapproach.org/>`__.
-   June 2020.  
- 
-Finally, circling back to the previous section, applying closed-loop
-verification to a disaggregated and software-defined cellular network
-is the next obvious thing to do.

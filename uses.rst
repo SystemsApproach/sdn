@@ -19,10 +19,10 @@ Second, large network operators like AT&T, DT, NTT, and Comcast
 publicly talk about their plans to deploy SDN-based
 solutions—especially in their access networks—but they are proceeding
 cautiously, with most of their initiatives either using hybrid
-approaches, or in the case of pure play SDN, still in the trial
-phase. The most notable exception is Comcast, which has deployed the
-open source components described in this book throughout their
-production network.
+approaches, or in the case of pure play SDN, just starting to go into
+production.  Of particular note, Comcast, which has deployed the open
+source components described in this book throughout their production
+network.
 
 Finally, enterprises have begun to adopt SDN, but there are two things
 to note about this situation. One is that while pure play SDN is
@@ -236,7 +236,7 @@ hops (server-leaf-spine-leaf-server in the inter-rack case).
     :align: center
 
     Example of a leaf-spine switching fabric common to cloud
-    datacenters and other compute clusters.
+    datacenters and other clusters, such as on-premises edge clouds.
 
 The main fabric-control software sets up L2 forwarding (bridging)
 within a server-rack, and L3 forwarding (routing) across racks. The
@@ -251,7 +251,7 @@ MPLS.) Having the fabric control software also provide L2-bridging
 comes from the need to support legacy workloads that often expect to
 communicate over an L2 network. There is much more to implementing a
 leaf-spine fabric, but we postpone a more complete description until
-Chapter 7, where we describe the specifics of the Trellis
+Chapter 7, where we describe the specifics of the SD-Fabric
 implementation.
 
 
@@ -468,9 +468,10 @@ proprietary, they would seem to be worst-case examples for applying
 SDN principles. But that also means they represent an opportunity for
 the biggest payoff, and it is for precisely this reason that large
 network operators are actively pursuing software-defined PON and RAN
-networks. This initiative is often referred to as *CORD (Central
+networks. This initiative is sometimes referred to as *CORD (Central
 Office Re-architected as a Datacenter)* and has been the subject of
-much business analysis, including a comprehensive report by A.D. Little.
+much business analysis, including a comprehensive report by
+A.D. Little.
 
 .. _reading_cord:
 .. admonition:: Further Reading
@@ -539,7 +540,8 @@ The bottom line is that the effort to apply SDN principles to both
 fiber and mobile access networks starts with the same building block
 components described throughout this book. We will highlight where
 such software-defined access networks “plug into” the SDN software
-stack as we work our way through the details.
+stack as we work our way through the details, with a full account
+presented in Chapter 9.
 
 2.6 Network Telemetry
 ---------------------

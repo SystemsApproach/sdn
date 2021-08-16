@@ -178,8 +178,7 @@ toolchain must be aware of which P4 language elements are
 controllable, and hence, available to be “exposed” by
 ``p4runtime.proto``. Such information is contained in
 ``forward.p4info``, which specifies exactly the set of controllable
-elements and their attributes as defined in the source P4 program
-[#]_.
+elements and their attributes as defined in the source P4 program.\ [#]_
 The table element is one obvious example, but there are
 others, including ``counters`` and ``meters``, which are used to
 report status information up to the controller and to allow the
