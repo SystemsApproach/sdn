@@ -167,7 +167,7 @@ plane itself is compiled from a high level specification of its
 desired properties. Thus we can hope to see control planes that are
 correct by construction, rather than trying to build models that
 accurately capture the behavior of historically hard-to-analyze
-systems like BGP [#]_.
+systems like BGP.\ [#]_
 
 .. [#] It's hard to imagine BGP ever going away entirely for
        interdomain routing, but at least for the large set of intradomain use
