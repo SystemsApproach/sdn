@@ -3,7 +3,7 @@ Chapter 10:  Future of SDN
 
 It is still early days for SDN. Cloud-hosted control planes are being
 deployed in production networks, but we are only just starting to see
-SDN being trialed in access networks and programmable pipelines being
+SDN being applied to access networks and programmable pipelines being
 used to introduce new data plane functionality. Enterprises have
 adopted network virtualization and SD-WAN to varying degrees, but
 there are still a lot more traditional networks than software-defined
