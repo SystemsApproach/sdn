@@ -142,6 +142,8 @@ impactful
 incrementing
 interoperable
 intra
+intradomain
+interdomain
 judgement
 microsegments
 microsegmentation

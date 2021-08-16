@@ -592,9 +592,9 @@ Much of this additional functionality runs in the control plane (or
 even the management plane), with the data plane behaving very much
 like any other L3 network. This means the data plane can be
 implemented by mechanisms seen in earlier chapters, or more
-specifically, by the SD-Fabric solution described in
-Chapter 7. Consider our two specific access technologies, and the
-implications of each with respect to SD-Fabric.
+specifically, by the SD-Fabric solution described in Chapter 7.
+Consider our two specific access technologies, and the implications
+of each with respect to SD-Fabric.
 
 The BNG that connects a PON to the Internet has a vendor-defined
 control/management plane, as there is no need for a industry-wide
@@ -604,17 +604,17 @@ SD-Fabric provides this capability. This means the fabric switches
 shown in :numref:`Figure %s <fig-sdpon>` are exactly the same fabric
 switches as shown in :numref:`Figure %s <fig-seba>` (from Chapter 2)
 and :numref:`Figure %s <fig-netconfig>` (from Chapter 7). In other
-words, SD-Fabric not only connects the OLTs to the Internet, it also
+words, SD-Fabric both connects the OLTs to the Internet and
 interconnects a set of servers that host the BNG control and
-management processes (along with any other Virtual Network Functions
+management functions (along with any other *Virtual Network Functions*
 that the operator wants to run at the edge).
 
 The Mobile Core that connects a RAN to the Internet is standardized by
 3GPP, making it a well-defined example to discuss (albeit at a
-high-level since the full 3GPP specification for the 5G Mobile Core is
-well beyond the scope of this book). :numref:`Figure %s <fig-core>`
-gives an architectural overview, identifying the functional blocks
-that make up the 5G Mobile Core.
+high-level since the full 3GPP specification is well beyond the scope
+of this book). :numref:`Figure %s <fig-core>` gives an architectural
+overview, identifying the functional blocks that make up the 5G Mobile
+Core.
 
 .. _fig-core:
 .. figure:: access/Slide9.png
@@ -625,15 +625,16 @@ that make up the 5G Mobile Core.
 
 The main point to take from this diagram is that the *UPF (User Plane
 Function)* implements the data plane (which 3GPP calls the *User
-Plane*). Everything else is a control plane function, and while the
-details aren't important to our discussion, AMF is responsible for
-mobility management, SMF is responsible for session management, and
-AUSF is responsible for authentication. For our purposes, you can
-think of these and all the other functional boxes that make up the
-control plane as microservices running on a commodity server. For more
-details about the Mobile Core control plane, as well as examples of
-specific implementation choices, we recommend the *Magma* and
-*SD-Core* open source projects.
+Plane*). Everything else is a control plane function, where broadly
+speaking, AMF is responsible for mobility management, SMF is
+responsible for session management, and AUSF is responsible for
+authentication. All the other functional blocks correspond to
+low-level processes that AMF, SMF, and AUSF call to do their job, but
+for our purposes, you can think of the entire set as Kubernetes-based
+microservices running on commodity servers. For more details about the
+Mobile Core control plane, as well as examples of specific
+implementation choices, we recommend the *Magma* and *SD-Core* open
+source projects.
 
 .. _reading_core:
 .. admonition:: Further Reading
@@ -644,46 +645,47 @@ specific implementation choices, we recommend the *Magma* and
    `SD-Core Project  <https://opennetworking.org/sd-core/>`__. 
    Open Networking Foundation. 2021.
 
-What is important to our discussion is that while the UPF can also
-be implemented as a server-hosted microservice—it runs a loop that
-reads packet from an input port and writes them to an output
-port—because we have access to a programmable switching fabric, we can
-offload that function to the switches. This is exactly what the
-``upf`` extension to ``fabric.p4`` shown in Section 7.4 does.
+What is important to our discussion is that while the UPF can also be
+implemented as a server-hosted microservice—just like any
+software-based router—because we have access to a programmable
+switching fabric, we can offload that function to the switches. This
+is exactly what the ``upf`` extension to ``fabric.p4`` shown in
+Section 7.4 does.
 
 But what is this extra functionality beyond forwarding IP packets? UPF
 performs three additional tasks. First, it encapsulates/decapsulates
-packets sent between to/from the base station. These are
-GTP-over-UDP/IP encapsulated packets. Second, queues packets according
-to the different QoS levels the operator wants to provide. Both of
-these tasks can be implemented in a straightforward way in P4 and the
-underlying programmable switches. The third task is to "hold" packets
-destined for a UE that has recently moved, so that no packets are
-dropped during the period of time the corresponding session state is
-in transition. This is not something that today's P4 switches are able
-to support. So instead, the switch temporarily redirects those packets
-to a server for hold-and-replay, or alternatively, to a SmartNIC
-connected to those servers. McDavid and colleagues describe the
-mechanism for doing this is more detail.
+packets sent between to/from the base stations. These are
+GTP-over-UDP/IP encapsulated packets. Second, it queues packets
+according to the different QoS levels the operator wants to provide.
+Both of these tasks can be implemented in a straightforward way in P4
+and the underlying programmable switches. The third task is to "hold"
+packets destined for a UE that has recently moved, so that no packets
+are dropped during the period of time the corresponding session state
+is in transition. This is not something that today's P4 switches are
+able to support. So instead, the switch temporarily redirects those
+packets to a server for hold-and-replay, or alternatively, to a
+SmartNIC connected to those servers. McDavid and colleagues describe
+the mechanism for doing this is more detail.
 
 .. _reading_upf:
 .. admonition:: Further Reading  
 
    R. MacDavid, *et al.*
-   A P4-based 5G User Plane Function.
-   June 2021. 
+   A P4-based 5G User Plane Function. ACM SOSR. September 2021.
 
 The main takeaway from this discussion is that access networks and
-switching fabrics are complementary use cases for SDN. The switching
-fabric not only interconnects servers that are able to host access
-network control plane functionality, but the fabric itself is also
-able to run some data plane functionality on behalf of the access
-networks. When you combine all these use cases, the end result is an
-*access-edge cloud*: a modest-sized cluster built from commodity
-servers and switches, deployed in enterprises and other edge sites,
-and able to host both access network workloads and edge service
-workloads. Aether is an example open source instance of such an edge
-cloud.
+switching fabrics are complementary use cases for SDN that can work in
+tandem. The switching fabric not only interconnects servers that host
+access network control plane functionality (including the RIC and
+xApps), but the fabric also runs some data plane functionality on
+behalf of the access networks. When you combine all these use cases,
+the end result is an *access-edge cloud*: a modest-sized cluster built
+from commodity servers and switches, deployed in enterprises and other
+edge sites, and able to host both access network workloads and edge
+service workloads. Aether is an open source example of such an edge
+cloud, combining SD-Fabric, SD-RAN, and SD-Core in a self-contained
+package that can be deployed in enterprises and managed as a cloud
+service.
 
 .. _reading_aether:
 .. admonition:: Further Reading  
