@@ -39,21 +39,21 @@ backbone are hundreds or thousands of edge sites.  These edge sites
 are commonly called *Central Offices* in the Telco world and *Head
 Ends* in the cable world, but despite their names implying
 “centralized” and “root of the hierarchy” these sites are at the very
-edge of the ISP’s network; the ISP-side of the last-mile that directly
+edge of the ISP’s network—the ISP-side of the last-mile that directly
 connects to customers. The PON and RAN-based access networks are
 anchored in these facilities.
 
 Passive Optical Network 
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-A PON is a tree-structured, fiber-based network, with a single point
-starting in one of the ISP's edge sites, and fanning out to reach up
-to 1024 homes. PON gets its name from the fact that the splitters are
-passive: they forward optical signals downstream and upstream without
-actively storing-and-forwarding frames. Framing then happens at the
-edges, at the ISP’s premises in a device called an *Optical Line
-Terminal* (OLT), and at the end-points in individual homes in a device
-called an *Optical Network Unit* (ONU).
+A PON is a tree-structured, fiber-based network, starting with a
+single device in one of the ISP's edge sites, and fanning out to reach
+up to 1024 homes. PON gets its name from the fact that the splitters
+are passive: they forward optical signals downstream and upstream
+without actively storing-and-forwarding frames. Framing then happens
+at the edges, at the ISP’s premises in a device called an *Optical
+Line Terminal* (OLT), and at the end-points in individual homes in a
+device called an *Optical Network Unit* (ONU).
 
 :numref:`Figure %s <fig-pon>` shows an example PON, simplified to
 depict just one ONU and one OLT. In practice, a Central Office would
@@ -171,7 +171,7 @@ historically run a multi-layer protocol stack. Once disaggregated, the
 pieces are then distributed throughout the network, with some elements
 co-located with the radio antenna, and some elements co-located with
 the Mobile Core in the Central Office. In other words, the plan is to
-both "split" and "distribute" the RAN.
+both "split" and "distribute" RAN functionality.
 
 For a broad introduction into what’s involved in disaggregating 5G
 mobile networks so they can be implemented in software, we recommend
@@ -212,7 +212,7 @@ hardware, and must instead deal with an assortment of legacy devices.
 To address these issues, the SD-PON architecture depicted in
 :numref:`Figure %s <fig-sdpon>` has emerged.  Production networks
 based on this design are now being deployed by Telcos throughout the
-world.  For simplicity, the figure shows only a single ONT, but it is
+world.  For simplicity, the figure shows only a single OLT, but it is
 connected to two fabric switches. The fabric is necessary to aggregate
 the set of OLTs that are likely to be deployed in practice, and while
 we postpone the details to Section 9.4, one could imagine these
@@ -271,8 +271,8 @@ initiated, verifying that the ONU is registered to a known customer.
 One outcome of a successful authorization is that the SD-PON
 application instructs ONOS to set up a path though the fabric (with
 the prescribed QoS profile) connecting that subscriber to the L2
-network. Typically, a home router connected to the ONU will then send
-a DHCP request, both triggering an IP address assignment and causing
+network. Next, a home router connected to the ONU will then send a
+DHCP request, both triggering an IP address assignment and causing
 ONOS to set up a route through the fabric connecting that home router
 to the upstream BNG (and hence, the rest of the Internet).
 
