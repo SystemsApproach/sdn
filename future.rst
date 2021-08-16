@@ -17,24 +17,26 @@ capabilities that were impossible in traditional networks is a great
 part of the promise of SDN.
 
 This chapter looks at a promising opportunity, revolving around the
-challenge of security. Networks are notoriously difficult to make
+verification of correctness. Networks are notoriously difficult to make
 verifiably robust and secure against failures, attacks, and
-configuration mistakes. Despite progress on application-level
-security, little has been done to address the security and robustness
-of the underlying network infrastructure. And despite progress making
-computer networks more programmable, most networks are still built
+configuration mistakes. While network verification has been a field of
+interest for several years, the lack of clear abstractions in
+networking has limited the progress that can be made. Most networks are still built
 using closed/proprietary software and complex/fixed-function hardware,
 whose correctness is hard to prove and whose design has unknown
-provenance.
+provenance. The distributed algorithms that determine how networks
+operate are notoriously difficult to reason about, with BGP being a
+classic example of a protocol whose failure modes have kept
+researchers and practitioners occupied for decades.
 
 The emergence of 5G networks and applications will only exacerbate the
 situation. 5G networks will connect not only smart phones and people,
 but also everything from doorbells, to lights, refrigerators,
-self-driving cars, and drones. If we cannot secure these networks, the
-risk of cyber disasters is much worse than anything experienced to
-date.
+self-driving cars, and drones. If we cannot correctly configure and
+secure these networks, the risk of cyber disasters is much worse than
+anything experienced to date.
 
-A critical capability for securing the Internet is verifiability:
+A critical capability for a reliable and secure Internet is verifiability:
 the ability to ensure that every packet in the network follows an
 operator-specified path and encounters only a set of forwarding rules
 within every device that the operator intended. Nothing more and
@@ -46,10 +48,13 @@ disaggregated) manner. Being able to reason about small pieces makes
 verification tractable, and the reasoning needed to stitch the
 components together into the composite system can also lead to
 insights. With disaggregation as the foundation, verifiability follows
-from (a) the ability to state intent, and (b) the ability to observe
+from (a) the ability to state intent *at the network level* rather
+than at the box level, and (b) the ability to observe
 behavior at fine granularity and in real-time. This is exactly the
 value SDN brings to the table, which leads to optimism that
 *verifiable closed-loop control* is now within reach.
+
+
 
 .. _reading_pronto:
 .. admonition:: Further Reading  
@@ -146,16 +151,27 @@ opportunity, we recommend a paper by Jed Liu and colleagues.
    SIGCOMM 2018.
 
 The second insight is that, in addition to building tools for
-analyzing network programs, it is important to also develop
-technologies that provide higher levels of assurance through
-*defense-in-depth*. This addresses one of the main weaknesses of
-current approaches to network verification—they are based on
-mathematical models of the network components, and therefore can
-produce incorrect answers when those components behave in different
-ways than are captured in the model. By exploiting the ability of P4
-data planes to collect rich telemetry and other monitoring data, it is
-possible to develop network verification tools that combine
-statically-verified components with runtime verification.
+analyzing network programs, it is important also to develop
+technologies that map the high-level intent of the network operator to
+code that implements that intent. One of the challenges of current
+approaches to network verification is that they take existing network
+equipment, with their complex distributed control planes, as their
+starting point, and build mathematical models of how those
+control planes behave. If the reality doesn't precisely match the
+model, then verification won't ensure that the network behaves as
+required. But with the centralized control model of SDN,
+the control plane is designed to map a centrally specified request
+into a set of control directives that can be implemented in the data
+plane. And we are starting to see systems in which the SDN control
+plane itself is compiled from a high level specification of its
+desired properties. Thus we can hope to see control planes that are
+correct by construction, rather than trying to build models that
+accurately capture the behavior of historically hard-to-analyze
+systems like BGP [#]_.
+
+.. [#] It's hard to imagine BGP ever going away entirely for
+       interdomain routing, but at least for the large set of intradomain use
+       cases the chance to design for verifiability seems possible.
 
 .. _fig-phase3:
 .. figure:: figures/Slide37.png
@@ -165,12 +181,20 @@ statically-verified components with runtime verification.
     Projecting into the future, with Phase 3 of SDN focusing on
     verifiable, top-down control of network behavior.
 
-To put this all in an historical context, Section 1.3 suggests we are
-now in the second phase of SDN. :numref:`Figure %s <fig-phase3>`
-extends this into the future with a third phase, during which
+To put this all in an historical context, :numref:`Figure %s
+<fig-phase3>` illustrates a view of three phases of SDN. It is fair to
+say that we are in the early stages of phase 2, where the most
+advanced operators have been able to take control of their software,
+via disaggregated control planes, and of their packet processing,  via
+P4-programmable data planes. We see an emerging third phase, during which
 verifiable closed loop control will empower network operators to take
-full ownership of the software that defines their networks. This gives
-network owners further ability to tailor their networks in ways that
-differentiate them from their competitors.
+full ownership of the software that defines their networks. Not only
+will they be able to determine the behavior of their networks through
+software, but they will be able to provide that the network is
+implementing their intent. Just as the hardware industry has developed
+high confidence that chips will work as intended before they go into
+manufacturing, network operators will have confidence that their
+networks are reliable, secure, and meeting their specified
+objectives. 
 
 
