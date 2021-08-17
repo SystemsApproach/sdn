@@ -45,8 +45,13 @@ opportunity.
 This book assumes a general understanding of the Internet, although a
 deeper appreciation for the role switches and routers play forwarding
 ethernet frames and IP packets is helpful. Links to related background
-information are included to help bridge any gaps. This book is also a
-work-in-progress. We are eager to hear your feedback and suggestions.
+information are included to help bridge any gaps.
+
+This book is a work-in-progress, with updates, clarifications, and new
+material added continuously. For example, the latest version (v2.0)
+includes new chapters on *Network Virtualization* (Chapter 8) and
+*Access Networks* (Chapter 9).  We are eager to hear your feedback and
+suggestions on how we can continue to improve this book.
 
 Acknowledgements
 ----------------
