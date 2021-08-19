@@ -51,9 +51,9 @@ single device in one of the ISP's edge sites, and fanning out to reach
 up to 1024 homes. PON gets its name from the fact that the splitters
 are passive: they forward optical signals downstream and upstream
 without actively storing-and-forwarding frames. Framing then happens
-at the edges, at the ISP’s premises in a device called an *Optical
-Line Terminal* (OLT), and at the end-points in individual homes in a
-device called an *Optical Network Unit* (ONU).
+at the end-points, at the ISP’s premises in a device called an
+*Optical Line Terminal* (OLT), and in individual homes in a device
+called an *Optical Network Unit* (ONU).
 
 :numref:`Figure %s <fig-pon>` shows an example PON, simplified to
 depict just one ONU and one OLT. In practice, a Central Office would
@@ -127,8 +127,10 @@ that overlay network. Packets are "routed" through this network to
 reach the best base station(s) to serve each UE at a given moment in
 time.\ [#]_ These forwarding decisions are implemented by the base
 stations, which make decisions about *handovers* (one base station
-handing a given UE's traffic off to another) and *link aggregation*
-(multiple base stations deciding to jointly transmit to a given UE).
+handing a given UE's traffic off to another), *load balancing* (a set
+of base stations deciding which should serve a UE based on their
+current load), and *link aggregation* (multiple base stations deciding
+to jointly transmit to a given UE).
 
 .. [#] We say quote "routed" because the decision is based on a
        combination of mobility tracking and monitoring how to most
