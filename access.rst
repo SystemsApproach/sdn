@@ -672,8 +672,9 @@ the mechanism for doing this is more detail.
 .. _reading_upf:
 .. admonition:: Further Reading  
 
-   R. MacDavid, *et al.*
-   A P4-based 5G User Plane Function. ACM SOSR. September 2021.
+   R. MacDavid, *et al.* `A P4-based 5G User Plane Function
+   <https://www.cs.princeton.edu/~macdavid/media/up4-sosr21.pdf>`__.
+   ACM SOSR. September 2021.
 
 The main takeaway from this discussion is that access networks and
 switching fabrics are complementary use cases for SDN that can work in
