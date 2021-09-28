@@ -37,8 +37,8 @@ Before getting to the specifics, we need one more bit of context. ISPs
 operate a national backbone, and connected to the periphery of that
 backbone are hundreds or thousands of edge sites.  These edge sites
 are commonly called *Central Offices* in the Telco world and *Head
-Ends* in the cable world, but despite their names implying
-“centralized” and “root of the hierarchy” these sites are at the very
+Ends* in the cable world. Despite their names implying
+“centralized” and “root of the hierarchy”, these sites are at the very
 edge of the ISP’s network—the ISP-side of the last-mile that directly
 connects to customers. The PON and RAN-based access networks are
 anchored in these facilities.
@@ -96,18 +96,20 @@ Radio Access Network
 
 A RAN implements the last hop by encoding and transmitting data at
 various bandwidths in the radio spectrum.  For example, traditional
-cellular technologies range from 700-MHz to 2400-MHz, with new
-mid-spectrum allocations now happening at 6-GHz and millimeter-wave
-(mmWave) allocations opening above 24-GHz.
+cellular technologies range from 700 MHz to 2400 MHz, with new
+mid-spectrum allocations now happening at 6 GHz and millimeter-wave
+(mmWave) allocations opening above 24 GHz.
 
 As shown in :numref:`Figure %s <fig-ran>`, the set of base stations in
 a given geographic region (e.g., a metro-area) are connected to each
 other, and back to the Mobile Core running in the Central Office. The
-Mobile Core is like the BNG in that it is an IP gateway connecting the
+Mobile Core is like the BNG (at the highest level) in that it
+serves as an IP gateway connecting the
 access network to the Internet, as well as being responsible for
 authentication, QoS, and billing. Unlike the BNG, the Mobile Core also
-has responsibility for tracking mobility (i.e., recording which base
-station is currently serving each active device, or so-called UE).
+has responsibility for managing mobility (i.e., recording which base
+station is currently serving each active device, managing handoffs
+across base stations, and so on).
 
 .. _fig-ran:
 .. figure:: access/Slide2.png
@@ -115,7 +117,7 @@ station is currently serving each active device, or so-called UE).
    :align: center
 
    A Radio Access Network (RAN) connecting a set of cellular devices 
-   (UEs) to a Mobile Core hosted in a Central Office.
+   (User Equipment—UEs) to a Mobile Core hosted in a Central Office.
 
 The figure shows the Mobile Core and set of base stations
 interconnected by a backhaul network. The technology used to implement
@@ -124,7 +126,8 @@ ethernet-based or PON-based—but for our purposes, the important point
 is that the RAN is effectively a regional packet-switched network,
 overlaid on the backhaul, where the base stations are the "nodes" of
 that overlay network. Packets are "routed" through this network to
-reach the best base station(s) to serve each UE at a given moment in
+reach the best base station(s) to serve each mobile device (User
+Equipment or UE) at a given moment in
 time.\ [#]_ These forwarding decisions are implemented by the base
 stations, which make decisions about *handovers* (one base station
 handing a given UE's traffic off to another), *load balancing* (a set
@@ -132,7 +135,7 @@ of base stations deciding which should serve a UE based on their
 current load), and *link aggregation* (multiple base stations deciding
 to jointly transmit to a given UE).
 
-.. [#] We say quote "routed" because the decision is based on a
+.. [#] We say "routed" in quotes because the decision is based on a
        combination of mobility tracking and monitoring how to most
        efficiently use the radio spectrum, as opposed to the
        shortest-path criteria typically used in wired networks. What's
@@ -165,7 +168,7 @@ backplane. Moreover, because the ONU is a "dumb" device that responds
 to directives from the OLT, this really boils down to disaggregating
 the OLT.
 
-Third, because the RAN is a packet-switch network that interconnects a
+Third, because the RAN is a packet-switched network that interconnects a
 set of base stations (running as an overlay on the backhaul), there is
 an opportunity for software control. This requires disaggregating the
 base stations, which as as we will see later in this chapter, have
@@ -191,7 +194,7 @@ the following companion book.
 -------------
 
 The opportunity for applying SDN to PON hinges on the fact that the
-OLTs that anchor the network's fan-out topology, are essentially
+OLTs are essentially
 glorified L2 switches, outfitted with a different MAC-layer framing
 protocol running on each switch port. And just as it's possible to buy
 a bare-metal L2 switch built to OCP specifications, the same is now
@@ -229,7 +232,7 @@ the rest of SD-PON architecture.
 	    
     Software-Defined PON architecture.
 
-First, a hardware abstraction layer, called *VOTHA (Virtual OLT
+First, a hardware abstraction layer, called *VOLTHA (Virtual OLT
 Hardware Abstraction)* sits between the Network OS (e.g., ONOS) and
 the individual OLTs. VOLTHA exports a north-facing OpenFlow interface,
 making it possible for ONOS to control an OLT like any other
@@ -303,7 +306,7 @@ To understand the technical underpinnings of SD-RAN, it is important
 to recognize that the base stations that make up the RAN are, for all
 practical purposes, specialized packet switches. The set of base
 stations in a given geographic area coordinate with each other to
-allocate the shared—and extremely scarce—radio spectrum. They make
+allocate the shared—and scarce—radio spectrum. They make
 hand-off decisions, decide to jointly serve a given user (think of
 this as a RAN variant of link aggregation), and make packet scheduling
 decisions based on continual measurements of the signal quality. Today
@@ -435,8 +438,8 @@ This results in the design depicted in :numref:`Figure %s
 <fig-ric-overview>`, where *RAN Intelligent Controller (RIC)* is what
 the O-RAN architecture documents call their centralized SDN Controller
 (so we adopt this terminology in the discussion that follows). The
-"Near-Real Time" qualifier indicates the RIC is part of 10-100ms
-control loop implemented in the CU, as opposed to the ~1ms control
+"Near-Real Time" qualifier indicates the RIC is part of 10-100 ms
+control loop implemented in the CU, as opposed to the ~1 ms control
 loop required by the MAC scheduler running in the DU.
 
 .. _fig-ric-overview:
@@ -557,8 +560,8 @@ has the Near-RT RIC as its control point. The third (inner) control
 loop, which is not shown in :numref:`Figure %s <fig-ric>`, runs inside
 the DU: It includes the real-time Scheduler embedded in the MAC stage
 of the RAN pipeline. The two outer control loops have rough time
-bounds of >>1sec and >10ms, respectively, and the real-time control
-loop is assumed to be <1ms.
+bounds of >>1 s and >10 ms, respectively, and the real-time control
+loop is assumed to be <1 ms.
 
 Focusing on the outer two control loops, the Near RT-RIC opens the
 possibility of introducing policy-based RAN control, whereby
@@ -632,7 +635,7 @@ speaking, AMF is responsible for mobility management, SMF is
 responsible for session management, and AUSF is responsible for
 authentication. All the other functional blocks correspond to
 low-level processes that AMF, SMF, and AUSF call to do their job, but
-for our purposes, you can think of the entire set as Kubernetes-based
+for our purposes, you can think of the entire set as 
 microservices running on commodity servers. For more details about the
 Mobile Core control plane, as well as examples of specific
 implementation choices, we recommend the *Magma* and *SD-Core* open
@@ -666,7 +669,7 @@ are dropped during the period of time the corresponding session state
 is in transition. This is not something that today's P4 switches are
 able to support. So instead, the switch temporarily redirects those
 packets to a server for hold-and-replay, or alternatively, to a
-SmartNIC connected to those servers. McDavid and colleagues describe
+SmartNIC connected to those servers. MacDavid and colleagues describe
 the mechanism for doing this is more detail.
 
 .. _reading_upf:
