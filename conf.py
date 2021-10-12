@@ -164,7 +164,7 @@ htmlhelp_basename = 'SystemsApproach'
 
 
 # -- Options for LaTeX output ------------------------------------------------
-latex_engine = 'xelatex'
+#latex_engine = 'xelatex'
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
@@ -179,7 +179,10 @@ latex_elements = {
     
     #
     # 'preamble': 'private/latex/preamble.tex',
-    'preamble': r'\usepackage{unicode-math}',
+    #
+    # Get unicode to work
+
+    'fontenc': '\\usepackage[LGR,T1]{fontenc}',
 
     # Latex figure (float) alignment
     #
