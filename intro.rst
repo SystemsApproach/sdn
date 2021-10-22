@@ -300,7 +300,7 @@ research community.
 .. admonition:: Further Reading
 
    N. McKeown, et. al. `OpenFlow: Enabling Innovation in Campus Networks
-   <https://www.net.t-labs.tu-berlin.de/teaching/ss09/IR_seminar/papers/openflow-wp-latest.pdf>`__.
+   <http://ccr.sigcomm.org/online/files/p69-v38n2n-mckeown.pdf>`__.
    SIGCOMM CCR, March 2008.
 
 Today, the OpenFlow specification has been through multiple revisions,
