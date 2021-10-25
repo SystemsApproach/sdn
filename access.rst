@@ -43,8 +43,8 @@ edge of the ISP’s network—the ISP-side of the last-mile that directly
 connects to customers. The PON and RAN-based access networks are
 anchored in these facilities.
 
-Passive Optical Network 
-~~~~~~~~~~~~~~~~~~~~~~~
+9.1.1 Passive Optical Network 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A PON is a tree-structured, fiber-based network, starting with a
 single device in one of the ISP's edge sites, and fanning out to reach
@@ -91,8 +91,8 @@ higher bandwidths. G-PON (Gigabit-PON) is the most widely deployed
 today, supporting a bandwidth of 2.25-Gbps. XGS-PON (10 Gigabit-PON)
 is now being deployed.
 
-Radio Access Network
-~~~~~~~~~~~~~~~~~~~~
+9.1.2 Radio Access Network
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A RAN implements the last hop by encoding and transmitting data at
 various bandwidths in the radio spectrum.  For example, traditional
@@ -143,8 +143,8 @@ to jointly transmit to a given UE).
        implement a distributed decision-making algorithm, and then
        forward packets to each other based on those decisions.
 
-Key Takeaways
-~~~~~~~~~~~~~~~~
+9.1.3 Key Takeaways
+~~~~~~~~~~~~~~~~~~~
 
 There are three observations to make about these two network
 technologies before we get to the question of how to apply SDN
@@ -329,8 +329,8 @@ has a local packet scheduler), but they do exert near real-time
 control over the base stations, with control loops measured in less
 than ten milliseconds.
 
-Split RAN
-~~~~~~~~~
+9.3.1 Split RAN
+~~~~~~~~~~~~~~~
 
 To better see how this works, we start with a finer-grain view of the
 packet processing pipeline running on each base station shown in
@@ -421,8 +421,8 @@ geographic area (e.g., a mall, campus, or factory), then a single DU
 would likely service multiple RUs. The use of mmWave in 5G is likely
 to make this later configuration all the more common.
     
-RAN Intelligent Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+9.3.2 RAN Intelligent Controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The RRU, shown in :numref:`Figure %s <fig-basestation>` as part of
 each basestation and shown in :numref:`Figure %s <fig-split-ran>` as
@@ -512,8 +512,8 @@ collect the available input data centrally, make a globally optimal
 decision, and then push the respective control parameters back to the
 base stations for execution.
 
-RIC Interfaces
-~~~~~~~~~~~~~~~~~~~
+9.3.3 RIC Interfaces
+~~~~~~~~~~~~~~~~~~~~
 
 Returning to the three interfaces called out in :numref:`Figure %s
 <fig-ric>`, each serves a purpose similar to the interfaces described

@@ -6,7 +6,7 @@ source for *Software-Defined Networks: A Systems Approach*, available under
 terms of the `Creative Commons (CC BY-NC-ND 4.0)
 <https://creativecommons.org/licenses/by-nc-nd/4.0>`__ license. The
 community is invited to contribute corrections, improvements, updates,
-and new material under the same terms. While this licence does not
+and new material under the same terms. While this license does not
 automatically grant the right to make derivative works, we are keen to
 discuss derivative works (such as translations) with interested
 parties. Please reach out to
