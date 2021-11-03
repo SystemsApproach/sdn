@@ -66,7 +66,7 @@ differentiates the level of service delivered to each customer, and
 meters traffic for the sake of billing.
   
 .. _fig-pon:
-.. figure:: access/Slide1.png
+.. figure:: figures/Slide54.png
    :width: 600px
    :align: center
 
@@ -112,7 +112,7 @@ station is currently serving each active device, managing handoffs
 across base stations, and so on).
 
 .. _fig-ran:
-.. figure:: access/Slide2.png
+.. figure:: figures/Slide55.png
    :width: 700px
    :align: center
 
@@ -226,7 +226,7 @@ described in Chapter 7.  The following describes the high-points of
 the rest of SD-PON architecture.
 
 .. _fig-sdpon:
-.. figure:: access/Slide8.png 
+.. figure:: figures/Slide61.png 
     :width: 500px
     :align: center
 	    
@@ -339,7 +339,7 @@ the base station as a pipeline (running left-to-right for packets sent
 to the UE) but it is equally valid to view it as a protocol stack.
 
 .. _fig-basestation:
-.. figure:: access/Slide3.png 
+.. figure:: figures/Slide56.png 
     :width: 600px
     :align: center
 	    
@@ -387,7 +387,7 @@ multiple split-points, with the partition shown in :numref:`Figure %s
 this chapter.
 
 .. _fig-split-ran:
-.. figure:: access/Slide4.png 
+.. figure:: figures/Slide57.png 
     :width: 600px
     :align: center
 
@@ -404,7 +404,7 @@ part of the MAC stage is responsible for all real-time scheduling
 decisions.
 
 .. _fig-ran-hierarchy:
-.. figure:: access/Slide5.png 
+.. figure:: figures/Slide58.png 
     :width: 350px
     :align: center
 	    
@@ -443,18 +443,18 @@ control loop implemented in the CU, as opposed to the ~1 ms control
 loop required by the MAC scheduler running in the DU.
 
 .. _fig-ric-overview:
-.. figure:: access/Slide6.png
+.. figure:: figures/Slide59.png
     :width: 350px
     :align: center
 
-    Where RIC sits in the larger scheme of things...
+    Where RIC sits in the larger scheme of things.
 
 Drilling down to the next level of detail, :numref:`Figure %s
 <fig-ric>` shows an exemplar implementation based on a retargeting of
 ONOS for the SD-RAN use case.
 
 .. _fig-ric:
-.. figure:: access/Slide7.png
+.. figure:: figures/Slide60.png
     :width: 400px
     :align: center
 
@@ -622,7 +622,7 @@ overview, identifying the functional blocks that make up the 5G Mobile
 Core.
 
 .. _fig-core:
-.. figure:: access/Slide9.png
+.. figure:: figures/Slide62.png
     :width: 600px
     :align: center
 
