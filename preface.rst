@@ -60,9 +60,9 @@ The software described in this book is due to the hard work of the ONF
 engineering team and the open source community that works with
 them. We acknowledge their contributions, with a special thank-you to
 Yi Tseng, Max Pudelko, and Charles Chan for their contributions to the
-tutorials that this book includes as hands-on exercises. We also
-thank Charles Chan, Jennifer Rexford, and Nick McKeown for their
-feedback on early drafts of the manuscript.
+tutorials that this book includes as hands-on exercises. We also thank
+Charles Chan, Jennifer Rexford, Nick McKeown, Kentaro Ebisawa, and
+Motonori Shindo for their comments and feedback.
 
 .. To include in epub and printed versions
 
@@ -71,5 +71,5 @@ by `Athena Lam <https://unsplash.com/@thecupandtheroad>`__
 on `Unsplash <https://unsplash.com>`__.
 
 | Larry Peterson, Carmelo Cascone, Brian O'Connor, Thomas Vachuska, and Bruce Davie
-| December 2020
+| November 2021
 
