@@ -447,11 +447,15 @@ loop required by the MAC scheduler running in the DU.
     :width: 350px
     :align: center
 
-    Where RIC sits in the larger scheme of things.
+    The RIC centrally controls the elements in the split-RAN hierarchy.
 
 Drilling down to the next level of detail, :numref:`Figure %s
 <fig-ric>` shows an exemplar implementation based on a retargeting of
-ONOS for the SD-RAN use case.
+ONOS for the SD-RAN use case. Most notably, the ONOS-based RIC
+supports a set of RAN-specific north- and south-facing interfaces,
+similar in spirit (but not detail) to the interfaces described in
+earlier chapters (e.g., gNMI, gNOI, OpenFlow). We discuss these
+interfaces in the next subsection.
 
 .. _fig-ric:
 .. figure:: figures/Slide60.png
@@ -461,10 +465,6 @@ ONOS for the SD-RAN use case.
     O-RAN compliant RAN Intelligent Controller (RIC) built by adapting
     and extending ONOS.
 
-Most notably, the ONOS-based RIC supports a set of RAN-specific north-
-and south-facing interfaces, similar in spirit (but not detail) to the
-interfaces described in earlier chapters (e.g., gNMI, gNOI,
-OpenFlow). We discuss these interfaces in the next subsection.
 
 .. sidebar:: O-RAN Alliance
 

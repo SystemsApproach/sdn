@@ -6,12 +6,13 @@ Science, Emeritus at Princeton University, where he served as Chair
 from 2003-2009. His research focuses on the design, implementation,
 and operation of Internet-scale distributed systems, including the
 widely used PlanetLab and MeasurementLab platforms.  He is currently
-leading the CORD and Aether access-edge cloud projects at the Open
-Networking Foundation (ONF), where he serves as CTO.  Peterson is a
-member of the National Academy of Engineering, a Fellow of the ACM and
-the IEEE, the 2010 recipient of the IEEE Kobayashi Computer and
-Communication Award, and the 2013 recipient of the ACM SIGCOMM
-Award. He received his Ph.D. degree from Purdue University in 1985.
+contributing to the Aether access-edge cloud project at the Open
+Networking Foundation (ONF), where he advises as Chief Scientist.
+Peterson is a member of the National Academy of Engineering, a Fellow
+of the ACM and the IEEE, the 2010 recipient of the IEEE Kobayashi
+Computer and Communication Award, and the 2013 recipient of the ACM
+SIGCOMM Award. He received his Ph.D. degree from Purdue University
+in 1985.
 
 **Carmelo Cascone** is a Member of the Technical Staff at the Open
 Networking Foundation (ONF), where he currently leads technical
