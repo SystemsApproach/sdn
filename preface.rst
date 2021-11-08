@@ -1,7 +1,7 @@
 Preface 
 =======
 
-The Internet is the midst of a transformation, one that moves away
+The Internet is in the midst of a transformation, one that moves away
 from bundled proprietary devices, and instead embraces disaggregating
 network hardware (which becomes commodity) from the software that
 controls it (which scales in the cloud). The transformation is
