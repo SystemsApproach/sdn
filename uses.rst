@@ -20,7 +20,7 @@ publicly talk about their plans to deploy SDN-based
 solutions—especially in their access networks—but they are proceeding
 cautiously, with most of their initiatives either using hybrid
 approaches, or in the case of pure play SDN, just starting to go into
-production.  Of particular note, Comcast, which has deployed the open
+production.  Of particular note is Comcast, which has deployed the open
 source components described in this book throughout their production
 network.
 
