@@ -424,12 +424,12 @@ to make this later configuration all the more common.
 9.3.2 RAN Intelligent Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The RRU, shown in :numref:`Figure %s <fig-basestation>` as part of
+The RRC, shown in :numref:`Figure %s <fig-basestation>` as part of
 each basestation and shown in :numref:`Figure %s <fig-split-ran>` as
 part of the CU, represents the control plane of the RAN. The CU-based
 configuration naturally maps onto SDN in that control decisions are
 made centrally, but the goal is to do more than just recreate the
-legacy set of RRU capabilities. We also want to pave the way for
+legacy set of RRC capabilities. We also want to pave the way for
 introducing additional control functions, and to do this, SD-RAN
 adopts a design that parallels the Network OS / Control App structure
 used in other domains (and described throughout this book).
