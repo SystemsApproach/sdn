@@ -3,8 +3,7 @@
 .DS_Store
 */.DS_Store
 figures-pdf/
-figures-hi_res/
-figures-low_res/
+figures-epub/
 private/
 local/
 scripts/
