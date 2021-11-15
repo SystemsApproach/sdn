@@ -40,8 +40,8 @@ Releases and Editions
 
 We continually release open source content in GitHub, with `print and
 ebook editions <https://www.systemsapproach.org/books.html>`__
-published from time-to-time. The latest print and ebook (1st Edition)
-corresponds to the ``v1.1`` tag.
+published from time-to-time. The latest print and ebook (2nd Printing)
+corresponds to the ``v2.0`` tag.
 
 In general, ``master`` contains a coherent and internally consistent
 version of the material. (If it were code, the book would build and
