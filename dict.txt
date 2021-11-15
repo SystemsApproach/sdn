@@ -16,6 +16,7 @@ Ctrl
 Davie
 Deparser
 Disaggregating
+Ebisawa
 École
 Feamster
 Ganga
@@ -31,6 +32,7 @@ IoT
 Ipsilon
 Kahn
 Karaf
+Kentaro
 Kobayashi
 Liu
 Makefile
@@ -39,6 +41,7 @@ Microsegmentation
 Milano
 Mininet
 Montréal
+Motonori
 Mpps
 Multicast
 Multiprotocol
@@ -63,6 +66,7 @@ Repo
 Rexford
 Runtime
 SAI
+Shindo
 Sridhar
 SNMP
 SRv

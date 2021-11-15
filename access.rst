@@ -43,8 +43,8 @@ edge of the ISP’s network—the ISP-side of the last-mile that directly
 connects to customers. The PON and RAN-based access networks are
 anchored in these facilities.
 
-Passive Optical Network 
-~~~~~~~~~~~~~~~~~~~~~~~
+9.1.1 Passive Optical Network 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A PON is a tree-structured, fiber-based network, starting with a
 single device in one of the ISP's edge sites, and fanning out to reach
@@ -66,7 +66,7 @@ differentiates the level of service delivered to each customer, and
 meters traffic for the sake of billing.
   
 .. _fig-pon:
-.. figure:: access/Slide1.png
+.. figure:: figures/Slide54.png
    :width: 600px
    :align: center
 
@@ -91,8 +91,8 @@ higher bandwidths. G-PON (Gigabit-PON) is the most widely deployed
 today, supporting a bandwidth of 2.25-Gbps. XGS-PON (10 Gigabit-PON)
 is now being deployed.
 
-Radio Access Network
-~~~~~~~~~~~~~~~~~~~~
+9.1.2 Radio Access Network
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A RAN implements the last hop by encoding and transmitting data at
 various bandwidths in the radio spectrum.  For example, traditional
@@ -112,7 +112,7 @@ station is currently serving each active device, managing handoffs
 across base stations, and so on).
 
 .. _fig-ran:
-.. figure:: access/Slide2.png
+.. figure:: figures/Slide55.png
    :width: 700px
    :align: center
 
@@ -143,8 +143,8 @@ to jointly transmit to a given UE).
        implement a distributed decision-making algorithm, and then
        forward packets to each other based on those decisions.
 
-Key Takeaways
-~~~~~~~~~~~~~~~~
+9.1.3 Key Takeaways
+~~~~~~~~~~~~~~~~~~~
 
 There are three observations to make about these two network
 technologies before we get to the question of how to apply SDN
@@ -226,7 +226,7 @@ described in Chapter 7.  The following describes the high-points of
 the rest of SD-PON architecture.
 
 .. _fig-sdpon:
-.. figure:: access/Slide8.png 
+.. figure:: figures/Slide61.png 
     :width: 500px
     :align: center
 	    
@@ -329,8 +329,8 @@ has a local packet scheduler), but they do exert near real-time
 control over the base stations, with control loops measured in less
 than ten milliseconds.
 
-Split RAN
-~~~~~~~~~
+9.3.1 Split RAN
+~~~~~~~~~~~~~~~
 
 To better see how this works, we start with a finer-grain view of the
 packet processing pipeline running on each base station shown in
@@ -339,7 +339,7 @@ the base station as a pipeline (running left-to-right for packets sent
 to the UE) but it is equally valid to view it as a protocol stack.
 
 .. _fig-basestation:
-.. figure:: access/Slide3.png 
+.. figure:: figures/Slide56.png 
     :width: 600px
     :align: center
 	    
@@ -387,7 +387,7 @@ multiple split-points, with the partition shown in :numref:`Figure %s
 this chapter.
 
 .. _fig-split-ran:
-.. figure:: access/Slide4.png 
+.. figure:: figures/Slide57.png 
     :width: 600px
     :align: center
 
@@ -404,7 +404,7 @@ part of the MAC stage is responsible for all real-time scheduling
 decisions.
 
 .. _fig-ran-hierarchy:
-.. figure:: access/Slide5.png 
+.. figure:: figures/Slide58.png 
     :width: 350px
     :align: center
 	    
@@ -421,15 +421,15 @@ geographic area (e.g., a mall, campus, or factory), then a single DU
 would likely service multiple RUs. The use of mmWave in 5G is likely
 to make this later configuration all the more common.
     
-RAN Intelligent Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+9.3.2 RAN Intelligent Controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The RRU, shown in :numref:`Figure %s <fig-basestation>` as part of
+The RRC, shown in :numref:`Figure %s <fig-basestation>` as part of
 each basestation and shown in :numref:`Figure %s <fig-split-ran>` as
 part of the CU, represents the control plane of the RAN. The CU-based
 configuration naturally maps onto SDN in that control decisions are
 made centrally, but the goal is to do more than just recreate the
-legacy set of RRU capabilities. We also want to pave the way for
+legacy set of RRC capabilities. We also want to pave the way for
 introducing additional control functions, and to do this, SD-RAN
 adopts a design that parallels the Network OS / Control App structure
 used in other domains (and described throughout this book).
@@ -443,28 +443,28 @@ control loop implemented in the CU, as opposed to the ~1 ms control
 loop required by the MAC scheduler running in the DU.
 
 .. _fig-ric-overview:
-.. figure:: access/Slide6.png
+.. figure:: figures/Slide59.png
     :width: 350px
     :align: center
 
-    Where RIC sits in the larger scheme of things...
+    The RIC centrally controls the elements in the split-RAN hierarchy.
 
 Drilling down to the next level of detail, :numref:`Figure %s
 <fig-ric>` shows an exemplar implementation based on a retargeting of
-ONOS for the SD-RAN use case.
+ONOS for the SD-RAN use case. Most notably, the ONOS-based RIC
+supports a set of RAN-specific north- and south-facing interfaces,
+similar in spirit (but not detail) to the interfaces described in
+earlier chapters (e.g., gNMI, gNOI, OpenFlow). We discuss these
+interfaces in the next subsection.
 
 .. _fig-ric:
-.. figure:: access/Slide7.png
+.. figure:: figures/Slide60.png
     :width: 400px
     :align: center
 
     O-RAN compliant RAN Intelligent Controller (RIC) built by adapting
     and extending ONOS.
 
-Most notably, the ONOS-based RIC supports a set of RAN-specific north-
-and south-facing interfaces, similar in spirit (but not detail) to the
-interfaces described in earlier chapters (e.g., gNMI, gNOI,
-OpenFlow). We discuss these interfaces in the next subsection.
 
 .. sidebar:: O-RAN Alliance
 
@@ -512,8 +512,8 @@ collect the available input data centrally, make a globally optimal
 decision, and then push the respective control parameters back to the
 base stations for execution.
 
-RIC Interfaces
-~~~~~~~~~~~~~~~~~~~
+9.3.3 RIC Interfaces
+~~~~~~~~~~~~~~~~~~~~
 
 Returning to the three interfaces called out in :numref:`Figure %s
 <fig-ric>`, each serves a purpose similar to the interfaces described
@@ -622,7 +622,7 @@ overview, identifying the functional blocks that make up the 5G Mobile
 Core.
 
 .. _fig-core:
-.. figure:: access/Slide9.png
+.. figure:: figures/Slide62.png
     :width: 600px
     :align: center
 

@@ -402,21 +402,27 @@ As a reminder, if you are unfamiliar with protobufs, a brief overview is availab
 
 In the same way SAI is an industry-wide switch abstraction (see
 Section 4.5), SONiC is a vendor-agnostic Switch OS that is gaining a
-lot of momentum in the industry. SONiC, which leverages SAI as a
-vendor-agnostic SDK and was originally open sourced by Microsoft,
-continues to serve as the Switch OS for the Azure Cloud. And like
-Stratum, SONiC can also leverage Open Networking Linux (ONL) as its
-underlying operating system. All of which is to say that Stratum and
-SONiC both try to fill the same need. Today their respective
-approaches are largely complementary, with both open source
-communities working towards a “best of both worlds” solution.
+lot of momentum in the industry. It was originally open sourced by
+Microsoft and continues to serve as the Switch OS for the Azure Cloud.
+SONiC leverages SAI as a vendor-agnostic SDK and includes a
+switch-customized Linux distribution, which is to say, Stratum and
+SONiC try to fill the same need. Today their respective approaches are
+largely complementary, with the two open source communities working
+towards a “best of both worlds” solution. This effort is known as *PINS*,
+which stands for *P4 Integrated Network Stack.*
+
+.. _reading_pins:
+.. admonition:: Further Reading
+
+   `PINS: P4 Integrated Network Stack
+   <https://opennetworking.org/pins/>`__.
 
 Both SONiC and Stratum support a configuration interface, so unifying
 those will be a matter of reconciling their respective data models and
 toolchains. The main distinction is Stratum’s support for programmable
 forwarding pipelines (including both P4 and P4Runtime), versus the
-least common denominator approach to forwarding taken by
-SAI. Developers on the two open source projects are working together
+least common denominator approach to forwarding taken by SAI.
+Developers on the two open source projects are working together
 to define a roadmap that will make it possible for interested networks
 to take advantage of programmable pipelines in an incremental and
 low-risk way.

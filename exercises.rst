@@ -198,7 +198,7 @@ solution to the reference solution should you get stuck.
 
    When exercises call for viewing graphical output, you will see
    reference to the *ONF Cloud Tutorial Portal*. This is for
-   cloud-hosted VMs used during ONF-run tutorials, and so does apply
+   cloud-hosted VMs used during ONF-run tutorials, and so does not apply
    here. In its place, the exercises also describe how to access the
    GUI running locally on your laptop.
 
