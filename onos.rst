@@ -513,7 +513,7 @@ Pipeliner leverages *Pipeconf*, a structure that maintains
 associations among the following elements:
 
 1. A model of the pipeline for each target switch.
-2. A target-specific driver needed to to deploy flow instructions to the switch.
+2. A target-specific driver needed to deploy flow instructions to the switch.
 3. A pipeline-specific translator to map flow objectives into the target pipeline.
 
 Pipeconf maintains these bindings using information extracted from the
