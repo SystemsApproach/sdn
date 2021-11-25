@@ -165,8 +165,8 @@ following is a quick reference:
 Exercises
 ------------------
 
-The following lists (and links) the individual exercises. That there
-are 8 exercises and 8 chapters is a coincidence. Exercises 1 and 2
+The following lists (and links) the individual exercises.
+Exercises 1 and 2
 focus on Stratum, and are best attempted after reading through Chapter
 5. Exercises 3 through 6 focus on ONOS and are best attempted after
 reading through Chapter 6. Exercises 7 and 8 focus on SD-Fabric and
