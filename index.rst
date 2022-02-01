@@ -32,3 +32,4 @@ Peterson, Cascone, O’Connor, Vachuska, and Davie
    exercises.rst
    README.rst
    authors.rst
+   latest.rst
