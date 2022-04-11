@@ -24,7 +24,7 @@ control MyVerifyChecksum(
     ...
 }
 
-/* Ingress Proceessing */
+/* Ingress Processing */
 control MyIngress(
 	inout headers hdr,
 	inout metadata meta,
@@ -32,7 +32,7 @@ control MyIngress(
     ...
 }
 
-/* Egress Proceessing */
+/* Egress Processing */
 control MyEgress(
 	inout headers hdr,
 	inout metadata meta,
