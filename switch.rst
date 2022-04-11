@@ -431,7 +431,7 @@ discover we need a new feature.
 	the control plane yet! What we've covered so far is complex
 	with or without SDN. That's because we're working at the SW/HW
 	boundary, and the hardware is designed to forward packets at
-	rates measured in Terabits-per-second. This complexity use to
+	rates measured in Terabits-per-second. This complexity used to
 	be hidden inside proprietary devices. One thing SDN has done
 	is put pressure on the marketplace to open up that space so
 	others can innovate.*
