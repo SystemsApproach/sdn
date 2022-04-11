@@ -256,7 +256,7 @@ an abstract target machine, analogous to a Java Virtual Machine. The
 goal is the same as for Java: to support a *write-once-run-anywhere*
 programming paradigm. (Note that :numref:`Figure %s <fig-psa>`
 includes the generic ``arch.p4`` as the architecture model spec,
-but in practice the architecture model would PSA specific, such as
+but in practice the architecture model would be PSA specific, such as
 ``psa.p4``.)
 
 .. _fig-psa:
