@@ -716,8 +716,8 @@ but the reader will recognize tables for several well-known protocols.
 For our purposes, what is instructive is to see how OF-DPA maps onto
 its programmable pipeline counterparts. In the programmable case, it’s
 not until you add a program like ``switch.p4`` that you get something
-roughly equivalent OF-DPA. That is, ``v1model.p4`` defines the available
-stages (control blocks). bit it's not until you add ``switch.p4`` that you
+roughly equivalent to OF-DPA. That is, ``v1model.p4`` defines the available
+stages (control blocks). But it's not until you add ``switch.p4`` that you
 have the functionality that runs in those stages.
 
 With this relationship in mind, we might want to incorporate both
@@ -742,9 +742,9 @@ forwarding pipelines—it necessarily focuses on the subset of
 functionality all vendors can agree on, the least common denominator,
 so to speak.
 
-SAI includes both a configuration interface and a control interface,
-where its the control interface that’s most relevant to this section
-because it abstracts the forwarding pipeline. On the other hand, there
+SAI includes both a configuration interface and a control interface, 
+where it's the latter that is most relevant to this section because 
+it abstracts the forwarding pipeline. On the other hand, there
 is little value in looking at yet another forwarding pipeline, so we
 refer the interested reader to the SAI specification for more details.
 
