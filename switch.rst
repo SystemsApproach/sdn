@@ -797,8 +797,8 @@ layers: a switching chip ASIC, a vendor-specific SDK for programming
 the ASIC, and a definition of the forwarding pipeline. By providing a
 programmatic interface, the SDKs in the middle layer effectively
 abstract the underlying hardware. They are either conventional (e.g.,
-the Broadcom SDK shown in the second and fourth examples) or as just
-pointed out, logically corresponds to a P4 architecture model paired
+the Broadcom SDK shown in the second and fourth examples) or, as just
+pointed out, logically correspond to a P4 architecture model paired
 with an ASIC-specific P4 compiler.  The topmost layer in all five
 examples defines a logical pipeline that can subsequently be
 controlled using a control interface like OpenFlow or P4Runtime (not
