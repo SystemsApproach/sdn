@@ -527,7 +527,7 @@ cluster of servers mitigates both these concerns, as techniques developed in
 the distributed systems world can ensure both high availability and
 scalability of such clusters.
 
-A secondary concern raised about control plan centralization is  
+A secondary concern raised about control plane centralization is  
 that, since the control plane is remote (i.e., off-switch), the link 
 between the two planes adds a vulnerable attack surface. The 
 counter-argument is that non-SDN networks already have (and depend on) 

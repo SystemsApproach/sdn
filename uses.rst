@@ -592,7 +592,7 @@ used, for example, to detect *microbursts*—queuing delays measured
 over millisecond or even sub-millisecond time scales—as reported by
 Xiaoqi Chen and colleagues.  It is even possible to correlate this
 information across packet flows that followed different routes, so as
-to to determine which flows shared buffer capacity at each switch.
+to determine which flows shared buffer capacity at each switch.
 
 .. _reading_int:
 .. admonition:: Further Reading

@@ -256,7 +256,7 @@ an abstract target machine, analogous to a Java Virtual Machine. The
 goal is the same as for Java: to support a *write-once-run-anywhere*
 programming paradigm. (Note that :numref:`Figure %s <fig-psa>`
 includes the generic ``arch.p4`` as the architecture model spec,
-but in practice the architecture model would PSA specific, such as
+but in practice the architecture model would be PSA specific, such as
 ``psa.p4``.)
 
 .. _fig-psa:
@@ -716,8 +716,8 @@ but the reader will recognize tables for several well-known protocols.
 For our purposes, what is instructive is to see how OF-DPA maps onto
 its programmable pipeline counterparts. In the programmable case, it’s
 not until you add a program like ``switch.p4`` that you get something
-roughly equivalent OF-DPA. That is, ``v1model.p4`` defines the available
-stages (control blocks). bit it's not until you add ``switch.p4`` that you
+roughly equivalent to OF-DPA. That is, ``v1model.p4`` defines the available
+stages (control blocks). But it's not until you add ``switch.p4`` that you
 have the functionality that runs in those stages.
 
 With this relationship in mind, we might want to incorporate both
@@ -742,9 +742,9 @@ forwarding pipelines—it necessarily focuses on the subset of
 functionality all vendors can agree on, the least common denominator,
 so to speak.
 
-SAI includes both a configuration interface and a control interface,
-where its the control interface that’s most relevant to this section
-because it abstracts the forwarding pipeline. On the other hand, there
+SAI includes both a configuration interface and a control interface, 
+where it's the latter that is most relevant to this section because 
+it abstracts the forwarding pipeline. On the other hand, there
 is little value in looking at yet another forwarding pipeline, so we
 refer the interested reader to the SAI specification for more details.
 
@@ -797,8 +797,8 @@ layers: a switching chip ASIC, a vendor-specific SDK for programming
 the ASIC, and a definition of the forwarding pipeline. By providing a
 programmatic interface, the SDKs in the middle layer effectively
 abstract the underlying hardware. They are either conventional (e.g.,
-the Broadcom SDK shown in the second and fourth examples) or as just
-pointed out, logically corresponds to a P4 architecture model paired
+the Broadcom SDK shown in the second and fourth examples) or, as just
+pointed out, logically correspond to a P4 architecture model paired
 with an ASIC-specific P4 compiler.  The topmost layer in all five
 examples defines a logical pipeline that can subsequently be
 controlled using a control interface like OpenFlow or P4Runtime (not
@@ -816,7 +816,7 @@ The two leftmost examples exist today, and represent the canonical
 layers for programmable and fixed-function ASICs, respectively. The
 middle example is purely hypothetical, but it illustrates that it is
 possible to define a P4-based stack even for a fixed-function pipeline
-(and by implication, control it using P4Runtime). The fourth example
+(and, by implication, control it using P4Runtime). The fourth example
 also exists today, and is how Broadcom ASICs conform to the
 SAI-defined logical pipeline. Finally, the rightmost example projects
 into the future, when SAI is extended to support P4 programmability
