@@ -206,7 +206,7 @@ into the table (assisted by a P4Runtime library).
 A core challenge of configuring and operating any network device is to
 define the set of variables available for operators to ``GET`` and
 ``SET`` on the device, with the additional requirement that this
-dictionary of variables be uniform across devices (i.e., be
+dictionary of variables should be uniform across devices (i.e., be
 vendor-agnostic). The Internet has already gone through one
 decades-long exercise defining such a dictionary, resulting in the
 *Management Information Base (MIB)* used in conjunction with SNMP. But
@@ -242,16 +242,16 @@ that defines the semantics of the variables available to be read and
 written is available in a programmatic form; it’s not just text in a
 standards document. Moreover, while it is true that all hardware
 vendors promote the unique capabilities of their products, it is not a
-free-for-all with each vendor defining a unique model. This is because
+free-for-all, with each vendor defining a unique model. This is because
 the network operators that buy network hardware have a strong
 incentive to drive the models for similar devices towards convergence,
 and vendors have an equally strong incentive to adhere to those
 models. YANG makes the process of creating, using, and modifying
-models programmable, and hence, adaptable to this iterative process.
+models programmable and hence, adaptable to this iterative process.
 
 .. sidebar:: Cloud Best Practices
 
-	*Our commentary on OpenConfig vs NETCONF is grounded in a
+	*Our commentary on OpenConfig vs. NETCONF is grounded in a
 	fundamental tenet of SDN, which is about bringing best
 	practices in cloud computing to the network. It involves big
 	ideas like implementing the network control plane as a
@@ -300,11 +300,11 @@ This is a base model that can be augmented, for example, to model an Ethernet in
 Other similar augmentations might be defined to support link
 aggregation, IP address assignment, VLAN tags, and so on.
 
-Each model in the OpenConfig hierarchy defines a combination of
+Each model in the OpenConfig hierarchy defines a combination of a
 configuration state that can be both read and written by the client
-(denoted ``rw`` in the examples), and operational state that reports
+(denoted ``rw`` in the examples) and an operational state that reports
 device status (denoted ``ro`` in the examples, indicating it is
-read-only from the client side). This distinction between declarative
+read-only from the client-side). This distinction between declarative
 configuration state and runtime feedback state is a fundamental aspect
 of any network device interface, where OpenConfig is explicitly
 focused on generalizing the latter to include network telemetry data
@@ -332,9 +332,9 @@ sides of the gRPC need not be written in the same language.
     YANG toolchain used to generate gRPC-based runtime for gNMI.
 
 Keep in mind that YANG is not tied to either gRPC or gNMI. The
-toolchain is able to start with the very same OpenConfig models, but
+toolchain is able to start with the very same OpenConfig models but
 instead produce XML or JSON representations for the data being
-read-from or written-to network devices using (for example) NETCONF or
+read from or written to network devices using, for example, NETCONF or
 RESTCONF, respectively. But in our context, the target is protobufs,
 which Stratum uses to support gNMI running over gRPC.
 
@@ -347,17 +347,17 @@ in the protobuf specification:
 The ``Capabilities`` method is used to retrieve the set of model
 definitions supported by the device. The ``Get`` and ``Set`` methods
 are used to read and write the corresponding variable defined in some
-model. The ``Subscribe`` method is used to set up a stream of
+models. The ``Subscribe`` method is used to set up a stream of
 telemetry updates from the device. The corresponding arguments and
-return values (e.g., ``GetRequest``, ``GetResponse``) are defined by a
-defined by a protobuf ``Message``, and include various fields from the
-YANG models. A given field is specified by giving its fully qualified
+return values (e.g., ``GetRequest``, ``GetResponse``) are defined 
+by a protobuf ``Message`` and include various fields from the YANG 
+models. A given field is specified by giving its fully qualified
 path name in the data model tree.
 
 The third point is that Stratum does not necessarily care about the
 full range of OpenConfig models. This is because—as a Switch OS
 designed to support a centralized Controller—Stratum cares about
-configuring various aspects of the data plane, but is not typically
+configuring various aspects of the data plane but is not typically
 involved in configuring control plane protocols like BGP. Such control
 plane protocols are no longer implemented on the switch in an
 SDN-based solution (although they remain in scope for the Network OS,
@@ -400,9 +400,9 @@ As a reminder, if you are unfamiliar with protobufs, a brief overview is availab
 5.4 SONiC
 ----------------
 
-In the same way SAI is an industry-wide switch abstraction (see
+In the same way that SAI is an industry-wide switch abstraction (see
 Section 4.5), SONiC is a vendor-agnostic Switch OS that is gaining a
-lot of momentum in the industry. It was originally open sourced by
+lot of momentum in the industry. It was originally open-sourced by
 Microsoft and continues to serve as the Switch OS for the Azure Cloud.
 SONiC leverages SAI as a vendor-agnostic SDK and includes a
 switch-customized Linux distribution, which is to say, Stratum and
@@ -422,7 +422,7 @@ those will be a matter of reconciling their respective data models and
 toolchains. The main distinction is Stratum’s support for programmable
 forwarding pipelines (including both P4 and P4Runtime), versus the
 least common denominator approach to forwarding taken by SAI.
-Developers on the two open source projects are working together
+Developers on the two open-source projects are working together
 to define a roadmap that will make it possible for interested networks
 to take advantage of programmable pipelines in an incremental and
 low-risk way.
