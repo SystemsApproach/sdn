@@ -39,7 +39,7 @@ release = version
 # -- Project information -----------------------------------------------------
 
 project = u'Software-Defined Networks: A Systems Approach'
-copyright = u'2020,2021'
+copyright = u'2022, Systems Approach LLC (Publisher)'
 author = u'Peterson, Cascone, OConnor, Vachuska, Davie'
 
 
