@@ -19,7 +19,7 @@ important issues of scalable performance and high availability.
 6.1 Architecture
 ---------------------
 
-Using ONOS as our model, the architecture of an Network OS is shown in
+Using ONOS as our model, the architecture of a Network OS is shown in
 :numref:`Figure %s <fig-onos>`. It consists of three main layers:
 
 1. A collection of Northbound Interfaces (NBI) that applications use to
@@ -66,7 +66,7 @@ FlowObjective API used to control the underlying switches.
 
 As an aside, while we generally characterize the applications that run
 on top of a Network OS as implementing the network control plane,
-there are actually a wide assortment of apps running on ONOS,
+there is actually a wide assortment of apps running on ONOS,
 implementing everything from a GUI that can be used to monitor the
 state of the network, to a traditional CLI that operators can use to
 issue directives.
