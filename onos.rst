@@ -137,7 +137,7 @@ and cellular base stations.
 --------------------
 
 The ONOS core is comprised of a number of subsystems, each responsible
-for a particular aspect of network state (e.g. topology, host
+for a particular aspect of the network state (e.g. topology, host
 tracking, packet intercept, flow programming). Each subsystem
 maintains its own *service abstraction*, where its implementation is
 responsible for propagating the state throughout the cluster.
@@ -146,10 +146,10 @@ Many ONOS services are built using distributed tables (maps), which
 are in turn implemented using a distributed key/value store. The store
 itself will be familiar to anyone who has looked at how modern cloud
 services are designed—it scales across a distributed set of servers,
-and implements a consensus algorithm to achieve fault-tolerance
+and implements a consensus algorithm to achieve fault tolerance
 in the event of failures. The specific algorithm used in ONOS is Raft,
 which is well described in a paper by Diego
-Ongaro and John Ousterhout. The web site also provides
+Ongaro and John Ousterhout. The website also provides
 a helpful visualization tool.
 
 .. _reading_p4:
@@ -160,12 +160,12 @@ a helpful visualization tool.
 
 ONOS uses Atomix as its store. Atomix goes beyond the core Raft
 algorithm to provide a rich set of programming primitives that ONOS
-uses to manage the distributed state and to provide easy access to
+uses to manage the distributed state and provide easy access to
 that state by the control apps.
 
 This distributed approach is a common design paradigm, which results in a system that is
 both scalable (runs on enough virtualized instances to handle the
-request workload) and highly available (run on enough instances to
+request workload) and highly available (runs on enough instances to
 continue offering service in the face of failure). What’s specific to
 ONOS—or any Network OS, for that matter—is the set of maps it defines:
 the semantics of the keys it stores and the types of the values
@@ -206,7 +206,7 @@ that Atomix plays in ONOS: coordinating all the ONOS instances.\ [#]_
 There are two aspects to this coordination.
 
 .. [#] For the purpose of this discussion, assume ONOS is packaged as
-       a whole, and then scaled across multiple virtualized instances.
+       a whole and then scaled across multiple virtualized instances.
        An alternative partitioning of ONOS functionality into
        independently scaled microservices is discussed in Section 6.5.
 
@@ -216,7 +216,7 @@ level of replication needed to guarantee availability in the face of
 failures. The Atomix *group membership* primitive is used to determine
 the set of available instances, making it possible to detect new
 instances that have been spun up and existing instances that have
-failed. (Note that the set of ONOS instances are distinct from the set
+failed. (Note that the set of ONOS instances is distinct from the set
 of Atomix instances, with both able to scale independently. This and
 the next paragraph are focused on the ONOS instances.)
 
@@ -224,11 +224,11 @@ Second, the primary job of each instance is to monitor and control a
 subset of the physical switches in the network. The approach ONOS
 takes is to elect a master instance for each switch, where only the
 master issues (writes) control instructions to a given switch. All the
-instances are able to monitor (read) switch state. The instances then
+instances are able to monitor (read) switch states. The instances then
 use the Atomix *leader-election* primitive to determine the master for
 each switch. Should an ONOS instance fail, the same primitive is used
 to elect a new master for the switches. The same approach is applied
-when a new switch comes on-line.
+when a new switch comes online.
 
 6.2.2 Services
 ~~~~~~~~~~~~~~
@@ -237,7 +237,7 @@ ONOS builds on Atomix by defining a core set of tables (maps), which
 are in turn packaged as a collection of *services* available to
 control applications (and other services). A table and a service are
 two ways of looking at the same things: one is a collection of
-key/value pairs and the other is the interface through which
+key/value pairs, and the other is the interface through which
 applications and other services interact with those pairs.
 :numref:`Figure %s <fig-services1>` depicts the respective layers,
 where the middle three components—Topology, Link, and Device—are
@@ -253,14 +253,14 @@ example ONOS services.
     in Atomix.
 
 Note that the Topology Service in :numref:`Figure %s <fig-services1>`
-does not have an associated map, but instead indirectly accesses the
+does not have an associated map but instead indirectly accesses the
 maps defined by the Link and Device Services. The Topology Service
 caches the resulting network graph in memory, which gives applications
-a low-latency, read-only way to access network state. The Topology
+a low-latency, read-only way to access the network state. The Topology
 Service also computes a spanning tree of the graph to ensure that all
 applications see the same broadcast tree.
 
-As a whole, ONOS defines an inter-connected graph of services, with
+As a whole, ONOS defines an interconnected graph of services, with
 :numref:`Figure %s <fig-services1>` showing just a small
 subgraph. :numref:`Figure %s <fig-services2>` expands on that view to
 illustrate some other aspects of the ONOS core, this time simplified
@@ -275,7 +275,7 @@ services.
     Dependency graph of services (some with their own key/value maps)
     involved in building a Path Service.
 
-There are several things of note about this dependency graph. First,
+There are several things to note about this dependency graph. First,
 the Path Service, which applications can query to learn
 end-to-end paths between host pairs, depends on both the Topology
 Service (which tracks the network graph) and a Host Service (which
@@ -298,13 +298,13 @@ to the network, which it then provides to the Host Service. The Host
 Location Provider, in turn, depends on a Packet Service to help it
 intercept those packets. The Packet Service defines a
 device-independent means for other ONOS services to instruct the
-underlying switches to capture and forward select packets to the
+underlying switches to capture and forward selected packets to the
 control plane. ONOS services can also use the Packet Service to inject
 packets into the data plane.
 
 Finally, while the service graph depicted in :numref:`Figure %s
 <fig-services2>` is designed to discover the network topology, there
-are many scenarios where the topology is fixed, and known *a
+are many scenarios where the topology is fixed and known *a
 priori*. This often happens when the control plane is tailored for a
 particular topology, as is the case for the leaf-spine topology
 discussed throughout this book. For such scenarios, the Topology
@@ -375,13 +375,13 @@ commonly used ONOS services:
 
   **Component Config:** Manages configuration parameters for various
   software components in the ONOS core and applications. Such
-  parameters (i.e. how to treat foreign flow rules, address or DHCP
+  parameters (i.e., how to treat foreign flow rules, address or DHCP
   server, polling frequency, and so on) allow for tailoring the
   behavior of the software. Set by the operator according to the needs of
   the deployment.
 
   **Packet:** Allows the core services and applications to intercept
-  packets (packet in) and to emit packets back into the network. This
+  packets (packet in) and emit packets back into the network. This
   is the basis for most of the host and link discovery methods (e.g.,
   ARP, DHCP, LLDP).
 
@@ -390,10 +390,10 @@ offer information about the network devices and their topology. There
 are, however, many more services, including ones that allow
 applications to program the behavior of the network using different
 constructs and different levels of abstraction. We discuss some of
-these in more depth in the next section, but for now we note that they
+these in more depth in the next section, but for now, we note that they
 include:
 
-  **Route:** Defines a prefix to nexthop mapping. Set either by a
+  **Route:** Defines a prefix to next-hop mapping. Set either by a
   control app or manually configured by an operator.
 
   **Mcast:** Defines group IP, source and sink locations. Set by a
@@ -409,10 +409,10 @@ include:
   to modify all of them.
 
   **Meter:** Expresses a rate-limit to enforce a quality of service
-  for select network traffic handled by a device.
+  for selected network traffic handled by a device.
 
   **Flow Rule:** Provides a device-centric, match/action pair for
-  programming the data-plane forwarding behavior of a device. It
+  programming the data plane forwarding behavior of a device. It
   requires that flow rule entries be composed in accordance with the
   device's table pipeline structure and capabilities.
 
@@ -427,7 +427,7 @@ include:
   indicate various hints and constraints for the end-to-end path,
   including the type of traffic and the source and destination hosts,
   or ingress and egress ports to request connectivity. The service
-  provisions this connectivity over the appropriate paths and then
+  provisions this connectivity over the appropriate paths, and then
   continuously monitors the network, changing the paths over time to
   continue meeting the objectives prescribed by the intent in the face
   of varying network conditions.
