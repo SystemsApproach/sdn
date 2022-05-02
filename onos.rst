@@ -137,7 +137,7 @@ and cellular base stations.
 --------------------
 
 The ONOS core is comprised of a number of subsystems, each responsible
-for a particular aspect of the network state (e.g. topology, host
+for a particular aspect of network state (e.g. topology, host
 tracking, packet intercept, flow programming). Each subsystem
 maintains its own *service abstraction*, where its implementation is
 responsible for propagating the state throughout the cluster.
@@ -160,7 +160,7 @@ a helpful visualization tool.
 
 ONOS uses Atomix as its store. Atomix goes beyond the core Raft
 algorithm to provide a rich set of programming primitives that ONOS
-uses to manage the distributed state and provide easy access to
+uses to manage the distributed state and to provide easy access to
 that state by the control apps.
 
 This distributed approach is a common design paradigm, which results in a system that is
@@ -224,7 +224,7 @@ Second, the primary job of each instance is to monitor and control a
 subset of the physical switches in the network. The approach ONOS
 takes is to elect a master instance for each switch, where only the
 master issues (writes) control instructions to a given switch. All the
-instances are able to monitor (read) switch states. The instances then
+instances are able to monitor (read) switch state. The instances then
 use the Atomix *leader-election* primitive to determine the master for
 each switch. Should an ONOS instance fail, the same primitive is used
 to elect a new master for the switches. The same approach is applied
@@ -381,7 +381,7 @@ commonly used ONOS services:
   the deployment.
 
   **Packet:** Allows the core services and applications to intercept
-  packets (packet in) and emit packets back into the network. This
+  packets (packet in) and to emit packets back into the network. This
   is the basis for most of the host and link discovery methods (e.g.,
   ARP, DHCP, LLDP).
 
@@ -412,7 +412,7 @@ include:
   for selected network traffic handled by a device.
 
   **Flow Rule:** Provides a device-centric, match/action pair for
-  programming the data plane forwarding behavior of a device. It
+  programming the data-plane forwarding behavior of a device. It
   requires that flow rule entries be composed in accordance with the
   device's table pipeline structure and capabilities.
 
@@ -461,21 +461,21 @@ from OpenFlow and hence, is pipeline-aware. The second is
 pipeline-agnostic and the focus of the rest of this section.
 
 There are three types of flow objectives: *Filtering*, *Forwarding*,
-and *Next*. **Filtering** objectives determine whether or not traffic
+and *Next*. Filtering objectives determine whether or not traffic
 should be permitted to enter the pipeline, based on a traffic
-*Selector*. **Forwarding** objectives determine what traffic is to be
+*Selector*. Forwarding objectives determine what traffic is to be
 allowed to egress the pipeline, generally by matching select fields in
-the packet with a forwarding table. The **Next** objectives indicate what kind
+the packet with a forwarding table. Next objectives indicate what kind
 of *Treatment* the traffic should receive, such as how the header is
 to be rewritten. If this sounds like an abstract three-stage pipeline:
 
 .. centered:: Filtering → Forwarding → Next
 
 then you understand the idea behind Flow Objectives. For example, the
-**Filter** objective (stage) might specify that packets matching a
+Filter objective (stage) might specify that packets matching a
 particular MAC address, VLAN tag, and IP address be allowed to enter
-the pipeline; the corresponding **Forwarding** objective (stage) then
-looks up the IP address in a routing table; and finally the **Next**
+the pipeline; the corresponding Forwarding objective (stage) then
+looks up the IP address in a routing table; and finally the Next
 objective (stage) rewrites the headers as necessary and assigns the
 packet to an output port. All three stages, of course, are agnostic as
 to exactly what combination of tables in the underlying switch is
@@ -611,7 +611,7 @@ types and models on the fly.
 6.5 Scalable Performance
 ------------------------
 
-ONOS is a logically centralized SDN controller and as such, must
+ONOS is a logically centralized SDN controller and must
 ensure that it is able to respond to a scalable number of control
 events in a timely way. It must also remain available in the face of
 failures. This section describes how ONOS scales to meet these

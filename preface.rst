@@ -61,8 +61,8 @@ engineering team and the open source community that works with
 them. We acknowledge their contributions, with a special thank-you to
 Yi Tseng, Max Pudelko, and Charles Chan for their contributions to the
 tutorials that this book includes as hands-on exercises. We also thank
-Charles Chan, Jennifer Rexford, Nick McKeown, Kentaro Ebisawa, and
-Motonori Shindo for their comments and feedback.
+Charles Chan, Jennifer Rexford, Nick McKeown, Kentaro Ebisawa,
+Motonori Shindo, and Sina Ebrahimi for their comments and feedback.
 
 .. To include in epub and printed versions
 
