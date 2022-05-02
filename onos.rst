@@ -443,42 +443,42 @@ extensions in the next Chapter when we take a closer look at SD-Fabric.
 6.3 Northbound Interface
 ------------------------
 
-The ONOS NBI has multiple parts. First, for every service included in
-a given configuration of ONOS, there is a corresponding API. For
+The ONOS NBI has multiple parts. First, there is a corresponding API 
+for every service included in a given configuration of ONOS. For
 example, the “Topology” interface shown in :numref:`Figure %s
 <fig-onos>` is exactly the API offered by the Topology Service shown
 in :numref:`Figure %s <fig-services1>`. Second, because ONOS permits
 applications to define and use their own Atomix tables, it is fair to
 consider the Atomix programmatic interface as another part of the ONOS
 NBI. Third, the ONOS NBI includes gNMI and gNOI. These are
-standardized interfaces, defined independent of ONOS, but supported as
+standardized interfaces, defined independent of ONOS but supported as
 part of the ONOS NBI. Note that the implementation sitting behind gNMI
 and gNOI are also ONOS services wrapped around Atomix maps. Finally,
 and most interestingly, ONOS offers a set of interfaces for
 controlling the underlying switches. :numref:`Figure %s <fig-onos>`
 depicts two: Flow Rules and Flow Objectives. The first is borrowed
-from OpenFlow, and hence, is pipeline-aware. The second is
-pipeline-agnostic, and the focus of the rest of this section.
+from OpenFlow and hence, is pipeline-aware. The second is
+pipeline-agnostic and the focus of the rest of this section.
 
 There are three types of flow objectives: *Filtering*, *Forwarding*,
-and *Next*. Filtering objectives determine whether or not traffic
+and *Next*. **Filtering** objectives determine whether or not traffic
 should be permitted to enter the pipeline, based on a traffic
-*Selector*. Forwarding objectives determine what traffic is to be
+*Selector*. **Forwarding** objectives determine what traffic is to be
 allowed to egress the pipeline, generally by matching select fields in
-the packet with a forwarding table. Next objectives indicate what kind
+the packet with a forwarding table. The **Next** objectives indicate what kind
 of *Treatment* the traffic should receive, such as how the header is
 to be rewritten. If this sounds like an abstract three-stage pipeline:
 
 .. centered:: Filtering → Forwarding → Next
 
 then you understand the idea behind Flow Objectives. For example, the
-Filter objective (stage) might specify that packets matching a
+**Filter** objective (stage) might specify that packets matching a
 particular MAC address, VLAN tag, and IP address be allowed to enter
-the pipeline; the corresponding Forwarding objective (stage) then
-looks up the IP address in a routing table; and finally the Next
+the pipeline; the corresponding **Forwarding** objective (stage) then
+looks up the IP address in a routing table; and finally the **Next**
 objective (stage) rewrites the headers as necessary and assigns the
 packet to an output port. All three stages, of course, are agnostic as
-to exactly what combination of tables in the underlying switch are
+to exactly what combination of tables in the underlying switch is
 used to implement the corresponding sequence of match/action pairs.
 
 The challenge is to map these pipeline-agnostic objectives onto the
@@ -527,12 +527,12 @@ plane and this ONOS model when programming the control plane using
 flow objectives. Eventually, these various layers of pipeline models
 will be unified, and in all likelihood, specified in P4.
 
-Programmatically, flow objectives are a data structure, packaged with
+Programmatically, flow objectives are a data structure packaged with
 associated constructor routines. The control application builds a list
 of objectives and passes them to ONOS to be executed. The following
 code example shows flow objectives being constructed to specify an
 end-to-end flow through the network. The process of applying them to
-the underlying devices is done elsewhere, and not included in the
+the underlying devices is done elsewhere and not included in the
 example.
 
 .. literalinclude:: code/flowobj.java
