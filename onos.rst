@@ -562,9 +562,9 @@ each, in turn.
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ONOS defines a Southbound Interface (SBI) plugin framework, where each
-plugin defines some southbound (network facing) API. Each plugin,
+plugin defines some southbound (network-facing) API. Each plugin,
 called a *Protocol Provider*, serves as a proxy between the SBI and
-the underlying network, where there is no limitation of what control
+the underlying network, where there is no limitation on what control
 protocol each can use to communicate with the network. Providers
 register themselves with the SBI plugin framework, and can start
 acting as a conduit for passing information and control directives
@@ -579,7 +579,7 @@ environment (below), as illustrated in :numref:`Figure %s <fig-plugins>`.
     ONOS Southbound Interface (SBI) is extended by Provider Plugins.
     
 :numref:`Figure %s <fig-plugins>` includes two general kinds of
-Provider plugins. The first type are protocol-specific, with OpenFlow
+Provider plugins. The first type is protocol-specific, with OpenFlow
 and gNMI being typical examples. Each of these Providers effectively
 bundles the API with the code that implements the corresponding
 protocol. The second type—of which *DeviceProvider*, *HostProvider*,
@@ -587,7 +587,7 @@ and *LinkProvider* are the examples shown in the figure—interact
 indirectly with the environment using some other ONOS service. We saw
 an example of this in Section 6.2.2, where Host Location Provider (an
 ONOS service) sits behind *HostProvider* (an SBI plugin); the latter
-defines the API for host discovery and the former defines one specific
+defines the API for host discovery, and the former defines one specific
 approach to discovering hosts (e.g., using Packet Service to intercept
 ARP, NDP and DHCP packets). Similarly, the LLDP Link Provider Service
 (corresponding to the *LinkProvider* SBI plugin) uses Packet Service
@@ -611,14 +611,13 @@ types and models on the fly.
 6.5 Scalable Performance
 ------------------------
 
-ONOS is a logically centralized SDN controller, and as such, must
+ONOS is a logically centralized SDN controller and as such, must
 ensure that it is able to respond to a scalable number of control
 events in a timely way. It must also remain available in the face of
 failures. This section describes how ONOS scales to meet these
 performance and availability requirements. We start with some scale
-and performance numbers,
-to provide a sense of the state-of-the-art in centralized network
-control (at the time of writing):
+and performance numbers to provide a sense of the state-of-the-art 
+in centralized network control (at the time of writing):
 
 * **Scale:** ONOS supports up to 50 network devices; 5000 network
   ports; 50k subscribers, 1M routes; and 5M flow rules/groups/meters.
@@ -630,7 +629,7 @@ control (at the time of writing):
   
 Production deployments run at least three instances of ONOS, but this
 is more for availability than performance. Each instance runs on a
-32-Core/128GB-RAM server, and is deployed as a Docker container using
+32-Core/128GB-RAM server and is deployed as a Docker container using
 Kubernetes. Each instance bundles an identical (but configurable)
 collection of core services, control applications, and protocol
 providers, and ONOS uses Karaf as its internal modularity framework.
@@ -647,8 +646,8 @@ rest of ONOS.
     provide scalable performance and high availability. 
     
 :numref:`Figure %s <fig-ha>` illustrates ONOS scaling across multiple
-instances, where the set of instances share network state via Atomix
-Maps. The figure also shows each instance being responsible for a
+instances, where the set of instances shares network state via Atomix
+Maps. The figure also shows that each instance is responsible for a
 subset of the underlying hardware switches. Should a given instance
 fail, the remaining instances use the Atomix leader-election primitive
 to select a new instance to take its place, thereby ensuring high
@@ -656,10 +655,10 @@ availability.
 
 A refactoring of ONOS to more closely adhere to a microservice
 architecture is also underway. The new version, called µONOS,
-leverages ONOS’s existing modularity, but packages and scales
-different subsystems independently. Although in principle each of of
+leverages ONOS’s existing modularity but packages and scales
+different subsystems independently. Although, in principle, each of
 the core services introduced in this chapter could be packaged as an
-independent microservice, doing so is much too fine-grain to be
+independent microservice, doing so is much too fine-grained to be
 practical. Instead, µONOS adopts the following approach. First, it
 encapsulates Atomix in its own microservice. Second, it runs each
 control application and southbound adaptor as a separate
