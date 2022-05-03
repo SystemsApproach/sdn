@@ -369,8 +369,8 @@ The key stages are as follows.
   able to make a “late” forwarding decision (i.e., to alternative
   carrier frequencies, including WiFi).
 
-* **PHY (Physical Layer):** Responsible for coding and modulation (as
-  discussed in an earlier chapter), including FEC.
+* **PHY (Physical Layer):** Responsible for coding and modulation,
+  including Forward Error Correction (FEC).
 
 The last two stages in :numref:`Figure %s <fig-basestation>` (D/A
 conversion and the RF front-end) are beyond the scope of this book.
@@ -527,7 +527,7 @@ corresponding SDK).
 The A1 interface provides a means for the mobile operator's
 management plane—typically called the *OSS/BSS (Operations Support
 System / Business Support System)* in the Telco world—to configure the
-RAN.  We have not discussed the Telco OSS/BSS up to this point, but it
+RAN.  We have not discussed the Telco OSS/BSS up to this point, but it is
 safe to assume such a component sits at the top of any Telco software
 stack. It is the source of all configuration settings and business
 logic needed to operate a network. You can think of it as the RAN
