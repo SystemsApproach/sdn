@@ -140,13 +140,13 @@ can read more about online.
 
 When applied to a leaf-spine fabric, there are always two segments
 involved: leaf-to-spine and spine-to-leaf.  SD-Fabric programs the
-switches to match labeled or unlabeled packets, and to push or pop
+switches to match labeled or unlabeled packets and push or pop
 MPLS labels as needed.  :numref:`Figure %s
 <fig-sr>` illustrates how SR works in SD-Fabric using a simple
 configuration that forwards traffic between a pair of hosts: 10.0.1.1
 and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
 subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
-10.0.2/24, and each of the switches have an assigned MPLS id: 101,
+10.0.2/24, and each of the switches has an assigned MPLS id: 101,
 103, 102, and 104.
 
 .. _fig-sr:
@@ -157,7 +157,7 @@ subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
     Example of Segment Routing being used to forward traffic between a
     pair of hosts.
 
-When Host 1 sends a packet with destination address 10.0.2.1 it is by
+When Host 1 sends a packet with destination address 10.0.2.1, it is by
 default forwarded to the server’s ToR/leaf switch. Leaf 1 matches the
 destination IP address, learns this packet needs to cross the fabric
 and emerge at Leaf 2 to reach subnet 10.0.2/24, and so pushes the MPLS
