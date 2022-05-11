@@ -46,7 +46,7 @@ website.
 
 SDN provides an opportunity to customize the network, but for
 pragmatic reasons, the first requirement for adoption is to reproduce
-functionality that already exists, and do so in a way that reproduces
+functionality that already exists and do so in a way that reproduces
 (or improves upon) the resilience and scalability of legacy
 solutions. SD-Fabric has satisfied this requirement, which we
 summarize here.
@@ -55,14 +55,14 @@ First, with respect to L2 connectivity, SD-Fabric supports VLANs,
 including native support for forwarding traffic based on VLAN id,
 along with Q-in-Q support based on an outer/inner VLAN id
 pair. Support for Q-in-Q is particularly relevant to access networks,
-where double tagging is used to isolate traffic belonging to different
+where double-tagging is used to isolate traffic belonging to different
 service classes. In addition, SD-Fabric supports L2 tunnels across the
-L3 fabric (both single and double tagged).
+L3 fabric (both single and double-tagged).
 
 Second, with respect to L3 connectivity, SD-Fabric supports IPv4 and
 IPv6 routing for both unicast and multicast addresses. For the latter,
 SD-Fabric implements centralized multicast tree construction (as opposed
-to running a protocol like PIM), but does include IGMP support for end
+to running a protocol like PIM) but does include IGMP support for end
 hosts wishing to join/leave multicast groups. SD-Fabric also supports
 both ARP (for IPv4 address translation) and NDP (for IPv6 neighbor
 discovery), along with support for both DHCPv4 and DHCPv6.
@@ -70,7 +70,7 @@ discovery), along with support for both DHCPv4 and DHCPv6.
 Third, SD-Fabric provides high availability in the face of link or
 switch failures. It does this through a combination of well-known
 techniques: dual-homing, link binding, and ECMP link groups. As
-illustrated in :numref:`Figure %s <fig-netconfig>`, each server in a
+illustrated in :numref:`Figure %s <fig-netconfig>`, each server in an
 SD-Fabric cluster is connected to a pair of Top-of-Rack (ToR, or leaf) switches, where
 the OS running on each compute server implements active-active link
 bonding. Each leaf switch is then connected by a pair of links to two
@@ -93,7 +93,7 @@ replicated on three to five servers.
     bonding, and ECMP groups.
 
 The use of link aggregation and ECMP is straightforward: the packet
-forwarding mechanism is augmented to load balance outgoing packets
+forwarding mechanism is augmented to load-balance outgoing packets
 among a group (e.g., a pair) of links (egress ports) rather than
 having just a single “best” output link (egress port). This both
 improves bandwidth and results in an automatic recovery mechanism
@@ -104,7 +104,7 @@ data plane.
 
 To be clear, ECMP is a forwarding strategy that SD-Fabric applies
 uniformly across all the switches in the fabric. The SD-Fabric control
-application knows the topology, and pushes the port groups into each
+application knows the topology and pushes the port groups into each
 of the fabric switches accordingly. Each switch then applies these
 port groups to its forwarding pipeline, which then forwards packets
 across the set of ports in each group without additional control plane
