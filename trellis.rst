@@ -11,21 +11,21 @@ before getting into the details.
   used to interconnect multiple racks of servers in a datacenter (see
   :numref:`Figure %s <fig-leaf-spine>`), but it also supports
   multi-site deployments (see :numref:`Figure %s <fig-trellis>`).
-  SD-Fabric uses only bare-metal switches, equipped with software
+  SD-Fabric uses only bare-metal switches, equipped with the software
   described in the previous chapters, to build out the fabric. It can
-  run on a mix of fixed-function and programmable pipelines, but is
+  run on a mix of fixed-function and programmable pipelines but is
   running in production with the former.
 
-* SD-Fabric supports a wide-range of L2/L3 features, all re-implemented
+* SD-Fabric supports a wide range of L2/L3 features, all re-implemented
   as SDN control apps (with the exception of a DHCP server used to
   relay DHCP requests and a Quagga BGP server used to exchange BGP
   routes with external peers). SD-Fabric implements L2 connectivity
-  within each server rack, and L3 connectivity between racks.
+  within each server rack and L3 connectivity between racks.
 
 * SD-Fabric supports access/edge networking technologies, such as PON
   (see :numref:`Figure %s <fig-seba>`) and RAN (see :numref:`Figure %s
   <fig-trellis>`), including support for (a) routing IP traffic
-  to/from devices connected to those access networks, and (b)
+  to/from devices connected to those access networks and (b)
   off-loading access network functionality into the fabric switches.
 
 This chapter does not give a comprehensive description of all of these
