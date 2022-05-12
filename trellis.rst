@@ -186,12 +186,12 @@ manage the set of ECMP groups connecting leaf and spine switches.
 In addition to Segment Routing, which establishes data paths between
 leaf switches, SD-Fabric also takes advantage of the Route and Mcast
 services introduced in Chapter 6. They determine which of the
-leaf-spine switches serve each IP prefix, and where to find all the
+leaf-spine switches serve each IP prefix and where to find all the
 hosts connected to each multicast group, respectively.
 
 SD-Fabric does not run distributed protocols like OSPF to learn about
 routes or PIM to construct multicast trees.  Instead, it computes the
-right answers based on global information, and then pushes these
+right answers based on global information and then pushes these
 mappings to the Route and Mcast services. This is straightforward to
 do because SD-Fabric imposes the simplifying constraint that each rack
 corresponds to exactly one IP subnet.
@@ -199,7 +199,7 @@ corresponds to exactly one IP subnet.
 To make this discussion more concrete, consider that all the ONOS
 Services described in Chapter 6 can be invoked via a RESTful API, or
 alternatively, through a CLI that is a thin wrapper around REST's
-``GET``, ``POST`` and ``DELETE`` calls.  Using the CLI to illustrate
+``GET``, ``POST``, and ``DELETE`` calls.  Using the CLI to illustrate
 (because it is easier to read), one can query the Route service to
 learn the existing routes as follows:
 
@@ -211,7 +211,7 @@ Similarly, one can add a static route to the Route Service:
 
 One thing to note about these examples is that there are two possible
 sources for routes. One is that the route is ``STATIC``, which usually
-means that SD-Fabric inserted it, with full knowledge of the what prefix
+means that SD-Fabric inserted it with full knowledge of the what prefix
 it has assigned to each rack in the cluster. (Human operators could
 also add a ``STATIC`` route using the CLI, but this would be an
 exception rather than the rule.)
@@ -233,7 +233,7 @@ possible to create a new multicast route and add a sink to it. For example:
 .. literalinclude:: code/onos3.txt
 
 specifies *Any-Source Multicast (ASM)*  (``sAddr *``), a multicast group address
-(``gAddr``), the group source addresses (``srcs``) and the group sink
+(``gAddr``), the group source addresses (``srcs``), and the group sink
 addresses (``sinks``). A sink can then be removed as follows:
 
 .. literalinclude:: code/onos4.txt
@@ -243,12 +243,12 @@ programmatic interface for network operators to define a multicast tree
 through a sequence of such calls. For example, when SD-Fabric runs as
 part of an access network that delivers IPTV to subscribers, one
 option is for software running on the operator's set-top boxes to
-issue calls similar to the ones shown above (except, of course, using
+issue calls similar to those shown above (except, of course, using
 the RESTful API rather than the CLI). Another option is to have
 set-top boxes send IGMP messages, which SD-Fabric intercepts using the
 Packet Service (similar to how the Host service intercepts ARP and
 DHCP packets). So the next time you use your TV remote to change
-channels, it is possible you are triggering procedure invocations up
+channels, you are possibly triggering procedure invocations up
 and down the SDN software stack described throughout this book!
     
 7.4  Customized Forwarding
