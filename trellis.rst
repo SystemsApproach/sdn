@@ -298,7 +298,7 @@ OF-DPA, as it eliminates tables that SD-Fabric does not need. This makes
 Second, ``fabric.p4`` is designed to mimic ONOS's FlowObjective API,
 thereby simplifying the process of mapping FlowObjectives onto
 P4Runtime operations. This is best illustrated by :numref:`Figure %s
-<fig-fabric>` which shows ``fabric.p4``\'s ingress pipeline. The
+<fig-fabric>`, which shows ``fabric.p4``\'s ingress pipeline. The
 egress pipeline is not shown, but it is a straightforward rewriting of
 the header fields in the common case.
 
@@ -314,10 +314,10 @@ the header fields in the common case.
 Third, ``fabric.p4`` is designed to be configurable, making it
 possible to selectively include additional functionality. This is not
 easy when writing code that is optimized for an ASIC-based forwarding
-pipeline, and in practice it makes heavy use of pre-processor
+pipeline, and in practice, it makes heavy use of pre-processor
 conditionals (i.e., ``#ifdefs``). The code fragment shown below is the
 main control block of ``fabric.p4``\'s ingress function. Chapter 9
-discusses these optional extensions in more depth, but at a high
+discusses these optional extensions in more depth but at a high
 level:
 
 * **UPF (User Plane Function):** Augments IP functionality in
@@ -362,7 +362,7 @@ connect the SD-Fabric fabric to the base stations of the Radio Access
 Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
 termination, which is used by some Passive Optical Networks
 deployments to connect the SD-Fabric fabric to home routers. Finally,
-it is worth nothing that the code fragment illustrates the basic
+it is worth noting that the code fragment illustrates the basic
 structure of ``fabric.p4``\'s core functionality, which first applies
 the *filtering objective* (``filtering.apply``), then applies the
 *forwarding objective* (``forwarding.apply`` and ``acl.apply``), and
@@ -371,7 +371,7 @@ finally applies the *next objective* (``next.apply``).
 In addition to selecting which extensions to include, the pre-processor 
 also defines several constants, including the size of each logical 
 table.  Clearly, this implementation is a low-level approach to 
-building configurable forwarding pipelines. Designing higher level 
+building configurable forwarding pipelines. Designing higher-level 
 language constructs for composition, including the ability to 
 dynamically add functions to the pipeline at runtime, is a subject of 
-on-going research. 
+ongoing research. 
