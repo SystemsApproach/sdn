@@ -337,8 +337,8 @@ level:
     technique sometimes called VNF off-loading. VNF is an acronym
     for Virtual Network Function, which refers to functionality that
     sometimes runs as software in virtual machines. Off-loading refers
-    to the idea of re-implementing this functionality to run in switch
-    forwarding pipeline, rather than on a general-purpose server. This
+    to the idea of re-implementing this functionality to run in the switch
+    forwarding pipeline rather than on a general-purpose server. This
     generally leads to better performance because packets can be
     forwarded from source to destination without having to be diverted
     to a server.*
