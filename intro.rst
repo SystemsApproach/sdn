@@ -697,11 +697,3 @@ vendors to operators to users. That's the long-term goal, inspired by
 what commodity servers and open source software did for the computing
 industry. But we still have a ways to go, so we return to more modest
 predictions about the next phase of the SDN journey in Chapter 10.
-
-.. _reading_future:
-.. admonition:: Further Reading
-
-   N. McKeown. `FutureNet 2019
-   <https://www.vmware.com/futurenet/2019-event/>`__.
-   October 2019.
-  
