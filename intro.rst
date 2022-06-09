@@ -697,3 +697,13 @@ vendors to operators to users. That's the long-term goal, inspired by
 what commodity servers and open source software did for the computing
 industry. But we still have a ways to go, so we return to more modest
 predictions about the next phase of the SDN journey in Chapter 10.
+
+.. _reading_future:
+.. admonition:: Further Reading
+
+   N. McKeown. `The Network will be programmed by many, operated by a few
+   <https://youtu.be/-cvNw1g5kJc?t=691>`__.
+   March 2021.
+
+
+  
