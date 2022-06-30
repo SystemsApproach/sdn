@@ -564,7 +564,7 @@ discusses a number of performance optimizations made over the years,
 but approaches to improving vSwitch performance warrant further
 discussion.
 
-The first is *DPDK (Data Path Development Kit)*, a set of libraries
+The first is *DPDK (Data Plane Development Kit)*, a set of libraries
 developed for the Intel x86 platform to improve performance of
 data-moving operations, including virtual switching. Many of the
 concepts are straightforward (e.g., packets can be processed in
