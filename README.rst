@@ -66,7 +66,7 @@ source:
 .. literalinclude:: code/build.sh
 
 The build process is stored in the Makefile and requires Python be
-installed. The Makefile will create a virtualenv (``doc_venv``) which
+installed. The Makefile will create a virtualenv (``venv-docs``) which
 installs the documentation generation toolset. You may also need to
 install the ``enchant`` C library using your system’s package manager
 for the spelling checker to function properly.
