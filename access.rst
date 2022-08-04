@@ -264,7 +264,7 @@ ports (these are called NNIs in the Telco world) and a set of
 user-facing ports (these are called UNIs in the Telco world). ONOS
 treats this aggregate as a logical switch, so whenever a customer
 powers up the ONU in their home, ONOS will see a "port active" event
-on the corresponding UNI, and take that appropriate actions. These
+on the corresponding UNI, and take the appropriate actions. These
 actions are implemented by the suite of SD-PON control apps shown in
 the figure.
 
