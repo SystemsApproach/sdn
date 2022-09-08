@@ -219,7 +219,7 @@ virtual network.
 
 As noted above, the idea of virtual networks goes back a long
 way. Virtual LANs (VLANs), for example, allow multiple LAN segments to
-co-exists on a single physical LAN, somewhat analogous to the way
+co-exist on a single physical LAN, somewhat analogous to the way
 virtual memory allows processes to share physical memory. However, the
 vision for virtual networks, as laid out by the Nicira team in the
 NSDI paper, is more closely analogous to virtual machines.
@@ -256,7 +256,7 @@ such as VLANs and VPNs, a modern network virtualization system exposes
 a northbound API by which virtual networks are created and
 managed. Through calls to this API, the topology and services of a
 virtual network are specified—either by a human user or by another
-piece of software such as a cloud automation platform. Typical, API
+piece of software such as a cloud automation platform. Typical API
 requests might say *“Create a layer 2 subnet”*, *“Attach VM A to
 subnet X”* or *“Apply firewall policy P to traffic entering VM B”*. As
 shown in :numref:`Figure %s <fig-three-planes>`, these API requests
@@ -307,7 +307,7 @@ a virtual network. This management layer can be thought of as an
 application that runs on the network OS. In short, the
 architecture presented in this Chapter is purpose-built to support
 virtual networks, whereas the one outlined in Chapter 3 is intended to
-be general-purpose, and in fact, there was at one time a ONOS-based
+be general-purpose, and in fact, there was at one time an ONOS-based
 virtual network application, called *Virtual Tenant Network (VTN)*,
 that was integrated with OpenStack. VTN is no longer being maintained,
 due in part to the availability of other network virtualization subsystems
@@ -316,7 +316,7 @@ that integrate with container management systems like Kubernetes.
 Consider a simple example. We want to create a virtual network that
 connects two VMs, A and B, to a single L2 subnet. We can express that
 intent by a set of API requests; for example, create the subnet, connect A to
-subnet, connect B to subnet, for example. These API requests are
+the subnet, connect B to the subnet. These API requests are
 accepted by the management plane and stored as desired state. The
 control plane observes changes in desired state that are not yet
 reflected in the actual state, so it needs to determine where A and B
@@ -327,16 +327,16 @@ computes a set of control directives that need to be installed into
 the appropriate vSwitches. These directive are pushed to the vSwitches,
 expressed, for example, as a set of OpenFlow rules.
 
-If at some later in time, one of the VMs moves to a different
+If, at some later time, one of the VMs moves to a different
 hypervisor, this information is passed to the control plane, which
-detects that actual state no longer corresponds to the desired
+detects that the actual state no longer corresponds to the desired
 state. That triggers a fresh computation to determine the updates that
 need to be pushed to the data plane, such as new forwarding rules to
 the appropriate set of vSwitches, and deletion of data plane state at
 the hypervisor that no longer hosts one of the VMs.
 
 With this architecture, we can implement a rich set of features for
-virtual networks. Provided the data plane has sufficient richness to
+virtual networks. Provided the data plane has the sufficient richness to
 implement forwarding rules for firewalls, load balancers, and so on,
 it is now possible to build a network virtualization system that
 accurately recreates the features of a physical network in software.
@@ -558,7 +558,7 @@ possible.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Since the virtual switch sits in the data path for all traffic
-entering of leaving VMs and containers in a virtual network, the
+entering or leaving VMs and containers in a virtual network, the
 performance of the virtual switch is critical. The OVS paper from 2015
 discusses a number of performance optimizations made over the years,
 but approaches to improving vSwitch performance warrant further
@@ -610,10 +610,10 @@ offloading certain functions from the server to the NIC, with *TCP
 Segmentation Offload (TSO)* being a notable example. As NICs have
 gained more capability in recent years with the rise of SmartNICs, the
 potential exists to move more of the vSwitch capability to the NIC
-with a potential performance gain. The challenge is one of trading
+with a potential performance gain. The challenge is trading
 flexibility for performance, as SmartNICs are still more
 resource-constrained than a general purpose CPU. The latest generation
-of SmartNICs are reaching a level of sophistication where offloading
+of SmartNICs is reaching a level of sophistication where offloading
 some or all of the vSwitch functions could be effective.\ [#]_ 
 
 .. [#] As an aside, P4 is gaining traction as a way to program
@@ -683,7 +683,7 @@ OVN. The OVN/CMS plugin is responsible for mapping abstractions that
 match those of the CMS into generic virtual network abstractions that
 can be stored in the *Northbound Database*. OVN uses an instance of
 ``ovsdb-server`` to implement this database. We can think of the plugin as the
-management plane and the Northbound DB is the desired state repository.
+management plane and the Northbound DB as the desired state repository.
 
 The control plane of OVN demonstrates a significant novel feature
 compared to the generic architecture of :numref:`Figure %s
@@ -833,7 +833,7 @@ complexity of configuring segments was such that machines
 from many applications would likely sit on the same segment, creating
 opportunities for an attack to spread from one application to
 another. The lateral movement of attacks within datacenters has been
-well documented as a key strategy of successful cyber-attacks over many
+documented well as a key strategy of successful cyber attacks over many
 years.
 
 Consider the arrangement of VMs and the firewall in :numref:`Figure %s
