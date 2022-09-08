@@ -55,9 +55,9 @@ First, with respect to L2 connectivity, SD-Fabric supports VLANs,
 including native support for forwarding traffic based on VLAN id,
 along with Q-in-Q support based on an outer/inner VLAN id
 pair. Support for Q-in-Q is particularly relevant to access networks,
-where double-tagging is used to isolate traffic belonging to different
+where double tagging is used to isolate traffic belonging to different
 service classes. In addition, SD-Fabric supports L2 tunnels across the
-L3 fabric (both single and double-tagged).
+L3 fabric (both single- and double-tagged).
 
 Second, with respect to L3 connectivity, SD-Fabric supports IPv4 and
 IPv6 routing for both unicast and multicast addresses. For the latter,
@@ -248,7 +248,7 @@ the RESTful API rather than the CLI). Another option is to have
 set-top boxes send IGMP messages, which SD-Fabric intercepts using the
 Packet Service (similar to how the Host service intercepts ARP and
 DHCP packets). So the next time you use your TV remote to change
-channels, you are possibly triggering procedure invocations up
+channels, you may be triggering procedure invocations up
 and down the SDN software stack described throughout this book!
     
 7.4  Customized Forwarding
@@ -314,7 +314,7 @@ the header fields in the common case.
 Third, ``fabric.p4`` is designed to be configurable, making it
 possible to selectively include additional functionality. This is not
 easy when writing code that is optimized for an ASIC-based forwarding
-pipeline, and in practice, it makes heavy use of pre-processor
+pipeline; in practice, it makes heavy use of pre-processor
 conditionals (i.e., ``#ifdefs``). The code fragment shown below is the
 main control block of ``fabric.p4``\'s ingress function. Chapter 9
 discusses these optional extensions in more depth but at a high

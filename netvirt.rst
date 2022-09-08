@@ -336,7 +336,7 @@ the appropriate set of vSwitches, and deletion of data plane state at
 the hypervisor that no longer hosts one of the VMs.
 
 With this architecture, we can implement a rich set of features for
-virtual networks. Provided the data plane has the sufficient richness to
+virtual networks. Provided the data plane has sufficient richness to
 implement forwarding rules for firewalls, load balancers, and so on,
 it is now possible to build a network virtualization system that
 accurately recreates the features of a physical network in software.
@@ -610,9 +610,9 @@ offloading certain functions from the server to the NIC, with *TCP
 Segmentation Offload (TSO)* being a notable example. As NICs have
 gained more capability in recent years with the rise of SmartNICs, the
 potential exists to move more of the vSwitch capability to the NIC
-with a potential performance gain. The challenge is trading
+with a potential performance gain. The challenge is in trading
 flexibility for performance, as SmartNICs are still more
-resource-constrained than a general purpose CPU. The latest generation
+resource-constrained than general-purpose CPUs. The latest generation
 of SmartNICs is reaching a level of sophistication where offloading
 some or all of the vSwitch functions could be effective.\ [#]_ 
 
@@ -832,8 +832,8 @@ Prior to microsegmentation, the
 complexity of configuring segments was such that machines
 from many applications would likely sit on the same segment, creating
 opportunities for an attack to spread from one application to
-another. The lateral movement of attacks within datacenters has been
-documented well as a key strategy of successful cyber attacks over many
+another. The lateral movement of attacks within datacenters has been well
+documented as a key strategy of successful cyberattacks over many
 years.
 
 Consider the arrangement of VMs and the firewall in :numref:`Figure %s
