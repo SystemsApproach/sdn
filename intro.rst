@@ -701,7 +701,9 @@ predictions about the next phase of the SDN journey in Chapter 10.
 .. _reading_future:
 .. admonition:: Further Reading
 
-   N. McKeown. `FutureNet 2019
-   <https://www.vmware.com/futurenet/2019-event/>`__.
-   October 2019.
+   N. McKeown. `The Network will be programmed by many, operated by a few
+   <https://youtu.be/-cvNw1g5kJc?t=691>`__.
+   March 2021.
+
+
   

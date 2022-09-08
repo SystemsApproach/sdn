@@ -1,8 +1,8 @@
 About The Book
 ===============
 
-This `repository <https://github.com/SystemsApproach/SDN>`__ contains
-source for *Software-Defined Networks: A Systems Approach*, available under
+Source for *Software-Defined Networks: A Systems Approach* is available
+on GitHub under
 terms of the `Creative Commons (CC BY-NC-ND 4.0)
 <https://creativecommons.org/licenses/by-nc-nd/4.0>`__ license. The
 community is invited to contribute corrections, improvements, updates,
@@ -60,16 +60,13 @@ know they are using the same version.
 Build the Book
 --------------
 
-To build a web-viewable version, you first need to download the source:
+To build a web-viewable version, you first need to download the
+source:
 
-.. code:: shell 
-
-   $ mkdir ~/SDN 
-   $ cd ~/SDN 
-   $ git clone https://github.com/SystemsApproach/SDN.git 
+.. literalinclude:: code/build.sh
 
 The build process is stored in the Makefile and requires Python be
-installed. The Makefile will create a virtualenv (``doc_venv``) which
+installed. The Makefile will create a virtualenv (``venv-docs``) which
 installs the documentation generation toolset. You may also need to
 install the ``enchant`` C library using your system’s package manager
 for the spelling checker to function properly.
