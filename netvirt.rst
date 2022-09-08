@@ -219,7 +219,7 @@ virtual network.
 
 As noted above, the idea of virtual networks goes back a long
 way. Virtual LANs (VLANs), for example, allow multiple LAN segments to
-co-exists on a single physical LAN, somewhat analogous to the way
+co-exist on a single physical LAN, somewhat analogous to the way
 virtual memory allows processes to share physical memory. However, the
 vision for virtual networks, as laid out by the Nicira team in the
 NSDI paper, is more closely analogous to virtual machines.
