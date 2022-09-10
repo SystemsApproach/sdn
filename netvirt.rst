@@ -259,7 +259,8 @@ virtual network are specified—either by a human user or by another
 piece of software such as a cloud automation platform. Typical API
 requests might say *“Create a layer 2 subnet”*, *“Attach VM A to
 subnet X”* or *“Apply firewall policy P to traffic entering VM B”*. As
-shown in :numref:`Figure %s <fig-three-planes>`, these API requests
+shown in :numref:`Figure %s <fig-three-planes>`, these 
+ts
 lead to the creation of *desired state*—the state that the network
 should be in. It is common to refer to the part of the system that
 receives API requests and stores them in a desired state database as
@@ -333,7 +334,7 @@ detects that the actual state no longer corresponds to the desired
 state. That triggers a fresh computation to determine the updates that
 need to be pushed to the data plane, such as new forwarding rules to
 the appropriate set of vSwitches, and deletion of data plane state at
-the hypervisor that no longer hosts one of the VMs.
+the hypervisor that no longer hosts one of the VMs. 
 
 With this architecture, we can implement a rich set of features for
 virtual networks. Provided the data plane has sufficient richness to
@@ -683,7 +684,7 @@ OVN. The OVN/CMS plugin is responsible for mapping abstractions that
 match those of the CMS into generic virtual network abstractions that
 can be stored in the *Northbound Database*. OVN uses an instance of
 ``ovsdb-server`` to implement this database. We can think of the plugin as the
-management plane and the Northbound DB as the desired state repository.
+management plane and the Northbound DB as the desired state repository. 
 
 The control plane of OVN demonstrates a significant novel feature
 compared to the generic architecture of :numref:`Figure %s
@@ -833,8 +834,7 @@ complexity of configuring segments was such that machines
 from many applications would likely sit on the same segment, creating
 opportunities for an attack to spread from one application to
 another. The lateral movement of attacks within datacenters has been well
-documented as a key strategy of successful cyberattacks over many
-years.
+documented as a key strategy of successful cyberattacks over many years.
 
 Consider the arrangement of VMs and the firewall in :numref:`Figure %s
 <fig-standard-firewall>`. Suppose that, without network
