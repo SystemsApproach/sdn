@@ -259,8 +259,7 @@ virtual network are specified—either by a human user or by another
 piece of software such as a cloud automation platform. Typical API
 requests might say *“Create a layer 2 subnet”*, *“Attach VM A to
 subnet X”* or *“Apply firewall policy P to traffic entering VM B”*. As
-shown in :numref:`Figure %s <fig-three-planes>`, these 
-ts
+shown in :numref:`Figure %s <fig-three-planes>`, these requests
 lead to the creation of *desired state*—the state that the network
 should be in. It is common to refer to the part of the system that
 receives API requests and stores them in a desired state database as
