@@ -33,3 +33,4 @@ Peterson, Cascone, O’Connor, Vachuska, and Davie
    README.rst
    authors.rst
    latest.rst
+   print.rst
