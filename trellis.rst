@@ -14,7 +14,7 @@ before getting into the details.
   SD-Fabric uses only bare-metal switches, equipped with the software
   described in the previous chapters, to build out the fabric. It can
   run on a mix of fixed-function and programmable pipelines but is
-  running in production with the former.
+  running in production with the former. 
 
 * SD-Fabric supports a wide range of L2/L3 features, all re-implemented
   as SDN control apps (with the exception of a DHCP server used to
