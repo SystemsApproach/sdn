@@ -13,10 +13,10 @@ our companion books that cover networking and emerging topics in more depth.
 
 * `5G Mobile Networks: A Systems Approach <https://amzn.to/3EjwMH0>`__
 
-.. * `Software-Defined Networks: A Systems Approach <https://amzn.to/3rmLdCP>`__
-
 * `TCP Congestion Control: A Systems Approach <https://amzn.to/3UTYi3T>`__
 
 * `Edge Cloud Operations: A Systems Approach <https://amzn.to/3MfvK13>`__
+
+.. * `Software-Defined Networks: A Systems Approach <https://amzn.to/3rmLdCP>`__
 
 As participants in the Amazon Associate program we may earn income from qualifying purchases using the links above.
