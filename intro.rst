@@ -232,11 +232,11 @@ forwards packets), this forwarding abstraction should not assume (or
 favor) one data plane implementation over another.
 
 The original interface supporting disaggregation, called *OpenFlow*,
-was introduced in 2008\ [#]_ , and although it was hugely instrumental in
+was introduced in 2008,\ [#]_ and although it was hugely instrumental in
 launching the SDN journey, it proved to be only a small part of what
 defines SDN today. Equating SDN with OpenFlow significantly
 under-values SDN, but it is an important milestone because it
-introduced *Flow Rules* as a simple-but-powerful way to specify the
+introduced *Flow Rules* as a simple-but-powerful way to specify
 forwarding behavior.
 
 
