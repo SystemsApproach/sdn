@@ -11,21 +11,21 @@ before getting into the details.
   used to interconnect multiple racks of servers in a datacenter (see
   :numref:`Figure %s <fig-leaf-spine>`), but it also supports
   multi-site deployments (see :numref:`Figure %s <fig-trellis>`).
-  SD-Fabric uses only bare-metal switches, equipped with software
+  SD-Fabric uses only bare-metal switches, equipped with the software
   described in the previous chapters, to build out the fabric. It can
-  run on a mix of fixed-function and programmable pipelines, but is
+  run on a mix of fixed-function and programmable pipelines but is
   running in production with the former.
 
-* SD-Fabric supports a wide-range of L2/L3 features, all re-implemented
+* SD-Fabric supports a wide range of L2/L3 features, all re-implemented
   as SDN control apps (with the exception of a DHCP server used to
   relay DHCP requests and a Quagga BGP server used to exchange BGP
   routes with external peers). SD-Fabric implements L2 connectivity
-  within each server rack, and L3 connectivity between racks.
+  within each server rack and L3 connectivity between racks.
 
 * SD-Fabric supports access/edge networking technologies, such as PON
   (see :numref:`Figure %s <fig-seba>`) and RAN (see :numref:`Figure %s
   <fig-trellis>`), including support for (a) routing IP traffic
-  to/from devices connected to those access networks, and (b)
+  to/from devices connected to those access networks and (b)
   off-loading access network functionality into the fabric switches.
 
 This chapter does not give a comprehensive description of all of these
@@ -46,7 +46,7 @@ website.
 
 SDN provides an opportunity to customize the network, but for
 pragmatic reasons, the first requirement for adoption is to reproduce
-functionality that already exists, and do so in a way that reproduces
+functionality that already exists and do so in a way that reproduces
 (or improves upon) the resilience and scalability of legacy
 solutions. SD-Fabric has satisfied this requirement, which we
 summarize here.
@@ -57,12 +57,12 @@ along with Q-in-Q support based on an outer/inner VLAN id
 pair. Support for Q-in-Q is particularly relevant to access networks,
 where double tagging is used to isolate traffic belonging to different
 service classes. In addition, SD-Fabric supports L2 tunnels across the
-L3 fabric (both single and double tagged).
+L3 fabric (both single- and double-tagged).
 
 Second, with respect to L3 connectivity, SD-Fabric supports IPv4 and
 IPv6 routing for both unicast and multicast addresses. For the latter,
 SD-Fabric implements centralized multicast tree construction (as opposed
-to running a protocol like PIM), but does include IGMP support for end
+to running a protocol like PIM) but does include IGMP support for end
 hosts wishing to join/leave multicast groups. SD-Fabric also supports
 both ARP (for IPv4 address translation) and NDP (for IPv6 neighbor
 discovery), along with support for both DHCPv4 and DHCPv6.
@@ -70,7 +70,7 @@ discovery), along with support for both DHCPv4 and DHCPv6.
 Third, SD-Fabric provides high availability in the face of link or
 switch failures. It does this through a combination of well-known
 techniques: dual-homing, link binding, and ECMP link groups. As
-illustrated in :numref:`Figure %s <fig-netconfig>`, each server in a
+illustrated in :numref:`Figure %s <fig-netconfig>`, each server in an
 SD-Fabric cluster is connected to a pair of Top-of-Rack (ToR, or leaf) switches, where
 the OS running on each compute server implements active-active link
 bonding. Each leaf switch is then connected by a pair of links to two
@@ -93,7 +93,7 @@ replicated on three to five servers.
     bonding, and ECMP groups.
 
 The use of link aggregation and ECMP is straightforward: the packet
-forwarding mechanism is augmented to load balance outgoing packets
+forwarding mechanism is augmented to load-balance outgoing packets
 among a group (e.g., a pair) of links (egress ports) rather than
 having just a single “best” output link (egress port). This both
 improves bandwidth and results in an automatic recovery mechanism
@@ -104,7 +104,7 @@ data plane.
 
 To be clear, ECMP is a forwarding strategy that SD-Fabric applies
 uniformly across all the switches in the fabric. The SD-Fabric control
-application knows the topology, and pushes the port groups into each
+application knows the topology and pushes the port groups into each
 of the fabric switches accordingly. Each switch then applies these
 port groups to its forwarding pipeline, which then forwards packets
 across the set of ports in each group without additional control plane
@@ -140,13 +140,13 @@ can read more about online.
 
 When applied to a leaf-spine fabric, there are always two segments
 involved: leaf-to-spine and spine-to-leaf.  SD-Fabric programs the
-switches to match labeled or unlabeled packets, and to push or pop
+switches to match labeled or unlabeled packets and push or pop
 MPLS labels as needed.  :numref:`Figure %s
 <fig-sr>` illustrates how SR works in SD-Fabric using a simple
 configuration that forwards traffic between a pair of hosts: 10.0.1.1
 and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
 subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
-10.0.2/24, and each of the switches have an assigned MPLS id: 101,
+10.0.2/24, and each of the switches has an assigned MPLS id: 101,
 103, 102, and 104.
 
 .. _fig-sr:
@@ -157,7 +157,7 @@ subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
     Example of Segment Routing being used to forward traffic between a
     pair of hosts.
 
-When Host 1 sends a packet with destination address 10.0.2.1 it is by
+When Host 1 sends a packet with destination address 10.0.2.1, it is by
 default forwarded to the server’s ToR/leaf switch. Leaf 1 matches the
 destination IP address, learns this packet needs to cross the fabric
 and emerge at Leaf 2 to reach subnet 10.0.2/24, and so pushes the MPLS
@@ -186,12 +186,12 @@ manage the set of ECMP groups connecting leaf and spine switches.
 In addition to Segment Routing, which establishes data paths between
 leaf switches, SD-Fabric also takes advantage of the Route and Mcast
 services introduced in Chapter 6. They determine which of the
-leaf-spine switches serve each IP prefix, and where to find all the
+leaf-spine switches serve each IP prefix and where to find all the
 hosts connected to each multicast group, respectively.
 
 SD-Fabric does not run distributed protocols like OSPF to learn about
 routes or PIM to construct multicast trees.  Instead, it computes the
-right answers based on global information, and then pushes these
+right answers based on global information and then pushes these
 mappings to the Route and Mcast services. This is straightforward to
 do because SD-Fabric imposes the simplifying constraint that each rack
 corresponds to exactly one IP subnet.
@@ -199,7 +199,7 @@ corresponds to exactly one IP subnet.
 To make this discussion more concrete, consider that all the ONOS
 Services described in Chapter 6 can be invoked via a RESTful API, or
 alternatively, through a CLI that is a thin wrapper around REST's
-``GET``, ``POST`` and ``DELETE`` calls.  Using the CLI to illustrate
+``GET``, ``POST``, and ``DELETE`` calls.  Using the CLI to illustrate
 (because it is easier to read), one can query the Route service to
 learn the existing routes as follows:
 
@@ -211,7 +211,7 @@ Similarly, one can add a static route to the Route Service:
 
 One thing to note about these examples is that there are two possible
 sources for routes. One is that the route is ``STATIC``, which usually
-means that SD-Fabric inserted it, with full knowledge of the what prefix
+means that SD-Fabric inserted it with full knowledge of the what prefix
 it has assigned to each rack in the cluster. (Human operators could
 also add a ``STATIC`` route using the CLI, but this would be an
 exception rather than the rule.)
@@ -233,7 +233,7 @@ possible to create a new multicast route and add a sink to it. For example:
 .. literalinclude:: code/onos3.txt
 
 specifies *Any-Source Multicast (ASM)*  (``sAddr *``), a multicast group address
-(``gAddr``), the group source addresses (``srcs``) and the group sink
+(``gAddr``), the group source addresses (``srcs``), and the group sink
 addresses (``sinks``). A sink can then be removed as follows:
 
 .. literalinclude:: code/onos4.txt
@@ -243,12 +243,12 @@ programmatic interface for network operators to define a multicast tree
 through a sequence of such calls. For example, when SD-Fabric runs as
 part of an access network that delivers IPTV to subscribers, one
 option is for software running on the operator's set-top boxes to
-issue calls similar to the ones shown above (except, of course, using
+issue calls similar to those shown above (except, of course, using
 the RESTful API rather than the CLI). Another option is to have
 set-top boxes send IGMP messages, which SD-Fabric intercepts using the
 Packet Service (similar to how the Host service intercepts ARP and
 DHCP packets). So the next time you use your TV remote to change
-channels, it is possible you are triggering procedure invocations up
+channels, you may be triggering procedure invocations up
 and down the SDN software stack described throughout this book!
     
 7.4  Customized Forwarding
@@ -298,7 +298,7 @@ OF-DPA, as it eliminates tables that SD-Fabric does not need. This makes
 Second, ``fabric.p4`` is designed to mimic ONOS's FlowObjective API,
 thereby simplifying the process of mapping FlowObjectives onto
 P4Runtime operations. This is best illustrated by :numref:`Figure %s
-<fig-fabric>` which shows ``fabric.p4``\'s ingress pipeline. The
+<fig-fabric>`, which shows ``fabric.p4``\'s ingress pipeline. The
 egress pipeline is not shown, but it is a straightforward rewriting of
 the header fields in the common case.
 
@@ -314,10 +314,10 @@ the header fields in the common case.
 Third, ``fabric.p4`` is designed to be configurable, making it
 possible to selectively include additional functionality. This is not
 easy when writing code that is optimized for an ASIC-based forwarding
-pipeline, and in practice it makes heavy use of pre-processor
+pipeline; in practice, it makes heavy use of pre-processor
 conditionals (i.e., ``#ifdefs``). The code fragment shown below is the
 main control block of ``fabric.p4``\'s ingress function. Chapter 9
-discusses these optional extensions in more depth, but at a high
+discusses these optional extensions in more depth but at a high
 level:
 
 * **UPF (User Plane Function):** Augments IP functionality in
@@ -337,8 +337,8 @@ level:
     technique sometimes called VNF off-loading. VNF is an acronym
     for Virtual Network Function, which refers to functionality that
     sometimes runs as software in virtual machines. Off-loading refers
-    to the idea of re-implementing this functionality to run in switch
-    forwarding pipeline, rather than on a general-purpose server. This
+    to the idea of re-implementing this functionality to run in the switch
+    forwarding pipeline rather than on a general-purpose server. This
     generally leads to better performance because packets can be
     forwarded from source to destination without having to be diverted
     to a server.*
@@ -362,7 +362,7 @@ connect the SD-Fabric fabric to the base stations of the Radio Access
 Network.  Similarly, ``bng.p4`` (not shown) implements PPPoE
 termination, which is used by some Passive Optical Networks
 deployments to connect the SD-Fabric fabric to home routers. Finally,
-it is worth nothing that the code fragment illustrates the basic
+it is worth noting that the code fragment illustrates the basic
 structure of ``fabric.p4``\'s core functionality, which first applies
 the *filtering objective* (``filtering.apply``), then applies the
 *forwarding objective* (``forwarding.apply`` and ``acl.apply``), and
@@ -371,7 +371,7 @@ finally applies the *next objective* (``next.apply``).
 In addition to selecting which extensions to include, the pre-processor 
 also defines several constants, including the size of each logical 
 table.  Clearly, this implementation is a low-level approach to 
-building configurable forwarding pipelines. Designing higher level 
+building configurable forwarding pipelines. Designing higher-level 
 language constructs for composition, including the ability to 
 dynamically add functions to the pipeline at runtime, is a subject of 
-on-going research. 
+ongoing research. 

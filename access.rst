@@ -274,7 +274,7 @@ example, when an ONU comes online (corresponding to a port on the
 logical switch becoming active), an 802.1X authorization sequence is
 initiated, verifying that the ONU is registered to a known customer.
 One outcome of a successful authorization is that the SD-PON
-application instructs ONOS to set up a path though the fabric (with
+application instructs ONOS to set up a path through the fabric (with
 the prescribed QoS profile) connecting that subscriber to the L2
 network. Next, a home router connected to the ONU will then send a
 DHCP request, both triggering an IP address assignment and causing
@@ -309,7 +309,7 @@ stations in a given geographic area coordinate with each other to
 allocate the shared—and scarce—radio spectrum. They make
 hand-off decisions, decide to jointly serve a given user (think of
 this as a RAN variant of link aggregation), and make packet scheduling
-decisions based on continual measurements of the signal quality. Today
+decisions based on continual measurements of the signal quality. Today,
 these are purely local decisions, but transforming it into a global
 optimization problem is in SDN’s wheelhouse.
 
@@ -498,8 +498,8 @@ for all the base stations and user devices, including which base
 station is serving each user device, as well as the set of “potential
 links” that could connect the device.  The Telemetry Service, which
 builds on a *Time Series Database (TSDB)*, tracks all the link quality
-information being reported back by the RAN elements. Various of the
-control applications then analyze this data to make informed decisions
+information being reported back by the RAN elements. Various control
+applications then analyze this data to make informed decisions
 about how the RAN can best meet its data delivery objectives.
 
 The example Control Apps (xApps) in :numref:`Figure %s <fig-ric>`
@@ -536,7 +536,7 @@ counterpart to gNMI/gNOI.
 The Near-RT RIC uses the E2 interface to control the underlying RAN
 elements, including the CU, DUs, and RUs. You can think of it as the
 RAN counterpart to OpenFlow. A requirement of the E2 interface is that
-it be able to connect the Near-RT RIC to different types of RAN
+it should be able to connect the Near-RT RIC to different types of RAN
 elements from different vendors. This range is reflected in the API,
 which revolves around a *Service Model* abstraction. The idea is that
 each RAN element advertises a Service Model, which effectively defines
