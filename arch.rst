@@ -41,10 +41,13 @@ switches. These two interfaces are depicted as “API shims” in
 :numref:`Figure %s <fig-stack>`, and in the context of the exemplar
 components, correspond to a combination of *gNMI*, *gNOI* and
 *FlowObjective* in the first case, and a combination of *gNMI*, *gNOI*
-and either *P4Runtime* or *OpenFlow* in the second case.  gRPC is
+and either *P4Runtime* or *OpenFlow* in the second case.  gRPC, an
+open source remote procedure call framework, is
 shown as the transport protocol for these APIs—an implementation
 choice, but one that we will generally assume from here 
-on. (Note that OpenFlow, unlike the other protocols, does not run over gRPC.)
+on. (Note that OpenFlow, unlike the other protocols, does not run over
+gRPC.) We discuss all of these acronyms and interfaces in further
+detail below. 
 
 
 .. _fig-stack:
