@@ -57,12 +57,12 @@ value SDN brings to the table, which leads to optimism that
 
 
 .. _reading_pronto:
-.. admonition:: Further Reading  
-   
+.. admonition:: Further Reading
+
    N. Foster, et. al. `Using Deep Programmability to Put Network
    Owners in Control
    <https://ccronline.sigcomm.org/2020/ccr-october-2020/using-deep-programmability-to-put-network-owners-in-control/>`__.
-   ACM SIGCOMM Computer Communication Review, October 2020. 
+   ACM SIGCOMM Computer Communication Review, October 2020.
 
 :numref:`Figure %s <fig-closed-loop>` illustrates the basic idea.  The
 software stack described in this book is augmented with the
@@ -85,7 +85,7 @@ reason about correctness-by-construction.
     control loop that verifies the network’s behavior.
 
 .. sidebar:: Top-Down Verification
-	     
+
    *The approach to verifying networks described in this chapter is
    similar to the one used in chip design. At the top is a behavioral
    model; then at the register-transfer level is a Verilog or VHDL
@@ -112,7 +112,7 @@ processed; these programs are compiled to run on the forwarding plane
 elements. Such an approach represents a fundamental new capability
 that has not been possible in conventional designs, based on two key
 insights.
-   
+
 First, while network control planes are inherently complicated, a P4
 data plane captures *ground truth* for the network—i.e., how it
 forwards packets—and is therefore an attractive platform for deploying
@@ -195,6 +195,6 @@ implementing their intent. Just as the hardware industry has developed
 high confidence that chips will work as intended before they go into
 manufacturing, network operators will have confidence that their
 networks are reliable, secure, and meeting their specified
-objectives. 
+objectives.
 
 

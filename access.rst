@@ -43,7 +43,7 @@ edge of the ISP’s network—the ISP-side of the last-mile that directly
 connects to customers. The PON and RAN-based access networks are
 anchored in these facilities.
 
-9.1.1 Passive Optical Network 
+9.1.1 Passive Optical Network
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A PON is a tree-structured, fiber-based network, starting with a
@@ -64,13 +64,13 @@ to the Internet. The BNG is a piece of Telco equipment that, in
 addition to forwarding packets, also authenticates users,
 differentiates the level of service delivered to each customer, and
 meters traffic for the sake of billing.
-  
+
 .. _fig-pon:
 .. figure:: figures/Slide54.png
    :width: 600px
    :align: center
 
-   An example PON that connects OLTs in the Central Office 
+   An example PON that connects OLTs in the Central Office
    to ONUs in homes and businesses.
 
 Because the splitters are passive, PON implements a multi-access
@@ -116,7 +116,7 @@ across base stations, and so on).
    :width: 700px
    :align: center
 
-   A Radio Access Network (RAN) connecting a set of cellular devices 
+   A Radio Access Network (RAN) connecting a set of cellular devices
    (User Equipment—UEs) to a Mobile Core hosted in a Central Office.
 
 The figure shows the Mobile Core and set of base stations
@@ -183,11 +183,11 @@ mobile networks so they can be implemented in software, we recommend
 the following companion book.
 
 .. _reading_5g:
-.. admonition:: Further Reading  
+.. admonition:: Further Reading
 
    L. Peterson and O. Sunay.
    `5G Mobile Networks: A Systems Approach <https://5g.systemsapproach.org/>`__.
-   June 2020. 
+   June 2020.
 
 
 9.2 SD-PON
@@ -226,10 +226,10 @@ described in Chapter 7.  The following describes the high-points of
 the rest of SD-PON architecture.
 
 .. _fig-sdpon:
-.. figure:: figures/Slide61.png 
+.. figure:: figures/Slide61.png
     :width: 500px
     :align: center
-	    
+
     Software-Defined PON architecture.
 
 First, a hardware abstraction layer, called *VOLTHA (Virtual OLT
@@ -296,12 +296,12 @@ velocity. Because of this, mobile network operators are working to
 make Software-Defined RAN (SD-RAN) happen.
 
 .. _reading_sdran:
-.. admonition:: Further Reading  
-   
-   `SD-RAN Project  
-   <https://opennetworking.org/sd-ran/>`__. 
-   Open Networking Foundation. August 2020. 
-   
+.. admonition:: Further Reading
+
+   `SD-RAN Project
+   <https://opennetworking.org/open-ran/>`__.
+   Open Networking Foundation. August 2020.
+
 To understand the technical underpinnings of SD-RAN, it is important
 to recognize that the base stations that make up the RAN are, for all
 practical purposes, specialized packet switches. The set of base
@@ -339,10 +339,10 @@ the base station as a pipeline (running left-to-right for packets sent
 to the UE) but it is equally valid to view it as a protocol stack.
 
 .. _fig-basestation:
-.. figure:: figures/Slide56.png 
+.. figure:: figures/Slide56.png
     :width: 600px
     :align: center
-	    
+
     RAN processing pipeline, including both user and
     control plane components.
 
@@ -387,7 +387,7 @@ multiple split-points, with the partition shown in :numref:`Figure %s
 this chapter.
 
 .. _fig-split-ran:
-.. figure:: figures/Slide57.png 
+.. figure:: figures/Slide57.png
     :width: 600px
     :align: center
 
@@ -404,10 +404,10 @@ part of the MAC stage is responsible for all real-time scheduling
 decisions.
 
 .. _fig-ran-hierarchy:
-.. figure:: figures/Slide58.png 
+.. figure:: figures/Slide58.png
     :width: 350px
     :align: center
-	    
+
     Split-RAN hierarchy, with one CU serving multiple DUs,
     each of which serves multiple RUs.
 
@@ -420,7 +420,7 @@ to a small cell, many of which might be spread across a modestly-sized
 geographic area (e.g., a mall, campus, or factory), then a single DU
 would likely service multiple RUs. The use of mmWave in 5G is likely
 to make this later configuration all the more common.
-    
+
 9.3.2 RAN Intelligent Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -581,7 +581,7 @@ implies the xApps must be aware of the available Service Models. This
 is problematic in that it implicitly couples applications with
 devices, but defining a device-agnostic version is still a
 work-in-progress.
- 
+
 9.4  Role of SD-Fabric
 -----------------------------------
 
@@ -635,7 +635,7 @@ speaking, AMF is responsible for mobility management, SMF is
 responsible for session management, and AUSF is responsible for
 authentication. All the other functional blocks correspond to
 low-level processes that AMF, SMF, and AUSF call to do their job, but
-for our purposes, you can think of the entire set as 
+for our purposes, you can think of the entire set as
 microservices running on commodity servers. For more details about the
 Mobile Core control plane, as well as examples of specific
 implementation choices, we recommend the *Magma* and *SD-Core* open
@@ -647,7 +647,7 @@ source projects.
    `Magma Core Project <https://www.magmacore.org/>`__.
    Linux Foundation. 2021.
 
-   `SD-Core Project  <https://opennetworking.org/sd-core/>`__. 
+   `SD-Core Project  <https://opennetworking.org/sd-core/>`__.
    Open Networking Foundation. 2021.
 
 What is important to our discussion is that while the UPF can also be
@@ -673,7 +673,7 @@ SmartNIC connected to those servers. MacDavid and colleagues describe
 the mechanism for doing this is more detail.
 
 .. _reading_upf:
-.. admonition:: Further Reading  
+.. admonition:: Further Reading
 
    R. MacDavid, *et al.* `A P4-based 5G User Plane Function
    <https://www.cs.princeton.edu/~macdavid/media/up4-sosr21.pdf>`__.
@@ -694,7 +694,7 @@ package that can be deployed in enterprises and managed as a cloud
 service.
 
 .. _reading_aether:
-.. admonition:: Further Reading  
+.. admonition:: Further Reading
 
-   `Aether: 5G-Connected Edge  <https://opennetworking.org/aether/>`__. 
+   `Aether: 5G-Connected Edge  <https://opennetworking.org/aether/>`__.
    Open Networking Foundation. 2021.

@@ -177,17 +177,17 @@ order.
 .. [#] SD-Fabric was previously known as Trellis, and still is in the
        code. UPF was previously known as SPGW, and still is in the
        code.
-       
 
-1. `P4Runtime Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-1.md>`__ 
-2. `YANG, OpenConfig, gNMI Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-2.md>`__   
-3. `Using ONOS as the Control Plane <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-3.md>`__ 
-4. `Enabling ONOS Built-in Services <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-4.md>`__   
-5. `Implementing IPv6 Routing with ECMP <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-5.md>`__ 
-6. `Implementing SRv6 <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-6.md>`__   
+
+1. `P4Runtime Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-1.md>`__
+2. `YANG, OpenConfig, gNMI Basics <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-2.md>`__
+3. `Using ONOS as the Control Plane <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-3.md>`__
+4. `Enabling ONOS Built-in Services <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-4.md>`__
+5. `Implementing IPv6 Routing with ECMP <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-5.md>`__
+6. `Implementing SRv6 <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-6.md>`__
 7. `SD-Fabric (Trellis) Basics
    <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-7.md>`__
-8. `GTP Termination with fabric.p4 <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-8.md>`__   
+8. `GTP Termination with fabric.p4 <https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-8.md>`__
 
 You can find solutions for each exercise in the ``solution``
 subdirectory for the repo you cloned.  Feel free to compare your

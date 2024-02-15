@@ -1,4 +1,4 @@
-Chapter 4:  Bare-Metal Switches 
+Chapter 4:  Bare-Metal Switches
 ===============================
 
 This chapter describes the bare-metal switches that provide the
@@ -37,11 +37,11 @@ figure. As of this writing, the state-of-the-art for these chips is
 25.6 Tbps with 400-Gbps ports.
 
 .. _fig-switch:
-.. figure:: figures/Slide10.png 
-    :width: 500px 
-    :align: center 
+.. figure:: figures/Slide10.png
+    :width: 500px
+    :align: center
 
-    High-Level schematic of a bare-metal switch. 
+    High-Level schematic of a bare-metal switch.
 
 Note that our use of the term NPU might be considered a bit non-standard. Historically,
 NPU was the name given to more narrowly-defined network processing
@@ -50,7 +50,7 @@ packet inspection. They were not as general-purpose as the NPUs we are
 discussing in this chapter, nor were they as high-performance. The
 long-term trend, however, has been toward NPUs that match the
 performance of
-fixed-function ASICs while providing a much higher degree of flexibility. 
+fixed-function ASICs while providing a much higher degree of flexibility.
 It seems likely that the current merchant silicon switching chips will
 make the earlier generation of purpose-built network processors
 obsolete. The NPU nomenclature used here is consistent with the
@@ -89,7 +89,7 @@ switch. A standard BIOS called the *Open Network Install Environment
 (ONIE)* has emerged under the OCP’s stewardship, and so we assume ONIE
 throughout the rest of the chapter.
 
-4.2 Forwarding Pipeline 
+4.2 Forwarding Pipeline
 ----------------------------------
 
 High-speed switches use a multi-stage pipeline to process packets. The
@@ -291,7 +291,7 @@ What exactly does ``arch.p4`` define? Essentially three things:
    the output signals to influence the behavior of the following
    blocks (e.g., the output queue/port where a packet has to be
    directed).
-   
+
 2. Type declarations for *externs*, which can be seen as additional
    fixed-function services that are exposed by the target and which
    can be invoked by a P4 programmer. Examples of such externs are
@@ -299,7 +299,7 @@ What exactly does ``arch.p4`` define? Essentially three things:
    ciphers to encrypt/decrypt the packet payload, and so on. The
    implementation of such externs is *not* specified in P4 by the
    architecture, but their interface is.
-	
+
 3. Extensions to core P4 language types, including alternative match
    types (e.g., ``range`` and ``lpm`` described in Section 4.4.3).
 
@@ -337,13 +337,13 @@ respective ASICs. Until that happens, PSA will remain a mostly “on
 paper” artifact.
 
 .. _fig-v1model:
-.. figure:: figures/Slide22.png 
-    :width: 650px 
-    :align: center 
+.. figure:: figures/Slide22.png
+    :width: 650px
+    :align: center
 
-    V1Model used in practice to abstract away the details of different 
-    physical forwarding pipelines. Developers write P4 to this 
-    abstract architectural model. 
+    V1Model used in practice to abstract away the details of different
+    physical forwarding pipelines. Developers write P4 to this
+    abstract architectural model.
 
 When we say P4 developers “write to this model” we are being more
 descriptive than you might think. In practice, every P4 program starts
@@ -405,7 +405,7 @@ the switches I intend to program? Does my program need access to
 chip-specific capabilities (e.g., a P4 extern to encrypt/decrypt
 packet payload) or can it rely solely on common/non-differentiating
 features (e.g., simple match-action tables or a P4 extern to count
-packets)? 
+packets)?
 
 As for that forwarding program (which we've been generically referring
 to as ``forward.p4``), an interesting tangible example is a program
@@ -426,34 +426,34 @@ discover we need a new feature.
 
 .. sidebar:: Is the Complexity Worth It?
 
-	*At this point you may be wondering if all the complexity
-	being introduced is worth it, and we haven't even gotten to
-	the control plane yet! What we've covered so far is complex
-	with or without SDN. That's because we're working at the SW/HW
-	boundary, and the hardware is designed to forward packets at
-	rates measured in Terabits-per-second. This complexity use to
-	be hidden inside proprietary devices. One thing SDN has done
-	is put pressure on the marketplace to open up that space so
-	others can innovate.*
+     *At this point you may be wondering if all the complexity
+     being introduced is worth it, and we haven't even gotten to
+     the control plane yet! What we've covered so far is complex
+     with or without SDN. That's because we're working at the SW/HW
+     boundary, and the hardware is designed to forward packets at
+     rates measured in Terabits-per-second. This complexity use to
+     be hidden inside proprietary devices. One thing SDN has done
+     is put pressure on the marketplace to open up that space so
+     others can innovate.*
 
-	*But before anyone can innovate, the first step is to reproduce
-	what we had running before, except now using open interfaces
-	and programmable hardware. Even though this chapter uses
-	forward.p4 as a hypothetical new data plane function
-	someone might write, it's really programs like switch.p4
-	(plus the Switch OS described in the next chapter) that
-	establish parity with legacy networking gear. Once we have
-	that in place, we are ready to do something new. But what?*
+     *But before anyone can innovate, the first step is to reproduce
+     what we had running before, except now using open interfaces
+     and programmable hardware. Even though this chapter uses
+     forward.p4 as a hypothetical new data plane function
+     someone might write, it's really programs like switch.p4
+     (plus the Switch OS described in the next chapter) that
+     establish parity with legacy networking gear. Once we have
+     that in place, we are ready to do something new. But what?*
 
-	*It is not our goal to answer that question with any
-	certainty.  The VNF off-loading and INT examples introduced in
-	Chapter 2 are a start. Software-defined 5G networks
-	(Chapter 9) and closed-loop verification (Chapter 10) are
-	potential killer-apps. But history teaches us that killer-apps
-	are impossible to predict with any accuracy. On the other
-	hand, history also includes many examples of how opening
-	closed, fixed-function systems leads to qualitatively new
-	capabilities.*
+     *It is not our goal to answer that question with any
+     certainty.  The VNF off-loading and INT examples introduced in
+     Chapter 2 are a start. Software-defined 5G networks
+     (Chapter 9) and closed-loop verification (Chapter 10) are
+     potential killer-apps. But history teaches us that killer-apps
+     are impossible to predict with any accuracy. On the other
+     hand, history also includes many examples of how opening
+     closed, fixed-function systems leads to qualitatively new
+     capabilities.*
 
 To summarize, the overarching goal is to enable the development of
 control apps without regard to the specific details of the device
@@ -517,7 +517,7 @@ block, this standard metadata structure includes such fields as
 ``ingress_port`` (port the packet arrived on), ``egress_port`` (port
 selected to send the packet out on), and ``drop`` (bit set to indicate
 the packet is to be dropped). These fields can be read or written by
-the functional blocks that make up the rest of the program.\ [#]_ 
+the functional blocks that make up the rest of the program.\ [#]_
 
 .. [#] A quirk of the V1Model is that there are two egress port fields
   in the metadata structure. One (``egress_port``) is read-only and
@@ -601,7 +601,7 @@ example, PSA also defines ``range`` and ``selector`` matches.
 The final step of the ingress routine is to “apply” the table we just
 defined. This is done only if the parser (or previous pipeline stage)
 marked the IP header as valid.
-	
+
 .. literalinclude:: code/ingress.p4
 
 4.4.4 Egress Processing
@@ -618,7 +618,7 @@ will see as many copies of the same packet as those generated by the
 traffic manager. As a second example, if one switch port is expected
 to send VLAN-tagged packets, the header must be extended with the
 VLAN id. A simple way of dealing with such a scenario is by creating a
-table that matches on the ``egress_port`` of the 
+table that matches on the ``egress_port`` of the
 metadata. Other examples include doing ingress port pruning for
 multicast/broadcast packets and adding a special “CPU header” for
 intercepted packets passed up to the control plane.
@@ -698,15 +698,15 @@ proprietary. :numref:`Figure %s <fig-ofdpa2>` then depicts what the
 OF-DPA pipeline looks like.
 
 .. _fig-ofdpa1:
-.. figure:: figures/Slide15.png 
-    :width: 200px 
+.. figure:: figures/Slide15.png
+    :width: 200px
     :align: center
 
-    Software stack for Tomahawk fixed-function forwarding pipeline. 
+    Software stack for Tomahawk fixed-function forwarding pipeline.
 
 .. _fig-ofdpa2:
-.. figure:: figures/Slide14.png 
-    :width: 700px 
+.. figure:: figures/Slide14.png
+    :width: 700px
     :align: center
 
     Logical fixed-function pipeline defined by OF-DPA.
@@ -742,8 +742,8 @@ forwarding pipelines—it necessarily focuses on the subset of
 functionality all vendors can agree on, the least common denominator,
 so to speak.
 
-SAI includes both a configuration interface and a control interface, 
-where it's the latter that is most relevant to this section because 
+SAI includes both a configuration interface and a control interface,
+where it's the latter that is most relevant to this section because
 it abstracts the forwarding pipeline. On the other hand, there
 is little value in looking at yet another forwarding pipeline, so we
 refer the interested reader to the SAI specification for more details.
@@ -791,7 +791,7 @@ examples in :numref:`Figure %s <fig-compare>`.
     Five example Pipeline/SDK/ASIC stacks. The two leftmost stacks,
     plus the fourth stack, exist today; the middle stack is
     hypothetical; and the rightmost stack is a work-in-progress.
-    
+
 Each example in :numref:`Figure %s <fig-compare>` consists of three
 layers: a switching chip ASIC, a vendor-specific SDK for programming
 the ASIC, and a definition of the forwarding pipeline. By providing a

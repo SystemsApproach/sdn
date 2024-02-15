@@ -51,7 +51,7 @@ appearance of having their own private LAN. However, these early forms
 of virtualization were quite limited in scope and lacked many of the
 advantages of SDN. You could think of them as virtualizing the address
 space of a network but not all its other properties, such as firewall
-policies or higher-level network services like load balancing. 
+policies or higher-level network services like load balancing.
 
 The original idea behind using SDN to create virtual networks is
 widely credited to the team at Nicira, whose approach is described in
@@ -91,7 +91,7 @@ As microservices and container-based systems such as Kubernetes have
 gained in popularity, network virtualization has continued to evolve
 to meet the needs of these environments. There are a range of open
 source network "plugins"  (Calico, Flannel, Antrea,
-etc.) that provide network virtualization services for Kubernetes. 
+etc.) that provide network virtualization services for Kubernetes.
 
 Because network virtualization set out to deliver a full set of
 network services in a programmatic way, its impact went beyond the
@@ -112,35 +112,35 @@ impact of attacks spreading throughout an enterprise or data center.
 
 .. sidebar:: Bringing SDN to Life
 
-	*As we saw in Chapter 1, the ideas behind SDN had been in the
-	works for years, but there were two related events
-	that, looking back, had a significant impact in bringing the
-	concept of programmable networks from theory to practice. First
-	was the 2007 founding of the commercial startup Nicira
-	Networks. Nicira was founded by three of the acknowledged
-	pioneers of SDN: Martin Casado, Scott Shenker, and Nick
-	McKeown. While Nicira was founded to make commercial use of
-	SDN, as with many startups, it took a while to find the ideal
-	product for the marketplace. In the end, it was Network
-	Virtualization that became the industry's first successful
-	application of SDN. Nicira's network virtualization platform
-	first shipped in 2011, establishing the category and
-	ultimately paving the way for VMware's acquisition of the
-	company and subsequent development of VMware NSX.*
+     *As we saw in Chapter 1, the ideas behind SDN had been in the
+     works for years, but there were two related events
+     that, looking back, had a significant impact in bringing the
+     concept of programmable networks from theory to practice. First
+     was the 2007 founding of the commercial startup Nicira
+     Networks. Nicira was founded by three of the acknowledged
+     pioneers of SDN: Martin Casado, Scott Shenker, and Nick
+     McKeown. While Nicira was founded to make commercial use of
+     SDN, as with many startups, it took a while to find the ideal
+     product for the marketplace. In the end, it was Network
+     Virtualization that became the industry's first successful
+     application of SDN. Nicira's network virtualization platform
+     first shipped in 2011, establishing the category and
+     ultimately paving the way for VMware's acquisition of the
+     company and subsequent development of VMware NSX.*
 
-	*At around the same time, McKeown and Shenker also created
-	three non-profit organizations to catalyze the SDN
-	transformation across the networking industry: the Open
-	Networking Foundation (ONF) took on responsibility for
-	advancing the cause of network disaggregation, including
-	development of the OpenFlow standard; the Open Networking
-	Laboratory (ON.Lab) was created to produce open source
-	SDN-based solutions and platforms; and the Open Networking
-	Summit (ONS) was created as a conference platform to bring
-	together academics and practitioners interested in SDN. In
-	2018, ONF and ON.Lab merged, and the combined organization has
-	focused on building the open source software that is
-	highlighted throughout this book.*
+     *At around the same time, McKeown and Shenker also created
+     three non-profit organizations to catalyze the SDN
+     transformation across the networking industry: the Open
+     Networking Foundation (ONF) took on responsibility for
+     advancing the cause of network disaggregation, including
+     development of the OpenFlow standard; the Open Networking
+     Laboratory (ON.Lab) was created to produce open source
+     SDN-based solutions and platforms; and the Open Networking
+     Summit (ONS) was created as a conference platform to bring
+     together academics and practitioners interested in SDN. In
+     2018, ONF and ON.Lab merged, and the combined organization has
+     focused on building the open source software that is
+     highlighted throughout this book.*
 
         *Of course there have been many other startups, conferences,
         and consortia that have driven the development of SDN to where
@@ -173,8 +173,8 @@ networks can be created, monitored and modified. It connects to
 virtual switches running on hosts–in this case, hypervisors supporting
 virtual machines. Virtual networks are created by programming the
 virtual switches to forward packets, with appropriate encapsulation,
-from host to host across the underlay network. 
-            
+from host to host across the underlay network.
+
 
 There have been reasonable debates about whether network
 virtualization is really SDN. Certainly it displays many of the
@@ -199,7 +199,7 @@ This observation about different aspects of SDN being implemented in
 switches versus end hosts is an important one that we return to in
 Section 3.1 (where we outline the overall SDN architecture), and again
 in Chapter 8 (where we describe Network Virtualization in more detail).
-       
+
 
 2.2 Switching Fabrics
 ----------------------------
@@ -298,10 +298,10 @@ is no central view of traffic.
 .. figure:: figures/Slide53.png
     :width: 600px
     :align: center
-            
+
     Example of non-optimal traffic engineering (left) and optimal
     placement (right).
-            
+
 B4 and SWAN recognize this shortcoming and move the path calculation to a
 logically centralized SDN controller. When a link fails, for example,
 the controller calculates a new mapping of traffic demands onto
@@ -341,7 +341,7 @@ insightful about the thought process in adopting SDN.
 .. _reading_b4:
 .. admonition:: Further Reading
 
-   A. Vahdat, D. Clark, and J. Rexford. `A Purpose-built Global Network: 
+   A. Vahdat, D. Clark, and J. Rexford. `A Purpose-built Global Network:
    Google's Move to SDN
    <https://queue.acm.org/detail.cfm?id=2856460>`__.
    ACM Queue, December 2015.
@@ -396,7 +396,7 @@ cloud service from all branch offices"*. The idea is illustrated in
     out to edge switches at various sites. The switches build an
     overlay of tunnels over the Internet or other physical networks,
     and implement policies including allowing direct access to cloud
-    services.  
+    services.
 
 
 Note that the "private" part of the VPN is generally achieved by the
@@ -432,7 +432,7 @@ for innovation because both the edge devices and the control planes
 are implemented in software, and centralization has offered new ways
 of tackling an old problem. Furthermore, there is plenty of competition among
 the players in the SD-WAN marketplace.
-      
+
 2.5 Access Networks
 -------------------------
 

@@ -112,6 +112,7 @@ commoditized
 compositional
 config
 cyber
+cyberattacks
 datapath
 de
 di
@@ -180,7 +181,7 @@ subgraph
 subnet
 subnets
 syscall
-tized 
+tized
 toolchain
 toolchains
 toolset

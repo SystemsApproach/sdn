@@ -1,4 +1,4 @@
-Preface 
+Preface
 =======
 
 The Internet is in the midst of a transformation, one that moves away

@@ -32,14 +32,14 @@ Using ONOS as our model, the architecture of a Network OS is shown in
    and notifying applications about relevant changes in that
    state. Internal to the core is a scalable key/value store called
    Atomix.
-   
+
 3. A Southbound Interface (SBI) constructed from a collection of plugins
    including shared protocol libraries and device-specific drivers.
-   
+
 .. _fig-onos:
-.. figure:: figures/Slide26.png 
-    :width: 700px 
-    :align: center 
+.. figure:: figures/Slide26.png
+    :width: 700px
+    :align: center
 
     Three-layer architecture of ONOS, hosting a set of control
     applications.
@@ -87,9 +87,9 @@ privileged kernel and multiple user domains. In other words, ONOS
 currently operates in a single trust domain.
 
 .. _fig-ztp:
-.. figure:: figures/Slide28.png 
-    :width: 500px 
-    :align: center 
+.. figure:: figures/Slide28.png
+    :width: 500px
+    :align: center
 
     Example of a Zero-Touch Provisioning (ZTP) application taking a
     “role spec” for a switch being installed as input, with ONOS
@@ -112,9 +112,9 @@ forwarding pipelines is a complexity ONOS is explicitly designed to
 address.
 
 .. _fig-layers:
-.. figure:: figures/Slide27.png 
-    :width: 500px 
-    :align: center 
+.. figure:: figures/Slide27.png
+    :width: 500px
+    :align: center
 
     ONOS manages the mapping of an abstract specification of
     network-wide behavior to a collection of per-device instructions.
@@ -153,7 +153,7 @@ Ongaro and John Ousterhout. The website also provides
 a helpful visualization tool.
 
 .. _reading_p4:
-.. admonition:: Further Reading 
+.. admonition:: Further Reading
 
    D. Ongaro and J. Ousterhout. `The Raft Consensus Algorithm
    <https://raft.github.io/>`__.
@@ -244,9 +244,9 @@ where the middle three components—Topology, Link, and Device—are
 example ONOS services.
 
 .. _fig-services1:
-.. figure:: figures/Slide29.png 
-    :width: 350px 
-    :align: center 
+.. figure:: figures/Slide29.png
+    :width: 350px
+    :align: center
 
     ONOS provides a set of services, such as the Topology, Device, and
     Link Services, on top of a corresponding table (Map) implemented
@@ -265,12 +265,12 @@ As a whole, ONOS defines an interconnected graph of services, with
 subgraph. :numref:`Figure %s <fig-services2>` expands on that view to
 illustrate some other aspects of the ONOS core, this time simplified
 to show the Atomix maps as an attribute of some (but not all) of the
-services. 
+services.
 
 .. _fig-services2:
-.. figure:: figures/Slide33.png 
-    :width: 550px 
-    :align: center 
+.. figure:: figures/Slide33.png
+    :width: 550px
+    :align: center
 
     Dependency graph of services (some with their own key/value maps)
     involved in building a Path Service.
@@ -322,9 +322,9 @@ from :numref:`Figure %s <fig-ztp>`.
        Network Config Service when there is a discrepancy.
 
 .. _fig-services3:
-.. figure:: figures/Slide34.png 
-    :width: 300px 
-    :align: center 
+.. figure:: figures/Slide34.png
+    :width: 300px
+    :align: center
 
     Network Config Service, supporting both provisioning applications
     and human operators.
@@ -443,7 +443,7 @@ extensions in the next Chapter when we take a closer look at SD-Fabric.
 6.3 Northbound Interface
 ------------------------
 
-The ONOS NBI has multiple parts. First, there is a corresponding API 
+The ONOS NBI has multiple parts. First, there is a corresponding API
 for every service included in a given configuration of ONOS. For
 example, the “Topology” interface shown in :numref:`Figure %s
 <fig-onos>` is exactly the API offered by the Topology Service shown
@@ -491,9 +491,9 @@ address, VLAN tag, and IP address combination, without regard for
 the exact sequence of pipeline tables that implement that combination.
 
 .. _fig-flowobj:
-.. figure:: figures/Slide39.png 
-    :width: 500px 
-    :align: center 
+.. figure:: figures/Slide39.png
+    :width: 500px
+    :align: center
 
     Flow Objective Service manages the mapping of pipeline-agnostic
     objectives onto pipeline-specific rules.
@@ -572,12 +572,12 @@ between ONOS applications and core services (above) and the network
 environment (below), as illustrated in :numref:`Figure %s <fig-plugins>`.
 
 .. _fig-plugins:
-.. figure:: figures/Slide35.png 
-    :width: 550px 
-    :align: center 
+.. figure:: figures/Slide35.png
+    :width: 550px
+    :align: center
 
     ONOS Southbound Interface (SBI) is extended by Provider Plugins.
-    
+
 :numref:`Figure %s <fig-plugins>` includes two general kinds of
 Provider plugins. The first type is protocol-specific, with OpenFlow
 and gNMI being typical examples. Each of these Providers effectively
@@ -616,17 +616,17 @@ ensure that it is able to respond to a scalable number of control
 events in a timely way. It must also remain available in the face of
 failures. This section describes how ONOS scales to meet these
 performance and availability requirements. We start with some scale
-and performance numbers to provide a sense of the state-of-the-art 
+and performance numbers to provide a sense of the state-of-the-art
 in centralized network control (at the time of writing):
 
 * **Scale:** ONOS supports up to 50 network devices; 5000 network
   ports; 50k subscribers, 1M routes; and 5M flow rules/groups/meters.
-  
+
 * **Performance:** ONOS supports up to 10k configuration ops/day; 500k
   flow ops/sec (sustained); 1k topology events/sec (peak); 50ms to
   detect port/switch up events; 5ms to detect port/switch down events;
   3ms for flow ops; and 6ms for hand-over events (RAN).
-  
+
 Production deployments run at least three instances of ONOS, but this
 is more for availability than performance. Each instance runs on a
 32-Core/128GB-RAM server and is deployed as a Docker container using
@@ -638,13 +638,13 @@ configuration that scales the key/value store independently from the
 rest of ONOS.
 
 .. _fig-ha:
-.. figure:: figures/Slide42.png 
-    :width: 600px 
-    :align: center 
+.. figure:: figures/Slide42.png
+    :width: 600px
+    :align: center
 
     Multiple ONOS instances, all sharing network state via Atomix,
-    provide scalable performance and high availability. 
-    
+    provide scalable performance and high availability.
+
 :numref:`Figure %s <fig-ha>` illustrates ONOS scaling across multiple
 instances, where the set of instances shares network state via Atomix
 Maps. The figure also shows that each instance is responsible for a

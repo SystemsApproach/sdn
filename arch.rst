@@ -44,10 +44,10 @@ components, correspond to a combination of *gNMI*, *gNOI* and
 and either *P4Runtime* or *OpenFlow* in the second case.  gRPC, an
 open source remote procedure call framework, is
 shown as the transport protocol for these APIs—an implementation
-choice, but one that we will generally assume from here 
+choice, but one that we will generally assume from here
 on. (Note that OpenFlow, unlike the other protocols, does not run over
 gRPC.) We discuss all of these acronyms and interfaces in further
-detail below. 
+detail below.
 
 
 .. _fig-stack:
@@ -101,7 +101,7 @@ per-switch.
 
 The second is that part of the SDN software stack runs on the end
 hosts. In particular, there is a *Virtual Switch (vSwitch)*—typically
-implemented in software as part of the hypervisor 
+implemented in software as part of the hypervisor
 running on the server—that is responsible for forwarding packets to
 and from the VMs. (Of course, not every end-host runs VMs, but a
 similar architecture applies to containers hosts or bare-metal servers.)
@@ -112,27 +112,27 @@ connected to physical machines.
 
 .. sidebar:: Host-Centric Perspective
 
-	*This book adopts a network-oriented perspective of SDN, one
-	that treats the end-host (both the virtual switch running in
-	the host OS and the NIC connecting the host to the network) as
-	an extension of the network, running under the control of a
-	Network OS. A more host-centric perspective is equally valid,
-	and perhaps more importantly, comes with a robust ecosystem of
-	open source software that runs as part of the host OS.*
+     *This book adopts a network-oriented perspective of SDN, one
+     that treats the end-host (both the virtual switch running in
+     the host OS and the NIC connecting the host to the network) as
+     an extension of the network, running under the control of a
+     Network OS. A more host-centric perspective is equally valid,
+     and perhaps more importantly, comes with a robust ecosystem of
+     open source software that runs as part of the host OS.*
 
-	*DPDK is one example, but another gaining traction is the
-	combination of eBPF (extended Berkeley Packet Filter) and XDP
-	(eXpress Data Path). When used together, they provide a way to
-	program generalized Match-Action rules in the OS kernel, or
-	potentially even on a SmartNIC.  This is similar in spirit to
-	OpenFlow and P4, except they allow for the Action part to be
-	an arbitrary program. In contrast, OpenFlow defines a fixed
-	set of Actions, and P4 is a restricted language for expressing
-	Actions (e.g., it does not include loops). This is necessary
-	when the Action must execute within a fixed cycle budget, as
-	is the case for a switch-based forwarding pipeline. It also
-	enables formal verification of the data plane, a promising
-	opportunity discussed in Chapter 10.*
+     *DPDK is one example, but another gaining traction is the
+     combination of eBPF (extended Berkeley Packet Filter) and XDP
+     (eXpress Data Path). When used together, they provide a way to
+     program generalized Match-Action rules in the OS kernel, or
+     potentially even on a SmartNIC.  This is similar in spirit to
+     OpenFlow and P4, except they allow for the Action part to be
+     an arbitrary program. In contrast, OpenFlow defines a fixed
+     set of Actions, and P4 is a restricted language for expressing
+     Actions (e.g., it does not include loops). This is necessary
+     when the Action must execute within a fixed cycle budget, as
+     is the case for a switch-based forwarding pipeline. It also
+     enables formal verification of the data plane, a promising
+     opportunity discussed in Chapter 10.*
 
 Fortunately, we can view a vSwitch as behaving just like a physical
 switch, including the APIs it supports. That a vSwitch is implemented
@@ -161,7 +161,7 @@ forwarding pipeline found on the network switches. Again, there are a
 range of possible implementation choices, including both FPGA and
 ASIC, as well as whether the NIC is fixed-function or programmable
 (using P4). For our purposes, we will treat such Smart NICs as yet
-another switching element along the end-to-end path.	
+another switching element along the end-to-end path.
 
 3.2 Bare-Metal Switch
 -------------------------
@@ -245,17 +245,17 @@ Stratum-managed API is defined as follows:
   forwarding model and how the control plane interacts with it.
   (For completeness, :numref:`Figure %s
   <fig-stack>` also lists OpenFlow as an alternative control interface.)
-  
+
 * **gNMI (gRPC Network Management Interface):** Used to set and
   retrieve configuration state. gNMI is usually paired with OpenConfig
   YANG models that define the structure of the configuration and state
   tree.
-  
+
 * **gNOI (gRPC Network Operations Interfaces):** Used to set and
   retrieve operational state, for example supporting certificates
   management, device testing, software upgrades, and networking
   troubleshooting.
-  
+
 If you recall the distinction between Control and Configuration
 introduced in Chapter 1, then you will recognize P4Runtime as the
 Control API and the gNMI/gNOI combination as a modern version of a
@@ -289,18 +289,18 @@ things:
 * **Managing Topology:** Tracks inventory of network infrastructure
   devices and their interconnection to provide a shared view of the
   network environment for the rest of the platform and applications.
-  
+
 * **Managing Configuration:** Facilitates issuing, tracking, rolling
   back, and validating atomic configuration operations on multiple
   network devices. This effectively mirrors the per-switch
   configuration and operation interfaces (also using gNMI and gNOI),
   but does so at the network level rather than the device level.
-  
+
 * **Controlling Switches:** Controls the data plane packet
   processing pipelines of the network switches and provides subsequent control
   of flow rules, groups, meters and other building blocks within those
   pipelines.
-  
+
 With respect to this last role, ONOS exports a northbound
 *FlowObjectives* abstraction, which generalizes Flow Rules in a
 pipeline-independent way.\ [#]_ This interface, which Chapter 6
@@ -366,7 +366,7 @@ supports several control plane features, including:
 * Dual-homing of servers and upstream routers
 * QinQ forwarding/termination
 * MPLS-based pseudowires.
-  
+
 For each of these features, the corresponding Control App interacts
 with ONOS—by observing changes in the network topology and issuing
 Flow Objectives—rather than by using any of the standard protocol

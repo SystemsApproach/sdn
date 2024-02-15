@@ -15,9 +15,9 @@ parties. Please reach out to
 If you make use of this work, the attribution should include the
 following information:
 
-| *Title: Software-Defined Networks: A Systems Approach* 
-| *Authors: Larry Peterson, Carmelo Cascone, Brian O'Connor, Thomas Vachuska, and Bruce Davie* 
-| *Source:* https://github.com/SystemsApproach/SDN 
+| *Title: Software-Defined Networks: A Systems Approach*
+| *Authors: Larry Peterson, Carmelo Cascone, Brian O'Connor, Thomas Vachuska, and Bruce Davie*
+| *Source:* https://github.com/SystemsApproach/SDN
 | *License:* \ `CC BY-NC-ND 4.0 <https://creativecommons.org/licenses/by-nc-nd/4.0>`__
 
 Read the Book
@@ -28,18 +28,18 @@ This book is part of the `Systems Approach Series
 at `https://sdn.systemsapproach.org
 <https://sdn.systemsapproach.org>`__.
 
+
 To track progress and receive notices about new versions, you can follow
 the project on
-`Facebook <https://www.facebook.com/Computer-Networks-A-Systems-Approach-110933578952503/>`__
-and `Mastodon <https://discuss.systems/@SystemsAppr>`__. To read a running
-commentary on how the Internet is evolving, follow the `Systems Approach
-on Substack <https://systemsapproach.substack.com>`__.
+`Mastodon <https://discuss.systems/@SystemsAppr>`__. To read a running
+commentary on how the Internet is evolving, and for updates on our writing projects, you can sign up for the
+`Systems Approach newsletter <https://systemsapproach.org/newsletter/>`__.
 
-Releases and Editions 
+Releases and Editions
 ---------------------
 
 We continually release open source content in GitHub, with `print and
-ebook editions <https://www.systemsapproach.org/books.html>`__
+ebook editions <https://www.systemsapproach.org/books/>`__
 published from time-to-time. The latest print and ebook (2nd Printing)
 corresponds to the ``v2.0`` tag.
 

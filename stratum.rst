@@ -2,7 +2,7 @@ Chapter 5:  Switch OS
 ======================
 
 This chapter describes the operating system running on every bare-metal
-switch. 
+switch.
 A good mental model is to think of this as analogous to a server OS:
 there is a general-purpose processor running a
 Linux-based OS, plus a “packet forwarding accelerator” similar in
@@ -42,8 +42,8 @@ section only as a way of grounding the description of an end-to-end
 workflow for developers implementing SDN-based solutions.
 
 .. _fig-stratum:
-.. figure:: figures/Slide17.png 
-    :width: 500px 
+.. figure:: figures/Slide17.png
+    :width: 500px
     :align: center
 
     High-level schematic of Stratum, a Thin Switch OS running on top
@@ -128,8 +128,8 @@ original P4 forwarding program as an abstract graph rather than with
 actual P4 source code.
 
 .. _fig-toolchain:
-.. figure:: figures/Slide18.png 
-    :width: 600px 
+.. figure:: figures/Slide18.png
+    :width: 600px
     :align: center
 
     P4 toolchain achieves ASIC-independence and auto-generates
@@ -182,7 +182,7 @@ elements and their attributes as defined in the source P4 program.\ [#]_
 The table element is one obvious example, but there are
 others, including ``counters`` and ``meters``, which are used to
 report status information up to the controller and to allow the
-controller to specify a QoS rate, respectively. However, neither of 
+controller to specify a QoS rate, respectively. However, neither of
 these are included in our example program.
 
 .. [#] In principle, this P4Info file is not strictly required, as the
@@ -251,21 +251,21 @@ models programmable and hence, adaptable to this iterative process.
 
 .. sidebar:: Cloud Best Practices
 
-	*Our commentary on OpenConfig vs. NETCONF is grounded in a
-	fundamental tenet of SDN, which is about bringing best
-	practices in cloud computing to the network. It involves big
-	ideas like implementing the network control plane as a
-	scalable cloud service, but it also includes more narrow
-	benefits, such as using modern messaging frameworks like
-	gRPC and protobufs.*
+     *Our commentary on OpenConfig vs. NETCONF is grounded in a
+     fundamental tenet of SDN, which is about bringing best
+     practices in cloud computing to the network. It involves big
+     ideas like implementing the network control plane as a
+     scalable cloud service, but it also includes more narrow
+     benefits, such as using modern messaging frameworks like
+     gRPC and protobufs.*
 
-	*The advantages in this particular case are tangible: (1)
-	improved and optimized transport using HTTP/2 and
-	protobuf-based marshalling instead of SSH plus hand-coded
-	marshalling; (2) binary data encodings instead of text-based
-	encoding; (3) diff-oriented data exchange instead of
-	snapshot-based responses; and (4) native support for server
-	push and client streaming.*
+     *The advantages in this particular case are tangible: (1)
+     improved and optimized transport using HTTP/2 and
+     protobuf-based marshalling instead of SSH plus hand-coded
+     marshalling; (2) binary data encodings instead of text-based
+     encoding; (3) diff-oriented data exchange instead of
+     snapshot-based responses; and (4) native support for server
+     push and client streaming.*
 
 This is where an industry-wide standardization effort, called
 *OpenConfig*, comes into play. OpenConfig is a group of network
@@ -325,8 +325,8 @@ languages (Stratum happens to use C++), where the client and server
 sides of the gRPC need not be written in the same language.
 
 .. _fig-yang:
-.. figure:: figures/Slide25.png 
-    :width: 550px 
+.. figure:: figures/Slide25.png
+    :width: 550px
     :align: center
 
     YANG toolchain used to generate gRPC-based runtime for gNMI.
@@ -349,8 +349,8 @@ definitions supported by the device. The ``Get`` and ``Set`` methods
 are used to read and write the corresponding variable defined in some
 models. The ``Subscribe`` method is used to set up a stream of
 telemetry updates from the device. The corresponding arguments and
-return values (e.g., ``GetRequest``, ``GetResponse``) are defined 
-by a protobuf ``Message`` and include various fields from the YANG 
+return values (e.g., ``GetRequest``, ``GetResponse``) are defined
+by a protobuf ``Message`` and include various fields from the YANG
 models. A given field is specified by giving its fully qualified
 path name in the data model tree.
 

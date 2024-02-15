@@ -1,10 +1,10 @@
 .. image:: _static/SystemsApproachLogoURL.png
    :width: 300px
    :align: center
-   :target: https://systemsapproach.org		 
+   :target: https://systemsapproach.org
 
 |
-	    
+
 Software-Defined Networks: A Systems Approach
 =============================================
 
@@ -14,11 +14,11 @@ Peterson, Cascone, O’Connor, Vachuska, and Davie
 |
 
 .. toctree::
-   :maxdepth: 2 
-   :caption: Table of Contents 
+   :maxdepth: 2
+   :caption: Table of Contents
 
-   foreword.rst	     
-   preface.rst	     
+   foreword.rst
+   preface.rst
    intro.rst
    uses.rst
    arch.rst

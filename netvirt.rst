@@ -34,11 +34,11 @@ system to implement network virtualization.
 
 .. _reading_NVP:
 .. admonition:: Further Reading
-                
+
    T. Koponen et al. `Network Virtualization in Multi-tenant Datacenters
    <https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/koponen>`__.
    NSDI, April, 2014.
-   
+
 
 The following sections show how a particular set of technology
 challenges, combined with the new capabilities offered by SDN, set the
@@ -269,7 +269,7 @@ the management plane.
 .. figure:: figures/Slide46.png
     :width: 450px
     :align: center
-            
+
     The Three Planes of a Network Virtualization System.
 
 At the bottom of :numref:`Figure %s <fig-three-planes>` is the data
@@ -333,7 +333,7 @@ detects that the actual state no longer corresponds to the desired
 state. That triggers a fresh computation to determine the updates that
 need to be pushed to the data plane, such as new forwarding rules to
 the appropriate set of vSwitches, and deletion of data plane state at
-the hypervisor that no longer hosts one of the VMs. 
+the hypervisor that no longer hosts one of the VMs.
 
 With this architecture, we can implement a rich set of features for
 virtual networks. Provided the data plane has sufficient richness to
@@ -492,7 +492,7 @@ vSwitch (OVS).*
    B. Pfaff, et al, `The Design and Implementation of Open
    vSwitch
    <https://www.openvswitch.org/support/papers/nsdi2015.pdf>`__,
-   USENIX NSDI 2015. 
+   USENIX NSDI 2015.
 
 Open vSwitch has been used in proprietary systems such as Nicira’s
 Network Virtualization Platform and VMware NSX, as well as open source
@@ -529,7 +529,7 @@ is also worth noting that OVSDB has taken on a life of its own, beyond
 the role shown in :numref:`Figure %s <fig-ovs-blocks>`, as a general
 way to represent network forwarding state. We'll see an example of
 this broader role in Section 8.4.
-       
+
 
 As for the OVS data plane, performance has been achieved via a long
 series of optimizations described in the Pfaff paper, notably a
@@ -614,7 +614,7 @@ with a potential performance gain. The challenge is in trading
 flexibility for performance, as SmartNICs are still more
 resource-constrained than general-purpose CPUs. The latest generation
 of SmartNICs is reaching a level of sophistication where offloading
-some or all of the vSwitch functions could be effective.\ [#]_ 
+some or all of the vSwitch functions could be effective.\ [#]_
 
 .. [#] As an aside, P4 is gaining traction as a way to program
      SmartNICs, suggesting the possibility of convergence in how the
@@ -631,7 +631,7 @@ by Davie, *et al.*
 
 .. _reading_OVSDB:
 .. admonition:: Further Reading
-                
+
    B. Davie, et al. `A Database Approach to SDN Control Plane
    Design <https://dl.acm.org/doi/10.1145/3041027.3041030>`__.
    Computer Communications Review, January 2017.
@@ -715,7 +715,7 @@ Database*. We can see how logical flows work with an example shown in
     :align: center
 
     Logical and Physical Flows in OVN.
-        
+
 
 Logical data path flows provide an abstract representation
 of the forwarding rules that are populated in the data
@@ -739,7 +739,7 @@ location of VMs and report it up to the database. So we see that the
 controller on ``HV1`` (hypervisor 1) has reported into the ``Chassis``
 table that it can be reached using the Geneve encapsulation at IP
 address ``10.0.0.10``. And that same hypervisor has reported into the
-``Port_Binding`` table that it is hosting the VM with ``LP1``. 
+``Port_Binding`` table that it is hosting the VM with ``LP1``.
 
 
 In order to program the data plane, the OVN controller for
@@ -767,10 +767,10 @@ Southbound databases.
 
 .. _reading_OVN:
 .. admonition:: Further Reading
-                
+
    Open Virtual Network. `OVN Reference Guide
    <https://docs.ovn.org/en/latest/ref/index.html>`__.
-                
+
 
 Everything discussed up to this point has assumed that we are talking
 about VMs as the endpoints for our virtual networks, but everything
@@ -797,7 +797,7 @@ delivering infrastructure as a service.
   May eventually generalize to "Impact of Network Virtualization" with
   multiple subsections, but at this point there is only one impact, so
   we make it a top-level section.
-  
+
 One of the interesting side-effects of network virtualization is that
 it enabled a change in the way security is implemented in the
 datacenter. As noted above, network virtualization enables security
@@ -853,7 +853,7 @@ impossible before the arrival of network virtualization.
 Microsegmentation has become an accepted best practice for datacenter
 networking, providing a starting point for "zero-trust"
 networking. This illustrates the far-reaching impact of network
-virtualization. 
+virtualization.
 
 8.6 Is Network Virtualization SDN?
 ----------------------------------
@@ -863,7 +863,7 @@ Virtualization is the most successful early application of SDN. But
 is it really SDN? There has been considerable debate on this topic,
 which reflects that there has been plenty of argument about exactly
 what SDN is.
-             
+
 The main argument against Network Virtualization's inclusion in SDN is
 that it didn't change the way physical networks are built. It simply
 runs as an overlay on top of a standard L2/L3 network, which might run

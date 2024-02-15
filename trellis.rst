@@ -250,7 +250,7 @@ Packet Service (similar to how the Host service intercepts ARP and
 DHCP packets). So the next time you use your TV remote to change
 channels, you may be triggering procedure invocations up
 and down the SDN software stack described throughout this book!
-    
+
 7.4  Customized Forwarding
 --------------------------
 
@@ -354,7 +354,7 @@ level:
     from a combination of forwarding functions, and we now have more
     options as to what hardware chip is the most appropriate target
     for implementing each such function.*
-    
+
 For example, a companion file, ``upf.p4`` (not shown), implements the
 forwarding plane for the UPF extension, which includes the GTP tunnel
 encapsulation/decapsulation required by the 3GPP cellular standard to
@@ -368,10 +368,10 @@ the *filtering objective* (``filtering.apply``), then applies the
 *forwarding objective* (``forwarding.apply`` and ``acl.apply``), and
 finally applies the *next objective* (``next.apply``).
 
-In addition to selecting which extensions to include, the pre-processor 
-also defines several constants, including the size of each logical 
-table.  Clearly, this implementation is a low-level approach to 
-building configurable forwarding pipelines. Designing higher-level 
-language constructs for composition, including the ability to 
-dynamically add functions to the pipeline at runtime, is a subject of 
-ongoing research. 
+In addition to selecting which extensions to include, the pre-processor
+also defines several constants, including the size of each logical
+table.  Clearly, this implementation is a low-level approach to
+building configurable forwarding pipelines. Designing higher-level
+language constructs for composition, including the ability to
+dynamically add functions to the pipeline at runtime, is a subject of
+ongoing research.

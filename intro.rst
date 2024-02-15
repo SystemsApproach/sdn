@@ -90,13 +90,13 @@ the underlying hardware (including processor chips), to the operating
 system running on that hardware, to the application itself.
 
 .. _fig-market1:
-.. figure:: figures/Slide01.png 
-    :width: 600px 
-    :align: center 
+.. figure:: figures/Slide01.png
+    :width: 600px
+    :align: center
 
-    Transformation of the vertical mainframe market to a horizontal 
-    marketplace with open interfaces and multiple options available at 
-    every level. 
+    Transformation of the vertical mainframe market to a horizontal
+    marketplace with open interfaces and multiple options available at
+    every level.
 
 As shown in :numref:`Figure %s <fig-market1>`, the introduction of
 microprocessors (e.g., Intel x86 and Motorola 68000) and open source
@@ -131,7 +131,7 @@ in turn enable a rich marketplace of networking applications.
 The value of such a transformation is clear. Opening a vertically
 integrated, closed, and proprietary market creates opportunities for
 innovation that would not otherwise be available. Or to put it another
-way: by opening up these interfaces, it becomes possible 
+way: by opening up these interfaces, it becomes possible
 to shift control from the vendors that sell networking
 equipment to the network operators that build networks to meet their
 users' needs.
@@ -221,7 +221,7 @@ switches in more detail.
 
 .. [#] By our count, over 15 open-source and proprietary disaggregated
        control planes are available today.
-       
+
 Disaggregating the control and data planes implies the need for a
 well-defined *forwarding abstraction*, that is, a general-purpose way
 for the control plane to instruct the data plane to forward packets in
@@ -327,7 +327,7 @@ disaggregation implied by SDN would not be viable.
 At the same time, operators are accustomed to configuring their
 switches and routers. This has historically been done using a *Command
 Line Interface (CLI)* or (less commonly) a management protocol like
-SNMP. 
+SNMP.
 Looking back at :numref:`Figure %s <fig-fib>`, this corresponds to the
 northbound interface to the RIB (as opposed to the interface between
 the RIB and the FIB). This interface is capable of installing new routes, which on
@@ -340,7 +340,7 @@ The answer is likely no, and it comes down to hitting the mark on both
 generality and performance. While a well-defined programmatic
 configuration interface is certainly an improvement over legacy CLIs,
 they are intended for modifying various settings of the control plane
-(such as RIB entries) and 
+(such as RIB entries) and
 other device parameters (e.g., port speeds/modes) rather than
 modifying the data plane’s FIB. As a consequence, such configuration
 interfaces are (a) unlikely to support the full range of
@@ -440,7 +440,7 @@ of distributed algorithms like Link-State and Distance-Vector routing
 protocols) and the app is free to simply run the shortest path
 algorithm on this graph and load the resulting flow rules into the
 underlying switches.  An introduction to Link-State and
-Distance-Vector routing algorithms is available online. 
+Distance-Vector routing algorithms is available online.
 
 .. _reading_routing:
 .. admonition:: Further Reading
@@ -487,57 +487,57 @@ endpoints" then it is quite reasonable to make that request part of an
 automated configuration system. This is precisely what happens in many
 modern clouds, where the provisioning of network resources and policies is
 automated along with all sort of other operations such as spinning up
-virtual machines or containers. 
+virtual machines or containers.
 
 .. sidebar:: Domain of Control
 
-	*The “Centralized vs Decentralized” framing of this section is
-	intended to characterize one dimension of the SDN design
-	space, not to indicate that network operators face an
-	either-or situation. There are many factors that impact where
-	a given operator comes down on this spectrum, but one place to
-	start is to scope the domain to which SDN is being applied. We
-	discuss example use cases in Chapter 2, but there is a natural
-	evolution of networking that highlights the thought process.*
+     *The “Centralized vs Decentralized” framing of this section is
+     intended to characterize one dimension of the SDN design
+     space, not to indicate that network operators face an
+     either-or situation. There are many factors that impact where
+     a given operator comes down on this spectrum, but one place to
+     start is to scope the domain to which SDN is being applied. We
+     discuss example use cases in Chapter 2, but there is a natural
+     evolution of networking that highlights the thought process.*
 
-	*Historically, there has been one control plane instance per
-	switch and they both run together on the same box. As simple
-	routers grew into chassis routers, there were typically N
-	control plane instances for M line cards. They ran on discrete
-	hardware and talked to each other through a management
-	network. As chassis routers grew into a multi-rack fabric
-	built from commodity switches, SDN suggested a design that
-	aggregates forwarding elements under a control plane running
-	anywhere and structured as a distributed system. The advantage
-	is that such a system can use modern techniques for state
-	distribution and management, rather than being tied to
-	standards. The key is to find domains for which it is possible
-	to optimize performance with a logically centralized control
-	plane. This book describes several such domains where SDN is
-	providing value.*
+     *Historically, there has been one control plane instance per
+     switch and they both run together on the same box. As simple
+     routers grew into chassis routers, there were typically N
+     control plane instances for M line cards. They ran on discrete
+     hardware and talked to each other through a management
+     network. As chassis routers grew into a multi-rack fabric
+     built from commodity switches, SDN suggested a design that
+     aggregates forwarding elements under a control plane running
+     anywhere and structured as a distributed system. The advantage
+     is that such a system can use modern techniques for state
+     distribution and management, rather than being tied to
+     standards. The key is to find domains for which it is possible
+     to optimize performance with a logically centralized control
+     plane. This book describes several such domains where SDN is
+     providing value.*
 
-Returning to the original question of centralized versus distributed 
-control plane, proponents of the latter often base their rationale on 
-the historical reasons the Internet adopted distributed routing 
-protocols in the first place: scale, and survival in the face of failures. The 
+Returning to the original question of centralized versus distributed
+control plane, proponents of the latter often base their rationale on
+the historical reasons the Internet adopted distributed routing
+protocols in the first place: scale, and survival in the face of failures. The
 concern is that any centralized solution results in a bottleneck that
-is also a single 
-point-of-failure. Distributing the centralized control plane over a 
+is also a single
+point-of-failure. Distributing the centralized control plane over a
 cluster of servers mitigates both these concerns, as techniques developed in
 the distributed systems world can ensure both high availability and
 scalability of such clusters.
 
-A secondary concern raised about control plane centralization is  
-that, since the control plane is remote (i.e., off-switch), the link 
-between the two planes adds a vulnerable attack surface. The 
-counter-argument is that non-SDN networks already have (and depend on) 
-out-of-band management networks, so this attack surface is not a new 
-one. These management networks can be used by off-switch controllers 
+A secondary concern raised about control plane centralization is
+that, since the control plane is remote (i.e., off-switch), the link
+between the two planes adds a vulnerable attack surface. The
+counter-argument is that non-SDN networks already have (and depend on)
+out-of-band management networks, so this attack surface is not a new
+one. These management networks can be used by off-switch controllers
 just as readily as by other management software. There is also the
 argument that a small number of centralized controllers can present a
 smaller attack surface than a large number of distributed controllers. Suffice it to say,
 opinions differ, but there is certainly a wealth of support for the
-centralized approach. 
+centralized approach.
 
 1.2.3 Data Plane: Programmable vs Fixed-Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -651,7 +651,7 @@ done changing the protocol stack, but that's unlikely. For example,
 QUIC is gaining momentum as an alternative to TCP when used with HTTP.
 Another example on the horizon is MPLS vs SRv6. Even VXLAN is now
 being superseded in some settings by a new, more flexible encapsulation
-called GENEVE. 
+called GENEVE.
 
 Programmable forwarding pipelines, coupled with a high-level language
 that can be used to program the pipeline, is one viable response to
@@ -667,9 +667,9 @@ includes the possibility of a programmable data plane.
 
 To summarize, the original definition of SDN is simple to state:
 
-	*A network in which the control plane is physically separate
-        from the forwarding plane, and a single control plane
-        controls several forwarding devices*.\ [#]_
+      *A network in which the control plane is physically separate
+      from the forwarding plane, and a single control plane
+      controls several forwarding devices*.\ [#]_
 
 This is a succinct way of saying what Sections 1.2.1 and 1.2.2 explain
 in long-form. Since that original definition, SDN has been interpreted
@@ -706,4 +706,4 @@ predictions about the next phase of the SDN journey in Chapter 10.
    March 2021.
 
 
-  
+
