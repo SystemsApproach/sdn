@@ -1,6 +1,13 @@
 About The Book
 ===============
 
+.. image:: https://github.com/SystemsApproach/ops/actions/workflows/publish-docs.yaml/badge.svg
+  :align: left
+  :alt: deployment status button
+  :target: https://github.com/SystemsApproach/sdn/actions/
+
+|
+
 Source for *Software-Defined Networks: A Systems Approach* is available
 on GitHub under
 terms of the `Creative Commons (CC BY-NC-ND 4.0)
