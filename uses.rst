@@ -54,7 +54,7 @@ space of a network but not all its other properties, such as firewall
 policies or higher-level network services like load balancing.
 
 The original idea behind using SDN to create virtual networks is
-widely credited to the team at Nicira, whose approach is described in
+widely credited to the team at Nicira, whose approach is described
 in an NSDI paper by Teemu Koponen and colleagues. The key insight was
 that modern clouds required networks that could be programmatically
 created, managed, and torn down, without a sysadmin having to manually
