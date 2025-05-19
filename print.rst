@@ -4,19 +4,20 @@
 ===========================
 
 We make all books in the *Systems Approach* series available as both
-print and e-books. This book is available via Amazon: `Software-Defined Networks: A Systems Approach <https://amzn.to/3rmLdCP>`__
+print and e-books. This book is available from various online
+booksellers: `Software-Defined Networks: A Systems Approach <https://systemsapproach.org/books/#sdnbook>`__
 
 `Book Series: <https://systemsapproach.org/books/>`__ Also check out
-our companion books that cover networking and emerging topics in more depth.
+our companion books that cover networking and emerging topics in more
+depth.
 
-* `Computer Networks: A Systems Approach <https://amzn.to/3CtG81U>`__
+* `What We Talk About When We Talk About Systems: Essays on the
+  Systems Approach <https://systemsapproach.org/books/#essaybook>`__
 
-* `Private 5G: A Systems Approach <https://amzn.to/3BBAQA6>`__
+* `Private 5G: A Systems Approach <https://systemsapproach.org/books/#5gbook>`__
 
-* `TCP Congestion Control: A Systems Approach <https://amzn.to/3UTYi3T>`__
+* `Edge Cloud Operations: A Systems Approach
+  <https://systemsapproach.org/books/#opsbook>`__
 
-* `Edge Cloud Operations: A Systems Approach <https://amzn.to/3MfvK13>`__
+* `TCP Congestion Control: A Systems Approach <https://systemsapproach.org/books/#tcpbook>`__
 
-.. * `Software-Defined Networks: A Systems Approach <https://amzn.to/3rmLdCP>`__
-
-As participants in the Amazon Associate program we may earn income from qualifying purchases using the links above.
