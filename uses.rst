@@ -478,7 +478,7 @@ A.D. Little.
 
    `Who Dares Wins! How Access Transformation Can Fast-Track Evolution
    of Operator Production Platforms
-   <https://www.adlittle.com/en/who-dares-wins>`__. *A.D. Little
+   <https://www.adlittle.com/en/insights/report/who-dares-wins>`__. *A.D. Little
    Report*, September 2019.
 
 The central challenge of initiatives like CORD is to disaggregate the
@@ -598,7 +598,7 @@ to determine which flows shared buffer capacity at each switch.
 .. admonition:: Further Reading
 
    X. Chen, et. al. `Fine-grained queue measurement in the data plane
-   <https://p4.org/p4/conquest>`__. ACM CoNEXT'19, December 2019.
+   <https://dl.acm.org/doi/10.1145/3359989.3365408>`__. ACM CoNEXT'19, December 2019.
 
 Similarly, packets can report the decision making process that
 directed their delivery, for example, with something like: *"In Switch
