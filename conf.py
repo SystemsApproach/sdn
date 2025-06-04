@@ -60,8 +60,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.mathjax',
     'sphinx.ext.todo',
-    'sphinxcontrib.spelling',
-    "sphinx_multiversion",
+    'sphinxcontrib.spelling'
 ]
 
 # Text files with lists of words that shouldn't fail the spellchecker:
