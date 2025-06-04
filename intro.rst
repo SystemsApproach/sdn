@@ -39,7 +39,7 @@ well-documented in an article by Feamster, Rexford, and Zegura.
 .. admonition:: Further Reading
 
    N. Feamster, J. Rexford, and E. Zegura. `The Road to SDN: An Intellectual History of Programmable Networks
-   <https://www.sigcomm.org/sites/default/files/ccr/papers/2014/April/0000000-0000012.pdf>`__.
+   <https://dl.acm.org/doi/10.1145/2602204.2602219>`__.
    SIGCOMM CCR, April 2014.
 
 We add two footnotes to that history. The first is a 2001 National

@@ -676,7 +676,7 @@ the mechanism for doing this is more detail.
 .. admonition:: Further Reading
 
    R. MacDavid, *et al.* `A P4-based 5G User Plane Function
-   <https://www.cs.princeton.edu/~macdavid/media/up4-sosr21.pdf>`__.
+   <https://dl.acm.org/doi/10.1145/3482898.3483358>`__.
    ACM SOSR. September 2021.
 
 The main takeaway from this discussion is that access networks and

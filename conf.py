@@ -102,7 +102,7 @@ numfig_format = {
 
 # Ignore link check for the following websites
 linkcheck_ignore = [
-     'https://amzn.to/', 'https://amazon.com'
+     'https://amzn.to/', 'https://amazon.com', 'https://dl.acm.org', 'https://developers.redhat.com', 'https://www.adlittle.com'
 ]
 
 # -- Options for HTML output -------------------------------------------------
