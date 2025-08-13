@@ -136,7 +136,7 @@ and cellular base stations.
 6.2 Distributed Core
 --------------------
 
-The ONOS core is comprised of a number of subsystems, each responsible
+The ONOS core comprises a number of subsystems, each responsible
 for a particular aspect of network state (e.g. topology, host
 tracking, packet intercept, flow programming). Each subsystem
 maintains its own *service abstraction*, where its implementation is
