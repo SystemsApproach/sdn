@@ -18,17 +18,13 @@
 
 import os
 
-from subprocess import check_output, CalledProcessError
+from pathlib import Path
 
 def get_version():
-
     try:
-        version = check_output(['cat', 'VERSION'],
-                               universal_newlines=True)
-    except CalledProcessError:
+        return Path("VERSION").read_text(encoding="utf-8").rstrip()
+    except OSError:
         return 'unknown version'
-
-    return version.rstrip()
 
 # "version" is used for html build
 version = get_version()
